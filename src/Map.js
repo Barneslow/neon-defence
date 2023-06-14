@@ -1,19 +1,23 @@
 import Phaser from "phaser";
-
-let bird;
+import Tower from "./Tower";
 
 export default class MapScene extends Phaser.Scene {
   constructor() {
-    super("flappy");
+    super("mapScene");
   }
-
   preload() {
     this.load.tilemapTiledJSON("map", "assets/json/Map.json");
     this.load.image("tiles", "assets/images/BaseSpritev2.png");
+    this.load.image("tower", "assets/images/Tower.png");
   }
-
+// @ts-ignore
+    
   create() {
     var map = this.make.tilemap({ key: "map" });
+    if (!map) {
+      console.error("Failed to load tilemap");
+      return;
+    }
     var tileset = map.addTilesetImage("BaseTilesV2", "tiles");
 
     var layerNames = [];
@@ -38,7 +42,9 @@ export default class MapScene extends Phaser.Scene {
     var offsetY = centerY - mapHeight / 1.2;
     this.cameras.main.scrollX = offsetX;
     this.cameras.main.scrollY = offsetY;
-  }
 
-  update(time, delta) {}
+
+    const newTower = new Tower(this, 200, 500);
+    this.add.existing(newTower);
+  }
 }
