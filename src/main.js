@@ -1,18 +1,18 @@
 import Phaser from "phaser";
-import FlappyScene from "./Flappy";
+import MapScene from "./Map";
 
 const config = {
   type: Phaser.AUTO,
   parent: "app",
-  width: 800,
-  height: 600,
+  width: 1540,
+  height: 800,
   physics: {
     default: "arcade",
     arcade: {
       gravity: { y: 200 },
     },
   },
-  scene: [FlappyScene],
+  scene: [MapScene],
 };
 
 export default new Phaser.Game(config);
