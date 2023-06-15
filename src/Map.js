@@ -68,7 +68,7 @@ export default class MapScene extends Phaser.Scene {
     graphics = this.add.graphics();
     path = this.add.path(145, MAP_HEIGHT);
     drawWaypointPath();
-    graphics.lineStyle(5, 0xffff00, 1);
+    // graphics.lineStyle(5, 0xffff00, 1);
     path.draw(graphics);
 
     this.bird = new Enemy(this, 0, 0, "bird", path);
