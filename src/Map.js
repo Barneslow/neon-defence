@@ -79,7 +79,7 @@ export default class MapScene extends Phaser.Scene {
   }
 
   update(time, delta) {
-    this.bird.update();
+    this.bird.update(time, delta);
   }
 }
 
