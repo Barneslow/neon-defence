@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import Turret from "./Turret";
 import Enemy from "./Enemy";
+import Bullet from "./Bullet";
 
 let path;
 let bird;
@@ -41,6 +42,7 @@ export default class MapScene extends Phaser.Scene {
 
     this.load.image("turret", "assets/images/Turret2D.png");
     this.load.image("bird", "assets/images/bird.png");
+    this.load.image("bullet", "assets/images/Bullet.png");
   }
 
   create() {
