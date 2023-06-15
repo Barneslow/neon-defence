@@ -66,16 +66,21 @@ export default class MapScene extends Phaser.Scene {
   onTileClicked(pointer) {
     const map = this.make.tilemap({ key: "map" });
     const tile = map.worldToTileXY(pointer.worldX, pointer.worldY);
+    const tileId = map.getTileAt(tile.x, tile.y, true).index; // Get the tile index
+    console.log(tileId);
     console.log("Clicked on tile:", tile);
-    const tileWidth = map.tileWidth;
-    const tileHeight = map.tileHeight;
-    const offsetX = tileWidth / 2;
-    const offsetY = tileHeight / 2;
-    const centerX = tile.x * tileWidth + offsetX;
-    const centerY = tile.y * tileHeight + offsetY;
+    if (tileId === 7) {
+      // Calculate the position of the center of the clicked tile
+      const tileWidth = map.tileWidth;
+      const tileHeight = map.tileHeight;
+      const offsetX = tileWidth / 2;
+      const offsetY = tileHeight / 2;
+      const centerX = tile.x * tileWidth + offsetX;
+      const centerY = tile.y * tileHeight + offsetY;
 
-    // Place the turret at the center of the clicked tile
-    const turret = new Turret(this, centerX, centerY);
+      // Create a new turret at the center of the clicked tile
+      const turret = new Turret(this, centerX, centerY, tileId);
+    }
   }
 
   update(time, delta) {
