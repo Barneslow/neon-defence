@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import MapScene from "../src/Map";
-import Tower from "./Tower";
+import Turret from "./Turret";
 
 const config = {
   type: Phaser.AUTO,
