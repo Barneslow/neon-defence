@@ -3,8 +3,31 @@ import Turret from "./Turret";
 import Enemy from "./Enemy";
 
 let path;
+let bird;
+let graphics;
 const MAP_HEIGHT = 768;
 const MAP_WIDTH = 1024;
+const PATHS = [
+  { x: 145, y: 430 },
+  { x: 260, y: 430 },
+  { x: 300, y: 700 },
+  { x: 450, y: 700 },
+  { x: 450, y: 400 },
+  { x: 725, y: 400 },
+  { x: 725, y: 725 },
+  { x: 875, y: 725 },
+  { x: 875, y: 250 },
+  { x: 400, y: 250 },
+  { x: 400, y: 350 },
+  { x: 300, y: 350 },
+  { x: 300, y: 250 },
+  { x: 175, y: 250 },
+  { x: 175, y: 150 },
+  { x: 450, y: 150 },
+];
+
+const speed = 2;
+let currentPathIndex = 0; // Starting index of the path line
 
 export default class MapScene extends Phaser.Scene {
   constructor() {
@@ -29,13 +52,13 @@ export default class MapScene extends Phaser.Scene {
     layer1.setInteractive();
     layer1.on("pointerdown", this.onTileClicked, this);
 
-    let graphics = this.add.graphics();
+    graphics = this.add.graphics();
     path = this.add.path(145, MAP_HEIGHT);
     drawWaypointPath();
     graphics.lineStyle(5, 0xffff00, 1);
     path.draw(graphics);
 
-    const bird = new Enemy(this, 145, MAP_HEIGHT);
+    bird = new Enemy(this, 145, MAP_HEIGHT);
   }
 
   onTileClicked(pointer) {
@@ -53,25 +76,15 @@ export default class MapScene extends Phaser.Scene {
     const turret = new Turret(this, centerX, centerY);
   }
 
-  update() {}
+  update(time, delta) {
+    PATHS.forEach((vector) => {
+      bird.x = vector.x;
+      bird.y = vector.y;
+    });
+  }
 }
 
 // DRAWING PATH LINE FUNCTION
 function drawWaypointPath() {
-  path.lineTo(145, 430);
-  path.lineTo(260, 430);
-  path.lineTo(300, 700);
-  path.lineTo(450, 700);
-  path.lineTo(450, 400);
-  path.lineTo(725, 400);
-  path.lineTo(725, 725);
-  path.lineTo(875, 725);
-  path.lineTo(875, 250);
-  path.lineTo(400, 250);
-  path.lineTo(400, 350);
-  path.lineTo(300, 350);
-  path.lineTo(300, 250);
-  path.lineTo(175, 250);
-  path.lineTo(175, 150);
-  path.lineTo(450, 150);
+  PATHS.forEach((vector) => path.lineTo(vector.x, vector.y));
 }
