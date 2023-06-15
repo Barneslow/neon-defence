@@ -43,6 +43,7 @@ export default class MapScene extends Phaser.Scene {
     this.load.image("turret", "assets/images/Turret2D.png");
     this.load.image("bird", "assets/images/bird.png");
     this.load.image("bullet", "assets/images/Bullet.png");
+    this.load.audio("bulletsound", "assets/sounds/BulletSound.mp3");
   }
 
   create() {
