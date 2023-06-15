@@ -1,13 +1,29 @@
 import Phaser from "phaser";
 
 export default class Enemy extends Phaser.GameObjects.Sprite {
-  constructor(scene, x, y) {
-    super(scene, x, y, "bird");
+  constructor(scene, x, y, name, test) {
+    super(scene, x, y, name, test);
     this.MapScene = scene;
+    this.path = test;
     this.follower = { t: 0, vec: new Phaser.Math.Vector2() };
+    scene.add.existing(this);
   }
 
   preload() {
     this.MapScene.load.image("bird", "assets/images/bird.png");
+  }
+
+  startOnPath() {
+    this.follower.t = 0;
+    this.hp = 100;
+    this.path.getPoint(this.follower.t, this.follower.vec);
+    this.setPosition(this.follower.vec.x, this.follower.vec.y);
+  }
+
+  update(time, delta) {
+    this.follower.t += (1 / 10000) * delta;
+    this.path.getPoint(this.follower.t, this.follower.vec);
+
+    this.setPosition(this.follower.vec.x, this.follower.vec.y);
   }
 }
