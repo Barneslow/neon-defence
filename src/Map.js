@@ -1,8 +1,8 @@
 import Phaser from "phaser";
 import Turret from "./Turret";
+import Enemy from "./Enemy";
 
 let path;
-let bird;
 const MAP_HEIGHT = 768;
 const MAP_WIDTH = 1024;
 
@@ -16,6 +16,7 @@ export default class MapScene extends Phaser.Scene {
     this.load.image("tiles", "assets/images/2Dsprites.png");
 
     this.load.image("turret", "assets/images/Turret2D.png");
+    this.load.image("bird", "assets/images/bird.png");
   }
 
   create() {
@@ -25,14 +26,16 @@ export default class MapScene extends Phaser.Scene {
     const layer1 = map.createLayer(0, tileset);
     const layer2 = map.createLayer(1, tileset);
 
-    layer1.setInteractive(); // Make layer1 clickable
-    layer1.on("pointerdown", this.onTileClicked, this); // Add click event listener
+    layer1.setInteractive();
+    layer1.on("pointerdown", this.onTileClicked, this);
 
     let graphics = this.add.graphics();
     path = this.add.path(145, MAP_HEIGHT);
     drawWaypointPath();
     graphics.lineStyle(5, 0xffff00, 1);
     path.draw(graphics);
+
+    const bird = new Enemy(this, 145, MAP_HEIGHT);
   }
 
   onTileClicked(pointer) {
@@ -47,8 +50,10 @@ export default class MapScene extends Phaser.Scene {
     const centerY = tile.y * tileHeight + offsetY;
 
     // Place the turret at the center of the clicked tile
-    const turret = new Turret(this, centerX, centerY, "turret");
+    const turret = new Turret(this, centerX, centerY);
   }
+
+  update() {}
 }
 
 // DRAWING PATH LINE FUNCTION
