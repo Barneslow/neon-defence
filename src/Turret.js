@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-
+import Bullet from "./Bullet";
 export default class Turret extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, range) {
     super(scene, x, y, "turret");
@@ -11,7 +11,6 @@ export default class Turret extends Phaser.GameObjects.Sprite {
 
     this.scene.input.on("pointermove", this.rotateTurret, this);
     this.range = range;
-    this.setRotation(1.5708);
 
     const initialAngle = Phaser.Math.Angle.Between(
       this.x,
@@ -19,7 +18,13 @@ export default class Turret extends Phaser.GameObjects.Sprite {
       this.scene.input.mousePointer.worldX,
       this.scene.input.mousePointer.worldY
     );
-    this.rotation = initialAngle + Phaser.Math.DegToRad(90);
+
+    this.bullets = this.scene.add.group(); // Group to hold the bullets
+    this.bulletSpeed = 500; // Speed of the bullets
+
+    this.shootInterval = 1000; // Time interval between shots in milliseconds
+    this.lastShootTime = 0; // Time when the last shot was fired
+    this.scene.input.on("pointerdown", this.shootBullet, this);
   }
   rotateTurret(pointer) {
     // Calculate the angle between the turret and the clicked position
@@ -32,6 +37,21 @@ export default class Turret extends Phaser.GameObjects.Sprite {
 
     // Set the rotation of the turret
     this.rotation = angle + (270 * Math.PI) / 180;
+  }
+  shootBullet() {
+    const bullet = new Bullet(this.scene, this.x, this.y);
+    bullet.body.velocity.setToPolar(
+      this.rotation - Math.PI / 2 - Math.PI,
+      this.bulletSpeed
+    );
+    this.bullets.add(bullet);
+  }
+
+  update(time, delta) {
+    if (time - this.lastShootTime >= this.shootInterval) {
+      this.shootBullet();
+      this.lastShootTime = time;
+    }
   }
   preload() {
     this.MapScene.load.image("turret", "assets/images/Turret2D.png");
