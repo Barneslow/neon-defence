@@ -38,6 +38,7 @@ const PATHS = [
 
 const speed = 2;
 let currentPathIndex = 0; // Starting index of the path line
+let resources = 30;
 
 export default class MapScene extends Phaser.Scene {
   constructor() {
@@ -62,6 +63,12 @@ export default class MapScene extends Phaser.Scene {
     const layer1 = map.createLayer(0, tileset);
     const layer2 = map.createLayer(1, tileset);
 
+    this.resourceText = this.add.text(10, 10, `Resources: ${resources}`, {
+      fontSize: "24px",
+      // @ts-ignore
+      fill: "#ffffff",
+    });
+
     layer1.setInteractive();
     layer1.on("pointerdown", this.onTileClicked, this);
 
@@ -81,7 +88,7 @@ export default class MapScene extends Phaser.Scene {
     const tileId = map.getTileAt(tile.x, tile.y, true).index; // Get the tile index
     console.log(tileId);
     console.log("Clicked on tile:", tile);
-    if (tileId === 7) {
+    if (tileId === 7 && resources >= 10) {
       // Calculate the position of the center of the clicked tile
       const tileWidth = map.tileWidth;
       const tileHeight = map.tileHeight;
@@ -89,9 +96,12 @@ export default class MapScene extends Phaser.Scene {
       const offsetY = tileHeight / 2;
       const centerX = tile.x * tileWidth + offsetX;
       const centerY = tile.y * tileHeight + offsetY;
-
-      // Create a new turret at the center of the clicked tile
       const turret = new Turret(this, centerX, centerY, tileId);
+      resources -= 10; // Reduce resources when placing a turret
+      this.resourceText.setText(`Resources: ${resources}`);
+      // Create a new turret at the center of the clicked tile
+    } else {
+      this.resourceText.setText(`Resources: Not enough resources`);
     }
   }
 

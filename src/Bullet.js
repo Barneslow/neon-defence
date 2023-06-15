@@ -10,11 +10,14 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
 
     this.setScale(0.5);
     this.setSize(16, 16);
+    // @ts-ignore
     this.body.setAllowGravity(false);
 
     const speed = 500; // Adjust the bullet speed as needed
     this.scene.physics.velocityFromRotation(angle, speed, this.body.velocity);
+    // @ts-ignore
     this.body.setCollideWorldBounds(false); // Enable collision with the world bounds
+    // @ts-ignore
     this.body.onWorldBounds = true;
     this.body.bounce.set(1); // Set the bounce value to 1 for full bouncing effect
     this.body.bounce.setTo(1, 1); //
