@@ -5,8 +5,8 @@ import Tower from "./Tower";
 const config = {
   type: Phaser.AUTO,
   parent: "app",
-  width: 1540,
-  height: 800,
+  width: 1024,
+  height: 768,
   physics: {
     default: "arcade",
     arcade: {
