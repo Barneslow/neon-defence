@@ -66,5 +66,6 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
   }
   preload() {
     this.scene.load.image("bullet", "assets/images/Bullet.png");
+    this.scene.load.audio("bulletsound", "assets/sounds/BulletSound.mp3");
   }
 }

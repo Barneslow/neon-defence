@@ -24,6 +24,7 @@ export default class Turret extends Phaser.GameObjects.Sprite {
 
     this.shootInterval = 1000; // Time interval between shots in milliseconds
     this.lastShootTime = 0; // Time when the last shot was fired
+    this.bulletSound = this.scene.sound.add("bulletsound");
     this.scene.input.on("pointerdown", this.shootBullet, this);
   }
   rotateTurret(pointer) {
@@ -45,6 +46,8 @@ export default class Turret extends Phaser.GameObjects.Sprite {
       this.bulletSpeed
     );
     this.bullets.add(bullet);
+
+    this.bulletSound.play({ volume: 0.2 });
   }
 
   update(time, delta) {
