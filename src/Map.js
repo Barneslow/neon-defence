@@ -32,6 +32,7 @@ let currentPathIndex = 0; // Starting index of the path line
 export default class MapScene extends Phaser.Scene {
   constructor() {
     super("mapScene");
+    this.bird = bird;
   }
 
   preload() {
@@ -58,7 +59,7 @@ export default class MapScene extends Phaser.Scene {
     graphics.lineStyle(5, 0xffff00, 1);
     path.draw(graphics);
 
-    bird = new Enemy(this, 145, MAP_HEIGHT);
+    this.bird = new Enemy(this, 0, 0, "bird", path);
   }
 
   onTileClicked(pointer) {
@@ -77,10 +78,11 @@ export default class MapScene extends Phaser.Scene {
   }
 
   update(time, delta) {
-    PATHS.forEach((vector) => {
-      bird.x = vector.x;
-      bird.y = vector.y;
-    });
+    this.bird.startOnPath();
+    // PATHS.forEach((vector) => {
+    //   bird.x = vector.x;
+    //   bird.y = vector.y;
+    // });
   }
 }
 
