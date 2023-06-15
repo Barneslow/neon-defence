@@ -60,6 +60,7 @@ export default class MapScene extends Phaser.Scene {
     path.draw(graphics);
 
     this.bird = new Enemy(this, 0, 0, "bird", path);
+    this.bird.startOnPath();
   }
 
   onTileClicked(pointer) {
@@ -78,11 +79,7 @@ export default class MapScene extends Phaser.Scene {
   }
 
   update(time, delta) {
-    this.bird.startOnPath();
-    // PATHS.forEach((vector) => {
-    //   bird.x = vector.x;
-    //   bird.y = vector.y;
-    // });
+    this.bird.update();
   }
 }
 

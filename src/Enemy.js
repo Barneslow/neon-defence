@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 
-export default class Turret extends Phaser.GameObjects.Sprite {
+export default class Enemy extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, name, test) {
     super(scene, x, y, name, test);
     this.MapScene = scene;
@@ -17,9 +17,13 @@ export default class Turret extends Phaser.GameObjects.Sprite {
     this.follower.t = 0;
     this.hp = 100;
     this.path.getPoint(this.follower.t, this.follower.vec);
-
     this.setPosition(this.follower.vec.x, this.follower.vec.y);
   }
 
-  update() {}
+  update(time, delta) {
+    this.follower.t += (1 / 10000) * delta;
+    this.path.getPoint(this.follower.t, this.follower.vec);
+
+    this.setPosition(this.follower.vec.x, this.follower.vec.y);
+  }
 }
