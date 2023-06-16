@@ -103,7 +103,7 @@ export default class MapScene extends Phaser.Scene {
 
   update(time, delta) {
     if (time > this.nextEnemy) {
-      console.log("fire");
+      // CHANGE DURATION OF ENEMY RESPAWN
       this.nextEnemy = time + 2000;
       const enemy = new Enemy(this, 0, 0, "bird", path);
       enemies.push(enemy);
