@@ -1,4 +1,451 @@
+@import 'https://fonts.googleapis.com/css?family=Damion|Work+Sans:900';
+
 body {
   display: flex;
   justify-content: center;
 }
+
+
+/***** INTRO Styling *****/
+:root {
+  --background-color: #180727;
+  --main-gradient-start: #44155D;
+  --main-gradient-end: #150D40;
+
+  --moon-gradient-start: #9070FE;
+  --moon-gradient-end: #44155D;
+  --moon-line-color: #16F7FF;
+  --moon-background-color: #F016FF;
+  
+  --plane-background-start: #150D40;
+  --plane-background-end: #44155D;
+  --plane-line-color: #16F7FF;
+  --plane-shadow-color: #ff91cf;
+}
+#intro {
+  background: var(--background-color);
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+#intro main {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: radial-gradient(circle, var(--main-gradient-start) 0%, var(--main-gradient-end) 100%);
+}
+
+/* Header */
+#intro header {
+  display: grid;
+  place-content: center;
+  align-items: center;
+  height: 100%;
+  bottom: -10%;
+  z-index: 999;
+  position: relative;
+  text-align: center;
+}
+#intro h1 {
+  position: relative;
+  display: inline-block;
+  font-family: 'Work Sans', sans-serif;
+  text-transform: uppercase;
+  font-size: 5em;
+  z-index: 1;
+  margin: 0;
+  line-height: 1;
+}
+#intro h1 span {
+  color: transparent;
+  background: linear-gradient(#000000 0%,#113e87 22%,#10cccc 50%,#000000 51%,#e21ddc 78%,#e21ddc 78%,#ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#intro h1 span:before {
+  content: attr(text);
+}
+#intro h1 span:after {
+  content: attr(text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.2;
+  text-shadow: 3px 0px #fff, -3px 0px #fff, 0px 3px #fff, 0px -3px #fff, 3px 3px #fff, -3px -3px #fff, 3px -3px #fff, -3px 3px #fff;
+}
+#intro .shine {
+  position: absolute;
+  width: 5px;
+  height: 2px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 7px 2px #fff;
+  z-index: 3;
+}
+#intro .shine.one {
+  top: 15%;
+  left: 4%;
+  animation: shine1 1000ms alternate infinite;
+}
+#intro .shine.two {
+  top: 55%;
+  left: 20%;
+  animation: shine1 1500ms alternate infinite;
+}
+#intro .shine.three {
+  top: 15%;
+  left: 40%;
+  animation: shine1 1700ms alternate infinite;
+}
+#intro .shine.four {
+  top: 15%;
+  left: 80%;
+  animation: shine1 900ms alternate infinite;
+}
+#intro .shine.five {
+  top: 55%;
+  left: 95%;
+  animation: shine1 1300ms alternate infinite;
+}
+@keyframes shine1 {
+  0% {
+    transform: rotate(0) scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: rotate(360deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(720deg) scale(0);
+    opacity: 0;
+  }
+}
+#intro a {
+  font-family: courier, monospace;
+  font-size: 1.8rem;
+  color: #fff;
+  font-weight: 300;
+  margin-top: 5px;
+  text-decoration: none;
+  -webkit-animation: opacity 2s infinite;
+  animation: opacity 2s infinite;
+}
+@keyframes opacity {
+  0% {
+      opacity: 1;
+  } 50% {
+      opacity: 0;
+  } 100% {
+      opacity: 1;
+  }
+}
+
+/* STARS */
+#stars {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 20rem;
+  overflow: hidden;
+  left: 0;
+  z-index: -1;
+  animation: stars 20s linear;
+}
+#stars .star {
+  position: absolute;
+  background: var(--moon-gradient-start);
+  width: 0.15rem;
+  height: 0.15rem;
+  border-radius: 50%;
+  transform: translate(var(--x), var(--y));
+  box-shadow: 0 0 0.25rem var(--moon-background-color);
+}
+@keyframes stars {
+  from {
+    transform: translateX(0);
+ }
+  60% {
+    transform: translateX(3vmax) rotate(1deg);
+ }
+  to {
+    transform: translateX(0);
+ }
+}
+
+/* Mountains */
+#intro .mountains {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  bottom: 25%;
+  width: 100%;
+  height: 50%;
+}
+#intro .mountains svg {
+  width:100%;
+  bottom: 0;
+  position: absolute;
+}
+
+/* Moon */
+#intro .moon {
+  width: 25vw;
+  height: 25vw;
+  position: absolute;
+  left: 50%;
+  bottom: 40%;
+  transform: translate(-50%, 0);
+  border-radius: 100%;
+  overflow: hidden;
+  box-shadow: 0 -20px 40px -20px var(--plane-shadow-color);
+}
+#intro .moon:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(0deg, var(--moon-gradient-start) 0%, var(--moon-gradient-end) 100%);
+}
+#intro .moon .line {
+  top: 0;
+  width: 100%;
+  height: 35%;
+  position: absolute;
+  animation: moonLinesSlide 6s ease-in infinite both;
+}
+#intro .moon .line:nth-child(1) {animation-delay: 0.6s;}
+#intro .moon .line:nth-child(2) {animation-delay: 1.2s;}
+#intro .moon .line:nth-child(3) {animation-delay: 1.8s;}
+#intro .moon .line:nth-child(4) {animation-delay: 2.4s;}
+#intro .moon .line:nth-child(5) {animation-delay: 3s;}
+#intro .moon .line:nth-child(6) {animation-delay: 3.6s;}
+#intro .moon .line:nth-child(7) {animation-delay: 4.2s;}
+#intro .moon .line:nth-child(8) {animation-delay: 4.8s;}
+#intro .moon .line:nth-child(9) {animation-delay: 5.4s;}
+#intro .moon .line:nth-child(10) {animation-delay: 6s;}
+
+/* Grid Pattern Plane Area */
+#intro .plane {
+  z-index: 20;
+  height: 30%;
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+  background: var(--plane-background-start);
+  overflow: hidden;
+  border-top: 2px solid var(--plane-line-color);
+  box-shadow: 0 0 150px -60px var(--plane-line-color);
+  background: linear-gradient(0deg, var(--plane-background-start) 60%, var(--plane-background-end) 100%);
+}
+#intro .plane .vlines {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+#intro .plane .vlines .line {
+  box-shadow: 0 0 5px var(--plane-shadow-color);
+}
+#intro .plane .vlines .left {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  border-right: 1px solid var(--plane-line-color);
+}
+#intro .plane .vlines .left .line {
+  right: 0%;
+  width: 2px;
+  height: 100%;
+  position: absolute;
+  background: var(--plane-line-color);
+}
+#intro .plane .vlines .left .line:nth-child(1) {
+  right: 12%;
+  transform-origin: 100% 0%;
+  transform: skewX(-45deg);
+}
+#intro .plane .vlines .left .line:nth-child(2) {
+  right: 24%;
+  transform-origin: 100% 0%;
+  transform: skewX(-55deg);
+}
+#intro .plane .vlines .left .line:nth-child(3) {
+  right: 36%;
+  transform-origin: 100% 0%;
+  transform: skewX(-65deg);
+}
+#intro .plane .vlines .left .line:nth-child(4) {
+  right: 48%;
+  transform-origin: 100% 0%;
+  transform: skewX(-75deg);
+}
+#intro .plane .vlines .left .line:nth-child(5) {
+  right: 60%;
+  transform-origin: 100% 0%;
+  transform: skewX(-85deg);
+}
+#intro .plane .vlines .right {
+  width: 50%;
+  height: 100%;
+  right: 0;
+  position: absolute;
+  border-left: 1px solid var(--plane-line-color);
+}
+#intro .plane .vlines .right .line {
+  right: 0%;
+  width: 2px;
+  height: 100%;
+  position: absolute;
+  background: var(--plane-line-color);
+}
+#intro .plane .vlines .right .line:nth-child(1) {
+  left: 12%;
+  transform-origin: 100% 0%;
+  transform: skewX(45deg);
+}
+#intro .plane .vlines .right .line:nth-child(2) {
+  left: 24%;
+  transform-origin: 100% 0%;
+  transform: skewX(55deg);
+}
+#intro .plane .vlines .right .line:nth-child(3) {
+  left: 36%;
+  transform-origin: 100% 0%;
+  transform: skewX(65deg);
+}
+#intro .plane .vlines .right .line:nth-child(4) {
+  left: 48%;
+  transform-origin: 100% 0%;
+  transform: skewX(75deg);
+}
+#intro .plane .vlines .right .line:nth-child(5) {
+  left: 60%;
+  transform-origin: 100% 0%;
+  transform: skewX(85deg);
+}
+#intro .plane .lines {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+#intro .plane .lines .line {
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  bottom: 90%;
+  background: var(--plane-line-color);
+  animation: linesSlide 3s ease-in infinite both;
+  box-shadow: 0 0 5px var(--plane-shadow-color);
+}
+#intro .plane .lines .line:nth-child(1) {animation-delay: 0.3s;}
+#intro .plane .lines .line:nth-child(2) {animation-delay: 0.6s;}
+#intro .plane .lines .line:nth-child(3) {animation-delay: 0.9s;}
+#intro .plane .lines .line:nth-child(4) {animation-delay: 1.2s;}
+#intro .plane .lines .line:nth-child(5) {animation-delay: 1.5s;}
+#intro .plane .lines .line:nth-child(6) {animation-delay: 1.8s;}
+#intro .plane .lines .line:nth-child(7) {animation-delay: 2.1s;}
+#intro .plane .lines .line:nth-child(8) {animation-delay: 2.4s;}
+#intro .plane .lines .line:nth-child(9) {animation-delay: 2.7s;}
+#intro .plane .lines .line:nth-child(10) {animation-delay: 3s;}
+@keyframes linesSlide {
+  from {
+    bottom: 100%;
+    height: 2px;
+  }
+  to {
+    bottom: -10px;
+    height: 10px;
+  }
+}
+@keyframes moonLinesSlide {
+  from {
+    top: 100%;
+    height: 2px;
+    background: var(--moon-line-color);
+  }
+  to {
+    top: -40%;
+    height: 35%;
+    background: var(--moon-background-color);
+  }
+}
+
+/* Volume / Music Button */
+#volume {
+  position: fixed;
+  left: 2.5vmin;
+  bottom: 2.5vmin;
+  width: 4rem;
+  height: 4rem;
+  display: grid;
+  place-items: center;
+  transition: background 0.3s ease;
+  cursor: pointer;
+  background: var(--moon-background-color);
+  border: none;
+  z-index: 42000;
+}
+@media (hover) {
+  #volume:hover {
+    background: rgba(240, 22, 255, .6);
+ }
+}
+#volume.playing .play {
+  display: block;
+}
+#volume.playing .muted {
+  display: none;
+}
+#volume:not(.playing) .play {
+  display: none;
+}
+#volume:not(.playing) .muted {
+  display: block;
+}
+
+/* Copywrite */
+#intro .copywrite {
+  display: grid;
+  place-items: center;
+  position: relative;
+  bottom: 3rem;
+  width: 50%;
+  margin: 0 auto;
+  z-index: 99;
+  background: rgba(240, 22, 255, .8);
+}
+
+small, small a {
+  font-family: courier, monospace;
+  text-align: center;
+  color:  #fff;
+  font-size: 14px;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width:1024px) {
+  #intro h1 {
+    font-size:3.5em;
+  }
+  #intro .moon {
+    width:50vw;
+    height:50vw;
+    bottom:55%;
+  }
+  #intro .mountains {
+    left:-50%;
+    width:250%;
+  }
+  #intro .copywrite {    
+    bottom: 4.5rem;
+    width: 70%;
+    margin-left: auto;
+    margin-right:0;
+  }
+}
+/***** END - Intro Styling *****/
