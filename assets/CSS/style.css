@@ -121,7 +121,7 @@ body {
     opacity: 0;
   }
 }
-#intro a {
+#intro header a {
   font-family: courier, monospace;
   font-size: 1.8rem;
   color: #fff;
