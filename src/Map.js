@@ -4,7 +4,7 @@ import Enemy from "./Enemy";
 import Bullet from "./Bullet";
 
 let path;
-let bird;
+let enemies = [];
 let graphics;
 const MAP_HEIGHT = 768;
 const MAP_WIDTH = 1024;
@@ -36,14 +36,11 @@ const PATHS = [
   { x: 450, y: 150 },
 ];
 
-const speed = 2;
-let currentPathIndex = 0; // Starting index of the path line
-let resources = 30;
+let resources = 100;
 
 export default class MapScene extends Phaser.Scene {
   constructor() {
     super("mapScene");
-    this.bird = bird;
   }
 
   preload() {
@@ -79,7 +76,7 @@ export default class MapScene extends Phaser.Scene {
     path.draw(graphics);
 
     this.bird = new Enemy(this, 0, 0, "bird", path);
-    this.bird.startOnPath();
+    this.nextEnemy = 0;
   }
 
   onTileClicked(pointer) {
@@ -88,7 +85,7 @@ export default class MapScene extends Phaser.Scene {
     const tileId = map.getTileAt(tile.x, tile.y, true).index; // Get the tile index
     console.log(tileId);
     console.log("Clicked on tile:", tile);
-    if (tileId === 7 && resources >= 10) {
+    if (resources >= 10) {
       // Calculate the position of the center of the clicked tile
       const tileWidth = map.tileWidth;
       const tileHeight = map.tileHeight;
@@ -106,7 +103,14 @@ export default class MapScene extends Phaser.Scene {
   }
 
   update(time, delta) {
-    this.bird.update(time, delta);
+    if (time > this.nextEnemy) {
+      console.log("fire");
+      this.nextEnemy = time + 2000;
+      const bird = new Enemy(this, 0, 0, "bird", path);
+      enemies.push(bird);
+    }
+
+    enemies.forEach((bird) => bird.update(time, delta));
   }
 }
 
