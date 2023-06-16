@@ -4,7 +4,6 @@ import Enemy from "./Enemy";
 import Bullet from "./Bullet";
 
 let path;
-let enemies = [];
 let graphics;
 const MAP_HEIGHT = 768;
 const MAP_WIDTH = 1024;
@@ -46,7 +45,6 @@ export default class MapScene extends Phaser.Scene {
   preload() {
     this.load.tilemapTiledJSON("map", "assets/json/2DTowerDefense.json");
     this.load.image("tiles", "assets/images/2Dsprites.png");
-
     this.load.image("turret", "assets/images/Turret2D.png");
     this.load.image("bird", "assets/images/bird.png");
     this.load.image("bullet", "assets/images/Bullet.png");
@@ -72,19 +70,30 @@ export default class MapScene extends Phaser.Scene {
     graphics = this.add.graphics();
     path = this.add.path(145, MAP_HEIGHT);
     drawWaypointPath();
-    // graphics.lineStyle(5, 0xffff00, 1);
     path.draw(graphics);
-
     this.nextEnemy = 0;
+
+    // ADDING COLLISION FUNCTION BETWEEN CLASSES
+    this.bullets = this.physics.add.group({
+      classType: Bullet,
+      runChildUpdate: true,
+    });
+
+    this.enemies = this.physics.add.group({
+      classType: Enemy,
+      runChildUpdate: true,
+    });
+
+    // OVERLAP FUNCTION
+    this.physics.add.overlap(this.enemies, this.bullets, damageEnemy);
   }
 
   onTileClicked(pointer) {
     const map = this.make.tilemap({ key: "map" });
     const tile = map.worldToTileXY(pointer.worldX, pointer.worldY);
     const tileId = map.getTileAt(tile.x, tile.y, true).index; // Get the tile index
-    console.log(tileId);
     console.log("Clicked on tile:", tile);
-    if (resources >= 10) {
+    if (tileId === 7 && resources >= 10) {
       // Calculate the position of the center of the clicked tile
       const tileWidth = map.tileWidth;
       const tileHeight = map.tileHeight;
@@ -106,14 +115,16 @@ export default class MapScene extends Phaser.Scene {
       // CHANGE DURATION OF ENEMY RESPAWN
       this.nextEnemy = time + 2000;
       const enemy = new Enemy(this, 0, 0, "bird", path);
-      enemies.push(enemy);
+      this.enemies.add(enemy);
     }
-
-    enemies.forEach((enemy) => enemy.update(time, delta));
   }
 }
 
 // DRAWING PATH LINE FUNCTION
 function drawWaypointPath() {
   PATHS.forEach((vector) => path.lineTo(vector.x, vector.y));
+}
+
+function damageEnemy(enemy, bullet) {
+  console.log("hit");
 }
