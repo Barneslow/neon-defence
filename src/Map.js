@@ -75,7 +75,6 @@ export default class MapScene extends Phaser.Scene {
     // graphics.lineStyle(5, 0xffff00, 1);
     path.draw(graphics);
 
-    this.bird = new Enemy(this, 0, 0, "bird", path);
     this.nextEnemy = 0;
   }
 
@@ -106,11 +105,11 @@ export default class MapScene extends Phaser.Scene {
     if (time > this.nextEnemy) {
       console.log("fire");
       this.nextEnemy = time + 2000;
-      const bird = new Enemy(this, 0, 0, "bird", path);
-      enemies.push(bird);
+      const enemy = new Enemy(this, 0, 0, "bird", path);
+      enemies.push(enemy);
     }
 
-    enemies.forEach((bird) => bird.update(time, delta));
+    enemies.forEach((enemy) => enemy.update(time, delta));
   }
 }
 
