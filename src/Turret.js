@@ -1,11 +1,13 @@
 import Phaser from "phaser";
 import Bullet from "./Bullet";
+import Enemy from "./Enemy";
 
 export default class Turret extends Phaser.GameObjects.Sprite {
-  constructor(scene, x, y, range, collisionGroup) {
+  constructor(scene, x, y, range, collisionGroup, enemies) {
     super(scene, x, y, "turret");
     this.MapScene = scene;
     this.collisionGroup = collisionGroup;
+    this.enemies = enemies;
 
     scene.add.existing(this);
 
@@ -41,6 +43,19 @@ export default class Turret extends Phaser.GameObjects.Sprite {
     // Set the rotation of the turret
     this.rotation = angle + (270 * Math.PI) / 180;
   }
+
+  autoFire() {
+    let enemy = getEnemy(this.x, this.y, 200, this.enemies);
+
+    console.log("fire");
+    if (enemy) {
+      let angle = Phaser.Math.Angle.Between(this.x, this.y, enemy.x, enemy.y);
+      this.angle = (angle + Math.PI / 2) * Phaser.Math.RAD_TO_DEG;
+
+      this.shootBullet();
+    }
+  }
+
   shootBullet() {
     const bullet = new Bullet(
       this.scene,
@@ -68,4 +83,17 @@ export default class Turret extends Phaser.GameObjects.Sprite {
   preload() {
     this.MapScene.load.image("turret", "assets/images/Turret2D.png");
   }
+}
+
+function getEnemy(x, y, distance, enemies) {
+  var enemyUnits = enemies.getChildren();
+  for (var i = 0; i < enemyUnits.length; i++) {
+    if (
+      enemyUnits[i].active &&
+      Phaser.Math.Distance.Between(x, y, enemyUnits[i].x, enemyUnits[i].y) <
+        distance
+    )
+      return enemyUnits[i];
+  }
+  return false;
 }

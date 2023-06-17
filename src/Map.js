@@ -6,6 +6,7 @@ import BigBoy from "./BigBoy";
 
 let path;
 let graphics;
+const radius = 500;
 const MAP_HEIGHT = 768;
 const MAP_WIDTH = 1024;
 const PATHS = [
@@ -101,7 +102,14 @@ export default class MapScene extends Phaser.Scene {
       const offsetY = tileHeight / 2;
       const centerX = tile.x * tileWidth + offsetX;
       const centerY = tile.y * tileHeight + offsetY;
-      const turret = new Turret(this, centerX, centerY, tileId, this.bullets);
+      const turret = new Turret(
+        this,
+        centerX,
+        centerY,
+        tileId,
+        this.bullets,
+        this.enemies
+      );
       resources -= 10; // Reduce resources when placing a turret
       this.resourceText.setText(`Resources: ${resources}`);
       // Create a new turret at the center of the clicked tile
@@ -131,7 +139,10 @@ function drawWaypointPath() {
   PATHS.forEach((vector) => path.lineTo(vector.x, vector.y));
 }
 
+// DAMAGE FUNCTION
 function damageEnemy(enemy, bullet) {
   bullet.destroy();
   enemy.damageTaken(20);
 }
+
+// DISTANCE BETWEEN TOWER AND BULLET
