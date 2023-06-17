@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 
 const ENEMY_SPEED = 1 / 50000;
-export default class Enemy extends Phaser.GameObjects.Sprite {
+export default class Enemy extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y, name, path) {
     super(scene, x, y, name, path);
     scene.add.existing(this);
@@ -30,6 +30,5 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.path.getPoint(this.follower.t, this.follower.vec);
 
     this.setPosition(this.follower.vec.x, this.follower.vec.y);
-    // this.damageTaken(0);
   }
 }

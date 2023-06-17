@@ -1,13 +1,16 @@
 import Phaser from "phaser";
 
 export default class Bullet extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, y, angle) {
+  constructor(scene, x, y, angle, collisionGroup) {
     super(scene, x, y, "bullet");
     this.scene = scene;
 
     this.scene.physics.world.enable(this);
     scene.physics.add.existing(this);
     this.scene.add.existing(this);
+
+    // ADDING INSTANCE OF THE BULLET TO THE COLLISION GROUP IN SCENE
+    collisionGroup.add(this);
 
     this.setScale(0.5);
     this.setSize(16, 16);
@@ -33,13 +36,13 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
   // Override the update method to add any additional logic for the bullet
   update() {
     // Add bullet-specific behavior here
-    this.scene.physics.world.collide(
-      this,
-      this.scene.enemiesGroup,
-      this.onCollision,
-      null,
-      this
-    );
+    // this.scene.physics.world.collide(
+    //   this,
+    //   this.scene.enemiesGroup,
+    //   this.onCollision,
+    //   null,
+    //   this
+    // );
   }
   onCollision(bullet, enemy) {
     // Handle bullet collision with enemy here

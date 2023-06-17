@@ -85,14 +85,19 @@ export default class MapScene extends Phaser.Scene {
     });
 
     // OVERLAP FUNCTION
-    this.physics.add.overlap(this.enemies, this.bullets, damageEnemy);
+    this.physics.add.overlap(
+      this.enemies,
+      this.bullets,
+      damageEnemy,
+      null,
+      this
+    );
   }
 
   onTileClicked(pointer) {
     const map = this.make.tilemap({ key: "map" });
     const tile = map.worldToTileXY(pointer.worldX, pointer.worldY);
     const tileId = map.getTileAt(tile.x, tile.y, true).index; // Get the tile index
-    console.log("Clicked on tile:", tile);
     if (tileId === 7 && resources >= 10) {
       // Calculate the position of the center of the clicked tile
       const tileWidth = map.tileWidth;
@@ -101,7 +106,7 @@ export default class MapScene extends Phaser.Scene {
       const offsetY = tileHeight / 2;
       const centerX = tile.x * tileWidth + offsetX;
       const centerY = tile.y * tileHeight + offsetY;
-      const turret = new Turret(this, centerX, centerY, tileId);
+      const turret = new Turret(this, centerX, centerY, tileId, this.bullets);
       resources -= 10; // Reduce resources when placing a turret
       this.resourceText.setText(`Resources: ${resources}`);
       // Create a new turret at the center of the clicked tile
@@ -125,6 +130,7 @@ function drawWaypointPath() {
   PATHS.forEach((vector) => path.lineTo(vector.x, vector.y));
 }
 
-function damageEnemy(enemy, bullet) {
-  console.log("hit");
+function damageEnemy(bullet, enemy) {
+  bullet.destroy();
+  enemy.destroy();
 }

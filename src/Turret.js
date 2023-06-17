@@ -1,9 +1,11 @@
 import Phaser from "phaser";
 import Bullet from "./Bullet";
+
 export default class Turret extends Phaser.GameObjects.Sprite {
-  constructor(scene, x, y, range) {
+  constructor(scene, x, y, range, collisionGroup) {
     super(scene, x, y, "turret");
     this.MapScene = scene;
+    this.collisionGroup = collisionGroup;
 
     scene.add.existing(this);
 
@@ -40,7 +42,14 @@ export default class Turret extends Phaser.GameObjects.Sprite {
     this.rotation = angle + (270 * Math.PI) / 180;
   }
   shootBullet() {
-    const bullet = new Bullet(this.scene, this.x, this.y);
+    const bullet = new Bullet(
+      this.scene,
+      this.x,
+      this.y,
+      null,
+      this.collisionGroup
+    );
+
     bullet.body.velocity.setToPolar(
       this.rotation - Math.PI / 2 - Math.PI,
       this.bulletSpeed
