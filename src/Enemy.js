@@ -9,7 +9,9 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.MapScene = scene;
     this.path = path;
     this.follower = { t: 0, vec: new Phaser.Math.Vector2() };
-    this.health = 20;
+    this.health = 50;
+    this.currentHealth = 50;
+    this.setTint(0xffffff);
   }
 
   preload() {
@@ -17,11 +19,18 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
   }
 
   damageTaken(damage) {
-    this.health -= damage;
+    this.currentHealth -= damage;
+    const healthPercentage = this.currentHealth / this.health;
 
-    if (this.health > 0) {
-      this.setActive(false);
-      this.setVisible(false);
+    if (healthPercentage < 0.75 && healthPercentage > 0.5) {
+      this.setTint(0xff9999);
+      console.log("light");
+    } else if (healthPercentage < 0.5) {
+      this.setTint(0xff0000);
+      console.log("dark");
+    }
+    if (this.currentHealth <= 0) {
+      this.destroy();
     }
   }
 

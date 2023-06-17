@@ -85,13 +85,7 @@ export default class MapScene extends Phaser.Scene {
     });
 
     // OVERLAP FUNCTION
-    this.physics.add.overlap(
-      this.enemies,
-      this.bullets,
-      damageEnemy,
-      null,
-      this
-    );
+    this.physics.add.overlap(this.enemies, this.bullets, damageEnemy);
   }
 
   onTileClicked(pointer) {
@@ -130,7 +124,7 @@ function drawWaypointPath() {
   PATHS.forEach((vector) => path.lineTo(vector.x, vector.y));
 }
 
-function damageEnemy(bullet, enemy) {
+function damageEnemy(enemy, bullet) {
   bullet.destroy();
-  enemy.destroy();
+  enemy.damageTaken(20);
 }
