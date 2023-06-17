@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import Turret from "./Turret";
 import Enemy from "./Enemy";
 import Bullet from "./Bullet";
+import BigBoy from "./BigBoy";
 
 let path;
 let graphics;
@@ -112,9 +113,15 @@ export default class MapScene extends Phaser.Scene {
   update(time, delta) {
     if (time > this.nextEnemy) {
       // CHANGE DURATION OF ENEMY RESPAWN
-      this.nextEnemy = time + 2000;
       const enemy = new Enemy(this, 0, 0, "bird", path);
       this.enemies.add(enemy);
+
+      if (time / 10 > this.nextEnemy) {
+        const bigboy = new BigBoy(this, 0, 0, "bird", path);
+        this.enemies.add(bigboy);
+      }
+
+      this.nextEnemy = time + 2000;
     }
   }
 }
