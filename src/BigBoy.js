@@ -24,10 +24,8 @@ export default class BigBoy extends Phaser.Physics.Arcade.Sprite {
 
     if (healthPercentage < 0.75 && healthPercentage > 0.5) {
       this.setTint(0xff9999);
-      console.log("light");
     } else if (healthPercentage < 0.5) {
       this.setTint(0xff0000);
-      console.log("dark");
     }
     if (this.currentHealth <= 0) {
       this.destroy();

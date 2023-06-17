@@ -1,6 +1,5 @@
 import Phaser from "phaser";
 import Bullet from "./Bullet";
-import Enemy from "./Enemy";
 
 export default class Turret extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, range, collisionGroup, enemies) {
@@ -48,7 +47,6 @@ export default class Turret extends Phaser.GameObjects.Sprite {
   autoFire() {
     let enemy = getEnemy(this.x, this.y, 200, this.enemies);
 
-    console.log(enemy);
     if (enemy) {
       let angle = Phaser.Math.Angle.Between(this.x, this.y, enemy.x, enemy.y);
       this.angle = (angle + Math.PI / 2) * Phaser.Math.RAD_TO_DEG;
