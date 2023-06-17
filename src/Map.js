@@ -86,6 +86,11 @@ export default class MapScene extends Phaser.Scene {
       runChildUpdate: true,
     });
 
+    this.turrets = this.add.group({
+      classType: Turret,
+      runChildUpdate: true,
+    });
+
     // OVERLAP FUNCTION
     this.physics.add.overlap(this.enemies, this.bullets, damageEnemy);
   }
@@ -112,7 +117,7 @@ export default class MapScene extends Phaser.Scene {
       );
       resources -= 10; // Reduce resources when placing a turret
       this.resourceText.setText(`Resources: ${resources}`);
-      // Create a new turret at the center of the clicked tile
+      this.turrets.add(turret);
     } else {
       this.resourceText.setText(`Resources: Not enough resources`);
     }
@@ -125,8 +130,8 @@ export default class MapScene extends Phaser.Scene {
       this.enemies.add(enemy);
 
       if (time / 10 > this.nextEnemy) {
-        const bigboy = new BigBoy(this, 0, 0, "bird", path);
-        this.enemies.add(bigboy);
+        // const bigboy = new BigBoy(this, 0, 0, "bird", path);
+        // this.enemies.add(bigboy);
       }
 
       this.nextEnemy = time + 2000;

@@ -7,6 +7,7 @@ export default class Turret extends Phaser.GameObjects.Sprite {
     super(scene, x, y, "turret");
     this.MapScene = scene;
     this.collisionGroup = collisionGroup;
+    this.nextTic = 0;
     this.enemies = enemies;
 
     scene.add.existing(this);
@@ -47,7 +48,7 @@ export default class Turret extends Phaser.GameObjects.Sprite {
   autoFire() {
     let enemy = getEnemy(this.x, this.y, 200, this.enemies);
 
-    console.log("fire");
+    console.log(enemy);
     if (enemy) {
       let angle = Phaser.Math.Angle.Between(this.x, this.y, enemy.x, enemy.y);
       this.angle = (angle + Math.PI / 2) * Phaser.Math.RAD_TO_DEG;
@@ -76,8 +77,13 @@ export default class Turret extends Phaser.GameObjects.Sprite {
 
   update(time, delta) {
     if (time - this.lastShootTime >= this.shootInterval) {
-      this.shootBullet();
       this.lastShootTime = time;
+    }
+    {
+      if (time > this.nextTic) {
+        this.autoFire();
+        this.nextTic = time + 1000;
+      }
     }
   }
   preload() {
