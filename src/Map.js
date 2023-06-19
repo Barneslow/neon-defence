@@ -111,7 +111,7 @@ export default class MapScene extends Phaser.Scene {
         this,
         centerX,
         centerY,
-        tileId,
+        100,
         this.bullets,
         this.enemies
       );
@@ -130,8 +130,8 @@ export default class MapScene extends Phaser.Scene {
       this.enemies.add(enemy);
 
       if (time / 10 > this.nextEnemy) {
-        // const bigboy = new BigBoy(this, 0, 0, "bird", path);
-        // this.enemies.add(bigboy);
+        const bigboy = new BigBoy(this, 0, 0, "bird", path);
+        this.enemies.add(bigboy);
       }
 
       this.nextEnemy = time + 2000;
