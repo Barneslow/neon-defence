@@ -26,7 +26,7 @@ export default class Turret extends Phaser.GameObjects.Sprite {
     this.bullets = this.scene.add.group(); // Group to hold the bullets
     this.bulletSpeed = 500; // Speed of the bullets
 
-    this.shootInterval = 2000; // Time interval between shots in milliseconds
+    this.shootInterval = 1000; // Time interval between shots in milliseconds
     this.lastShootTime = 0; // Time when the last shot was fired
     this.bulletSound = this.scene.sound.add("bulletsound");
     this.scene.input.on("pointerdown", this.shootBullet, this);
@@ -49,7 +49,7 @@ export default class Turret extends Phaser.GameObjects.Sprite {
 
     if (enemy) {
       let angle = Phaser.Math.Angle.Between(this.x, this.y, enemy.x, enemy.y);
-      this.angle = (angle + Math.PI / 2) * Phaser.Math.RAD_TO_DEG;
+      this.angle = (angle + Math.PI + Math.PI / 2) * Phaser.Math.RAD_TO_DEG;
 
       this.shootBullet();
     }
