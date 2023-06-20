@@ -129,8 +129,8 @@ export default class MapScene extends Phaser.Scene {
   }
 
   update(time, delta) {
-    // time > this.nextEnemy
-    if (this.one === true) {
+    // this.one === true
+    if (time > this.nextEnemy) {
       // CHANGE DURATION OF ENEMY RESPAWN
       const enemy = new CustomMoveEnemy(this, 0, 0, "bird");
       this.enemies.add(enemy);

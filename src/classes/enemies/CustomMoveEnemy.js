@@ -14,7 +14,7 @@ export default class CustomMoveEnemy extends Phaser.Physics.Arcade.Sprite {
     this.health = 50;
     this.currentHealth = 50;
     this.setTint(0xffffff);
-    this.setPosition(145, 768);
+    this.setPosition(145, 767);
     this.initialMove = true;
   }
 
@@ -26,7 +26,7 @@ export default class CustomMoveEnemy extends Phaser.Physics.Arcade.Sprite {
     // DETECTS IF THE PATH IS A MOVEABLE TILEID
     const currentTile = this.map.getTilesWithinWorldXY(
       this.x,
-      this.y - this.height,
+      this.y,
       this.width,
       this.height
     );
@@ -34,16 +34,6 @@ export default class CustomMoveEnemy extends Phaser.Physics.Arcade.Sprite {
     const singleCurrentTile = currentTile[0];
 
     console.log(singleCurrentTile.index);
-
-    // const leftTile = this.map.getTileAt(
-    //   singleCurrentTile.x - 1,
-    //   singleCurrentTile.y
-    // );
-    // const rightTile = this.map.getTileAt(
-    //   singleCurrentTile.x + 1,
-    //   singleCurrentTile.y
-    // );
-    // MOVE FORWARD
 
     if (singleCurrentTile.index === 27) {
       this.setVelocityY(-50);
