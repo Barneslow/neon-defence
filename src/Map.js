@@ -3,6 +3,7 @@ import Turret from "./Turret";
 import Enemy from "./Enemy";
 import Bullet from "./Bullet";
 import BigBoy from "./BigBoy";
+import { placeTurretOnMap } from "./helpers/helpers";
 
 let path;
 let graphics;
@@ -97,30 +98,9 @@ export default class MapScene extends Phaser.Scene {
 
   onTileClicked(pointer) {
     const map = this.make.tilemap({ key: "map" });
-    const tile = map.worldToTileXY(pointer.worldX, pointer.worldY);
-    const tileId = map.getTileAt(tile.x, tile.y, true).index; // Get the tile index
-    if (tileId === 7 && resources >= 10) {
-      // Calculate the position of the center of the clicked tile
-      const tileWidth = map.tileWidth;
-      const tileHeight = map.tileHeight;
-      const offsetX = tileWidth / 2;
-      const offsetY = tileHeight / 2;
-      const centerX = tile.x * tileWidth + offsetX;
-      const centerY = tile.y * tileHeight + offsetY;
-      const turret = new Turret(
-        this,
-        centerX,
-        centerY,
-        100,
-        this.bullets,
-        this.enemies
-      );
-      resources -= 10; // Reduce resources when placing a turret
-      this.resourceText.setText(`Resources: ${resources}`);
-      this.turrets.add(turret);
-    } else {
-      this.resourceText.setText(`Resources: Not enough resources`);
-    }
+    // Bind functions to this keyword
+    const boundPlaceTurretOnMapFunc = placeTurretOnMap.bind(this);
+    boundPlaceTurretOnMapFunc(pointer, resources, map);
   }
 
   update(time, delta) {
