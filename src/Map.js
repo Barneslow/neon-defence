@@ -5,6 +5,7 @@ import Bullet from "./Bullet";
 import BigBoy from "./classes/enemies/BigBoy";
 import { placeTurretOnMap } from "./helpers/helpers";
 import AutoTurret from "./classes/turrets/AutoTurret";
+import CustomMoveEnemy from "./classes/enemies/CustomMoveEnemy";
 
 let path;
 let graphics;
@@ -44,6 +45,7 @@ let resources = 100;
 export default class MapScene extends Phaser.Scene {
   constructor() {
     super("mapScene");
+    this.one = true;
   }
 
   preload() {
@@ -57,11 +59,13 @@ export default class MapScene extends Phaser.Scene {
 
   create() {
     const map = this.make.tilemap({ key: "map" });
+    this.map = map;
     const tileset = map.addTilesetImage("2Dsprites", "tiles", 32, 32);
 
     const layer1 = map.createLayer(0, tileset);
-    const layer2 = map.createLayer(1, tileset);
-
+    // const layer2 = map.createLayer(1, tileset);
+    // const pathTiles = this.map.getTilesWithinWorldXY(145, 10, 700, 1000);
+    // console.log(pathTiles);
     this.resourceText = this.add.text(10, 10, `Resources: ${resources}`, {
       fontSize: "24px",
       // @ts-ignore
@@ -99,21 +103,26 @@ export default class MapScene extends Phaser.Scene {
 
   onTileClicked(pointer) {
     const map = this.make.tilemap({ key: "map" });
+    const tile = map.worldToTileXY(pointer.worldX, pointer.worldY);
+    const tileId = map.getTileAt(tile.x, tile.y, true).index;
+    console.log(tileId);
     // Bind functions to this keyword
     const boundPlaceTurretOnMapFunc = placeTurretOnMap.bind(this);
     boundPlaceTurretOnMapFunc(pointer, resources, map);
   }
 
   update(time, delta) {
-    if (time > this.nextEnemy) {
+    // time > this.nextEnemy
+    if (this.one === true) {
       // CHANGE DURATION OF ENEMY RESPAWN
-      const enemy = new Enemy(this, 0, 0, "bird", path);
+      const enemy = new CustomMoveEnemy(this, 0, 0, "bird");
       this.enemies.add(enemy);
+      this.one = false;
 
-      if (time / 10 > this.nextEnemy) {
-        const bigboy = new BigBoy(this, 0, 0, "bird", path);
-        this.enemies.add(bigboy);
-      }
+      // if (time / 10 > this.nextEnemy) {
+      //   const bigboy = new BigBoy(this, 0, 0, "bird", path);
+      //   this.enemies.add(bigboy);
+      // }
 
       this.nextEnemy = time + 2000;
     }

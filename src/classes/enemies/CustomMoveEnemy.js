@@ -1,19 +1,20 @@
 import Phaser from "phaser";
 
 const ENEMY_SPEED = 1 / 50000;
-export default class Enemy extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, y, name, path, map) {
+export default class CustomMoveEnemy extends Phaser.Physics.Arcade.Sprite {
+  constructor(scene, x, y, name, path) {
     super(scene, x, y, name, path);
     scene.add.existing(this);
     scene.physics.add.existing(this);
     this.MapScene = scene;
-    this.map = map;
+    this.map = scene.map;
+    this.nextTic = 0;
     this.path = path;
     this.follower = { t: 0, vec: new Phaser.Math.Vector2() };
     this.health = 50;
     this.currentHealth = 50;
     this.setTint(0xffffff);
-    this.setPosition(145, 430);
+    this.setPosition(145, 768);
   }
 
   preload() {
@@ -21,12 +22,12 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
   }
 
   moveOnPath() {
+    // DETECTS IF THE PATH IS A MOVEABLE TILEID
     const pathTiles = this.map.getTilesWithinWorldXY(
       this.x,
-      this.y,
-      this.width,
-      this.height,
-      { isColliding: true }
+      this.y - this.height,
+      this.width / 2,
+      this.height / 2
     );
 
     let canMoveForward = true;
@@ -35,21 +36,10 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
 
     pathTiles.forEach((tile) => {
       if (tile.index === 3 || tile.index === 5) {
-        canMoveForward = false;
-
-        const leftTile = this.map.getTileAt(tile.x - 1, tile.y);
-        const rightTile = this.map.getTileAt(tile.x + 1, tile.y);
-
-        if (leftTile && (leftTile.index === 3 || leftTile.index === 5)) {
-          canMoveLeft = true;
-          canMoveRight = false;
-        } else if (
-          rightTile &&
-          (rightTile.index === 3 || rightTile.index === 5)
-        ) {
-          canMoveLeft = false;
-          canMoveRight = true;
-        }
+        this.setVelocityY(-50);
+      } else {
+        this.setVelocityY(0);
+        console.log("velocity 0");
       }
     });
 
@@ -77,9 +67,10 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
   }
 
   update(time, delta) {
-    this.moveOnPath();
-    // this.follower.t += ENEMY_SPEED * delta;
-    // this.path.getPoint(this.follower.t, this.follower.vec);
-    // this.setPosition(this.follower.vec.x, this.follower.vec.y);
+    if (time > this.nextTic) {
+      this.moveOnPath();
+      // Increase the shoot time
+      this.nextTic = time + 2000;
+    }
   }
 }
