@@ -33,25 +33,19 @@ export default class CustomMoveEnemy extends Phaser.Physics.Arcade.Sprite {
 
     const singleCurrentTile = currentTile[0];
 
-    console.log(singleCurrentTile.index);
-
     if (singleCurrentTile.index === 27) {
       this.setVelocityY(-50);
       this.setVelocityX(0);
-      console.log("forward");
     } else if (singleCurrentTile.index === 28) {
       // MOVE RIGHT
-      console.log("right");
       this.setVelocityY(0);
       this.setVelocityX(50);
     } else if (singleCurrentTile.index === 17) {
       // MOVE LEFT
-      console.log("left");
       this.setVelocityY(0);
       this.setVelocityX(-50);
     } else if (singleCurrentTile.index === 5) {
       // MOVE BACK
-      console.log("back");
       this.setVelocityY(50);
       this.setVelocityX(0);
     }
