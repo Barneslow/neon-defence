@@ -18,7 +18,7 @@ export default class CustomMoveEnemy extends Phaser.Physics.Arcade.Sprite {
   }
 
   preload() {
-    this.MapScene.load.image("bird", "assets/images/bird.png");
+    this.MapScene.load.image("robot", "assets/images/Robot2D.png");
   }
 
   moveOnPath() {

@@ -1,6 +1,8 @@
 import Phaser from "phaser";
 import MapScene from "../src/Map";
 
+const startBtn = document.getElementById("start");
+
 const config = {
   type: Phaser.AUTO,
   parent: "app",
@@ -14,5 +16,7 @@ const config = {
   },
   scene: [MapScene],
 };
+
+startBtn.addEventListener("click", () => console.log("start"));
 
 export default new Phaser.Game(config);
