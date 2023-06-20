@@ -1,10 +1,10 @@
 import Phaser from "phaser";
-import Turret from "./Turret";
-import Enemy from "./Enemy";
+import Turret from "./classes/turrets/Turret";
+import Enemy from "./classes/enemies/Enemy";
 import Bullet from "./Bullet";
-import BigBoy from "./BigBoy";
+import BigBoy from "./classes/enemies/BigBoy";
 import { placeTurretOnMap } from "./helpers/helpers";
-import AutoTurret from "./AutoTurret";
+import AutoTurret from "./classes/turrets/AutoTurret";
 
 let path;
 let graphics;

@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import Bullet from "./Bullet";
+import Bullet from "../../Bullet";
 
 export default class AutoTurret extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, range, collisionGroup, enemies) {
@@ -37,6 +37,7 @@ export default class AutoTurret extends Phaser.GameObjects.Sprite {
       null,
       this.collisionGroup
     );
+    bullet.setTint(0xff0000);
 
     bullet.body.velocity.setToPolar(
       this.rotation - Math.PI / 2 - Math.PI,

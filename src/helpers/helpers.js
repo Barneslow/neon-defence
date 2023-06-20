@@ -1,5 +1,5 @@
-import AutoTurret from "../AutoTurret";
-import Turret from "../Turret";
+import AutoTurret from "../classes/turrets/AutoTurret";
+import Turret from "../classes/turrets/Turret";
 
 export function placeTurretOnMap(pointer, resources, map) {
   const tile = map.worldToTileXY(pointer.worldX, pointer.worldY);
