@@ -1,13 +1,16 @@
 import Phaser from "phaser";
 
 export default class Bullet extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, y, angle, collisionGroup) {
+  constructor(scene, x, y, angle, collisionGroup, damage = 10) {
     super(scene, x, y, "bullet");
     this.scene = scene;
 
     this.scene.physics.world.enable(this);
     scene.physics.add.existing(this);
     this.scene.add.existing(this);
+
+    // BULLET DAMAGE
+    this.damage = damage;
 
     // ADDING INSTANCE OF THE BULLET TO THE COLLISION GROUP IN SCENE
     collisionGroup.add(this);
@@ -44,12 +47,7 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
     //   this
     // );
   }
-  onCollision(bullet, enemy) {
-    // Handle bullet collision with enemy here
-    // For example, you can damage the enemy or destroy both bullet and enemy
-    bullet.destroy();
-    enemy.destroy();
-  }
+
   startLifespanTimer() {
     this.timerEvent = this.scene.time.addEvent({
       delay: this.lifespan,

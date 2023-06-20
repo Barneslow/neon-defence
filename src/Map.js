@@ -117,7 +117,8 @@ export default class MapScene extends Phaser.Scene {
 // DAMAGE FUNCTION
 function damageEnemy(enemy, bullet) {
   bullet.destroy();
-  enemy.damageTaken(50);
-}
+
+  enemy.damageTaken(bullet.damage);
+
 
 // DISTANCE BETWEEN TOWER AND BULLET
