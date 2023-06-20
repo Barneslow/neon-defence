@@ -10,9 +10,8 @@ export default class CustomMoveEnemy extends Phaser.Physics.Arcade.Sprite {
     this.map = scene.map;
     this.nextTic = 0;
     this.path = path;
-    this.follower = { t: 0, vec: new Phaser.Math.Vector2() };
-    this.health = 500;
-    this.currentHealth = 500;
+    this.health = 10;
+    this.currentHealth = 10;
     this.setTint(0xffffff);
     this.setPosition(145, 767);
     this.initialMove = true;
@@ -62,6 +61,8 @@ export default class CustomMoveEnemy extends Phaser.Physics.Arcade.Sprite {
     }
     if (this.currentHealth <= 0) {
       this.destroy();
+      this.MapScene.resources += 10;
+      this.MapScene.updateResources();
     }
   }
 
@@ -70,9 +71,6 @@ export default class CustomMoveEnemy extends Phaser.Physics.Arcade.Sprite {
       this.setVelocityY(-200);
       this.initialMove = false;
     }
-    // if (time > this.nextTic) {
     this.moveOnPath();
-    this.nextTic = time + 1000;
-    // }
   }
 }

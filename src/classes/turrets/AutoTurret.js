@@ -2,16 +2,16 @@ import Phaser from "phaser";
 import Bullet from "../../Bullet";
 
 export default class AutoTurret extends Phaser.GameObjects.Sprite {
-  constructor(scene, x, y, range, collisionGroup, enemies) {
+  constructor(scene, x, y, collisionGroup, enemies) {
     super(scene, x, y, "turret");
     this.MapScene = scene;
     this.collisionGroup = collisionGroup;
     this.nextTic = 0;
     this.enemies = enemies;
     scene.add.existing(this);
-    this.range = range;
+    this.range = 100;
     this.rotationSpeed = 0.04;
-
+    this.cost = 50;
     this.bullets = this.scene.add.group();
     this.bulletSpeed = 500;
 

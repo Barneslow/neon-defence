@@ -7,45 +7,11 @@ import { placeTurretOnMap } from "./helpers/helpers";
 import AutoTurret from "./classes/turrets/AutoTurret";
 import CustomMoveEnemy from "./classes/enemies/CustomMoveEnemy";
 
-let path;
-let graphics;
-const radius = 500;
-const MAP_HEIGHT = 768;
-const MAP_WIDTH = 1024;
-const PATHS = [
-  { x: 145, y: 430 },
-  { x: 275, y: 430 },
-  { x: 275, y: 500 },
-  { x: 300, y: 500 },
-  { x: 300, y: 700 },
-  { x: 450, y: 700 },
-  { x: 450, y: 400 },
-  { x: 530, y: 400 },
-  { x: 530, y: 350 },
-  { x: 650, y: 350 },
-  { x: 650, y: 400 },
-  { x: 700, y: 400 },
-  { x: 725, y: 400 },
-  { x: 725, y: 630 },
-  { x: 690, y: 660 },
-  { x: 690, y: 725 },
-  { x: 875, y: 725 },
-  { x: 875, y: 250 },
-  { x: 400, y: 250 },
-  { x: 400, y: 350 },
-  { x: 300, y: 350 },
-  { x: 300, y: 250 },
-  { x: 175, y: 250 },
-  { x: 175, y: 150 },
-  { x: 450, y: 150 },
-];
-
-let resources = 100;
-
 export default class MapScene extends Phaser.Scene {
   constructor() {
     super("mapScene");
     this.one = true;
+    this.resources = 100;
   }
 
   preload() {
@@ -66,7 +32,7 @@ export default class MapScene extends Phaser.Scene {
     // const layer2 = map.createLayer(1, tileset);
     // const pathTiles = this.map.getTilesWithinWorldXY(145, 10, 700, 1000);
     // console.log(pathTiles);
-    this.resourceText = this.add.text(10, 10, `Resources: ${resources}`, {
+    this.resourceText = this.add.text(10, 10, `Resources: ${this.resources}`, {
       fontSize: "24px",
       // @ts-ignore
       fill: "#ffffff",
@@ -75,10 +41,6 @@ export default class MapScene extends Phaser.Scene {
     layer1.setInteractive();
     layer1.on("pointerdown", this.onTileClicked, this);
 
-    graphics = this.add.graphics();
-    path = this.add.path(145, MAP_HEIGHT);
-    drawWaypointPath();
-    path.draw(graphics);
     this.nextEnemy = 0;
 
     // ADDING COLLISION FUNCTION BETWEEN CLASSES
@@ -118,14 +80,18 @@ export default class MapScene extends Phaser.Scene {
     }
   }
 
+  updateResources() {
+    this.resourceText.setText(`Resources: ${this.resources}`);
+  }
+
   onTileClicked(pointer) {
-    const map = this.make.tilemap({ key: "map" });
-    const tile = map.worldToTileXY(pointer.worldX, pointer.worldY);
-    const tileId = map.getTileAt(tile.x, tile.y, true).index;
-    console.log(tileId);
-    // Bind functions to this keyword
-    const boundPlaceTurretOnMapFunc = placeTurretOnMap.bind(this);
-    boundPlaceTurretOnMapFunc(pointer, resources, map);
+    const tile = this.map.worldToTileXY(pointer.worldX, pointer.worldY);
+    const tileId = this.map.getTileAt(tile.x, tile.y, true).index;
+
+    // PLACE TURRET ON THE MAP
+    const boundPlaceTurretOnMapFunc = placeTurretOnMap.bind(this); // Bind the function to transfer this keyword
+    const newRes = boundPlaceTurretOnMapFunc(pointer, this.resources, this.map);
+    this.resources = newRes;
   }
 
   update(time, delta) {
@@ -144,11 +110,6 @@ export default class MapScene extends Phaser.Scene {
       this.nextEnemy = time + 2000;
     }
   }
-}
-
-// DRAWING PATH LINE FUNCTION
-function drawWaypointPath() {
-  PATHS.forEach((vector) => path.lineTo(vector.x, vector.y));
 }
 
 // DAMAGE FUNCTION
