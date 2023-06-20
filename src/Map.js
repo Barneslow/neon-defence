@@ -12,6 +12,8 @@ export default class MapScene extends Phaser.Scene {
     super("mapScene");
     this.resources = 100;
     this.startWave = false;
+    this.waveNumber = 10;
+    this.boss = false;
   }
 
   preload() {
@@ -109,20 +111,22 @@ export default class MapScene extends Phaser.Scene {
   update(time, delta) {
     if (!this.startWave) return;
     // this.one === true
-    if (time > this.nextEnemy) {
+    if (time > this.nextEnemy && this.waveNumber > 0) {
       // CHANGE DURATION OF ENEMY RESPAWN
       const enemy = new CustomMoveEnemy(this, 0, 0, "robot");
       this.enemies.add(enemy);
 
       this.nextEnemy = time + 2000;
+      this.waveNumber--;
     }
 
-    if (time > this.nextBoss) {
+    if (time > 20000 && this.boss === false) {
       // CHANGE DURATION OF BOSS RESPAWN
       const bigboy = new BigBoy(this, 0, 0, "boss");
       this.enemies.add(bigboy);
 
-      this.nextBoss = time + 10000;
+      this.boss = true;
+      // this.nextBoss = time + 10000;
     }
   }
 }
