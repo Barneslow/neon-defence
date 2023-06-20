@@ -15,10 +15,13 @@ export default class CustomMoveEnemy extends Phaser.Physics.Arcade.Sprite {
     this.setTint(0xffffff);
     this.setPosition(145, 767);
     this.initialMove = true;
+    this.deadSound = this.scene.sound.add("dead");
   }
 
   preload() {
     this.MapScene.load.image("robot", "assets/images/Robot2D.png");
+    this.scene.load.audio("bulletsound", "assets/sounds/BulletSound.mp3");
+    this.scene.load.audio("dead", "assets/sounds/dead-enemy.mp3");
   }
 
   moveOnPath() {
@@ -61,6 +64,7 @@ export default class CustomMoveEnemy extends Phaser.Physics.Arcade.Sprite {
     }
     if (this.currentHealth <= 0) {
       this.destroy();
+      this.deadSound.play({ volume: 0.2 });
       this.MapScene.resources += 10;
       this.MapScene.updateResources();
     }

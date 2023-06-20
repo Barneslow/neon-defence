@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 
-export default class CustomMoveEnemy extends Phaser.Physics.Arcade.Sprite {
+export default class BigBoy extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y, name, path) {
     super(scene, x, y, name, path);
     scene.add.existing(this);
@@ -10,14 +10,16 @@ export default class CustomMoveEnemy extends Phaser.Physics.Arcade.Sprite {
     this.nextTic = 0;
     this.path = path;
     this.health = 300;
-    this.currentHealth = 300;
+    this.currentHealth = 20;
     this.setTint(0xffffff);
     this.setPosition(145, 767);
     this.initialMove = true;
+    this.deadSound = this.scene.sound.add("dead-boss");
   }
 
   preload() {
     this.MapScene.load.image("boss", "assets/images/Boss.png");
+    this.scene.load.audio("dead-boss", "assets/sounds/dead-boss.mp3");
   }
 
   moveOnPath() {
@@ -60,6 +62,8 @@ export default class CustomMoveEnemy extends Phaser.Physics.Arcade.Sprite {
     }
     if (this.currentHealth <= 0) {
       this.destroy();
+      this.deadSound.play({ volume: 0.2 });
+
       this.MapScene.resources += 10;
       this.MapScene.updateResources();
     }

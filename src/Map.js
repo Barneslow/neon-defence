@@ -25,6 +25,8 @@ export default class MapScene extends Phaser.Scene {
     this.load.image("boss", "assets/images/Boss.png");
     this.load.image("bullet", "assets/images/Bullet.png");
     this.load.audio("bulletsound", "assets/sounds/BulletSound.mp3");
+    this.load.audio("dead", "assets/sounds/dead-enemy.mp3");
+    this.load.audio("dead-boss", "assets/sounds/dead-boss.mp3");
   }
 
   create() {
@@ -111,16 +113,16 @@ export default class MapScene extends Phaser.Scene {
   update(time, delta) {
     if (!this.startWave) return;
     // this.one === true
-    if (time > this.nextEnemy && this.waveNumber > 0) {
-      // CHANGE DURATION OF ENEMY RESPAWN
-      const enemy = new CustomMoveEnemy(this, 0, 0, "robot");
-      this.enemies.add(enemy);
+    // if (time > this.nextEnemy && this.waveNumber > 0) {
+    //   // CHANGE DURATION OF ENEMY RESPAWN
+    //   const enemy = new CustomMoveEnemy(this, 0, 0, "robot");
+    //   this.enemies.add(enemy);
 
-      this.nextEnemy = time + 2000;
-      this.waveNumber--;
-    }
+    //   this.nextEnemy = time + 2000;
+    //   this.waveNumber--;
+    // }
 
-    if (time > 20000 && this.boss === false) {
+    if (time > 1000 && this.boss === false) {
       // CHANGE DURATION OF BOSS RESPAWN
       const bigboy = new BigBoy(this, 0, 0, "boss");
       this.enemies.add(bigboy);
