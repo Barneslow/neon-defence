@@ -18,7 +18,7 @@ export default class MapScene extends Phaser.Scene {
     this.load.tilemapTiledJSON("map", "assets/json/2DTowerDefense.json");
     this.load.image("tiles", "assets/images/2Dsprites.png");
     this.load.image("turret", "assets/images/Turret2D.png");
-    this.load.image("bird", "assets/images/bird.png");
+    this.load.image("bird", "assets/images/Boss2.png");
     this.load.image("bullet", "assets/images/Bullet.png");
     this.load.audio("bulletsound", "assets/sounds/BulletSound.mp3");
   }
@@ -120,5 +120,5 @@ function damageEnemy(enemy, bullet) {
 
   enemy.damageTaken(bullet.damage);
 
-
-// DISTANCE BETWEEN TOWER AND BULLET
+  // DISTANCE BETWEEN TOWER AND BULLET
+}
