@@ -10,8 +10,8 @@ export default class CustomMoveEnemy extends Phaser.Physics.Arcade.Sprite {
     this.map = scene.map;
     this.nextTic = 0;
     this.path = path;
-    this.health = 10;
-    this.currentHealth = 10;
+    this.health = 30;
+    this.currentHealth = 30;
     this.setTint(0xffffff);
     this.setPosition(145, 767);
     this.initialMove = true;
