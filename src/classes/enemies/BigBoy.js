@@ -1,21 +1,54 @@
 import Phaser from "phaser";
 
-const ENEMY_SPEED = 1 / 100000;
 export default class BigBoy extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y, name, path) {
     super(scene, x, y, name, path);
     scene.add.existing(this);
     scene.physics.add.existing(this);
     this.MapScene = scene;
+    this.map = scene.map;
+    this.nextTic = 0;
     this.path = path;
-    this.follower = { t: 0, vec: new Phaser.Math.Vector2() };
-    this.health = 500;
-    this.currentHealth = 500;
-    this.setTint(0x0000ff);
+    this.health = 300;
+    this.currentHealth = 20;
+    this.setTint(0xffffff);
+    this.setPosition(145, 767);
+    this.initialMove = true;
+    this.deadSound = this.scene.sound.add("dead-boss");
   }
 
   preload() {
-    this.MapScene.load.image("bird", "assets/images/bird.png");
+    this.MapScene.load.image("boss", "assets/images/Boss.png");
+    this.scene.load.audio("dead-boss", "assets/sounds/dead-boss.mp3");
+  }
+
+  moveOnPath() {
+    // DETECTS IF THE PATH IS A MOVEABLE TILEID
+    const currentTile = this.map.getTilesWithinWorldXY(
+      this.x,
+      this.y,
+      this.width,
+      this.height
+    );
+
+    const singleCurrentTile = currentTile[0];
+
+    if (singleCurrentTile.index === 27) {
+      this.setVelocityY(-20);
+      this.setVelocityX(0);
+    } else if (singleCurrentTile.index === 28) {
+      // MOVE RIGHT
+      this.setVelocityY(0);
+      this.setVelocityX(20);
+    } else if (singleCurrentTile.index === 17) {
+      // MOVE LEFT
+      this.setVelocityY(0);
+      this.setVelocityX(-20);
+    } else if (singleCurrentTile.index === 5) {
+      // MOVE BACK
+      this.setVelocityY(20);
+      this.setVelocityX(0);
+    }
   }
 
   damageTaken(damage) {
@@ -29,13 +62,18 @@ export default class BigBoy extends Phaser.Physics.Arcade.Sprite {
     }
     if (this.currentHealth <= 0) {
       this.destroy();
+      this.deadSound.play({ volume: 0.2 });
+
+      this.MapScene.resources += 10;
+      this.MapScene.updateResources();
     }
   }
 
   update(time, delta) {
-    this.follower.t += ENEMY_SPEED * delta;
-    this.path.getPoint(this.follower.t, this.follower.vec);
-
-    this.setPosition(this.follower.vec.x, this.follower.vec.y);
+    if (this.initialMove) {
+      this.setVelocityY(-50);
+      this.initialMove = false;
+    }
+    this.moveOnPath();
   }
 }

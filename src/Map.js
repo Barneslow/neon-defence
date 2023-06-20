@@ -10,20 +10,29 @@ import CustomMoveEnemy from "./classes/enemies/CustomMoveEnemy";
 export default class MapScene extends Phaser.Scene {
   constructor() {
     super("mapScene");
-    this.one = true;
     this.resources = 100;
+    this.startWave = false;
+    this.waveNumber = 10;
+    this.boss = false;
   }
 
   preload() {
     this.load.tilemapTiledJSON("map", "assets/json/2DTowerDefense.json");
     this.load.image("tiles", "assets/images/2Dsprites.png");
     this.load.image("turret", "assets/images/Turret2D.png");
-    this.load.image("bird", "assets/images/Boss2.png");
+    this.load.image("bird", "assets/images/bird.png");
+    this.load.image("robot", "assets/images/Robot2D.png");
+    this.load.image("boss", "assets/images/Boss.png");
     this.load.image("bullet", "assets/images/Bullet.png");
     this.load.audio("bulletsound", "assets/sounds/BulletSound.mp3");
+    this.load.audio("dead", "assets/sounds/dead-enemy.mp3");
+    this.load.audio("dead-boss", "assets/sounds/dead-boss.mp3");
   }
 
   create() {
+    const startBtn = document.getElementById("start");
+    startBtn.addEventListener("click", this.startWaveFunc.bind(this));
+
     const map = this.make.tilemap({ key: "map" });
     this.map = map;
     const tileset = map.addTilesetImage("2Dsprites", "tiles", 32, 32);
@@ -42,6 +51,7 @@ export default class MapScene extends Phaser.Scene {
     layer1.on("pointerdown", this.onTileClicked, this);
 
     this.nextEnemy = 0;
+    this.nextBoss = 0;
 
     // ADDING COLLISION FUNCTION BETWEEN CLASSES
     this.bullets = this.physics.add.group({
@@ -96,20 +106,29 @@ export default class MapScene extends Phaser.Scene {
     this.resources = newRes;
   }
 
+  startWaveFunc() {
+    this.startWave = true;
+  }
+
   update(time, delta) {
+    if (!this.startWave) return;
     // this.one === true
-    if (time > this.nextEnemy) {
-      // CHANGE DURATION OF ENEMY RESPAWN
-      const enemy = new CustomMoveEnemy(this, 0, 0, "bird");
-      this.enemies.add(enemy);
-      this.one = false;
+    // if (time > this.nextEnemy && this.waveNumber > 0) {
+    //   // CHANGE DURATION OF ENEMY RESPAWN
+    //   const enemy = new CustomMoveEnemy(this, 0, 0, "robot");
+    //   this.enemies.add(enemy);
 
-      // if (time / 10 > this.nextEnemy) {
-      //   const bigboy = new BigBoy(this, 0, 0, "bird", path);
-      //   this.enemies.add(bigboy);
-      // }
+    //   this.nextEnemy = time + 2000;
+    //   this.waveNumber--;
+    // }
 
-      this.nextEnemy = time + 2000;
+    if (time > 1000 && this.boss === false) {
+      // CHANGE DURATION OF BOSS RESPAWN
+      const bigboy = new BigBoy(this, 0, 0, "boss");
+      this.enemies.add(bigboy);
+
+      this.boss = true;
+      // this.nextBoss = time + 10000;
     }
   }
 }
@@ -119,6 +138,4 @@ function damageEnemy(enemy, bullet) {
   bullet.destroy();
 
   enemy.damageTaken(bullet.damage);
-
-  // DISTANCE BETWEEN TOWER AND BULLET
 }
