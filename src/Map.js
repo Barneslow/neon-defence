@@ -96,9 +96,26 @@ export default class MapScene extends Phaser.Scene {
       classType: Turret && AutoTurret,
       runChildUpdate: true,
     });
-
+    this.input.on("pointerdown", this.shootBullet, this);
     // OVERLAP FUNCTION
     this.physics.add.overlap(this.enemies, this.bullets, damageEnemy);
+  }
+
+  shootBullet(pointer) {
+    const turretsInRange = this.turrets.getChildren().filter((turret) => {
+      const distanceToPointer = Phaser.Math.Distance.Between(
+        turret.x,
+        turret.y,
+        pointer.worldX,
+        pointer.worldY
+      );
+      return distanceToPointer <= turret.range;
+    });
+
+    if (turretsInRange.length > 0) {
+      const controlledTurret = turretsInRange[0]; // Use the first turret in range
+      controlledTurret.shootBullet();
+    }
   }
 
   onTileClicked(pointer) {
