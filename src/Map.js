@@ -4,6 +4,7 @@ import Enemy from "./Enemy";
 import Bullet from "./Bullet";
 import BigBoy from "./BigBoy";
 import { placeTurretOnMap } from "./helpers/helpers";
+import AutoTurret from "./AutoTurret";
 
 let path;
 let graphics;
@@ -88,7 +89,7 @@ export default class MapScene extends Phaser.Scene {
     });
 
     this.turrets = this.add.group({
-      classType: Turret,
+      classType: Turret && AutoTurret,
       runChildUpdate: true,
     });
 

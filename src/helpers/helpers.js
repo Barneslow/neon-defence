@@ -1,3 +1,4 @@
+import AutoTurret from "../AutoTurret";
 import Turret from "../Turret";
 
 export function placeTurretOnMap(pointer, resources, map) {
@@ -10,7 +11,7 @@ export function placeTurretOnMap(pointer, resources, map) {
     const offsetY = tileHeight / 2;
     const centerX = tile.x * tileWidth + offsetX;
     const centerY = tile.y * tileHeight + offsetY;
-    const turret = new Turret(
+    const turret = new AutoTurret(
       this,
       centerX,
       centerY,
