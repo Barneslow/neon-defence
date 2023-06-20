@@ -154,7 +154,7 @@ function drawWaypointPath() {
 // DAMAGE FUNCTION
 function damageEnemy(enemy, bullet) {
   bullet.destroy();
-  enemy.damageTaken(20);
+  enemy.damageTaken(50);
 }
 
 // DISTANCE BETWEEN TOWER AND BULLET
