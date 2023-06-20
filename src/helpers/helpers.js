@@ -11,7 +11,7 @@ export function placeTurretOnMap(pointer, resources, map) {
     const offsetY = tileHeight / 2;
     const centerX = tile.x * tileWidth + offsetX;
     const centerY = tile.y * tileHeight + offsetY;
-    const turret = new AutoTurret(
+    const turret = new Turret(
       this,
       centerX,
       centerY,
