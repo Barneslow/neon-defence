@@ -14,6 +14,9 @@ export default class AutoTurret extends Phaser.GameObjects.Sprite {
     this.cost = 50;
     this.bullets = this.scene.add.group();
     this.bulletSpeed = 500;
+    this.experiencePoints = 0;
+    this.level = 1;
+    this.damageOutput = 10;
 
     // this.bulletSound = this.scene.sound.add("bulletsound");
   }
@@ -29,13 +32,38 @@ export default class AutoTurret extends Phaser.GameObjects.Sprite {
     }
   }
 
+  upgradeExperience() {
+    // LEVEL UP TOWER - REFACTOR LATER
+    this.experiencePoints += 10;
+
+    // Alternate exp
+    if (this.experiencePoints === 30) {
+      this.level++;
+    }
+    if (this.experiencePoints === 50) {
+      this.level++;
+    }
+
+    if (this.level === 2) {
+      this.setTint(0x0000ff);
+      this.damageOutput = 20;
+    }
+
+    if (this.level === 3) {
+      this.setTint(0x00ff00);
+      this.damageOutput = 30;
+    }
+  }
+
   shootBullet() {
+    this.upgradeExperience();
     const bullet = new Bullet(
       this.scene,
       this.x,
       this.y,
       null,
-      this.collisionGroup
+      this.collisionGroup,
+      this.damageOutput
     );
     bullet.setTint(0xff0000);
 
