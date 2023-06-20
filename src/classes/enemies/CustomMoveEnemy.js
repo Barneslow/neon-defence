@@ -15,6 +15,7 @@ export default class CustomMoveEnemy extends Phaser.Physics.Arcade.Sprite {
     this.currentHealth = 50;
     this.setTint(0xffffff);
     this.setPosition(145, 768);
+    this.initialMove = true;
   }
 
   preload() {
@@ -26,64 +27,44 @@ export default class CustomMoveEnemy extends Phaser.Physics.Arcade.Sprite {
     const currentTile = this.map.getTilesWithinWorldXY(
       this.x,
       this.y - this.height,
-      this.width / 2,
-      this.height / 2
+      this.width,
+      this.height
     );
 
     const singleCurrentTile = currentTile[0];
 
-    const leftTile = this.map.getTileAt(
-      singleCurrentTile.x - 1,
-      singleCurrentTile.y
-    );
-    const rightTile = this.map.getTileAt(
-      singleCurrentTile.x + 1,
-      singleCurrentTile.y
-    );
+    console.log(singleCurrentTile.index);
 
-    // console.log(rightTile.index);
+    // const leftTile = this.map.getTileAt(
+    //   singleCurrentTile.x - 1,
+    //   singleCurrentTile.y
+    // );
+    // const rightTile = this.map.getTileAt(
+    //   singleCurrentTile.x + 1,
+    //   singleCurrentTile.y
+    // );
+    // MOVE FORWARD
 
-    if (singleCurrentTile.index === 3 || singleCurrentTile.index === 5) {
+    if (singleCurrentTile.index === 27) {
       this.setVelocityY(-50);
       this.setVelocityX(0);
-    } else if (leftTile.index === 3 || leftTile.index === 5) {
+      console.log("forward");
+    } else if (singleCurrentTile.index === 28) {
+      // MOVE RIGHT
+      console.log("right");
       this.setVelocityY(0);
       this.setVelocityX(50);
-
-      // console.log("left");
-    } else if (rightTile.index === 3 || rightTile.index === 5) {
+    } else if (singleCurrentTile.index === 17) {
+      // MOVE LEFT
+      console.log("left");
       this.setVelocityY(0);
       this.setVelocityX(-50);
-      // console.log("right");
-    } else {
+    } else if (singleCurrentTile.index === 5) {
+      // MOVE BACK
+      console.log("back");
       this.setVelocityY(50);
       this.setVelocityX(0);
-      // console.log("back");
     }
-
-    // currentTile.forEach((tile) => {
-    //   const leftTile = this.map.getTileAt(tile.x - 1, tile.y);
-    //   const rightTile = this.map.getTileAt(tile.x + 1, tile.y);
-
-    //   //   console.log(rightTile.index);
-    //   if (tile.index === 3 || tile.index === 5) {
-    //     this.setVelocityY(-50);
-    //     this.setVelocityX(0);
-    //   } else if (leftTile.index === 3 || tile.index === 5) {
-    //     this.setVelocityY(0);
-    //     this.setVelocityX(50);
-
-    //     // console.log("left");
-    //   } else if (rightTile.index === 3 || tile.index === 5) {
-    //     this.setVelocityY(0);
-    //     this.setVelocityX(-50);
-    //     // console.log("right");
-    //   } else {
-    //     this.setVelocityY(50);
-    //     this.setVelocityX(0);
-    //     // console.log("back");
-    //   }
-    // });
   }
 
   damageTaken(damage) {
@@ -101,6 +82,10 @@ export default class CustomMoveEnemy extends Phaser.Physics.Arcade.Sprite {
   }
 
   update(time, delta) {
+    if (this.initialMove) {
+      this.setVelocityY(-200);
+      this.initialMove = false;
+    }
     // if (time > this.nextTic) {
     this.moveOnPath();
     this.nextTic = time + 1000;
