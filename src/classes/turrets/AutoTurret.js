@@ -18,7 +18,23 @@ export default class AutoTurret extends Phaser.GameObjects.Sprite {
     this.level = 1;
     this.damageOutput = 10;
 
+    this.setInteractive({ useHandCursor: true })
+      .on("pointerover", this.onPointerOver, this)
+      .on("pointerout", this.onPointerOut, this);
+
     // this.bulletSound = this.scene.sound.add("bulletsound");
+  }
+
+  onPointerOver() {
+    const gameCanvas = this.scene.sys.game.canvas;
+    gameCanvas.style.cursor = "pointer";
+    this.setTint(0xffff00);
+  }
+
+  onPointerOut() {
+    const gameCanvas = this.scene.sys.game.canvas;
+    gameCanvas.style.cursor = "auto";
+    this.clearTint();
   }
 
   autoFire() {

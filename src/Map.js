@@ -99,13 +99,14 @@ export default class MapScene extends Phaser.Scene {
 
   updateResources() {
     this.resourceText.setText(`Resources: ${this.resources}`);
+    console.log(this.resources);
   }
 
   onTileClicked(pointer) {
     const tile = this.map.worldToTileXY(pointer.worldX, pointer.worldY);
     const tileId = this.map.getTileAt(tile.x, tile.y, true).index;
-
     if (tileId != 7 || this.resources < 50) return; // prevent tile resource issues
+    if (!this.turretType) return;
 
     // PLACE TURRET ON THE MAP
     const boundPlaceTurretOnMapFunc = placeTurretOnMap.bind(this); // Bind the function to transfer this keyword

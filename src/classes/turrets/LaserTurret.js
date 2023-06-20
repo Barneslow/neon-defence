@@ -11,14 +11,42 @@ export default class LaserTurret extends Phaser.GameObjects.Sprite {
     scene.add.existing(this);
     this.range = 100;
     this.rotationSpeed = 0.04;
-    this.cost = 50;
     this.bullets = this.scene.add.group();
     this.bulletSpeed = 500;
     this.experiencePoints = 0;
     this.level = 1;
     this.damageOutput = 10;
+    this.setInteractive({ useHandCursor: true })
+      .on("pointerover", this.onPointerOver, this)
+      .on("pointerout", this.onPointerOut, this)
+      .on("pointerdown", this.onPointerDown, this);
 
     // this.bulletSound = this.scene.sound.add("bulletsound");
+  }
+
+  onPointerDown() {
+    this.MapScene.resources += 150;
+    this.MapScene.updateResources();
+    console.log(this.MapScene);
+    this.destroy();
+  }
+
+  onPointerOver() {
+    const gameCanvas = this.scene.sys.game.canvas;
+    gameCanvas.style.cursor = "pointer";
+    this.setTint(0xffff00);
+
+    const sellElement = document.getElementById("sell-turret");
+    sellElement.textContent = "$300";
+  }
+
+  onPointerOut() {
+    const gameCanvas = this.scene.sys.game.canvas;
+    gameCanvas.style.cursor = "auto";
+    const sellElement = document.getElementById("sell-turret");
+    sellElement.textContent = "";
+
+    this.clearTint();
   }
 
   autoFire() {

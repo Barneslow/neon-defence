@@ -5,6 +5,11 @@ body {
   justify-content: center;
 }
 
+.btn-box {
+  display: flex;
+  gap: 0.5rem;
+}
+
 .ui-btn {
   background-color: rgb(255, 87, 87);
   border-radius: 5px;
