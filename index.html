@@ -23,7 +23,16 @@
 
   <body>
     <div id="app"></div>
-    <button id="start">Start</button>
+    <div class="btn-box">
+      <button id="start" class="ui-btn">Start</button>
+      <button id="auto-turret" class="ui-btn" data-type="auto">
+        Auto Turret <span>$100</span>
+      </button>
+      <button id="laser-turret" data-type="laser" class="ui-btn">
+        Laser Turret <span>$300</span>
+      </button>
+    </div>
+
     <script type="module" src="src/main.js"></script>
   </body>
 </html>

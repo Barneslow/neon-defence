@@ -5,11 +5,22 @@ body {
   justify-content: center;
 }
 
-#start {
-  background-color: green;
+.ui-btn {
+  background-color: rgb(255, 87, 87);
   border-radius: 5px;
   color: white;
-  font-size: 2rem;
+  font-size: 1.6rem;
   padding: 0.5rem 1rem;
   width: fit-content;
+}
+
+.ui-btn:hover {
+  background-color: red;
+  cursor: pointer;
+}
+#start {
+  background-color: rgb(51, 114, 51);
+}
+#start:hover {
+  background-color: green;
 }

@@ -5,21 +5,22 @@ import Bullet from "./Bullet";
 import BigBoy from "./classes/enemies/BigBoy";
 import { placeTurretOnMap } from "./helpers/helpers";
 import AutoTurret from "./classes/turrets/AutoTurret";
-import CustomMoveEnemy from "./classes/enemies/CustomMoveEnemy";
 
 export default class MapScene extends Phaser.Scene {
   constructor() {
     super("mapScene");
-    this.resources = 100;
+    this.resources = 1000;
     this.startWave = false;
     this.waveNumber = 10;
     this.boss = false;
+    this.turretType = "auto";
   }
 
   preload() {
     this.load.tilemapTiledJSON("map", "assets/json/2DTowerDefense.json");
     this.load.image("tiles", "assets/images/2Dsprites.png");
     this.load.image("turret", "assets/images/Turret2D.png");
+    this.load.image("laser", "assets/images/laser2D.png");
     this.load.image("bird", "assets/images/bird.png");
     this.load.image("robot", "assets/images/Robot2D.png");
     this.load.image("boss", "assets/images/Boss.png");
@@ -32,6 +33,12 @@ export default class MapScene extends Phaser.Scene {
   create() {
     const startBtn = document.getElementById("start");
     startBtn.addEventListener("click", this.startWaveFunc.bind(this));
+
+    const autoTurret = document.getElementById("auto-turret");
+    const laserTurret = document.getElementById("laser-turret");
+
+    autoTurret.addEventListener("click", this.chooseTurretType.bind(this));
+    laserTurret.addEventListener("click", this.chooseTurretType.bind(this));
 
     const map = this.make.tilemap({ key: "map" });
     this.map = map;
@@ -102,12 +109,22 @@ export default class MapScene extends Phaser.Scene {
 
     // PLACE TURRET ON THE MAP
     const boundPlaceTurretOnMapFunc = placeTurretOnMap.bind(this); // Bind the function to transfer this keyword
-    const newRes = boundPlaceTurretOnMapFunc(pointer, this.resources, this.map);
+    const newRes = boundPlaceTurretOnMapFunc(
+      pointer,
+      this.resources,
+      this.map,
+      this.turretType
+    );
     this.resources = newRes;
   }
 
   startWaveFunc() {
     this.startWave = true;
+  }
+
+  chooseTurretType(e) {
+    const type = e.target.dataset.type;
+    this.turretType = type;
   }
 
   update(time, delta) {
