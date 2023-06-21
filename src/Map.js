@@ -7,7 +7,6 @@ import BigBoy from "./classes/enemies/BigBoy";
 import { placeTurretOnMap } from "./helpers/helpers";
 import { enemyClassTypes } from "./config/enemy-config";
 import BaseTurret from "./classes/turrets/BaseTurret";
-import CustomMoveEnemy from "./classes/enemies/CustomMoveEnemy";
 
 export default class MapScene extends Phaser.Scene {
   constructor() {
