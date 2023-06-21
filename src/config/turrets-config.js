@@ -1,7 +1,7 @@
 export const turretsClassTypes = {
   laser: {
     name: "laser",
-    sprite: "laser2D",
+    sprite: "LaserTurret",
     damageOutput: {
       level1: 10,
       level2: 30,
