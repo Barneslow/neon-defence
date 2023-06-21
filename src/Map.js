@@ -17,6 +17,7 @@ export default class MapScene extends Phaser.Scene {
     this.boss = false;
     this.turretType = "auto";
     this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
+    this.hearts = 3;
   }
 
   preload() {
@@ -48,10 +49,11 @@ export default class MapScene extends Phaser.Scene {
   create() {
     const startBtn = document.getElementById("start");
     startBtn.addEventListener("click", this.startWave.bind(this));
-
+    const heartContainer = document.getElementById("heartContainer");
+    this.heartContainer = heartContainer;
     const autoTurret = document.getElementById("auto-turret");
     const laserTurret = document.getElementById("laser-turret");
-
+    this.displayHearts();
     autoTurret.addEventListener("click", this.chooseTurretType.bind(this));
     laserTurret.addEventListener("click", this.chooseTurretType.bind(this));
 
@@ -117,6 +119,17 @@ export default class MapScene extends Phaser.Scene {
     }
   }
 
+  displayHearts() {
+    const hearts = Array.from(Array(this.hearts).keys());
+    this.heartContainer.innerHTML = "";
+    hearts.forEach((heart) => {
+      const html = document.createElement("img");
+      html.src = `./assets/images/bird.png`;
+      this.heartContainer.appendChild(html);
+    });
+    console.log(hearts);
+  }
+
   updateResources() {
     this.resourceText.setText(`Resources: ${this.resources}`);
     this.scoreText.setText(`Score: ${this.score}`);
@@ -171,6 +184,18 @@ export default class MapScene extends Phaser.Scene {
   //     }
   //   }
   // }
+
+  takeHeart() {
+    this.hearts--;
+    if (this.hearts == 0) {
+      this.gameOver();
+    }
+    this.displayHearts();
+  }
+
+  gameOver() {
+    console.log("game over");
+  }
 
   spawnEnemiesForWave(enemyType) {
     const enemy = new BaseEnemy(this, 0, 0, enemyClassTypes[enemyType]);

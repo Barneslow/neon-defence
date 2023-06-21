@@ -89,5 +89,9 @@ export default class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
       this.initialMove = false;
     }
     this.moveOnPath();
+    if (this.y < 500) {
+      this.MapScene.takeHeart();
+      this.destroy();
+    }
   }
 }
