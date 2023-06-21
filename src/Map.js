@@ -13,9 +13,9 @@ export default class MapScene extends Phaser.Scene {
     this.resources = 1000;
     this.isWaveInProgress = false;
     this.waveIndex = 0;
-    this.remainingEnemies = 0;
     this.boss = false;
     this.turretType = "auto";
+    this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
   }
 
   preload() {
@@ -133,77 +133,56 @@ export default class MapScene extends Phaser.Scene {
   startWave() {
     if (!this.isWaveInProgress) {
       this.isWaveInProgress = true;
+      this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
     }
   }
-
-  spawnEnemy(enemyType) {
-    if (MIN_WAVE_DATA[this.waveIndex] > 0) {
-      const enemy = new BaseEnemy(this, 0, 0, enemyClassTypes[enemyType]);
-      this.enemies.add(enemy);
-
-      MIN_WAVE_DATA[this.waveIndex]--;
-
-      if (MIN_WAVE_DATA[this.waveIndex] === 0) {
-        if (this.waveIndex === MIN_WAVE_DATA.length - 1) {
-          console.log("game over");
-          this.isWaveInProgress = false;
-        } else {
-          console.log("next wave");
-          this.waveIndex++;
-          this.isWaveInProgress = false;
-        }
-      }
-    }
-  }
-
-  // spawnEnemiesForWave() {
-  //   const currentWave = WAVE_DATA[this.waveIndex];
-
-  //   for (let i = 0; i < currentWave.robot; i++) {
-  //     this.spawnEnemy("robot");
-  //   }
-
-  //   for (let i = 0; i < currentWave.spider; i++) {
-  //     this.spawnEnemy("spider");
-  //   }
-  //   for (let i = 0; i < currentWave.boss; i++) {
-  //     this.spawnEnemy("boss");
-  //   }
-  // }
 
   // spawnEnemy(enemyType) {
-  //   // Create an enemy sprite based on the enemyType
-  //   const enemy = new BaseEnemy(this, 0, 0, enemyClassTypes[enemyType]);
-  //   this.enemies.add(enemy);
+  //   if (MIN_WAVE_DATA[this.waveIndex] > 0) {
+  //     const enemy = new BaseEnemy(this, 0, 0, enemyClassTypes[enemyType]);
+  //     this.enemies.add(enemy);
 
-  //   WAVE_DATA[this.waveIndex].enemies--;
+  //     MIN_WAVE_DATA[this.waveIndex]--;
 
-  //   console.log(WAVE_DATA[this.waveIndex].enemies--);
-
-  //   // Check if the current wave is complete
-  //   const currentWave = WAVE_DATA[this.waveIndex];
-  //   if (
-  //     currentWave.robots === 0 &&
-  //     currentWave.spiders === 0 &&
-  //     currentWave.boss === 0
-  //   ) {
-  //     if (this.waveIndex === WAVE_DATA.length - 1) {
-  //       console.log("game over");
-  //     } else {
-  //       console.log("next wave");
-  //       this.waveIndex++;
-  //       this.isWaveInProgress = false;
+  //     if (MIN_WAVE_DATA[this.waveIndex] === 0) {
+  //       if (this.waveIndex === MIN_WAVE_DATA.length - 1) {
+  //         console.log("game over");
+  //         this.isWaveInProgress = false;
+  //       } else {
+  //         console.log("next wave");
+  //         this.waveIndex++;
+  //         this.isWaveInProgress = false;
+  //       }
   //     }
   //   }
   // }
 
+  spawnEnemiesForWave(enemyType) {
+    const enemy = new BaseEnemy(this, 0, 0, enemyClassTypes[enemyType]);
+    this.enemies.add(enemy);
+    this.waveArray.shift();
+  }
+
+  endWave() {
+    this.waveIndex++;
+    this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
+    console.log("next wave");
+    this.isWaveInProgress = false;
+  }
+
   update(time, delta) {
     if (!this.isWaveInProgress) return;
+    console.log(this.waveArray.length);
 
-    if (time > this.nextEnemy && WAVE_DATA[this.waveIndex].enemies > 0) {
+    if (time > this.nextEnemy && this.waveArray.length > 0) {
       // CHANGE DURATION OF ENEMY RESPAWN
-      this.spawnEnemy("spider");
+
+      console.log("spawn enemy");
+      this.spawnEnemiesForWave(this.waveArray[0]);
       this.nextEnemy = time + 2000;
+    }
+    if (time > this.nextEnemy && this.waveArray.length === 0) {
+      this.endWave();
     }
 
     // if (time > 1000 && this.boss === false) {
@@ -221,4 +200,29 @@ function damageEnemy(enemy, bullet) {
   bullet.destroy();
 
   enemy.damageTaken(bullet.damage);
+}
+function convertObjectToArray(obj) {
+  const array = [];
+
+  // Iterate over the object properties
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      const value = obj[key];
+
+      // Skip the "boss" key for now
+      if (key !== "boss" && value > 0) {
+        // Create individual strings for each enemy type
+        for (let i = 0; i < value; i++) {
+          array.push(key);
+        }
+      }
+    }
+  }
+
+  // Add the "boss" key last if it exists and its value is greater than 0
+  if (obj.hasOwnProperty("boss") && obj.boss > 0) {
+    array.push("boss");
+  }
+
+  return array.filter((element) => element !== "enemies");
 }
