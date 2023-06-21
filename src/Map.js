@@ -5,7 +5,7 @@ import Bullet from "./Bullet";
 import { placeTurretOnMap } from "./helpers/helpers";
 import { enemyClassTypes } from "./config/enemy-config";
 import BaseTurret from "./classes/turrets/BaseTurret";
-import { WAVE_DATA } from "./data/waves";
+import { WAVE_DATA, MIN_WAVE_DATA } from "./data/waves";
 
 export default class MapScene extends Phaser.Scene {
   constructor() {
@@ -23,9 +23,13 @@ export default class MapScene extends Phaser.Scene {
     this.load.image("tiles", "assets/images/2Dsprites.png");
     this.load.image("turret", "assets/images/Turret2D.png");
     this.load.image("laser", "assets/images/laser2D.png");
+
+    // Enemy Sprites
     this.load.image("bird", "assets/images/bird.png");
     this.load.image("robot", "assets/images/Robot2D.png");
     this.load.image("boss", "assets/images/Boss.png");
+    this.load.image("spider", "assets/images/spider.png");
+
     this.load.image("bullet", "assets/images/Bullet.png");
     this.load.audio("bulletsound", "assets/sounds/BulletSound.mp3");
     this.load.audio("dead", "assets/sounds/dead-enemy.mp3");
@@ -132,15 +136,15 @@ export default class MapScene extends Phaser.Scene {
     }
   }
 
-  spawnEnemy() {
-    if (WAVE_DATA[this.waveIndex] > 0) {
-      const enemy = new BaseEnemy(this, 0, 0, enemyClassTypes.robot);
+  spawnEnemy(enemyType) {
+    if (MIN_WAVE_DATA[this.waveIndex] > 0) {
+      const enemy = new BaseEnemy(this, 0, 0, enemyClassTypes[enemyType]);
       this.enemies.add(enemy);
 
-      WAVE_DATA[this.waveIndex]--;
+      MIN_WAVE_DATA[this.waveIndex]--;
 
-      if (WAVE_DATA[this.waveIndex] === 0) {
-        if (this.waveIndex === WAVE_DATA.length - 1) {
+      if (MIN_WAVE_DATA[this.waveIndex] === 0) {
+        if (this.waveIndex === MIN_WAVE_DATA.length - 1) {
           console.log("game over");
           this.isWaveInProgress = false;
         } else {
@@ -152,12 +156,53 @@ export default class MapScene extends Phaser.Scene {
     }
   }
 
+  // spawnEnemiesForWave() {
+  //   const currentWave = WAVE_DATA[this.waveIndex];
+
+  //   for (let i = 0; i < currentWave.robot; i++) {
+  //     this.spawnEnemy("robot");
+  //   }
+
+  //   for (let i = 0; i < currentWave.spider; i++) {
+  //     this.spawnEnemy("spider");
+  //   }
+  //   for (let i = 0; i < currentWave.boss; i++) {
+  //     this.spawnEnemy("boss");
+  //   }
+  // }
+
+  // spawnEnemy(enemyType) {
+  //   // Create an enemy sprite based on the enemyType
+  //   const enemy = new BaseEnemy(this, 0, 0, enemyClassTypes[enemyType]);
+  //   this.enemies.add(enemy);
+
+  //   WAVE_DATA[this.waveIndex].enemies--;
+
+  //   console.log(WAVE_DATA[this.waveIndex].enemies--);
+
+  //   // Check if the current wave is complete
+  //   const currentWave = WAVE_DATA[this.waveIndex];
+  //   if (
+  //     currentWave.robots === 0 &&
+  //     currentWave.spiders === 0 &&
+  //     currentWave.boss === 0
+  //   ) {
+  //     if (this.waveIndex === WAVE_DATA.length - 1) {
+  //       console.log("game over");
+  //     } else {
+  //       console.log("next wave");
+  //       this.waveIndex++;
+  //       this.isWaveInProgress = false;
+  //     }
+  //   }
+  // }
+
   update(time, delta) {
     if (!this.isWaveInProgress) return;
 
-    if (time > this.nextEnemy && WAVE_DATA[this.waveIndex] > 0) {
+    if (time > this.nextEnemy && WAVE_DATA[this.waveIndex].enemies > 0) {
       // CHANGE DURATION OF ENEMY RESPAWN
-      this.spawnEnemy();
+      this.spawnEnemy("spider");
       this.nextEnemy = time + 2000;
     }
 

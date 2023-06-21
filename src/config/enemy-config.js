@@ -21,4 +21,15 @@ export const enemyClassTypes = {
     speed: 25,
     resources: 50,
   },
+  spider: {
+    name: "spider",
+    sprite: "spider",
+    health: 50,
+    sound: {
+      name: "dead",
+      audio: "dead",
+    },
+    speed: 100,
+    resources: 25,
+  },
 };
