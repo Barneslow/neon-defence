@@ -1,11 +1,11 @@
 import Phaser from "phaser";
 import Turret from "./classes/turrets/Turret";
 import BaseEnemy from "./classes/enemies/BaseEnemy";
-import Bullet from "./Bullet";
+import Bullet from "./classes/bullet/Bullet";
 import { placeTurretOnMap } from "./helpers/helpers";
 import { enemyClassTypes } from "./config/enemy-config";
 import BaseTurret from "./classes/turrets/BaseTurret";
-import { WAVE_DATA, MIN_WAVE_DATA } from "./data/waves";
+import { WAVE_DATA } from "./config/wave-config";
 
 export default class MapScene extends Phaser.Scene {
   constructor() {

@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import Bullet from "../../Bullet";
+import Bullet from "../bullet/Bullet";
 import { getEnemyNearTurret } from "../../helpers/helpers";
 import { Popup } from "../../Popup";
 import BaseBullet from "../bullet/BaseBullet";
