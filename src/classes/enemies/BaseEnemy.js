@@ -78,6 +78,7 @@ export default class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
       this.destroy();
       this.deadSound.play({ volume: 0.2 });
       this.MapScene.resources += this.resources;
+      this.MapScene.score += this.resources;
       this.MapScene.updateResources();
     }
   }

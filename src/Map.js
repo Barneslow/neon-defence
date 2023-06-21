@@ -11,6 +11,7 @@ export default class MapScene extends Phaser.Scene {
   constructor() {
     super("mapScene");
     this.resources = 1000;
+    this.score = 0;
     this.isWaveInProgress = false;
     this.waveIndex = 0;
     this.boss = false;
@@ -67,6 +68,11 @@ export default class MapScene extends Phaser.Scene {
       // @ts-ignore
       fill: "#ffffff",
     });
+    this.scoreText = this.add.text(700, 10, `Score: ${this.score}`, {
+      fontSize: "24px",
+      // @ts-ignore
+      fill: "#ffffff",
+    });
 
     layer1.setInteractive();
     layer1.on("pointerdown", this.onTileClicked, this);
@@ -113,6 +119,7 @@ export default class MapScene extends Phaser.Scene {
 
   updateResources() {
     this.resourceText.setText(`Resources: ${this.resources}`);
+    this.scoreText.setText(`Score: ${this.score}`);
     console.log(this.resources);
   }
 
