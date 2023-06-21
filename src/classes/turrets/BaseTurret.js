@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import Bullet from "../../Bullet";
 import { getEnemyNearTurret } from "../../helpers/helpers";
+import { Popup } from "../../Popup";
 
 export default class BaseTurret extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, turretObject) {
@@ -50,7 +51,20 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
     );
   }
 
-  onPointerDown() {
+  onPointerDown(pointer) {
+    const popup = new Popup(
+      this.MapScene,
+      pointer.worldX,
+      pointer.worldY,
+      100,
+      100,
+      this
+    );
+
+    popup.show();
+  }
+
+  sellTurret() {
     this.MapScene.resources += this.cost / 2;
     this.MapScene.updateResources();
     this.destroy();

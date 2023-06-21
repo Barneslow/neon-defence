@@ -1,9 +1,7 @@
 import Phaser from "phaser";
 import Turret from "./classes/turrets/Turret";
-import Enemy from "./classes/enemies/Enemy";
 import BaseEnemy from "./classes/enemies/BaseEnemy";
 import Bullet from "./Bullet";
-import BigBoy from "./classes/enemies/BigBoy";
 import { placeTurretOnMap } from "./helpers/helpers";
 import { enemyClassTypes } from "./config/enemy-config";
 import BaseTurret from "./classes/turrets/BaseTurret";
