@@ -42,12 +42,7 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
       .on("pointerdown", this.onPointerDown, this);
   }
 
-  preload() {
-    this.MapScene.load.image(
-      this.turretName,
-      `assets/images/${this.turretSprite}.png`
-    );
-  }
+  preload() {}
 
   onPointerDown(pointer) {
     const popup = new Popup(
@@ -110,12 +105,12 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
     }
 
     if (this.level === 2) {
-      this.setTint(0x0000ff);
+      this.setTexture(this.turretSprite.level2.name);
       this.damageOutput = this.damageObject.level2;
     }
 
     if (this.level === 3) {
-      this.setTint(0x00ff00);
+      this.setTexture(this.turretSprite.level3.name);
       this.damageOutput = this.damageObject.level3;
     }
   }
