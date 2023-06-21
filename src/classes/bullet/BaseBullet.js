@@ -1,52 +1,34 @@
 import Phaser from "phaser";
 
-export default class Bullet extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, y, angle, collisionGroup, damage = 10) {
-    super(scene, x, y, "bullet");
-    this.scene = scene;
-
+export default class BaseBullet extends Phaser.Physics.Arcade.Sprite {
+  constructor(scene, x, y, bulletObject, damage = 10) {
+    super(scene, x, y, bulletObject.sprite);
+    this.Mapscene = scene;
     this.scene.physics.world.enable(this);
     scene.physics.add.existing(this);
     this.scene.add.existing(this);
 
-    // BULLET DAMAGE
+    // BULLET Config Properties
     this.damage = damage;
+    this.speed = bulletObject.speed;
+    this.lifespan = bulletObject.lifespan;
 
     // ADDING INSTANCE OF THE BULLET TO THE COLLISION GROUP IN SCENE
-    collisionGroup.add(this);
+    scene.physics.scene.bullets.add(this);
 
-    this.setScale(0.5);
-    this.setSize(16, 16);
-    // @ts-ignore
-    this.body.setAllowGravity(false);
+    this.setScale(bulletObject.scale.level1);
+    this.setSize(bulletObject.size, bulletObject.size);
 
-    const speed = 500; // Adjust the bullet speed as needed
-    this.scene.physics.velocityFromRotation(angle, speed, this.body.velocity);
-    // @ts-ignore
-    this.body.setCollideWorldBounds(false); // Enable collision with the world bounds
-    // @ts-ignore
-    this.body.onWorldBounds = true;
-    this.body.bounce.set(1); // Set the bounce value to 1 for full bouncing effect
-    this.body.bounce.setTo(1, 1); //
+    // this.scene.physics.velocityFromRotation(
+    //   null,
+    //   this.speed,
+    //   this.body.velocity
+    // );
 
-    this.lifespan = 2000; // Lifespan of the bullet in milliseconds
-    this.timerEvent = null; // Reference to the timer event
-
-    // Start the lifespan timer when the bullet is created
     this.startLifespanTimer();
   }
 
-  // Override the update method to add any additional logic for the bullet
-  update() {
-    // Add bullet-specific behavior here
-    // this.scene.physics.world.collide(
-    //   this,
-    //   this.scene.enemiesGroup,
-    //   this.onCollision,
-    //   null,
-    //   this
-    // );
-  }
+  update() {}
 
   startLifespanTimer() {
     this.timerEvent = this.scene.time.addEvent({
@@ -61,16 +43,5 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
     this.destroy();
   }
 
-  activateBounce() {
-    this.hasBounce = true;
-  }
-
-  // Deactivate the bounce effect
-  deactivateBounce() {
-    this.hasBounce = false;
-  }
-  preload() {
-    this.scene.load.image("bullet", "assets/images/Bullet.png");
-    this.scene.load.audio("bulletsound", "assets/sounds/BulletSound.mp3");
-  }
+  preload() {}
 }

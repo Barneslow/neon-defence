@@ -2,6 +2,8 @@ import Phaser from "phaser";
 import Bullet from "../../Bullet";
 import { getEnemyNearTurret } from "../../helpers/helpers";
 import { Popup } from "../../Popup";
+import BaseBullet from "../bullet/BaseBullet";
+import { bulletClassTypes } from "../../config/bullet-config";
 
 export default class BaseTurret extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, turretObject) {
@@ -22,7 +24,6 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
 
     //Adding bullet physics
     this.bullets = this.scene.add.group();
-    this.bulletSpeed = 500;
     // this.bulletSound = this.scene.sound.add("bulletsound");
 
     // Adding tower level
@@ -117,20 +118,19 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
 
   shootBullet() {
     this.upgradeExperience();
-    const bullet = new Bullet(
+    const bullet = new BaseBullet(
       this.scene,
       this.x,
       this.y,
-      null,
-      this.bulletCollisionGroup,
+      bulletClassTypes[this.turretName],
       this.damageOutput
     );
-    bullet.setTint(0xff0000);
 
     bullet.body.velocity.setToPolar(
       this.rotation - Math.PI / 2 - Math.PI,
-      this.bulletSpeed
+      bulletClassTypes[this.turretName].speed
     );
+
     this.bullets.add(bullet);
 
     // this.bulletSound.play({ volume: 0.2 });
