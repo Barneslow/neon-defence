@@ -42,8 +42,7 @@ export default class HumanTurret extends Phaser.GameObjects.Sprite {
     this.playerInRange = false;
 
     this.scene.input.on("pointermove", this.setPlayerInRange, this);
-    this.scene.input.on("pointerdown", this.setPlayerInRange, this);
-    this.input.on("pointerdown", this.shootBullet, this);
+    this.scene.input.on("pointerdown", this.shootBullet, this);
   }
 
   setPlayerInRange(pointer) {
