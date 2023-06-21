@@ -35,8 +35,6 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
     this.nextTic = 0;
     this.tickTimer = turretObject.tickTimer;
 
-    console.log(this.damageObject);
-
     // Adding interactive properties
     this.setInteractive({ useHandCursor: true })
       .on("pointerover", this.onPointerOver, this)

@@ -5,7 +5,10 @@ export function placeTurretOnMap(pointer, resources, map, turretType) {
   const tile = map.worldToTileXY(pointer.worldX, pointer.worldY);
   const tileId = map.getTileAt(tile.x, tile.y, true).index;
 
-  const turretCosts = { auto: 50, laser: 300 };
+  const turretCosts = {
+    auto: turretsClassTypes.auto.cost,
+    laser: turretsClassTypes.laser.cost,
+  };
 
   if (tileId === 7 && resources >= turretCosts[turretType]) {
     const tileWidth = map.tileWidth;
