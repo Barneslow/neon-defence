@@ -1,7 +1,4 @@
-import AutoTurret from "../classes/turrets/AutoTurret";
 import BaseTurret from "../classes/turrets/BaseTurret";
-import LaserTurret from "../classes/turrets/LaserTurret";
-import Turret from "../classes/turrets/Turret";
 import { turretsClassTypes } from "../config/turrets-config";
 
 export function placeTurretOnMap(pointer, resources, map, turretType) {

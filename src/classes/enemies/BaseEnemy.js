@@ -1,25 +1,39 @@
 import Phaser from "phaser";
 
-export default class CustomMoveEnemy extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, y, name) {
-    super(scene, x, y, name);
+export default class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
+  constructor(scene, x, y, enemyObject) {
+    super(scene, x, y, enemyObject.name);
     scene.add.existing(this);
     scene.physics.add.existing(this);
     this.MapScene = scene;
     this.map = scene.map;
-    this.nextTic = 0;
-    this.health = 30;
-    this.currentHealth = 30;
-    this.setTint(0xffffff);
-    this.setPosition(145, 767);
+    this.health = enemyObject.health;
+    this.currentHealth = enemyObject.health;
     this.initialMove = true;
-    this.deadSound = this.scene.sound.add("dead");
+    this.resources = enemyObject.resources;
+    this.speed = enemyObject.speed;
+
+    this.sound = enemyObject.sound;
+    this.deadSound = this.scene.sound.add(enemyObject.sound.name);
+
+    this.enemyName = enemyObject.name;
+    this.sprite = enemyObject.sprite;
+
+    this.setPosition(145, 767);
   }
 
   preload() {
-    this.MapScene.load.image("robot", "assets/images/Robot2D.png");
+    this.MapScene.load.image(
+      this.enemyName,
+      `assets/images/${this.sprite}.png`
+    );
+
     this.scene.load.audio("bulletsound", "assets/sounds/BulletSound.mp3");
-    this.scene.load.audio("dead", "assets/sounds/dead-enemy.mp3");
+
+    this.scene.load.audio(
+      this.sound.name,
+      `assets/sounds/${this.sound.audio}.mp3`
+    );
   }
 
   moveOnPath() {
@@ -34,19 +48,19 @@ export default class CustomMoveEnemy extends Phaser.Physics.Arcade.Sprite {
     const singleCurrentTile = currentTile[0];
 
     if (singleCurrentTile.index === 27) {
-      this.setVelocityY(-50);
+      this.setVelocityY(-this.speed);
       this.setVelocityX(0);
     } else if (singleCurrentTile.index === 28) {
       // MOVE RIGHT
       this.setVelocityY(0);
-      this.setVelocityX(50);
+      this.setVelocityX(this.speed);
     } else if (singleCurrentTile.index === 17) {
       // MOVE LEFT
       this.setVelocityY(0);
-      this.setVelocityX(-50);
+      this.setVelocityX(-this.speed);
     } else if (singleCurrentTile.index === 5) {
       // MOVE BACK
-      this.setVelocityY(50);
+      this.setVelocityY(this.speed);
       this.setVelocityX(0);
     }
   }
@@ -63,14 +77,14 @@ export default class CustomMoveEnemy extends Phaser.Physics.Arcade.Sprite {
     if (this.currentHealth <= 0) {
       this.destroy();
       this.deadSound.play({ volume: 0.2 });
-      this.MapScene.resources += 10;
+      this.MapScene.resources += this.resources;
       this.MapScene.updateResources();
     }
   }
 
   update(time, delta) {
     if (this.initialMove) {
-      this.setVelocityY(-200);
+      this.setVelocityY(-this.speed);
       this.initialMove = false;
     }
     this.moveOnPath();

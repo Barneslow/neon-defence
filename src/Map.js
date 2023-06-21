@@ -1,10 +1,13 @@
 import Phaser from "phaser";
 import Turret from "./classes/turrets/Turret";
 import Enemy from "./classes/enemies/Enemy";
+import BaseEnemy from "./classes/enemies/BaseEnemy";
 import Bullet from "./Bullet";
 import BigBoy from "./classes/enemies/BigBoy";
 import { placeTurretOnMap } from "./helpers/helpers";
-import AutoTurret from "./classes/turrets/AutoTurret";
+import { enemyClassTypes } from "./config/enemy-config";
+import BaseTurret from "./classes/turrets/BaseTurret";
+import CustomMoveEnemy from "./classes/enemies/CustomMoveEnemy";
 
 export default class MapScene extends Phaser.Scene {
   constructor() {
@@ -67,12 +70,12 @@ export default class MapScene extends Phaser.Scene {
     });
 
     this.enemies = this.physics.add.group({
-      classType: Enemy,
+      classType: BaseEnemy,
       runChildUpdate: true,
     });
 
     this.turrets = this.add.group({
-      classType: Turret && AutoTurret,
+      classType: Turret && BaseTurret,
       runChildUpdate: true,
     });
     this.input.on("pointerdown", this.shootBullet, this);
@@ -130,24 +133,21 @@ export default class MapScene extends Phaser.Scene {
 
   update(time, delta) {
     if (!this.startWave) return;
-    // this.one === true
-    // if (time > this.nextEnemy && this.waveNumber > 0) {
-    //   // CHANGE DURATION OF ENEMY RESPAWN
-    //   const enemy = new CustomMoveEnemy(this, 0, 0, "robot");
-    //   this.enemies.add(enemy);
-
-    //   this.nextEnemy = time + 2000;
-    //   this.waveNumber--;
-    // }
-
-    if (time > 1000 && this.boss === false) {
-      // CHANGE DURATION OF BOSS RESPAWN
-      const bigboy = new BigBoy(this, 0, 0, "boss");
-      this.enemies.add(bigboy);
-
-      this.boss = true;
-      // this.nextBoss = time + 10000;
+    if (time > this.nextEnemy && this.waveNumber > 0) {
+      // CHANGE DURATION OF ENEMY RESPAWN
+      const enemy = new BaseEnemy(this, 0, 0, enemyClassTypes.robot);
+      this.enemies.add(enemy);
+      this.nextEnemy = time + 2000;
+      this.waveNumber--;
     }
+
+    // if (time > 1000 && this.boss === false) {
+    //   // CHANGE DURATION OF BOSS RESPAWN
+    //   const bigboy = new BaseEnemy(this, 0, 0, enemyClassTypes.boss);
+    //   this.enemies.add(bigboy);
+    //   this.boss = true;
+    //   // this.nextBoss = time + 10000;
+    // }
   }
 }
 
