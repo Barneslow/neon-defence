@@ -22,7 +22,7 @@ export default class MapScene extends Phaser.Scene {
     this.load.tilemapTiledJSON("map", "assets/json/2DTowerDefense.json");
     this.load.image("tiles", "assets/images/2Dsprites.png");
     this.load.image("turret", "assets/images/Turret2D.png");
-    this.load.image("laser", "assets/images/laser2D.png");
+    this.load.image("laser", "assets/images/LaserTurret.png");
 
     // Enemy Sprites
     this.load.image("bird", "assets/images/bird.png");
