@@ -5,13 +5,15 @@ import Bullet from "./Bullet";
 import { placeTurretOnMap } from "./helpers/helpers";
 import { enemyClassTypes } from "./config/enemy-config";
 import BaseTurret from "./classes/turrets/BaseTurret";
+import { WAVE_DATA } from "./data/waves";
 
 export default class MapScene extends Phaser.Scene {
   constructor() {
     super("mapScene");
     this.resources = 1000;
-    this.startWave = false;
-    this.waveNumber = 10;
+    this.isWaveInProgress = false;
+    this.waveIndex = 0;
+    this.remainingEnemies = 0;
     this.boss = false;
     this.turretType = "auto";
   }
@@ -32,7 +34,7 @@ export default class MapScene extends Phaser.Scene {
 
   create() {
     const startBtn = document.getElementById("start");
-    startBtn.addEventListener("click", this.startWaveFunc.bind(this));
+    startBtn.addEventListener("click", this.startWave.bind(this));
 
     const autoTurret = document.getElementById("auto-turret");
     const laserTurret = document.getElementById("laser-turret");
@@ -119,23 +121,44 @@ export default class MapScene extends Phaser.Scene {
     this.resources = newRes;
   }
 
-  startWaveFunc() {
-    this.startWave = true;
-  }
-
   chooseTurretType(e) {
     const type = e.target.dataset.type;
     this.turretType = type;
   }
 
-  update(time, delta) {
-    if (!this.startWave) return;
-    if (time > this.nextEnemy && this.waveNumber > 0) {
-      // CHANGE DURATION OF ENEMY RESPAWN
+  startWave() {
+    if (!this.isWaveInProgress) {
+      this.isWaveInProgress = true;
+    }
+  }
+
+  spawnEnemy() {
+    if (WAVE_DATA[this.waveIndex] > 0) {
       const enemy = new BaseEnemy(this, 0, 0, enemyClassTypes.robot);
       this.enemies.add(enemy);
+
+      WAVE_DATA[this.waveIndex]--;
+
+      if (WAVE_DATA[this.waveIndex] === 0) {
+        if (this.waveIndex === WAVE_DATA.length - 1) {
+          console.log("game over");
+          this.isWaveInProgress = false;
+        } else {
+          console.log("next wave");
+          this.waveIndex++;
+          this.isWaveInProgress = false;
+        }
+      }
+    }
+  }
+
+  update(time, delta) {
+    if (!this.isWaveInProgress) return;
+
+    if (time > this.nextEnemy && WAVE_DATA[this.waveIndex] > 0) {
+      // CHANGE DURATION OF ENEMY RESPAWN
+      this.spawnEnemy();
       this.nextEnemy = time + 2000;
-      this.waveNumber--;
     }
 
     // if (time > 1000 && this.boss === false) {
