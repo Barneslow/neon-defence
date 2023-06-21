@@ -29,6 +29,7 @@ export default class AutoTurret extends Phaser.GameObjects.Sprite {
     const gameCanvas = this.scene.sys.game.canvas;
     gameCanvas.style.cursor = "pointer";
     this.setTint(0xffff00);
+    console.log(this);
   }
 
   onPointerOut() {

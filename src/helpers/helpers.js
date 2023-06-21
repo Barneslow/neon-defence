@@ -1,6 +1,8 @@
 import AutoTurret from "../classes/turrets/AutoTurret";
+import BaseTurret from "../classes/turrets/BaseTurret";
 import LaserTurret from "../classes/turrets/LaserTurret";
 import Turret from "../classes/turrets/Turret";
+import { turretsClassTypes } from "../config/turrets-config";
 
 export function placeTurretOnMap(pointer, resources, map, turretType) {
   const tile = map.worldToTileXY(pointer.worldX, pointer.worldY);
@@ -18,20 +20,18 @@ export function placeTurretOnMap(pointer, resources, map, turretType) {
 
     let turret;
     if (turretType === "auto") {
-      turret = new AutoTurret(
+      turret = new BaseTurret(
         this,
         centerX,
         centerY,
-        this.bullets,
-        this.enemies
+        turretsClassTypes["auto"]
       );
     } else if (turretType === "laser") {
-      turret = new LaserTurret(
+      turret = new BaseTurret(
         this,
         centerX,
         centerY,
-        this.bullets,
-        this.enemies
+        turretsClassTypes["laser"]
       );
     }
 
@@ -42,4 +42,18 @@ export function placeTurretOnMap(pointer, resources, map, turretType) {
   } else {
     this.resourceText.setText(`Resources: Not enough resources`);
   }
+}
+
+// FIND NEARBY ENEMY
+export function getEnemyNearTurret(x, y, distance, enemies) {
+  var enemyUnits = enemies.getChildren();
+  for (var i = 0; i < enemyUnits.length; i++) {
+    if (
+      enemyUnits[i].active &&
+      Phaser.Math.Distance.Between(x, y, enemyUnits[i].x, enemyUnits[i].y) <
+        distance
+    )
+      return enemyUnits[i];
+  }
+  return false;
 }

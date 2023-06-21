@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import Bullet from "../../Bullet";
 import { getEnemyNearTurret } from "../../helpers/helpers";
 
-export default class LaserTurret extends Phaser.GameObjects.Sprite {
+export default class BaseTurret extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, turretObject) {
     super(scene, x, y, turretObject.name);
 
@@ -33,6 +33,8 @@ export default class LaserTurret extends Phaser.GameObjects.Sprite {
     // adding tower shoottimer
     this.nextTic = 0;
     this.tickTimer = turretObject.tickTimer;
+
+    console.log(this.damageObject);
 
     // Adding interactive properties
     this.setInteractive({ useHandCursor: true })
@@ -91,18 +93,18 @@ export default class LaserTurret extends Phaser.GameObjects.Sprite {
     if (this.experiencePoints === this.experience.level2) {
       this.level++;
     }
-    if (this.experiencePoints === this.experience.level2) {
+    if (this.experiencePoints === this.experience.level3) {
       this.level++;
     }
 
     if (this.level === 2) {
       this.setTint(0x0000ff);
-      this.damageOutput = this.damageObject.damageOutput.level2;
+      this.damageOutput = this.damageObject.level2;
     }
 
     if (this.level === 3) {
       this.setTint(0x00ff00);
-      this.damageOutput = this.damageObject.damageOutput.level3;
+      this.damageOutput = this.damageObject.level3;
     }
   }
 
