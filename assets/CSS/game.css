@@ -10,6 +10,18 @@ body {
   gap: 0.5rem;
 }
 
+#heart-container {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  padding: 0.25rem;
+  border: 1px solid black;
+}
+
+.heart-icon {
+  height: 50px;
+  aspect-ratio: 1;
+}
+
 .ui-btn {
   background-color: rgb(255, 87, 87);
   border-radius: 5px;

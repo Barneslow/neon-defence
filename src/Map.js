@@ -52,7 +52,7 @@ export default class MapScene extends Phaser.Scene {
   create() {
     const startBtn = document.getElementById("start");
     startBtn.addEventListener("click", this.startWave.bind(this));
-    const heartContainer = document.getElementById("heartContainer");
+    const heartContainer = document.getElementById("heart-container");
     this.heartContainer = heartContainer;
     const autoTurret = document.getElementById("auto-turret");
     const laserTurret = document.getElementById("laser-turret");
@@ -126,9 +126,10 @@ export default class MapScene extends Phaser.Scene {
     const hearts = Array.from(Array(this.hearts).keys());
     this.heartContainer.innerHTML = "";
     hearts.forEach((heart) => {
-      const html = document.createElement("img");
-      html.src = `./assets/images/bird.png`;
-      this.heartContainer.appendChild(html);
+      const imageElement = document.createElement("img");
+      imageElement.classList.add("heart-icon");
+      imageElement.src = `./assets/images/lifehearts.png`;
+      this.heartContainer.appendChild(imageElement);
     });
   }
 
