@@ -17,7 +17,7 @@ export default class GameOverScene extends Phaser.Scene {
     restartButton.on(
       "pointerdown",
       function () {
-        this.scene.start("mapScene"); // Replace 'MainGame' with the scene name of your main game
+        this.scene.start("mapScene");
       },
       this
     );

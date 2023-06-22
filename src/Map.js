@@ -171,7 +171,6 @@ export default class MapScene extends Phaser.Scene {
     });
 
     const tile = tileInstances[0];
-
     const tileWidth = this.map.tileWidth;
     const tileHeight = this.map.tileHeight;
     const offsetX = tileWidth;
