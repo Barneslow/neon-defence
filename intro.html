@@ -34,53 +34,70 @@
             <div class="shine four"></div>
             <div class="shine five"></div>
           </h1>
+          
+          <!-- Sign-in Modal -->
+          <button id="signin-btn">Sign In / Guest</button>
+          <dialog id="modalSignin">
+            <button class="btn close-button" data-close-modal="">&times;</button>
+            <div class="modal-content">
+              <h3>Sign In</h3>
+              <form id="login-form" onsubmit="login(event)">
+                <input type="text" id="name-input" placeholder="Name" required>
+                <input type="email" id="email-input" placeholder="Email" required>
+                <input type="password" id="password-input" placeholder="Password" required>
+                <button type="submit">Sign In</button>
+              </form>
+              <button id="guest-btn" onclick="playAsGuest()">Play as Guest</button>
+            </div>
+            </dialog>
+          
+          <!-- Leaderboard Modal -->
+          <button id="leaderboard-button">Leaderboard</button>
+          <dialog id="modalLeaderboard">
+            <button class="close-button">&times;</button>
+            <h3>Leaderboard</h3>
+            <div id="leaderboard"></div>
+          </dialog>
+
           <div class="dropdown">
-            <button id="dropbtn" class="dropbtn">Select Level</button>
-            <button id="sign-in" class="dropbtn">Sign In</button>
+            <button id="dropbtn" class="dropbtn">Select Mode</button>
             <div class="dropdown-content">
               <a id="easy">Easy</a>
               <a id="medium">Medium</a>
               <a id="hard">Hard</a>
             </div>
           </div>
-          <button id="how-to-play-button">How to Play</button>
-          <dialog id="modalHowToPlay" data-modal="">
-            <div class="modal">
-              <button class="btn close-button" data-close-modal="">
-                Close
-              </button>
-              <h3>How to Play:</h3>
-              <h5>DevGames Hackathon - June 2023</h5>
-              <ul>
-                <li class="devan">
-                  <a href="https://github.com/devan-cadman" target="_blank"
-                    >Devan Cadman</a
-                  >
-                </li>
-              </ul>
-            </div>
+
+          <dialog id="modalHowToPlay">
+            <button class="btn close-button" data-close-modal="">&times;</button>
+            <h3>How to Play:</h3>
+            <h5>DevGames Hackathon - June 2023</h5>
           </dialog>
-          <button id="sound-button">Sound: ON</button>
-          <button id="music-button" class="volume">Music: ON</button>
+
+          <!-- Credits Modal -->
           <button id="credits-button">Credits</button>
           <dialog id="modalCredits" data-modal="">
-            <div class="modal">
-              <button class="btn close-button" data-close-modal="">
-                Close
-              </button>
-              <h3>Credits:</h3>
-              <h5>DevGames Hackathon - June 2023</h5>
-              <ul>
-                <li class="devan">
-                  <a href="https://github.com/devan-cadman" target="_blank"
-                    >Devan Cadman</a
-                  >
-                </li>
-              </ul>
-            </div>
+            <button class="btn close-button" data-close-modal="">&times;</button>
+            <h3>Credits:</h3>
+            <h5>DevGames Hackathon - June 2023</h5>
+            <ul>
+              <li class="darrach">
+                <img src="./assets/images/turret.png" alt="plasma turret" /> 
+                <a href="https://github.com/DarrachBarneveld" target="_blank">Darrach Barneveld</a>
+              </li>
+              <li class="devan">
+                <img src="./assets/images/turret.png" alt="plasma turret" />
+                <a href="https://github.com/devan-cadman" target="_blank">Devan Cadman</a>
+              </li>
+              <li class="tanguy">
+                <img src="./assets/images/turret.png" alt="plasma turret" />
+                <a href="https://github.com/tlalexandre" target="_blank">Tanguy L'Alexandre</a>
+              </li>
+            </ul>
           </dialog>
         </div>
       </section>
+
       <section class="sky">
         <div id="stars"></div>
         <div class="mountains">
@@ -145,48 +162,13 @@
       <audio loop="loop" id="synthwave-track">
         <source src="./assets/sounds/synthwave-80s.mp3" type="audio/mp3" />
       </audio>
-      <button id="volume">
-        <svg
-          class="play"
-          xmlns="http://www.w3.org/2000/svg"
-          width="21.25"
-          height="17.5"
-          viewBox="0 0 21.25 17.5"
-        >
-          <path
-            d="M1.25-11.25v7.5h5l5.625,5H13.75v-17.5H11.875l-5.625,5Zm16,6.75a3.745,3.745,0,0,0,1.5-3,3.745,3.745,0,0,0-1.5-3L16.125-9a1.87,1.87,0,0,1,.75,1.5,1.87,1.87,0,0,1-.75,1.5Zm2.25,3a7.491,7.491,0,0,0,3-6,7.491,7.491,0,0,0-3-6L18.375-12a5.615,5.615,0,0,1,2.25,4.5A5.615,5.615,0,0,1,18.375-3L19.5-1.5Z"
-            transform="translate(-1.25 16.25)"
-            fill="var(--labs-sys-color-volume)"
-          ></path>
-        </svg>
-        <svg
-          class="muted"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24.996"
-          height="19.992"
-          viewBox="0 0 24.996 19.992"
-        >
-          <path
-            d="M1.891-16.922,1.148-17.5,0-16.016l.742.574L23.105,1.922l.742.574L25,1.016,24.254.441,21.238-1.9A7.48,7.48,0,0,0,23.75-7.5a7.491,7.491,0,0,0-3-6L19.625-12a5.615,5.615,0,0,1,2.25,4.5,5.611,5.611,0,0,1-2.152,4.426L15-6.742V-16.25H13.125l-4.836,4.3-6.4-4.969ZM2.5-11.25v7.5h5l5.625,5H15V-1.934L3.172-11.25H2.5Zm16,6.75a3.745,3.745,0,0,0,1.5-3,3.745,3.745,0,0,0-1.5-3L17.375-9a1.87,1.87,0,0,1,.75,1.5,1.87,1.87,0,0,1-.75,1.5Z"
-            transform="translate(0 17.496)"
-            fill="var(--labs-sys-color-volume)"
-          ></path>
-        </svg>
+      <button id="music">
+        <svg class="play" xmlns="http://www.w3.org/2000/svg" width="21.25" height="17.5" viewBox="0 0 21.25 17.5"><path d="M1.25-11.25v7.5h5l5.625,5H13.75v-17.5H11.875l-5.625,5Zm16,6.75a3.745,3.745,0,0,0,1.5-3,3.745,3.745,0,0,0-1.5-3L16.125-9a1.87,1.87,0,0,1,.75,1.5,1.87,1.87,0,0,1-.75,1.5Zm2.25,3a7.491,7.491,0,0,0,3-6,7.491,7.491,0,0,0-3-6L18.375-12a5.615,5.615,0,0,1,2.25,4.5A5.615,5.615,0,0,1,18.375-3L19.5-1.5Z" transform="translate(-1.25 16.25)" fill="var(--labs-sys-color-volume)"></path></svg>
+        <svg class="muted" xmlns="http://www.w3.org/2000/svg" width="24.996" height="19.992" viewBox="0 0 24.996 19.992"><path d="M1.891-16.922,1.148-17.5,0-16.016l.742.574L23.105,1.922l.742.574L25,1.016,24.254.441,21.238-1.9A7.48,7.48,0,0,0,23.75-7.5a7.491,7.491,0,0,0-3-6L19.625-12a5.615,5.615,0,0,1,2.25,4.5,5.611,5.611,0,0,1-2.152,4.426L15-6.742V-16.25H13.125l-4.836,4.3-6.4-4.969ZM2.5-11.25v7.5h5l5.625,5H15V-1.934L3.172-11.25H2.5Zm16,6.75a3.745,3.745,0,0,0,1.5-3,3.745,3.745,0,0,0-1.5-3L17.375-9a1.87,1.87,0,0,1,.75,1.5,1.87,1.87,0,0,1-.75,1.5Z" transform="translate(0 17.496)" fill="var(--labs-sys-color-volume)"></path></svg>
       </button>
 
       <div class="copywrite">
-        <small
-          >Copyright © 2021 Neon Defence Music by
-          <a
-            href="https://pixabay.com/users/alexiaction-26977400/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=110045"
-            >AlexiAction</a
-          >
-          from
-          <a
-            href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=110045"
-            >Pixabay</a
-          ></small
-        >
+        <small>Copyright © 2021 Neon Defence Music by <a href="https://pixabay.com/users/alexiaction-26977400/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=110045">AlexiAction</a> from<a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=110045">Pixabay</a></small>
       </div>
     </main>
 
