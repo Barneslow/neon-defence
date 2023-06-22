@@ -4,7 +4,7 @@ import { Popup } from "../../Popup";
 import BaseBullet from "../bullet/BaseBullet";
 import { bulletClassTypes } from "../../config/bullet-config";
 
-export default class BaseTurret extends Phaser.GameObjects.Sprite {
+export default class PowerTurret extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, turretObject) {
     super(scene, x, y, turretObject.name);
 
@@ -15,34 +15,54 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
     this.turretName = turretObject.name;
     this.turretSprite = turretObject.sprite;
     this.cost = turretObject.cost;
-    this.experience = turretObject.experience;
 
     // Adding CollisionGroups
     this.bulletCollisionGroup = scene.physics.scene.bullets;
     this.enemies = scene.physics.scene.enemies;
 
-    //Adding bullet physics
-    this.bullets = this.scene.add.group();
-    // this.bulletSound = this.scene.sound.add("bulletsound");
-
     // Adding tower level
-    this.experiencePoints = 0;
     this.level = 1;
     this.damageOutput = turretObject.damageOutput.level1;
     this.damageObject = turretObject.damageOutput;
-
-    // adding tower shoottimer
-    this.nextTic = 0;
-    this.tickTimer = turretObject.tickTimer;
 
     // Adding interactive properties
     this.setInteractive({ useHandCursor: true })
       .on("pointerover", this.onPointerOver, this)
       .on("pointerout", this.onPointerOut, this)
       .on("pointerdown", this.onPointerDown, this);
+
+    this.timer = null; // Timer object
+    this.timerCountInMilli = turretObject.timer;
+    this.fireBtn = document.getElementById(turretObject.name);
+    this.fireBtn.addEventListener("click", this.fireTower.bind(this));
   }
 
   preload() {}
+
+  startTimer() {
+    this.timer = this.scene.time.addEvent({
+      delay: this.timerCountInMilli,
+      callback: this.endTimer,
+      callbackScope: this,
+    });
+    // @ts-ignore
+    this.fireBtn.disabled = true;
+  }
+
+  endTimer() {
+    // @ts-ignore
+    this.fireBtn.disabled = false;
+  }
+
+  fireTower() {
+    this.startTimer();
+
+    const totalEnemies = Array.from(this.enemies.children.entries);
+
+    totalEnemies.forEach((enemy) => {
+      enemy.damageTaken(this.damageOutput);
+    });
+  }
 
   onPointerDown(pointer) {
     const popup = new Popup(
@@ -81,29 +101,7 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
     this.clearTint();
   }
 
-  autoFire() {
-    let enemy = getEnemyNearTurret(this.x, this.y, 200, this.enemies);
-
-    if (enemy) {
-      // TURRET ROTATION
-      let angle = Phaser.Math.Angle.Between(this.x, this.y, enemy.x, enemy.y);
-      this.angle = (angle + Math.PI + Math.PI / 2) * Phaser.Math.RAD_TO_DEG;
-      this.shootBullet();
-    }
-  }
-
   upgradeExperience() {
-    // LEVEL UP TOWER - REFACTOR LATER
-    this.experiencePoints += 10;
-
-    // Alternate exp
-    if (this.experiencePoints === this.experience.level2) {
-      this.level++;
-    }
-    if (this.experiencePoints === this.experience.level3) {
-      this.level++;
-    }
-
     if (this.level === 2) {
       this.setTexture(this.turretSprite.level2.name);
       this.damageOutput = this.damageObject.level2;
@@ -115,31 +113,13 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
     }
   }
 
-  shootBullet() {
-    this.upgradeExperience();
-    const bullet = new BaseBullet(
-      this.scene,
-      this.x,
-      this.y,
-      bulletClassTypes[this.turretName],
-      this.damageOutput
-    );
-
-    bullet.body.velocity.setToPolar(
-      this.rotation - Math.PI / 2 - Math.PI,
-      bulletClassTypes[this.turretName].speed
-    );
-
-    this.bullets.add(bullet);
-
-    // this.bulletSound.play({ volume: 0.2 });
+  updateTower() {
+    this.level++;
   }
 
-  update(time, delta) {
-    if (time > this.nextTic) {
-      this.autoFire();
-      // Increase the shoot time
-      this.nextTic = time + this.tickTimer;
+  update() {
+    if (this.timer && this.timer.getProgress() < 1) {
+      const remainingTime = Math.ceil(this.timer.getRemaining() / 1000);
     }
   }
 }

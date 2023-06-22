@@ -87,4 +87,21 @@ export const turretsClassTypes = {
     },
     tickTimer: null,
   },
+
+  // POWER TOWERS
+
+  electric: {
+    name: "electric",
+    sprite: {
+      name: "electric",
+      sprite1: "Turret2D",
+    },
+    damageOutput: {
+      level1: 5,
+      level2: 15,
+      level3: 50,
+    },
+    cost: 1000,
+    timer: 10000,
+  },
 };

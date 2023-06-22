@@ -1,5 +1,6 @@
 import BaseTurret from "../classes/turrets/BaseTurret";
 import HumanTurret from "../classes/turrets/HumanTurret";
+import PowerTurret from "../classes/turrets/PowerTurret";
 import Turret from "../classes/turrets/Turret";
 import { turretsClassTypes } from "../config/turrets-config";
 
@@ -10,6 +11,7 @@ export function placeTurretOnMap(pointer, resources, map, turretType) {
   const turretCosts = {
     auto: turretsClassTypes.auto.cost,
     laser: turretsClassTypes.laser.cost,
+    electric: turretsClassTypes.electric.cost,
   };
 
   if (tileId === 7 && resources >= turretCosts[turretType]) {
@@ -28,11 +30,17 @@ export function placeTurretOnMap(pointer, resources, map, turretType) {
       //   centerY,
       //   turretsClassTypes["auto"]
       // );
-      turret = new HumanTurret(
+      // turret = new HumanTurret(
+      //   this,
+      //   centerX,
+      //   centerY,
+      //   turretsClassTypes["human"]
+      // );
+      turret = new PowerTurret(
         this,
         centerX,
         centerY,
-        turretsClassTypes["human"]
+        turretsClassTypes["electric"]
       );
     } else if (turretType === "laser") {
       turret = new BaseTurret(
