@@ -19,11 +19,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Phaser 3 Game</title>
     <link rel="stylesheet" href="./assets/CSS/game.css" />
-  </head>
+    <link rel="stylesheet" href="./assets/CSS/style.css" />
+</head>
 
-  <body>
-    <div id="app"></div>
-    <div class="btn-box">
+<body id="game">
+  <div id="stars"></div>
+  <div id="app"></div>
+  <div class="btn-box">
+    <button id="start" class="ui-btn">Start</button>
       <button id="start" class="ui-btn">Start</button>
       <button id="pause" class="ui-btn">Start</button>
       <button id="speed-up" class="ui-btn">Start</button>
@@ -57,5 +60,6 @@
     </div>
 
     <script type="module" src="src/main.js"></script>
+    <script type="module" src="src/intro.js"></script>
   </body>
 </html>
