@@ -43,7 +43,6 @@ body {
   width: 100%;
   display: grid;
   place-items: center;
-  overflow: hidden;
 }
 #game #app canvas {
   max-height: 70vh;
