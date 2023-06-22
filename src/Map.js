@@ -184,7 +184,7 @@ export default class MapScene extends Phaser.Scene {
     const offsetX = tileWidth;
     const offsetY = tileHeight;
     const centerX = tile.x * tileWidth + offsetX;
-    const centerY = tile.y * tileHeight + offsetY;
+    const centerY = tile.y * tileHeight + offsetY - 15;
 
     new PowerTurret(this, centerX, centerY, turretsClassTypes[type]);
 
@@ -230,7 +230,7 @@ export default class MapScene extends Phaser.Scene {
   onTileClicked(pointer) {
     const tile = this.map.worldToTileXY(pointer.worldX, pointer.worldY);
     const tileId = this.map.getTileAt(tile.x, tile.y, true).index;
-    // console.log(tileId);
+    console.log(tileId);
     if (tileId != 7 || this.resources < 50) return; // prevent tile resource issues
     if (!this.turretType) return;
 
