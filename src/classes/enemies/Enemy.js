@@ -52,14 +52,6 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
         }
       }
     });
-
-    if (canMoveForward) {
-      console.log("foward");
-    } else if (canMoveLeft) {
-      console.log("left");
-    } else if (canMoveRight) {
-      console.log("right");
-    }
   }
 
   damageTaken(damage) {

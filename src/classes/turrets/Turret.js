@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import Bullet from "../../Bullet";
+import Bullet from "../bullet/Bullet";
 
 export default class Turret extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, range, collisionGroup, enemies) {
