@@ -20,6 +20,8 @@ export default class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
     this.sprite = enemyObject.sprite;
 
     this.setPosition(145, 767);
+    this.overlaySprite = scene.add.sprite(x, y, "flame");
+    this.overlaySprite.setDepth(1); // Set the depth to ensure it appears above the base sprite
   }
 
   preload() {
@@ -27,7 +29,7 @@ export default class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
       this.enemyName,
       `assets/images/${this.sprite}.png`
     );
-
+    this.MapScene.load.image("flame");
     this.scene.load.audio("bulletsound", "assets/sounds/BulletSound.mp3");
 
     this.scene.load.audio(

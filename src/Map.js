@@ -48,6 +48,7 @@ export default class MapScene extends Phaser.Scene {
 
     // Fire Sprites
     this.load.image("fire", "assets/images/FireTowerInactive.png");
+    this.load.image("flame", "assets/images/flame.png");
 
     // Enemy Sprites
     this.load.image("bird", "assets/images/bird.png");
@@ -72,7 +73,7 @@ export default class MapScene extends Phaser.Scene {
     const startBtn = document.getElementById("start");
     startBtn.addEventListener("click", this.startWave.bind(this));
 
-    const speedBtn = document.getElementById("speed");
+    const speedBtn = document.getElementById("speed-up");
     speedBtn.addEventListener("click", this.increaseGameSpeed.bind(this));
 
     const heartContainer = document.getElementById("heart-container");

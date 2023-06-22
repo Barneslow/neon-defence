@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import MapScene from "../src/Map";
 import GameOverScene from "./gameOver";
+import { checkAuthState } from "./auth";
 
 const config = {
   type: Phaser.AUTO,
@@ -15,11 +16,6 @@ const config = {
   },
   scene: [MapScene, GameOverScene],
 };
-
-// // POWER TOWER DISABLE USE
-// const elecBTN = document.getElementById("electric");
-
-// elecBTN.addEventListener("click", () => console.log("test"));
 
 export default new Phaser.Game(config);
 
@@ -51,4 +47,7 @@ const render = () => {
 };
 
 requestAnimationFrame(render);
-window.addEventListener("resize", () => requestAnimationFrame(render)); 
+
+checkAuthState();
+
+window.addEventListener("resize", () => requestAnimationFrame(render));

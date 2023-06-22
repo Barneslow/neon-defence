@@ -1,6 +1,10 @@
+import { signInWithGoogle } from "./auth";
+
 document.addEventListener("DOMContentLoaded", function () {
   const startButton = document.getElementById("start-button");
   const menu = document.getElementById("menu");
+
+  signInButton.addEventListener("click", signInWithGoogle);
 
   // Add event listener to the start button
   startButton.addEventListener("click", function (event) {
@@ -39,7 +43,7 @@ const render = () => {
 };
 
 requestAnimationFrame(render);
-window.addEventListener("resize", () => requestAnimationFrame(render)); 
+window.addEventListener("resize", () => requestAnimationFrame(render));
 
 // Music / Music Button
 const music = document.getElementById("music");
