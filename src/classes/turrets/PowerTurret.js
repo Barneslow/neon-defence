@@ -78,6 +78,7 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
         enemy.setVelocity(0, 0);
 
         this.MapScene.time.delayedCall(this.damageOutput, () => {
+          if (!enemy.body) return;
           enemy.setVelocity(currentVelocity.x, currentVelocity.y);
         });
       });
@@ -89,6 +90,9 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
           delay: 1000,
           repeat: 10,
           callback: () => {
+            if (!enemy) {
+              return;
+            }
             enemy.damageTaken(this.damageOutput);
             counter++;
 

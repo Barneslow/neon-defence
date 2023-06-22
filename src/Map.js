@@ -71,6 +71,10 @@ export default class MapScene extends Phaser.Scene {
   create() {
     const startBtn = document.getElementById("start");
     startBtn.addEventListener("click", this.startWave.bind(this));
+
+    const speedBtn = document.getElementById("speed");
+    speedBtn.addEventListener("click", this.increaseGameSpeed.bind(this));
+
     const heartContainer = document.getElementById("heart-container");
     this.heartContainer = heartContainer;
     const autoTurret = document.getElementById("auto-turret");
@@ -112,11 +116,13 @@ export default class MapScene extends Phaser.Scene {
       fontSize: "24px",
       // @ts-ignore
       fill: "#ffffff",
+      fontFamily: "Work Sans",
     });
     this.scoreText = this.add.text(700, 10, `Score: ${this.score}`, {
       fontSize: "24px",
       // @ts-ignore
       fill: "#ffffff",
+      fontFamily: "Work Sans",
     });
 
     layer1.setInteractive();
@@ -178,7 +184,7 @@ export default class MapScene extends Phaser.Scene {
     const offsetX = tileWidth;
     const offsetY = tileHeight;
     const centerX = tile.x * tileWidth + offsetX;
-    const centerY = tile.y * tileHeight + offsetY;
+    const centerY = tile.y * tileHeight + offsetY - 15;
 
     new PowerTurret(this, centerX, centerY, turretsClassTypes[type]);
 
@@ -214,6 +220,8 @@ export default class MapScene extends Phaser.Scene {
     });
   }
 
+  increaseGameSpeed() {}
+
   updateResources() {
     this.resourceText.setText(`Resources: ${this.resources}`);
     this.scoreText.setText(`Score: ${this.score}`);
@@ -222,7 +230,7 @@ export default class MapScene extends Phaser.Scene {
   onTileClicked(pointer) {
     const tile = this.map.worldToTileXY(pointer.worldX, pointer.worldY);
     const tileId = this.map.getTileAt(tile.x, tile.y, true).index;
-    // console.log(tileId);
+    console.log(tileId);
     if (tileId != 7 || this.resources < 50) return; // prevent tile resource issues
     if (!this.turretType) return;
 
@@ -274,8 +282,9 @@ export default class MapScene extends Phaser.Scene {
 
   endWave() {
     this.waveIndex++;
-    this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
     this.isWaveInProgress = false;
+    if (this.waveIndex >= WAVE_DATA.length) return;
+    this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
   }
 
   update(time, delta) {
