@@ -32,4 +32,15 @@ export const enemyClassTypes = {
     speed: 100,
     resources: 25,
   },
+  drone: {
+    name: "drone",
+    sprite: "drone",
+    health: 50,
+    sound: {
+      name: "dead",
+      audio: "dead",
+    },
+    speed: 75,
+    resources: 50,
+  },
 };
