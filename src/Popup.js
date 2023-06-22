@@ -24,7 +24,6 @@ export class Popup extends Phaser.GameObjects.Container {
       fontFamily: "Work Sans",
       color: "#000000",
       backgroundColor: "#FF0000",
-      border: "1px solid white",
       padding: {
         left: 8,
         right: 8,

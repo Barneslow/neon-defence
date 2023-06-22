@@ -96,11 +96,7 @@ export default class MapScene extends Phaser.Scene {
     autoTurret.addEventListener("click", this.chooseTurretType.bind(this));
     laserTurret.addEventListener("click", this.chooseTurretType.bind(this));
 
-    // Power turret purchases
-    // BINDING THIS KEYWORD TO EVENTLISTNER FUNCTION
-
     const electricTower = document.getElementById("electric");
-
     electricTower.addEventListener(
       "click",
       this.purchaseTower.bind(this, "electric", electricTower)
@@ -123,19 +119,20 @@ export default class MapScene extends Phaser.Scene {
     const tileset = map.addTilesetImage("2Dsprites", "tiles", 32, 32);
 
     const layer1 = map.createLayer(0, tileset);
-    // const layer2 = map.createLayer(1, tileset);
-    // const pathTiles = this.map.getTilesWithinWorldXY(145, 10, 700, 1000);
+
+    // createContainerText(this);
     this.resourceText = this.add.text(10, 10, `Resources: ${this.resources}`, {
       fontSize: "24px",
-      // @ts-ignore
-      fill: "#ffffff",
+      backgroundColor: "black",
       fontFamily: "Work Sans",
+      padding: 10,
     });
+
     this.scoreText = this.add.text(700, 10, `Score: ${this.score}`, {
       fontSize: "24px",
-      // @ts-ignore
-      fill: "#ffffff",
+      backgroundColor: "black",
       fontFamily: "Work Sans",
+      padding: 10,
     });
 
     layer1.setInteractive();
@@ -357,4 +354,13 @@ function convertObjectToArray(obj) {
   }
 
   return array.filter((element) => element !== "enemies");
+}
+function createContainerText(scene, text) {
+  const containerElement = scene.add.rectangle(0, 0, 500, 100, 0x000000, 0.9);
+  const textElement = scene.add.text(10, 10, `Resources: ${scene.resources}`, {
+    fontSize: "24px",
+    fontFamily: "Work Sans",
+  });
+
+  return textElement;
 }
