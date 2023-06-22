@@ -282,8 +282,9 @@ export default class MapScene extends Phaser.Scene {
 
   endWave() {
     this.waveIndex++;
-    this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
     this.isWaveInProgress = false;
+    if (this.waveIndex >= WAVE_DATA.length) return;
+    this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
   }
 
   update(time, delta) {
