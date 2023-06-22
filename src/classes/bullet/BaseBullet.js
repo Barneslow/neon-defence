@@ -10,7 +10,8 @@ export default class BaseBullet extends Phaser.Physics.Arcade.Sprite {
 
     // BULLET Config Properties
     this.damage = damage;
-    this.speed = bulletObject.speed;
+    this.speed = bulletObject.speed * scene.speedMultiplyer;
+
     this.lifespan = bulletObject.lifespan;
 
     // ADDING INSTANCE OF THE BULLET TO THE COLLISION GROUP IN SCENE

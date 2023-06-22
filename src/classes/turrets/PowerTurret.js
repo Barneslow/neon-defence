@@ -1,8 +1,5 @@
 import Phaser from "phaser";
-import { getEnemyNearTurret } from "../../helpers/helpers";
 import { Popup } from "../../Popup";
-import BaseBullet from "../bullet/BaseBullet";
-import { bulletClassTypes } from "../../config/bullet-config";
 
 export default class PowerTurret extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, turretObject) {
@@ -39,23 +36,27 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
     this.fireBtn.addEventListener("click", this.fireTower.bind(this));
 
     this.sound = this.scene.sound.add(turretObject.sound);
+    this.powerUpSound = this.scene.sound.add("power-up");
   }
 
   preload() {}
 
   startTimer() {
     this.timer = this.scene.time.addEvent({
-      delay: this.timerCountInMilli,
+      delay: this.timerCountInMilli / this.MapScene.speedMultiplyer,
       callback: this.endTimer,
       callbackScope: this,
     });
     // @ts-ignore
     this.fireBtn.disabled = true;
+    this.setTexture(`${this.turretSprite.name}-inactive`);
   }
 
   endTimer() {
     // @ts-ignore
     this.fireBtn.disabled = false;
+    this.setTexture(this.turretSprite.name);
+    this.powerUpSound.play();
   }
 
   fireTower() {
@@ -87,7 +88,7 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
       totalEnemies.forEach((enemy) => {
         let counter = 0;
         const burnTimer = enemy.scene.time.addEvent({
-          delay: 1000,
+          delay: 1000 / this.MapScene.speedMultiplyer,
           repeat: 10,
           callback: () => {
             if (!enemy) {
