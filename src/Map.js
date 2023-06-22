@@ -209,7 +209,7 @@ export default class MapScene extends Phaser.Scene {
     hearts.forEach((heart) => {
       const imageElement = document.createElement("img");
       imageElement.classList.add("heart-icon");
-      imageElement.src = `./assets/images/lifehearts.png`;
+      imageElement.src = `./assets/images/life-heart.png`;
       this.heartContainer.appendChild(imageElement);
     });
   }
