@@ -48,6 +48,7 @@ export default class MapScene extends Phaser.Scene {
 
     // Fire Sprites
     this.load.image("fire", "assets/images/FireTowerInactive.png");
+    this.load.image("flame", "assets/images/flame.png");
 
     // Enemy Sprites
     this.load.image("bird", "assets/images/bird.png");

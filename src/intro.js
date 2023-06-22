@@ -1,10 +1,16 @@
+import { signInWithGoogle } from "./auth";
+
 document.addEventListener("DOMContentLoaded", function () {
   const startButton = document.getElementById("start-button");
   const howToPlayButton = document.getElementById("how-to-play-button");
   const soundButton = document.getElementById("sound-button");
   const musicButton = document.getElementById("music-button");
   const creditsButton = document.getElementById("credits-button");
+  const signInButton = document.getElementById("sign-in");
+
   const menu = document.getElementById("menu");
+
+  signInButton.addEventListener("click", signInWithGoogle);
 
   // Add event listener to the start button
   startButton.addEventListener("click", function (event) {
@@ -88,7 +94,7 @@ const render = () => {
 };
 
 requestAnimationFrame(render);
-window.addEventListener("resize", () => requestAnimationFrame(render)); 
+window.addEventListener("resize", () => requestAnimationFrame(render));
 
 // Music / Volume Button
 const volume = document.getElementById("volume");
@@ -116,7 +122,6 @@ volume.addEventListener("keydown", (e) => {
 
 musicButton.addEventListener("click", () => volumeToggle());
 
-
 // Dropdown
 const dropdownButton = document.querySelector(".dropbtn");
 const dropdownContent = document.querySelector(".dropdown-content");
@@ -133,7 +138,6 @@ window.addEventListener("click", (event) => {
     dropdownContent.classList.remove("show");
   }
 });
-
 
 // Function to open a modal
 const openModal = (modalElement) => {

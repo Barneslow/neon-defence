@@ -14,15 +14,15 @@
         <div class="startail-m"></div>
       </div>
       <header id="introHeader">
-          <h1 class="title">
-            <span text="NEON DEFENCE"></span>
-            <div class="shine one"></div>
-            <div class="shine two"></div>
-            <div class="shine three"></div>
-            <div class="shine four"></div>
-            <div class="shine five"></div>
-          </h1>
-          <p><a href="game.html" id="start-button">START GAME</a></p>
+        <h1 class="title">
+          <span text="NEON DEFENCE"></span>
+          <div class="shine one"></div>
+          <div class="shine two"></div>
+          <div class="shine three"></div>
+          <div class="shine four"></div>
+          <div class="shine five"></div>
+        </h1>
+        <p><a href="game.html" id="start-button">START GAME</a></p>
       </header>
       <section id="menu" style="display: none">
         <div class="menu-content">
@@ -36,6 +36,7 @@
           </h1>
           <div class="dropdown">
             <button id="dropbtn" class="dropbtn">Select Level</button>
+            <button id="sign-in" class="dropbtn">Sign In</button>
             <div class="dropdown-content">
               <a id="easy">Easy</a>
               <a id="medium">Medium</a>
@@ -43,31 +44,41 @@
             </div>
           </div>
           <button id="how-to-play-button">How to Play</button>
-            <dialog id="modalHowToPlay" data-modal="">
-              <div class="modal">
-                  <button class="btn close-button" data-close-modal="">Close</button>
-                  <h3>How to Play:</h3>
-                  <h5>DevGames Hackathon - June 2023</h5>
-                  <ul>
-                      <li class="devan"><a href="https://github.com/devan-cadman" target="_blank">Devan Cadman</a></li>
-                      
-                  </ul>
-              </div>
-            </dialog>
+          <dialog id="modalHowToPlay" data-modal="">
+            <div class="modal">
+              <button class="btn close-button" data-close-modal="">
+                Close
+              </button>
+              <h3>How to Play:</h3>
+              <h5>DevGames Hackathon - June 2023</h5>
+              <ul>
+                <li class="devan">
+                  <a href="https://github.com/devan-cadman" target="_blank"
+                    >Devan Cadman</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </dialog>
           <button id="sound-button">Sound: ON</button>
           <button id="music-button" class="volume">Music: ON</button>
           <button id="credits-button">Credits</button>
-            <dialog id="modalCredits" data-modal="">
-              <div class="modal">
-                  <button class="btn close-button" data-close-modal="">Close</button>
-                  <h3>Credits:</h3>
-                  <h5>DevGames Hackathon - June 2023</h5>
-                  <ul>
-                      <li class="devan"><a href="https://github.com/devan-cadman" target="_blank">Devan Cadman</a></li>
-                      
-                  </ul>
-              </div>
-            </dialog>
+          <dialog id="modalCredits" data-modal="">
+            <div class="modal">
+              <button class="btn close-button" data-close-modal="">
+                Close
+              </button>
+              <h3>Credits:</h3>
+              <h5>DevGames Hackathon - June 2023</h5>
+              <ul>
+                <li class="devan">
+                  <a href="https://github.com/devan-cadman" target="_blank"
+                    >Devan Cadman</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </dialog>
         </div>
       </section>
       <section class="sky">
@@ -178,7 +189,7 @@
         >
       </div>
     </main>
-    
+
     <script type="module" src="src/intro.js"></script>
   </body>
 </html>
