@@ -20,6 +20,9 @@ export default class MapScene extends Phaser.Scene {
     this.turretType = "auto";
     this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
     this.hearts = 3;
+    this.electric = false;
+    this.fire = false;
+    this.freeze = false;
   }
 
   preload() {
@@ -52,7 +55,13 @@ export default class MapScene extends Phaser.Scene {
     this.load.image("spider", "assets/images/spider.png");
 
     this.load.image("bullet", "assets/images/Bullet.png");
+
+    // Audio Files
     this.load.audio("bulletsound", "assets/sounds/BulletSound.mp3");
+    this.load.audio("electric-audio", "assets/sounds/electricity.mp3");
+    this.load.audio("fire-audio", "assets/sounds/fire.mp3");
+    this.load.audio("freeze-audio", "assets/sounds/freeze.mp3");
+
     this.load.audio("dead", "assets/sounds/dead-enemy.mp3");
     this.load.audio("dead-boss", "assets/sounds/dead-boss.mp3");
   }
@@ -75,16 +84,19 @@ export default class MapScene extends Phaser.Scene {
 
     electricTower.addEventListener(
       "click",
-      this.purchaseTower.bind(this, "electric")
+      this.purchaseTower.bind(this, "electric", electricTower)
     );
+
     const fireTower = document.getElementById("fire");
+    fireTower.addEventListener(
+      "click",
+      this.purchaseTower.bind(this, "fire", fireTower)
+    );
 
-    fireTower.addEventListener("click", this.purchaseTower.bind(this, "fire"));
     const freezeTower = document.getElementById("freeze");
-
     freezeTower.addEventListener(
       "click",
-      this.purchaseTower.bind(this, "freeze")
+      this.purchaseTower.bind(this, "freeze", freezeTower)
     );
 
     const map = this.make.tilemap({ key: "map" });
@@ -132,7 +144,8 @@ export default class MapScene extends Phaser.Scene {
     this.physics.add.overlap(this.enemies, this.bullets, damageEnemy);
   }
 
-  purchaseTower(type) {
+  purchaseTower(type, element) {
+    if (this[type] === true) return;
     let tileID;
     console.log(type);
 
@@ -167,6 +180,9 @@ export default class MapScene extends Phaser.Scene {
     const centerY = tile.y * tileHeight + offsetY;
 
     new PowerTurret(this, centerX, centerY, turretsClassTypes[type]);
+
+    element.textContent = `Shoot`;
+    this[type] = true;
   }
 
   shootBullet(pointer) {

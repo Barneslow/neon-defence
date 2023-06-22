@@ -103,6 +103,7 @@ export const turretsClassTypes = {
     },
     cost: 1000,
     timer: 10000,
+    sound: "electric-audio",
   },
   freeze: {
     name: "freeze",
@@ -117,6 +118,7 @@ export const turretsClassTypes = {
     },
     cost: 1000,
     timer: 10000,
+    sound: "freeze-audio",
   },
   fire: {
     name: "fire",
@@ -131,5 +133,6 @@ export const turretsClassTypes = {
     },
     cost: 1000,
     timer: 10000,
+    sound: "fire-audio",
   },
 };
