@@ -76,6 +76,7 @@ export default class MapScene extends Phaser.Scene {
     });
 
     layer1.setInteractive();
+    // layer2.setInteractive(false);
     layer1.on("pointerdown", this.onTileClicked, this);
 
     this.nextEnemy = 0;
@@ -171,7 +172,7 @@ export default class MapScene extends Phaser.Scene {
   }
 
   gameOver() {
-    console.log("game over");
+    window.location.href = "intro.html";
   }
 
   spawnEnemiesForWave(enemyType) {
