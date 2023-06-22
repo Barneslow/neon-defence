@@ -13,16 +13,16 @@ body {
   --main-gradient-end: #150D40;
 
   --moon-gradient-start: #9070FE;
-  --moon-gradient-end: #44155D;
+  --moon-gradient-end: #fc784f /*#44155D*/;
   --moon-line-color: #16F7FF;
   --moon-background-color: #F016FF;
   
   --plane-background-start: #150D40;
   --plane-background-end: #44155D;
   --plane-line-color: #16F7FF;
-  --plane-shadow-color: #ff91cf;
+  --plane-shadow-color: #fc784f /*#ff91cf*/;
 }
-#intro {
+#intro, #game {
   background: var(--background-color);
   padding: 0;
   margin: 0;
@@ -58,7 +58,7 @@ body {
 }
 #intro h1 span {
   color: transparent;
-  background: linear-gradient(#000000 0%,#113e87 22%,#10cccc 50%,#000000 51%,#e21ddc 78%,#e21ddc 78%,#ffffff 100%);
+  background: linear-gradient(#000000 0%,#113e87 22%,#10cccc 50%,#000000 51%,#e21ddc 78%,#ff91cf 78%,#ffffff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -449,3 +449,95 @@ small, small a {
   }
 }
 /***** END - Intro Styling *****/
+
+/***** MENU STYLING *****/
+#menu {
+  place-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  position: relative;
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+}
+.menu-content {
+  background-color: rgba(0,0,0,0.9);
+  padding: 2rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  gap: 10px;
+  -webkit-box-shadow: 0px 10px 13px 5px var(--plane-line-color) 5px 5px 15px 5px rgba(0,0,0,0);
+  box-shadow: 0px 10px 27px 2px var(--plane-line-color), 5px 5px 15px 5px rgba(0,0,0,0);
+}
+#intro .menu-content h1 {
+  font-size: 3em;
+  margin: 0 1rem;
+}
+.menu-content button:hover {
+  box-shadow: none;
+  background: var(--background-color);
+  color: #fff;
+}
+.menu-content button {
+  text-align: middle;
+  margin-top: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 80px;
+  padding-right: 80px;
+  background-color: transparent;
+  -webkit-box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 5px 5px 15px 5px rgba(255,139,253,0);
+  box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 5px 5px 15px 5px rgba(255,139,253,0);
+  border: 3px double var(--moon-background-color);
+  border-radius: 3px;
+  color: var(--background-color);
+  background: #fff;
+  font-weight: 600;
+  font-size: 18px;
+  font-family: courier, monospace;
+  cursor: pointer;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+.show {
+  display: block;
+}
+/***** END - Menu Styling *****/
+
+/***** GAME STYLING *****/
+#game {
+  height:100dvh;
+  height: 100vh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+#game #app canvas {
+  max-height: 70vh;
+  max-width: 100%;
+}
+#game #stars {overflow: visible !important;}
+
+/***** END - Game Styling *****/
