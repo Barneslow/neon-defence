@@ -90,7 +90,7 @@ body {
 }
 
 /* Timer - Hourglass */
-#timer .circle{
+#timer{
   position:relative;
   margin:180px auto;
   width:80px;
