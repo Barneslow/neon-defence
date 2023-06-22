@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithPopup,
   signInWithEmailAndPassword,
+  onAuthStateChanged,
 } from "firebase/auth";
 import { firebaseAuth, firebaseDB } from "./config/firebase";
 
@@ -51,3 +52,15 @@ export const createUserDocumentFromAuth = async (userAuth) => {
 
   return userSnapShot;
 };
+export const checkAuthState = async () => {
+  onAuthStateChanged(firebaseAuth, (user) => {
+    if (user) {
+      console.log(user);
+      //   getUserData(user.uid);
+    } else {
+      console.log("user is not logged in");
+    }
+  });
+};
+
+checkAuthState();

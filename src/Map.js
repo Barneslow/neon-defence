@@ -73,7 +73,7 @@ export default class MapScene extends Phaser.Scene {
     const startBtn = document.getElementById("start");
     startBtn.addEventListener("click", this.startWave.bind(this));
 
-    const speedBtn = document.getElementById("speed");
+    const speedBtn = document.getElementById("speed-up");
     speedBtn.addEventListener("click", this.increaseGameSpeed.bind(this));
 
     const heartContainer = document.getElementById("heart-container");
