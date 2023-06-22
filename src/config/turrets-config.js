@@ -57,4 +57,34 @@ export const turretsClassTypes = {
     },
     tickTimer: 2000,
   },
+
+  human: {
+    name: "turret",
+    sprite: {
+      level1: {
+        name: "turret",
+        sprite1: "Turret2D",
+      },
+      level2: {
+        name: "turret2",
+        sprite1: "Turret2Dlvl2",
+      },
+      level3: {
+        name: "turret3",
+        sprite1: "Turret2Dlvl3",
+      },
+    },
+    damageOutput: {
+      level1: 5,
+      level2: 15,
+      level3: 50,
+    },
+    cost: 100,
+    experience: {
+      level1: 0,
+      level2: 100,
+      level3: 300,
+    },
+    tickTimer: null,
+  },
 };

@@ -1,4 +1,6 @@
 import BaseTurret from "../classes/turrets/BaseTurret";
+import HumanTurret from "../classes/turrets/HumanTurret";
+import Turret from "../classes/turrets/Turret";
 import { turretsClassTypes } from "../config/turrets-config";
 
 export function placeTurretOnMap(pointer, resources, map, turretType) {
@@ -20,11 +22,17 @@ export function placeTurretOnMap(pointer, resources, map, turretType) {
 
     let turret;
     if (turretType === "auto") {
-      turret = new BaseTurret(
+      // turret = new Turret(
+      //   this,
+      //   centerX,
+      //   centerY,
+      //   turretsClassTypes["auto"]
+      // );
+      turret = new HumanTurret(
         this,
         centerX,
         centerY,
-        turretsClassTypes["auto"]
+        turretsClassTypes["human"]
       );
     } else if (turretType === "laser") {
       turret = new BaseTurret(
