@@ -110,11 +110,13 @@ export default class MapScene extends Phaser.Scene {
       fontSize: "24px",
       // @ts-ignore
       fill: "#ffffff",
+      fontFamily: "Work Sans",
     });
     this.scoreText = this.add.text(700, 10, `Score: ${this.score}`, {
       fontSize: "24px",
       // @ts-ignore
       fill: "#ffffff",
+      fontFamily: "Work Sans",
     });
 
     layer1.setInteractive();
@@ -207,7 +209,7 @@ export default class MapScene extends Phaser.Scene {
     hearts.forEach((heart) => {
       const imageElement = document.createElement("img");
       imageElement.classList.add("heart-icon");
-      imageElement.src = `./assets/images/lifehearts.png`;
+      imageElement.src = `./assets/images/heart.png`;
       this.heartContainer.appendChild(imageElement);
     });
   }

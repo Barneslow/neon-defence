@@ -13,6 +13,7 @@ export class Popup extends Phaser.GameObjects.Container {
     // Create the text for the popup
     const text = scene.add.text(0, -height / 2 + 30, "Sell", {
       fontSize: "24px",
+      fontFamily: "Work Sans",
       color: "#ffffff",
     });
     text.setOrigin(0.5);
@@ -20,6 +21,7 @@ export class Popup extends Phaser.GameObjects.Container {
     // Create the red X button
     const xButton = scene.add.text(width / 2 - 20, height / 2 - 20, "X", {
       fontSize: "16px",
+      fontFamily: "Work Sans",
       color: "#000000",
       backgroundColor: "#FF0000",
       border: "1px solid white",
@@ -37,6 +39,7 @@ export class Popup extends Phaser.GameObjects.Container {
     // Create the green Y button
     const yButton = scene.add.text(-width / 2 + 20, height / 2 - 20, "Y", {
       fontSize: "16px",
+      fontFamily: "Work Sans",
       color: "#000000",
       backgroundColor: "#90EE90",
       padding: {
