@@ -6,6 +6,8 @@ import { placeTurretOnMap } from "./helpers/helpers";
 import { enemyClassTypes } from "./config/enemy-config";
 import BaseTurret from "./classes/turrets/BaseTurret";
 import { WAVE_DATA } from "./config/wave-config";
+import { turretsClassTypes } from "./config/turrets-config";
+import PowerTurret from "./classes/turrets/PowerTurret";
 
 export default class MapScene extends Phaser.Scene {
   constructor() {
@@ -35,7 +37,7 @@ export default class MapScene extends Phaser.Scene {
     this.load.image("laser3", "assets/images/LaserTurretlvl3.png");
 
     // Electric Sprites
-    this.load.image("electric", "assets/images/bird.png");
+    this.load.image("electric", "assets/images/ElectricTowerInactive.png");
 
     // Enemy Sprites
     this.load.image("bird", "assets/images/bird.png");
@@ -59,6 +61,10 @@ export default class MapScene extends Phaser.Scene {
     this.displayHearts();
     autoTurret.addEventListener("click", this.chooseTurretType.bind(this));
     laserTurret.addEventListener("click", this.chooseTurretType.bind(this));
+
+    // Power turret purchases
+    const electricTower = document.getElementById("electric");
+    electricTower.addEventListener("click", this.purchaseTower.bind(this));
 
     const map = this.make.tilemap({ key: "map" });
     this.map = map;
@@ -103,6 +109,32 @@ export default class MapScene extends Phaser.Scene {
     this.input.on("pointerdown", this.shootBullet, this);
     // OVERLAP FUNCTION
     this.physics.add.overlap(this.enemies, this.bullets, damageEnemy);
+  }
+
+  purchaseTower() {
+    const tileID = 39;
+    const tileInstances = [];
+
+    const tileLayer = this.map.getLayer(0);
+
+    tileLayer.data.forEach((row, y) => {
+      row.forEach((tile, x) => {
+        if (tile.index === tileID) {
+          tileInstances.push({ x, y });
+        }
+      });
+    });
+
+    const tile = tileInstances[0];
+
+    const tileWidth = this.map.tileWidth;
+    const tileHeight = this.map.tileHeight;
+    const offsetX = tileWidth;
+    const offsetY = tileHeight;
+    const centerX = tile.x * tileWidth + offsetX;
+    const centerY = tile.y * tileHeight + offsetY;
+
+    new PowerTurret(this, centerX, centerY, turretsClassTypes["electric"]);
   }
 
   shootBullet(pointer) {

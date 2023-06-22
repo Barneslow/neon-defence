@@ -8,8 +8,10 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, turretObject) {
     super(scene, x, y, turretObject.name);
 
+    console.log(scene);
     this.MapScene = scene;
     scene.add.existing(this);
+    this.purchased = false;
 
     // Creating Turret Config Properties
     this.turretName = turretObject.name;
@@ -55,6 +57,9 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
   }
 
   fireTower() {
+    if (!this.purchased) {
+      this.purchased = true;
+    }
     this.startTimer();
 
     const totalEnemies = Array.from(this.enemies.children.entries);
