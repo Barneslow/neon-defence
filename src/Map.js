@@ -39,6 +39,12 @@ export default class MapScene extends Phaser.Scene {
     // Electric Sprites
     this.load.image("electric", "assets/images/ElectricTowerInactive.png");
 
+    // Freeze Sprites
+    this.load.image("freeze", "assets/images/FreezeTowerInactive.png");
+
+    // Fire Sprites
+    this.load.image("fire", "assets/images/FireTowerInactive.png");
+
     // Enemy Sprites
     this.load.image("bird", "assets/images/bird.png");
     this.load.image("robot", "assets/images/Robot2D.png");
@@ -63,8 +69,23 @@ export default class MapScene extends Phaser.Scene {
     laserTurret.addEventListener("click", this.chooseTurretType.bind(this));
 
     // Power turret purchases
+    // BINDING THIS KEYWORD TO EVENTLISTNER FUNCTION
+
     const electricTower = document.getElementById("electric");
-    electricTower.addEventListener("click", this.purchaseTower.bind(this));
+
+    electricTower.addEventListener(
+      "click",
+      this.purchaseTower.bind(this, "electric")
+    );
+    const fireTower = document.getElementById("fire");
+
+    fireTower.addEventListener("click", this.purchaseTower.bind(this, "fire"));
+    const freezeTower = document.getElementById("freeze");
+
+    freezeTower.addEventListener(
+      "click",
+      this.purchaseTower.bind(this, "freeze")
+    );
 
     const map = this.make.tilemap({ key: "map" });
     this.map = map;
@@ -111,8 +132,19 @@ export default class MapScene extends Phaser.Scene {
     this.physics.add.overlap(this.enemies, this.bullets, damageEnemy);
   }
 
-  purchaseTower() {
-    const tileID = 39;
+  purchaseTower(type) {
+    let tileID;
+    console.log(type);
+
+    if (type === "electric") {
+      tileID = 39;
+    }
+    if (type === "fire") {
+      tileID = 59;
+    }
+    if (type === "freeze") {
+      tileID = 49;
+    }
     const tileInstances = [];
 
     const tileLayer = this.map.getLayer(0);
@@ -134,7 +166,7 @@ export default class MapScene extends Phaser.Scene {
     const centerX = tile.x * tileWidth + offsetX;
     const centerY = tile.y * tileHeight + offsetY;
 
-    new PowerTurret(this, centerX, centerY, turretsClassTypes["electric"]);
+    new PowerTurret(this, centerX, centerY, turretsClassTypes[type]);
   }
 
   shootBullet(pointer) {
@@ -173,6 +205,7 @@ export default class MapScene extends Phaser.Scene {
   onTileClicked(pointer) {
     const tile = this.map.worldToTileXY(pointer.worldX, pointer.worldY);
     const tileId = this.map.getTileAt(tile.x, tile.y, true).index;
+    console.log(tileId);
     if (tileId != 7 || this.resources < 50) return; // prevent tile resource issues
     if (!this.turretType) return;
 
