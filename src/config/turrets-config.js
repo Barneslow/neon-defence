@@ -104,4 +104,18 @@ export const turretsClassTypes = {
     cost: 1000,
     timer: 10000,
   },
+  freeze: {
+    name: "freeze",
+    sprite: {
+      name: "freeze",
+      sprite1: "Turret2D",
+    },
+    damageOutput: {
+      level1: 1000,
+      level2: 2000,
+      level3: 3000,
+    },
+    cost: 1000,
+    timer: 10000,
+  },
 };
