@@ -8,6 +8,7 @@ import BaseTurret from "./classes/turrets/BaseTurret";
 import { WAVE_DATA } from "./config/wave-config";
 import { turretsClassTypes } from "./config/turrets-config";
 import PowerTurret from "./classes/turrets/PowerTurret";
+import DroneEnemy from "./classes/enemies/DroneClass";
 
 export default class MapScene extends Phaser.Scene {
   constructor() {
@@ -53,6 +54,7 @@ export default class MapScene extends Phaser.Scene {
     this.load.image("robot", "assets/images/Robot2D.png");
     this.load.image("boss", "assets/images/Boss.png");
     this.load.image("spider", "assets/images/spider.png");
+    this.load.image("drone", "assets/images/drone.png");
 
     this.load.image("bullet", "assets/images/Bullet.png");
 
@@ -139,6 +141,7 @@ export default class MapScene extends Phaser.Scene {
       classType: Turret && BaseTurret,
       runChildUpdate: true,
     });
+
     this.input.on("pointerdown", this.shootBullet, this);
     // OVERLAP FUNCTION
     this.physics.add.overlap(this.enemies, this.bullets, damageEnemy);
@@ -147,7 +150,6 @@ export default class MapScene extends Phaser.Scene {
   purchaseTower(type, element) {
     if (this[type] === true) return;
     let tileID;
-    console.log(type);
 
     if (type === "electric") {
       tileID = 39;
@@ -220,7 +222,7 @@ export default class MapScene extends Phaser.Scene {
   onTileClicked(pointer) {
     const tile = this.map.worldToTileXY(pointer.worldX, pointer.worldY);
     const tileId = this.map.getTileAt(tile.x, tile.y, true).index;
-    console.log(tileId);
+    // console.log(tileId);
     if (tileId != 7 || this.resources < 50) return; // prevent tile resource issues
     if (!this.turretType) return;
 
@@ -260,7 +262,12 @@ export default class MapScene extends Phaser.Scene {
   }
 
   spawnEnemiesForWave(enemyType) {
-    const enemy = new BaseEnemy(this, 0, 0, enemyClassTypes[enemyType]);
+    let enemy;
+    if (enemyType === "drone") {
+      enemy = new DroneEnemy(this, 0, 0, enemyClassTypes[enemyType]);
+    } else {
+      enemy = new BaseEnemy(this, 0, 0, enemyClassTypes[enemyType]);
+    }
     this.enemies.add(enemy);
     this.waveArray.shift();
   }
@@ -279,6 +286,7 @@ export default class MapScene extends Phaser.Scene {
 
       this.spawnEnemiesForWave(this.waveArray[0]);
       this.nextEnemy = time + 2000;
+      console.log(this.enemies);
     }
     if (time > this.nextEnemy && this.waveArray.length === 0) {
       this.endWave();
