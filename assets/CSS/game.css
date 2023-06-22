@@ -66,6 +66,24 @@ body {
 }
 .btn-box img {max-height:30px;}
 
+.btn-box button {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 80px;
+  padding-right: 80px;
+  background-color: transparent;
+  -webkit-box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 5px 5px 15px 5px rgba(255,139,253,0);
+  box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 5px 5px 15px 5px rgba(255,139,253,0);
+  border: 3px double var(--moon-background-color);
+  border-radius: 3px;
+  color: var(--background-color) !important;
+  background: #fff !important;
+  font-weight: 600;
+  font-size: 18px;
+  font-family: courier, monospace;
+  cursor: pointer;
+}
+
 #heart-container {
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 5px;
