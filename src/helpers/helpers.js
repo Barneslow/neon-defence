@@ -1,3 +1,5 @@
+import BaseEnemy from "../classes/enemies/BaseEnemy";
+import DroneEnemy from "../classes/enemies/DroneClass";
 import BaseTurret from "../classes/turrets/BaseTurret";
 import HumanTurret from "../classes/turrets/HumanTurret";
 import PowerTurret from "../classes/turrets/PowerTurret";
@@ -5,8 +7,6 @@ import Turret from "../classes/turrets/Turret";
 import { turretsClassTypes } from "../config/turrets-config";
 
 export function placeTurretOnMap(pointer, resources, map, turretType) {
-  console.log(pointer);
-
   const tile = map.worldToTileXY(pointer.worldX, pointer.worldY);
   const tileId = map.getTileAt(tile.x, tile.y, true).index;
 
@@ -15,8 +15,6 @@ export function placeTurretOnMap(pointer, resources, map, turretType) {
     laser: turretsClassTypes.laser.cost,
     electric: turretsClassTypes.electric.cost,
   };
-
-  console.log(map);
 
   if (tileId === 7 && resources >= turretCosts[turretType]) {
     const tileWidth = map.tileWidth;
@@ -66,14 +64,23 @@ export function placeTurretOnMap(pointer, resources, map, turretType) {
 
 // FIND NEARBY ENEMY
 export function getEnemyNearTurret(x, y, distance, enemies) {
-  var enemyUnits = enemies.getChildren();
-  for (var i = 0; i < enemyUnits.length; i++) {
+  const enemyUnits = enemies.getChildren();
+
+  const noDroneFilter = enemyUnits.filter(
+    (obj) => !(obj instanceof DroneEnemy)
+  );
+
+  for (let i = 0; i < noDroneFilter.length; i++) {
     if (
-      enemyUnits[i].active &&
-      Phaser.Math.Distance.Between(x, y, enemyUnits[i].x, enemyUnits[i].y) <
-        distance
+      noDroneFilter[i].active &&
+      Phaser.Math.Distance.Between(
+        x,
+        y,
+        noDroneFilter[i].x,
+        noDroneFilter[i].y
+      ) < distance
     )
-      return enemyUnits[i];
+      return noDroneFilter[i];
   }
   return false;
 }
