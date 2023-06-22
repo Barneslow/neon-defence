@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import MapScene from "../src/Map";
+import GameOverScene from "./gameOver";
 
 const config = {
   type: Phaser.AUTO,
@@ -12,7 +13,7 @@ const config = {
       gravity: { y: 0 },
     },
   },
-  scene: [MapScene],
+  scene: [MapScene, GameOverScene],
 };
 
 // // POWER TOWER DISABLE USE

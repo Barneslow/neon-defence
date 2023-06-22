@@ -257,7 +257,7 @@ export default class MapScene extends Phaser.Scene {
   }
 
   gameOver() {
-    window.location.href = "intro.html";
+    this.scene.start("GameOverScene");
   }
 
   spawnEnemiesForWave(enemyType) {
