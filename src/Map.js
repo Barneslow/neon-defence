@@ -71,6 +71,10 @@ export default class MapScene extends Phaser.Scene {
   create() {
     const startBtn = document.getElementById("start");
     startBtn.addEventListener("click", this.startWave.bind(this));
+
+    const speedBtn = document.getElementById("speed");
+    speedBtn.addEventListener("click", this.increaseGameSpeed.bind(this));
+
     const heartContainer = document.getElementById("heart-container");
     this.heartContainer = heartContainer;
     const autoTurret = document.getElementById("auto-turret");
@@ -215,6 +219,8 @@ export default class MapScene extends Phaser.Scene {
       this.heartContainer.appendChild(imageElement);
     });
   }
+
+  increaseGameSpeed() {}
 
   updateResources() {
     this.resourceText.setText(`Resources: ${this.resources}`);

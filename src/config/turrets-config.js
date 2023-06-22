@@ -117,7 +117,7 @@ export const turretsClassTypes = {
       level3: 3000,
     },
     cost: 1000,
-    timer: 10000,
+    timer: 0,
     sound: "freeze-audio",
   },
   fire: {
