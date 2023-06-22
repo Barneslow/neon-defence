@@ -34,6 +34,9 @@ export default class MapScene extends Phaser.Scene {
     this.load.image("laser2", "assets/images/LaserTurretlvl2.png");
     this.load.image("laser3", "assets/images/LaserTurretlvl3.png");
 
+    // Electric Sprites
+    this.load.image("electric", "assets/images/bird.png");
+
     // Enemy Sprites
     this.load.image("bird", "assets/images/bird.png");
     this.load.image("robot", "assets/images/Robot2D.png");

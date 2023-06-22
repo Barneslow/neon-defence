@@ -68,6 +68,7 @@ export default class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
   damageTaken(damage) {
     this.currentHealth -= damage;
     const healthPercentage = this.currentHealth / this.health;
+    console.log(this.currentHealth);
 
     if (healthPercentage < 0.75 && healthPercentage > 0.5) {
       this.setTint(0xff9999);
