@@ -60,14 +60,35 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
     const totalEnemies = Array.from(this.enemies.children.entries);
 
     if (this.turretName === "electric") {
+      totalEnemies.forEach((enemy) => {
+        enemy.damageTaken(this.damageOutput);
+      });
     }
     if (this.turretName === "freeze") {
       totalEnemies.forEach((enemy) => {
         enemy.body.enable = false;
 
-        this.MapScene.time.delayedCall(5000, () => {
-          enemy.body.enable = true; // Re-enable the sprite's physics body
-          enemy.clearTint(); // Optional: Remove the tint
+        this.MapScene.time.delayedCall(this.damageOutput, () => {
+          enemy.body.enable = true;
+          //   enemy.clearTint();
+        });
+      });
+    }
+    if (this.turretName === "fire") {
+      totalEnemies.forEach((enemy) => {
+        let counter = 0;
+        const burnTimer = enemy.scene.time.addEvent({
+          delay: 1000,
+          repeat: 10,
+          callback: () => {
+            enemy.damageTaken(this.damageOutput);
+            counter++;
+
+            if (counter >= 10) {
+              burnTimer.remove();
+            }
+          },
+          callbackScope: enemy,
         });
       });
     }

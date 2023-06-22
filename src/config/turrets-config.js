@@ -118,4 +118,18 @@ export const turretsClassTypes = {
     cost: 1000,
     timer: 10000,
   },
+  fire: {
+    name: "fire",
+    sprite: {
+      name: "fire",
+      sprite1: "Turret2D",
+    },
+    damageOutput: {
+      level1: 2,
+      level2: 5,
+      level3: 10,
+    },
+    cost: 1000,
+    timer: 10000,
+  },
 };

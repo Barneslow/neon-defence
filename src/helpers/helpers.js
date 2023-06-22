@@ -40,7 +40,7 @@ export function placeTurretOnMap(pointer, resources, map, turretType) {
         this,
         centerX,
         centerY,
-        turretsClassTypes["freeze"]
+        turretsClassTypes["fire"]
       );
     } else if (turretType === "laser") {
       turret = new BaseTurret(
