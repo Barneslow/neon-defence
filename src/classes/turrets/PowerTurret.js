@@ -90,6 +90,9 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
           delay: 1000,
           repeat: 10,
           callback: () => {
+            if (!enemy) {
+              return;
+            }
             enemy.damageTaken(this.damageOutput);
             counter++;
 
