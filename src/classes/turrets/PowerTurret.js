@@ -71,11 +71,14 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
     }
     if (this.turretName === "freeze") {
       totalEnemies.forEach((enemy) => {
-        enemy.body.enable = false;
+        const currentVelocityX = enemy.body.velocity.x;
+        const currentVelocityY = enemy.body.velocity.y;
+        let currentVelocity = { x: currentVelocityX, y: currentVelocityY };
+
+        enemy.setVelocity(0, 0);
 
         this.MapScene.time.delayedCall(this.damageOutput, () => {
-          enemy.body.enable = true;
-          //   enemy.clearTint();
+          enemy.setVelocity(currentVelocity.x, currentVelocity.y);
         });
       });
     }
