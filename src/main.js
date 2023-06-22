@@ -1,6 +1,5 @@
 import Phaser from "phaser";
 import MapScene from "../src/Map";
-import GameOverScene from "./gameOver";
 import { checkAuthState } from "./auth";
 
 const config = {
@@ -14,7 +13,7 @@ const config = {
       gravity: { y: 0 },
     },
   },
-  scene: [MapScene, GameOverScene],
+  scene: [MapScene],
 };
 
 export default new Phaser.Game(config);

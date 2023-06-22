@@ -24,6 +24,7 @@ export default class MapScene extends Phaser.Scene {
     this.electric = false;
     this.fire = false;
     this.freeze = false;
+    this.speedMultiplyer = 1;
   }
 
   preload() {
@@ -41,13 +42,23 @@ export default class MapScene extends Phaser.Scene {
     this.load.image("laser3", "assets/images/LaserTurretlvl3.png");
 
     // Electric Sprites
-    this.load.image("electric", "assets/images/ElectricTowerInactive.png");
+    this.load.image("electric", "assets/images/ElectricTowerActive.png");
+    this.load.image(
+      "electric-inactive",
+      "assets/images/ElectricTowerInactive.png"
+    );
 
     // Freeze Sprites
-    this.load.image("freeze", "assets/images/FreezeTowerInactive.png");
+    this.load.image("freeze", "assets/images/FreezeTowerActive.png");
+    this.load.image(
+      "freeze-inactive",
+      "assets/images/ElectricTowerInactive.png"
+    );
 
     // Fire Sprites
-    this.load.image("fire", "assets/images/FireTowerInactive.png");
+    this.load.image("fire", "assets/images/FireTowerActive.png");
+    this.load.image("fire-inactive", "assets/images/ElectricTowerInactive.png");
+
     this.load.image("flame", "assets/images/flame.png");
 
     // Enemy Sprites
@@ -60,11 +71,12 @@ export default class MapScene extends Phaser.Scene {
     this.load.image("bullet", "assets/images/Bullet.png");
 
     // Audio Files
-    this.load.audio("bulletsound", "assets/sounds/BulletSound.mp3");
     this.load.audio("electric-audio", "assets/sounds/electricity.mp3");
     this.load.audio("fire-audio", "assets/sounds/fire.mp3");
     this.load.audio("freeze-audio", "assets/sounds/freeze.mp3");
+    this.load.audio("power-up", "assets/sounds/power-up.mp3");
 
+    this.load.audio("bulletsound", "assets/sounds/BulletSound.mp3");
     this.load.audio("dead", "assets/sounds/dead-enemy.mp3");
     this.load.audio("dead-boss", "assets/sounds/dead-boss.mp3");
   }
@@ -221,7 +233,10 @@ export default class MapScene extends Phaser.Scene {
     });
   }
 
-  increaseGameSpeed() {}
+  increaseGameSpeed() {
+    console.log("speed");
+    this.speedMultiplyer = 2;
+  }
 
   updateResources() {
     this.resourceText.setText(`Resources: ${this.resources}`);
@@ -295,7 +310,7 @@ export default class MapScene extends Phaser.Scene {
       // CHANGE DURATION OF ENEMY RESPAWN
 
       this.spawnEnemiesForWave(this.waveArray[0]);
-      this.nextEnemy = time + 2000;
+      this.nextEnemy = time + 2000 / this.speedMultiplyer;
       console.log(this.enemies);
     }
     if (time > this.nextEnemy && this.waveArray.length === 0) {

@@ -11,7 +11,7 @@ export default class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
     this.currentHealth = enemyObject.health;
     this.initialMove = true;
     this.resources = enemyObject.resources;
-    this.speed = enemyObject.speed;
+    this.speed = enemyObject.speed * scene.speedMultiplyer;
 
     this.sound = enemyObject.sound;
     this.deadSound = this.scene.sound.add(enemyObject.sound.name);
