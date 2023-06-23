@@ -165,3 +165,14 @@ attachModalEvents(creditsButton, modalCredits);
 const signInButton = document.getElementById("signin-btn");
 const signInModal = document.getElementById("modalSignin");
 attachModalEvents(signInButton, signInModal);
+
+// Warning to rorate screen for Mobile Portrait mode
+window.addEventListener("orientationchange", function() {
+  if (window.orientation === 0 || window.orientation === 180) {
+      // Portrait mode
+      document.getElementById("warning-message").style.display = "block";
+  } else {
+      // Landscape mode
+      document.getElementById("warning-message").style.display = "none";
+  }
+});
