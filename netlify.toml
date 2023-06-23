@@ -4,6 +4,6 @@
   status = 200
 
 [[redirects]]
-  from = "/game"
+  from = "/game.html"
   to = "/game.html"
   status = 200
