@@ -221,6 +221,11 @@ body {
   background: rgb(22, 247, 255, 0.7) !important;
 }
 
+.close-button {    
+  padding: 8px 14px !important;
+  font-size: 20px;
+}
+
 .btn-box {
   display: flex;
   margin-top: 10px;
@@ -229,6 +234,7 @@ body {
   max-width: 90%;
   margin-left: 0;
   max-height: 20vh;
+}
 
 .btn-box button:disabled {
   cursor: not-allowed;
@@ -431,6 +437,46 @@ body {
   }
 }
 /* END - timer / hourglass */
+
+/* Dialog / Modal */
+dialog {display:none;}
+dialog[open] {
+  display: block;
+  z-index: 10;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border: none;
+  border-radius: 2px;
+  box-shadow: 0px 0px 4px 2px rgba(128, 128, 128, 0.1);    
+  padding:0;
+  margin:0;
+}
+dialog::backdrop {
+  background-color:#f4f4f4;
+}
+dialog .modal {
+  z-index: 99999;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 3rem;
+  box-sizing: border-box;
+  min-width: 35vw;
+  gap: 10px;
+  -webkit-box-shadow: 0px 10px 13px 5px var(--plane-line-color) 5px 5px 15px 5px rgba(0,0,0,0);
+  box-shadow: 0px 10px 27px 2px var(--plane-line-color), 5px 5px 15px 5px rgba(0,0,0,0);
+  
+}
+#modalGameOver {
+  background: radial-gradient(circle, var(--main-gradient-start) 0%, var(--main-gradient-end) 100%); 
+}
+/* END - Dialog / Modal */
 
 /* Responsive */
 @media screen and (max-width: 768px) {
