@@ -33,7 +33,7 @@ body {
   margin: 0;
   position: relative;
 }
-#game main {overflow:hidden;}
+
 #game #app canvas {
   max-height: 80vh;
   max-width: 100%;
