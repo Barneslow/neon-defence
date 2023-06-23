@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import Turret from "./classes/turrets/Turret";
 import BaseEnemy from "./classes/enemies/BaseEnemy";
 import Bullet from "./classes/bullet/Bullet";
-import { placeTurretOnMap } from "./helpers/helpers";
+import { formatDuration, placeTurretOnMap } from "./helpers/helpers";
 import { enemyClassTypes } from "./config/enemy-config";
 import BaseTurret from "./classes/turrets/BaseTurret";
 import { WAVE_DATA } from "./config/wave-config";
@@ -16,6 +16,7 @@ export default class MapScene extends Phaser.Scene {
     this.resources = 1000;
     this.score = 0;
     this.isWaveInProgress = false;
+    this.startedGame = false;
     this.waveIndex = 0;
     this.boss = false;
     this.turretType = "auto";
@@ -26,6 +27,7 @@ export default class MapScene extends Phaser.Scene {
     this.freeze = false;
     this.speedMultiplyer = 1;
     this.difficulty = 1;
+    this.timeUntilNextWave = 0;
   }
 
   preload() {
@@ -40,6 +42,7 @@ export default class MapScene extends Phaser.Scene {
   create() {
     const startBtn = document.getElementById("start");
     startBtn.addEventListener("click", this.startWave.bind(this));
+    this.startBtn = startBtn;
 
     const speedBtn = document.getElementById("speed-up");
     speedBtn.addEventListener("click", this.increaseGameSpeed.bind(this));
@@ -96,6 +99,19 @@ export default class MapScene extends Phaser.Scene {
       // @ts-ignore
       padding: 10,
     });
+
+    this.waveTimeRemainingText = this.add.text(
+      500,
+      50,
+      `Time Until Next Wave: ${this.timeUntilNextWave}`,
+      {
+        fontSize: "24px",
+        backgroundColor: "black",
+        fontFamily: "Work Sans",
+        // @ts-ignore
+        padding: 10,
+      }
+    );
 
     layer1.setInteractive();
     // layer2.setInteractive(false);
@@ -177,13 +193,19 @@ export default class MapScene extends Phaser.Scene {
   }
 
   increaseGameSpeed() {
-    console.log("speed");
     this.speedMultiplyer = 2;
   }
 
   updateResources() {
     this.resourceText.setText(`Resources: ${this.resources}`);
     this.scoreText.setText(`Score: ${this.score}`);
+  }
+
+  updateWaveTimeRemaining() {
+    console.log(this.timeUntilNextWave);
+    this.waveTimeRemainingText.setText(
+      `Time Until Next Wave: ${formatDuration(this.timeUntilNextWave)}`
+    );
   }
 
   onTileClicked(pointer) {
@@ -210,9 +232,32 @@ export default class MapScene extends Phaser.Scene {
   }
 
   startWave() {
+    this.startedGame = true;
+    // @ts-ignore
+    this.startBtn.disabled = true;
+    // @ts-ignore
+    const previousTimers = this.time._active;
+    // remove previous timer
+    if (previousTimers.length > 0) {
+      previousTimers.forEach((timer) => this.time.removeEvent(timer));
+    }
+
     if (!this.isWaveInProgress) {
       this.isWaveInProgress = true;
       this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
+
+      const time = this.waveArray.length * 2000 + 22000;
+
+      this.timeUntilNextWave = time;
+
+      this.time.addEvent({
+        delay: 1000,
+        repeat: time / 1000,
+        callback: () => {
+          this.timeUntilNextWave = this.timeUntilNextWave - 1000;
+        },
+        callbackScope: this,
+      });
     }
   }
 
@@ -249,25 +294,25 @@ export default class MapScene extends Phaser.Scene {
   }
 
   update(time, delta) {
+    if (!this.startedGame) return;
+    if (this.timeUntilNextWave <= 0) {
+      console.log("next wave");
+      this.startWave();
+    }
+    this.updateWaveTimeRemaining();
     if (!this.isWaveInProgress) return;
 
     if (time > this.nextEnemy && this.waveArray.length > 0) {
       // CHANGE DURATION OF ENEMY RESPAWN
-
       this.spawnEnemiesForWave(this.waveArray[0]);
       this.nextEnemy = time + 2000 / this.speedMultiplyer;
     }
+
     if (time > this.nextEnemy && this.waveArray.length === 0) {
       this.endWave();
+      // @ts-ignore
+      this.startBtn.disabled = false;
     }
-
-    // if (time > 1000 && this.boss === false) {
-    //   // CHANGE DURATION OF BOSS RESPAWN
-    //   const bigboy = new BaseEnemy(this, 0, 0, enemyClassTypes.boss);
-    //   this.enemies.add(bigboy);
-    //   this.boss = true;
-    //   // this.nextBoss = time + 10000;
-    // }
   }
 }
 
@@ -366,6 +411,7 @@ function loadAllAudio(scene) {
   scene.load.audio("fire-audio", "assets/sounds/fire.mp3");
   scene.load.audio("freeze-audio", "assets/sounds/freeze.mp3");
   scene.load.audio("power-up", "assets/sounds/power-up.mp3");
+  scene.load.audio("laser", "assets/sounds/laser.mp3");
 
   scene.load.audio("bulletsound", "assets/sounds/BulletSound.mp3");
   scene.load.audio("dead", "assets/sounds/dead-enemy.mp3");
