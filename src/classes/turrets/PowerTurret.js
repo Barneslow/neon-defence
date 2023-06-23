@@ -29,6 +29,8 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
     //   .on("pointerout", this.onPointerOut, this)
     //   .on("pointerdown", this.onPointerDown, this);
 
+    console.log(turretObject);
+
     this.timer = null; // Timer object
     this.timerCountInMilli = turretObject.timer;
     this.fireBtn = document.getElementById(turretObject.name);
@@ -41,7 +43,6 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
   preload() {}
 
   startTimer() {
-    console.log(this.turretSprite.name);
     this.timer = this.scene.time.addEvent({
       delay: this.timerCountInMilli / this.MapScene.speedMultiplyer,
       callback: this.endTimer,
