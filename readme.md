@@ -1,112 +1,54 @@
-# Phaser 3 + Vite.js Template
-> Make Phaser 3 games with modern frontend tooling.
+#Neon Defence
+Neon Defence is an exciting tower defense game where your objective is to protect the Sun of Neon City from various types of enemies. Build and strategically place different types of turrets to fend off waves of incoming enemies and prevent them from reaching the Sun. If enemies manage to reach the Sun, you will lose a life. Be careful, as losing three lives will result in a game over.
 
-![License](https://img.shields.io/badge/license-MIT-green)
+##Turrets
+Neon Defence features four unique types of turrets that you can utilize to defend against the enemy waves:
 
-## Prerequisites
+###AutoTurret: This turret automatically fires at enemies within its range. It provides a consistent stream of damage to keep the enemy at bay.
 
-You'll need [Node.js](https://nodejs.org/en/) and [npm](https://www.npmjs.com/) installed.
+###ShotGunTurret: The ShotGunTurret unleashes a powerful shotgun blast that damages multiple enemies in a cone-shaped area. It's great for dealing with groups of weaker enemies.
 
-It is highly recommended to use [Node Version Manager](https://github.com/nvm-sh/nvm) (nvm) to install Node.js and npm.
+###LaserTurret: The LaserTurret emits a high-intensity laser beam that can cut through enemies, dealing continuous damage to a single target. It's effective against tougher foes.
 
-For Windows users there is [Node Version Manager for Windows](https://github.com/coreybutler/nvm-windows).
+###HumanControlledTurret: The HumanControlledTurret allows you, the player, to take control and manually aim and shoot at enemies. Use your skills to accurately eliminate threats and protect the Sun.
 
-Install Node.js and `npm` with `nvm`:
+##Enemies
+Neon Defence throws various enemies at you throughout the game. Here are some of the enemy types you will encounter:
 
-```bash
-nvm install node
+###Basic Robot: These are the most common enemies you'll face. They have moderate health and deal low damage.
 
-nvm use node
-```
+###Reinforced Robot: Reinforced robots are tougher than the basic ones, requiring more hits to defeat. Be prepared for a longer fight.
 
-Replace 'node' with 'latest' for `nvm-windows`.
+###Mechanic Spider: These agile enemies can crawl over obstacles and move quickly towards the Sun. Watch out for their speed.
 
-## Getting Started
+###Drone: Drones are aerial enemies that fly above the ground defenses. You'll need to use turrets capable of hitting airborne targets to deal with them.
 
-You can clone this repository or use [degit](https://github.com/Rich-Harris/degit) to scaffold the project like this:
+###Boss: Boss enemies are formidable adversaries that possess high health and deal significant damage. They pose a real threat to the Sun and require careful planning to defeat.
 
-```bash
-npx degit https://github.com/ourcade/phaser3-vite-template my-folder-name
-cd my-folder-name
+##How to Play
+###Build Turrets: Use the in-game resources to construct and place turrets strategically. Experiment with different turret combinations to find the most effective defense against each enemy type.
 
-npm install
-```
+###Upgrade Turrets: As you progress, you'll earn resources that can be used to upgrade your turrets. Enhance their firepower, range, and special abilities to improve their effectiveness against the increasingly challenging enemies.
 
-Start development server:
+###Monitor Resources: Keep an eye on your available resources, as they are limited. Spend them wisely to optimize your defense strategy.
 
-```
-npm run start
-```
+###Defend the Sun: Your primary objective is to protect the Sun from enemy incursions. Ensure that no enemy reaches the Sun by eliminating them with your turrets.
 
-To create a production build:
+###Lives and Game Over: You start with three lives. If an enemy reaches the Sun, you lose a life. Losing all three lives will result in a game over. Strive to maintain a strong defense and keep the Sun safe.
 
-```
-npm run build
-```
+##Controls
+The game can be played using the following controls:
 
-Production files will be placed in the `dist` folder. Then upload those files to a web server. 🎉
+[Add control scheme here]
+##Installation
+[Add installation instructions here]
 
-## Project Structure
+##Credits
+[Provide credits to any external assets, libraries, or resources used in the game]
 
-```
-    .
-    ├── dist
-    ├── node_modules
-    ├── public
-    ├── src
-    │   ├── HelloWorldScene.js
-    │   ├── main.js
-	├── index.html
-    ├── package.json
-```
+##License
+[Specify the license under which the game is distributed, if applicable]
 
-JavaScript files are intended for the `src` folder. `main.js` is the entry point referenced by `index.html`.
+##Feedback and Support
+[Provide instructions on how users can provide feedback or seek support]
 
-Other than that there is no opinion on how you should structure your project.
-
-There is an example `HelloWorldScene.js` file that can be placed inside a `scenes` folder to organize by type or elsewhere to organize by function. For example, you can keep all files specific to the HelloWorld scene in a `hello-world` folder.
-
-It is all up to you!
-
-## Static Assets
-
-Any static assets like images or audio files should be placed in the `public` folder. It'll then be served from the root. For example: http://localhost:8000/images/my-image.png
-
-Example `public` structure:
-
-```
-    public
-    ├── images
-    │   ├── my-image.png
-    ├── music
-    │   ├── ...
-    ├── sfx
-    │   ├── ...
-```
-
-They can then be loaded by Phaser with `this.image.load('my-image', 'images/my-image.png')`.
-
-# ESLint
-
-This template uses a basic `eslint` set up for code linting to help you find and fix common problems in your JavaScript code.
-
-It does not aim to be opinionated.
-
-[See here for rules to turn on or off](https://eslint.org/docs/rules/).
-
-## Dev Server Port
-
-You can change the dev server's port number by modifying the `vite.config.js` file. Look for the `server` section:
-
-```js
-{
-	// ...
-	server: { host: '0.0.0.0', port: 8000 },
-}
-```
-
-Change 8000 to whatever you want.
-
-## License
-
-[MIT License](https://github.com/ourcade/phaser3-vite-template/blob/master/LICENSE)
