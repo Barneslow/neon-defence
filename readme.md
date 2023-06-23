@@ -1,4 +1,4 @@
-#Neon Defence:
+Neon Defence:
 Neon Defence is an exciting tower defense game where your objective is to protect the Sun of Neon City from various types of enemies. Build and strategically place different types of turrets to fend off waves of incoming enemies and prevent them from reaching the Sun. If enemies manage to reach the Sun, you will lose a life. Be careful, as losing three lives will result in a game over.
 
 ##Turrets:
