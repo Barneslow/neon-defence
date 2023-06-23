@@ -77,6 +77,9 @@ export default class MapScene extends Phaser.Scene {
       this.toggleAudioMute.bind(this)
     );
 
+    const replayBtn = document.getElementById("replay-button");
+    replayBtn.addEventListener("click", () => location.reload());
+
     const heartContainer = document.getElementById("heart-container");
     this.heartContainer = heartContainer;
     const autoTurret = document.getElementById("auto-turret");
@@ -294,6 +297,10 @@ export default class MapScene extends Phaser.Scene {
     this.scene.resume();
     const modalGameOver = document.getElementById("modalGameOver");
     modalGameOver.setAttribute("open", "");
+
+    const score = document.getElementById("score");
+
+    score.textContent = `Your Score ${this.score.toString()}`;
   }
 
   spawnEnemiesForWave(enemyType) {
@@ -348,19 +355,23 @@ export default class MapScene extends Phaser.Scene {
     this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
   }
 
-  victory() {
-    this.physics.resume();
-    this.scene.resume();
-    const modalGameOver = document.getElementById("modalGameOver");
-    modalGameOver.setAttribute("open", "");
-  }
+  // victory() {
+  //   this.physics.resume();
+  //   this.scene.resume();
+  //   const modalGameOver = document.getElementById("modalGameOver");
+  //   modalGameOver.setAttribute("open", "");
+
+  //   const score = document.getElementById("score");
+
+  //   score.textContent = this.score.toString();
+  // }
 
   update(time, delta) {
     if (!this.startedGame) return;
     this.updateWaveTimeRemaining();
 
     if (this.enemies.getLength() === 0 && WAVE_DATA.length <= this.waveIndex) {
-      this.victory();
+      this.gameOver();
     }
 
     if (this.timeUntilNextWave <= 0) {
@@ -429,6 +440,11 @@ function loadAllSprites(scene) {
   scene.load.image("shotgun", "assets/images/turrets/ShotGunTurret.png");
   scene.load.image("shotgun2", "assets/images/turrets/ShotGunTurretlvl2.png");
   scene.load.image("shotgun3", "assets/images/turrets/ShotGunTurretlvl3.png");
+
+  // Human Sprites
+  scene.load.image("human", "assets/images/turrets/HumanTurret.png");
+  scene.load.image("human2", "assets/images/turrets/HumanTurretlvl2.png");
+  scene.load.image("human3", "assets/images/turrets/HumanTurretlvl3.png");
 
   // Electric Sprites
   scene.load.image("electric", "assets/images/turrets/ElectricTowerActive.png");

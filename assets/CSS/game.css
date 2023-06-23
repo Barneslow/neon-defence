@@ -169,6 +169,29 @@ body {
   -webkit-animation: opacity 2s infinite;
   animation: opacity 2s infinite;
 }
+
+#replay-button {
+  font-family: courier, monospace;
+  font-size: 1.8rem;
+  color: #fff;
+  font-weight: 300;
+  margin-top: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-animation: opacity 2s infinite;
+  animation: opacity 2s infinite;
+}
+
+#score {
+  font-family: courier, monospace;
+  font-size: 1.8rem;
+  color: #fff;
+  font-weight: 300;
+  margin-top: 5px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 @keyframes opacity {
   0% {
     opacity: 1;
