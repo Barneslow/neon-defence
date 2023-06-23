@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [],
-  server: { host: "https://neon-defence.netlify.app", port: 8000 },
+  server: { host: "https://neon-defence.netlify.app/", port: 8000 },
   clearScreen: false,
 });
+// https://neon-defence.netlify.app/
