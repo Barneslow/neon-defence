@@ -32,50 +32,7 @@ export default class MapScene extends Phaser.Scene {
     this.load.tilemapTiledJSON("map", "assets/json/2DTowerDefense.json");
     this.load.image("tiles", "assets/images/2Dsprites.png");
 
-    // Turret Sprites
-    this.load.image("turret", "assets/images/Turret2D.png");
-    this.load.image("turret2", "assets/images/Turret2Dlvl2.png");
-    this.load.image("turret3", "assets/images/Turret2Dlvl3.png");
-
-    // Laser Sprites
-    this.load.image("laser", "assets/images/LaserTurret.png");
-    this.load.image("laser2", "assets/images/LaserTurretlvl2.png");
-    this.load.image("laser3", "assets/images/LaserTurretlvl3.png");
-
-    // Shotgun Sprites
-    this.load.image("shotgun", "assets/images/ShotGunTurret.png");
-    this.load.image("shotgun2", "assets/images/ShotGunTurretlvl2.png");
-    this.load.image("shotgun3", "assets/images/ShotGunTurretlvl3.png");
-
-    // Electric Sprites
-    this.load.image("electric", "assets/images/ElectricTowerActive.png");
-    this.load.image(
-      "electric-inactive",
-      "assets/images/ElectricTowerInactive.png"
-    );
-
-    // Freeze Sprites
-    this.load.image("freeze", "assets/images/FreezeTowerActive.png");
-    this.load.image(
-      "freeze-inactive",
-      "assets/images/ElectricTowerInactive.png"
-    );
-
-    // Fire Sprites
-    this.load.image("fire", "assets/images/FireTowerActive.png");
-    this.load.image("fire-inactive", "assets/images/ElectricTowerInactive.png");
-
-    this.load.image("flame", "assets/images/flame.png");
-
-    // Enemy Sprites
-    this.load.image("robot", "assets/images/enemies/robot.png");
-    this.load.image("heavybot", "assets/images/enemies/heavybot.png");
-    this.load.image("spider", "assets/images/enemies/spider.png");
-    this.load.image("drone", "assets/images/enemies/drone.png");
-    this.load.image("golem", "assets/images/enemies/golem.png");
-    this.load.image("boss", "assets/images/enemies/boss.png");
-
-    this.load.image("bullet", "assets/images/Bullet.png");
+    loadAllSprites(this);
 
     // Audio Files
     this.load.audio("electric-audio", "assets/sounds/electricity.mp3");
@@ -359,4 +316,56 @@ function createContainerText(scene, text) {
   });
 
   return textElement;
+}
+
+function loadAllSprites(scene) {
+  // Turret Sprites
+  scene.load.image("turret", "assets/images/turrets/Turret2D.png");
+  scene.load.image("turret2", "assets/images/turrets/Turret2Dlvl2.png");
+  scene.load.image("turret3", "assets/images/turrets/Turret2Dlvl3.png");
+
+  // Laser Sprites
+  scene.load.image("laser", "assets/images/turrets/LaserTurret.png");
+  scene.load.image("laser2", "assets/images/turrets/LaserTurretlvl2.png");
+  scene.load.image("laser3", "assets/images/turrets/LaserTurretlvl3.png");
+
+  // Shotgun Sprites
+  scene.load.image("shotgun", "assets/images/turrets/ShotGunTurret.png");
+  scene.load.image("shotgun2", "assets/images/turrets/ShotGunTurretlvl2.png");
+  scene.load.image("shotgun3", "assets/images/turrets/ShotGunTurretlvl3.png");
+
+  // Electric Sprites
+  scene.load.image("electric", "assets/images/turrets/ElectricTowerActive.png");
+  scene.load.image(
+    "electric-inactive",
+    "assets/images/ElectricTowerInactive.png"
+  );
+
+  // Freeze Sprites
+  scene.load.image(
+    "freeze",
+    "assets/images/turrets/turrets/FreezeTowerActive.png"
+  );
+  scene.load.image(
+    "freeze-inactive",
+    "assets/images/turrets/turrets/ElectricTowerInactive.png"
+  );
+
+  // Fire Sprites
+  scene.load.image("fire", "assets/images/turrets/FireTowerActive.png");
+  scene.load.image(
+    "fire-inactive",
+    "assets/images/turrets/ElectricTowerInactive.png"
+  );
+
+  // Enemy Sprites
+  scene.load.image("robot", "assets/images/enemies/robot.png");
+  scene.load.image("heavybot", "assets/images/enemies/heavybot.png");
+  scene.load.image("spider", "assets/images/enemies/spider.png");
+  scene.load.image("drone", "assets/images/enemies/drone.png");
+  scene.load.image("golem", "assets/images/enemies/golem.png");
+  scene.load.image("boss", "assets/images/enemies/boss.png");
+
+  // Bullet Sprites
+  scene.load.image("bullet", "assets/images/Bullet.png");
 }
