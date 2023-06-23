@@ -5,3 +5,4 @@ export default defineConfig({
   server: { host: "https://neon-defence.netlify.app/", port: 8000 },
   clearScreen: false,
 });
+// https://neon-defence.netlify.app/
