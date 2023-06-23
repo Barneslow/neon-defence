@@ -88,19 +88,19 @@ export const turretsClassTypes = {
   },
 
   human: {
-    name: "turret",
+    name: "human",
     sprite: {
       level1: {
-        name: "turret",
-        sprite1: "Turret2D",
+        name: "human1",
+        sprite1: "HumanTurret",
       },
       level2: {
-        name: "turret2",
-        sprite1: "Turret2Dlvl2",
+        name: "human2",
+        sprite1: "HumanTurretlvl2",
       },
       level3: {
-        name: "turret3",
-        sprite1: "Turret2Dlvl3",
+        name: "human3",
+        sprite1: "HumanTurretlvl3",
       },
     },
     damageOutput: {

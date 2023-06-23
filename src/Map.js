@@ -476,6 +476,8 @@ function loadAllSprites(scene) {
 
   // Bullet Sprites
   scene.load.image("bullet", "assets/images/Bullet.png");
+  scene.load.image("ShotGunBullet", "assets/images/ShotGunBullet.png");
+  scene.load.image("HumanBullet", "assets/images/HumanBullet.png");
 }
 
 function loadAllAudio(scene) {
