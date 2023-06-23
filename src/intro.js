@@ -1,5 +1,7 @@
 // Import signInWithGoogle function
+import { collection, doc, getDocs } from "@firebase/firestore";
 import { signInWithGoogle } from "./auth";
+import { firebaseDB } from "./config/firebase";
 
 document.addEventListener("DOMContentLoaded", function () {
   const startButton = document.getElementById("start-button");
@@ -12,60 +14,58 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("introHeader").style.display = "none";
   });
 
-
   // Add event listener to the sign-in button
   signInButton.addEventListener("click", function () {
     signInModal.setAttribute("open", "");
   });
 
   // Add event listener to the sign-in form
-const loginForm = document.getElementById("login-form");
-loginForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-  
-  // Get the input values from the form
-  const email = document.getElementById("email-input").value;
-  const password = document.getElementById("password-input").value;
+  const loginForm = document.getElementById("login-form");
+  loginForm.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-  // Call the signIn function with the email and password
-  signIn(email, password);
-});
+    // Get the input values from the form
+    const email = document.getElementById("email-input").value;
+    const password = document.getElementById("password-input").value;
 
-// Define the signIn function
-function signIn(email, password) {
-  // Make an API call to your backend with the email and password
-  // Example using fetch:
-  fetch("/api/signin", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email, password }),
-  })
-    .then((response) => {
-      if (response.ok) {
-        // Sign-in successful
-        console.log("Sign-in successful");
-        // Add code to handle successful sign-in, such as redirecting to another page
-      } else {
-        // Sign-in failed
-        console.log("Sign-in failed");
-        // Add code to handle failed sign-in, such as displaying an error message
-      }
+    // Call the signIn function with the email and password
+    signIn(email, password);
+  });
+
+  // Define the signIn function
+  function signIn(email, password) {
+    // Make an API call to your backend with the email and password
+    // Example using fetch:
+    fetch("/api/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
     })
-    .catch((error) => {
-      // Error occurred during sign-in
-      console.log("Error during sign-in:", error);
-      // Add code to handle the error, such as displaying an error message
-    });
-}
+      .then((response) => {
+        if (response.ok) {
+          // Sign-in successful
+          console.log("Sign-in successful");
+          // Add code to handle successful sign-in, such as redirecting to another page
+        } else {
+          // Sign-in failed
+          console.log("Sign-in failed");
+          // Add code to handle failed sign-in, such as displaying an error message
+        }
+      })
+      .catch((error) => {
+        // Error occurred during sign-in
+        console.log("Error during sign-in:", error);
+        // Add code to handle the error, such as displaying an error message
+      });
+  }
 
   // Attach sign-in with Google functionality to the sign-in modal
   attachModalEvents(signInButton, signInModal);
   const googleSignInButton = signInModal.querySelector("#google-signin-btn");
   googleSignInButton.addEventListener("click", signInWithGoogle);
 });
-
 
 // Stars Background
 const getRandomInt = (min, max) => {
@@ -94,7 +94,6 @@ const render = () => {
 };
 requestAnimationFrame(render);
 window.addEventListener("resize", () => requestAnimationFrame(render));
-
 
 // Music / Music Button
 const music = document.getElementById("music");
@@ -146,10 +145,46 @@ const attachModalEvents = (buttonElement, modalElement) => {
   });
 };
 
+// Dynaically render leaderboard
+async function renderLeaderBoardScores() {
+  const leaderboardContainer = document.getElementById("leaderboard");
+  leaderboardContainer.innerHTML = "";
+
+  // Adding a loader while fetching
+  const loader = document.createElement("div");
+  loader.id = "loader";
+  leaderboardContainer.appendChild(loader);
+
+  try {
+    const usersSnapshot = await getDocs(collection(firebaseDB, "users"));
+    leaderboardContainer.removeChild(loader);
+    const totalUsers = [];
+    usersSnapshot.forEach((userDoc) => totalUsers.push(userDoc.data()));
+
+    totalUsers.sort((a, b) => b.highScore - a.highScore);
+
+    totalUsers.forEach((user) => {
+      const scoreElement = document.createElement("div");
+      scoreElement.classList.add("leaderboard-score");
+
+      const html = `
+      <h3>${user.userName}</h3>
+      <h3>${user.highScore}</h3>`;
+
+      scoreElement.innerHTML = html;
+
+      leaderboardContainer.appendChild(scoreElement);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 // Leaderboard:
 const leaderboardButton = document.getElementById("leaderboard-button");
 const modalLeaderboard = document.getElementById("modalLeaderboard");
 attachModalEvents(leaderboardButton, modalLeaderboard);
+leaderboardButton.addEventListener("click", renderLeaderBoardScores);
 
 // How to play:
 const howToPlayButton = document.getElementById("how-to-play-button");

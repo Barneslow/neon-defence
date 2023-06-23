@@ -8,6 +8,7 @@ export default class HumanTurret extends Phaser.GameObjects.Sprite {
     super(scene, x, y, turretObject.name);
     this.MapScene = scene;
     scene.add.existing(this);
+    this.range = 200;
 
     // config options
     this.turretName = turretObject.name;
@@ -43,6 +44,26 @@ export default class HumanTurret extends Phaser.GameObjects.Sprite {
 
     this.scene.input.on("pointermove", this.setPlayerInRange, this);
     this.scene.input.on("pointerdown", this.shootBullet, this);
+
+    // // Adding radius circle
+    // this.circleGraphics = scene.add.graphics();
+    // this.circleOpacity = 0.5;
+    // this.circleFillColor = 0xffffff; // White col
+
+    const colorValue = Phaser.Display.Color.GetColor(255, 255, 255);
+
+    this.circle = this.scene.add.circle(
+      this.x,
+      this.y,
+      this.range / 2,
+      colorValue
+    );
+
+    this.circle.setAlpha(0.4);
+    this.circle.depth = 1;
+    this.circle.setStrokeStyle(4, 0xffffff);
+
+    this.depth = 2;
   }
 
   setPlayerInRange(pointer) {
@@ -53,7 +74,7 @@ export default class HumanTurret extends Phaser.GameObjects.Sprite {
       pointer.worldY
     );
 
-    this.playerInRange = distanceToPointer <= 200;
+    this.playerInRange = distanceToPointer <= this.range;
     if (this.playerInRange) {
       this.followPointer();
     }
@@ -76,7 +97,7 @@ export default class HumanTurret extends Phaser.GameObjects.Sprite {
     );
   }
 
-  shootBullet(pointer) {
+  shootBullet() {
     if (this.playerInRange) {
       const bullet = new BaseBullet(
         this.scene,
