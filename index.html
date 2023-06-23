@@ -4,90 +4,87 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Phaser 3 Game</title>
-    <link rel="stylesheet" href="./assets/CSS/style.css" />
-  </head>
-
-  <body>
-    <div id="app"></div>
-    <script type="module" src="src/main.js"></script>
-  </body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Phaser 3 Game</title>
     <link rel="stylesheet" href="./assets/CSS/game.css" />
   </head>
 
   <body id="game">
-    <div id="stars"></div>
-    <div id="app"></div>
-    <div class="btn-box">
-      <div class="controls">
-        <button id="start" class="ui-btn">Start</button>
-        <button id="pause" class="ui-btn">Pause</button>
-        <button id="speed-up" class="ui-btn">x2 Speed</button>
-        <button id="settings" data-type="laser" class="ui-btn">Settings</button>
-      </div>
-      <div class="turret-buttons">
-        <h3>Turrets</h3>
-        <button id="auto-turret" class="ui-btn" data-type="auto">
-          <img src="./assets/images/Turret2DHUD.png" alt="auto turret" /> Turret
-          <span>$100</span>
-        </button>
-        <button id="laser-turret" class="ui-btn" data-type="laser">
-          <img src="./assets/images/LaserTurretHUD.png" alt="laser turret" />
-          Laser Turret <span>$100</span>
-        </button>
-        <button id="shotgun-turret" class="ui-btn" data-type="shotgun">
-          <img
-            src="./assets/images/ShotGunTurretHUD.png"
-            alt="shotgun turret"
-          />
-          Shotgun Turret <span>$100</span>
-        </button>
 
-        <button id="human-turret" class="ui-btn" data-type="human">
-          <img src="./assets/images/turret.png" alt="plasma turret" /> Plasma
-          Turret <span>$100</span>
-        </button>
-      </div>
+    <main>
+      <div id="stars"></div>
 
-      <div class="Power-buttons">
-        <h3>Power Buttons</h3>
-        <button id="electric">
-          <i style="color: yellow" class="fa-solid fa-bolt-lightning"></i>
-        </button>
+      <h1 class="title">
+        <span text="NEON DEFENCE"></span>
+        <div class="shine one"></div>
+        <div class="shine two"></div>
+        <div class="shine three"></div>
+        <div class="shine four"></div>
+        <div class="shine five"></div>
+      </h1>
+      
+      <div class="main-game">
+        <div id="app"></div>
+        <section class="side-bar">
+          <div class="turret-buttons">
+            <h3>Turrets</h3>
+            <button id="auto-turret" class="ui-btn" data-type="auto">
+              <img src="./assets/images/Turret2DHUD.png" alt="auto turret" />
+              <span>$100</span>
+            </button>
+            <button id="laser-turret" class="ui-btn" data-type="laser">
+              <img src="./assets/images/LaserTurretHUD.png" alt="laser turret" />
+              <span>$100</span>
+            </button>
+            <button id="shotgun-turret" class="ui-btn" data-type="shotgun">
+              <img src="./assets/images/ShotGunTurretHUD.png" alt="shotgun turret"/>
+            <span>$100</span>
+            </button>
 
-        <button id="freeze">
-          <i style="color: aquamarine" class="fa-solid fa-icicles"></i>
-        </button>
-        <button id="fire">
-          <i style="color: red" class="fa-solid fa-fire"></i>
-        </button>
-
-        <div id="timer" class="circle">
-          <div class="up">
-            <div class="innera"></div>
+            <button id="human-turret" class="ui-btn" data-type="human">
+              <img src="./assets/images/turret.png" alt="plasma turret" />
+              <span>$100</span>
+            </button>
           </div>
-          <div class="down">
-            <div class="innerb"></div>
+
+          <p id="sell-turret"></p>
+
+          <div class="Power-buttons">
+            <h3>Power Buttons</h3>
+            <button id="electric">
+              <i style="color: yellow" class="fa-solid fa-bolt-lightning"></i>
+            </button>
+
+            <button id="freeze">
+              <i style="color: aquamarine" class="fa-solid fa-icicles"></i>
+            </button>
+            <button id="fire">
+              <i style="color: red" class="fa-solid fa-fire"></i>
+            </button>
+
+            <div id="timer" class="circle">
+              <div class="up">
+                <div class="innera"></div>
+              </div>
+              <div class="down">
+                <div class="innerb"></div>
+              </div>
+            </div>
           </div>
+        </section>
+      </div>
+
+      <div class="btn-box">
+        <div class="controls">
+          <button id="start" class="ui-btn">Start <i class="fa-solid fa-play"></i></button>
+          <button id="pause" class="ui-btn">Pause <i class="fa-sharp fa-solid fa-pause"></i></button>
+          <button id="speed-up" class="ui-btn">x2 Speed <i class="fa-sharp fa-solid fa-forward-fast"></i></button>
+          <button id="settings" data-type="laser" class="ui-btn">Settings <i class="fa-solid fa-gear"></i></button>
         </div>
+        
+        <div id="heart-container"></div>
       </div>
-
-      <div id="heart-container"></div>
-
-      <p id="sell-turret"></p>
-    </div>
-
-    <script
-      src="https://kit.fontawesome.com/27545168c5.js"
-      crossorigin="anonymous"
-    ></script>
-
+    </main>
+      
+    <script src="https://kit.fontawesome.com/27545168c5.js" crossorigin="anonymous"></script>
     <script type="module" src="src/main.js"></script>
   </body>
 </html>
