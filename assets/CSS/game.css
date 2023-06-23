@@ -1,16 +1,16 @@
 :root {
   --background-color: #180727;
-  --main-gradient-start: #44155D;
-  --main-gradient-end: #150D40;
+  --main-gradient-start: #44155d;
+  --main-gradient-end: #150d40;
 
-  --moon-gradient-start: #9070FE;
+  --moon-gradient-start: #9070fe;
   --moon-gradient-end: #fc784f /*#44155D*/;
-  --moon-line-color: #16F7FF;
-  --moon-background-color: #F016FF;
-  
-  --plane-background-start: #150D40;
-  --plane-background-end: #44155D;
-  --plane-line-color: #16F7FF;
+  --moon-line-color: #16f7ff;
+  --moon-background-color: #f016ff;
+
+  --plane-background-start: #150d40;
+  --plane-background-end: #44155d;
+  --plane-line-color: #16f7ff;
   --plane-shadow-color: #fc784f /*#ff91cf*/;
 }
 
@@ -77,7 +77,7 @@ body {
 #game h1 {
   position: relative;
   display: inline-block;
-  font-family: 'Work Sans', sans-serif;
+  font-family: "Work Sans", sans-serif;
   text-transform: uppercase;
   font-size: 5em;
   z-index: 1;
@@ -86,7 +86,15 @@ body {
 }
 #game h1 span {
   color: transparent;
-  background: linear-gradient(#000000 0%,#113e87 22%,#10cccc 50%,#000000 51%,#e21ddc 78%,#ff91cf 78%,#ffffff 100%);
+  background: linear-gradient(
+    #000000 0%,
+    #113e87 22%,
+    #10cccc 50%,
+    #000000 51%,
+    #e21ddc 78%,
+    #ff91cf 78%,
+    #ffffff 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -99,7 +107,8 @@ body {
   top: 0;
   left: 0;
   opacity: 0.2;
-  text-shadow: 3px 0px #fff, -3px 0px #fff, 0px 3px #fff, 0px -3px #fff, 3px 3px #fff, -3px -3px #fff, 3px -3px #fff, -3px 3px #fff;
+  text-shadow: 3px 0px #fff, -3px 0px #fff, 0px 3px #fff, 0px -3px #fff,
+    3px 3px #fff, -3px -3px #fff, 3px -3px #fff, -3px 3px #fff;
 }
 #game .shine {
   position: absolute;
@@ -162,11 +171,13 @@ body {
 }
 @keyframes opacity {
   0% {
-      opacity: 1;
-  } 50% {
-      opacity: 0;
-  } 100% {
-      opacity: 1;
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
@@ -178,7 +189,8 @@ body {
   text-align: center;
   gap: 1rem;
 }
-.side-bar .ui-btn, .side-bar button {
+.side-bar .ui-btn,
+.side-bar button {
   width: 100% !important;
 }
 
@@ -218,10 +230,10 @@ body {
 }
 
 #game button:hover {
-  background: rgb(22, 247, 255, 0.7) !important;
+  background: rgb(22, 247, 255, 0.7);
 }
 
-.close-button {    
+.close-button {
   padding: 8px 14px !important;
   font-size: 20px;
 }
@@ -243,11 +255,38 @@ body {
 
 .btn-box i {
   font-size: 1.6rem;
-  text-shadow: 3px 3px 0 var(--moon-line-color), -1px -1px 0 var(--moon-background-color), 1px -1px 0 var(--moon-line-color), -1px 1px 0 var(--moon-background-color), 1px 1px 0 var(--moon-background-color);
+  text-shadow: 3px 3px 0 var(--moon-line-color),
+    -1px -1px 0 var(--moon-background-color), 1px -1px 0 var(--moon-line-color),
+    -1px 1px 0 var(--moon-background-color),
+    1px 1px 0 var(--moon-background-color);
 }
 
-.Power-buttons button {background-color: var(--background-color) !important;color: #fff !important;}
-.Power-buttons i {font-size:30px;}
+.Power-buttons button {
+  background-color: var(--background-color);
+  color: #fff !important;
+}
+
+#electric:hover {
+  background-color: rgba(255, 255, 0, 0.8) !important;
+}
+#electric:hover > i {
+  color: black !important;
+}
+#fire:hover {
+  background-color: rgba(255, 0, 0, 0.8) !important;
+}
+#fire:hover > i {
+  color: black !important;
+}
+#freeze:hover {
+  background-color: rgba(127, 255, 212, 0.8) !important;
+}
+#freeze:hover > i {
+  color: black !important;
+}
+.Power-buttons i {
+  font-size: 30px;
+}
 
 .controls {
   display: flex;
@@ -439,7 +478,9 @@ body {
 /* END - timer / hourglass */
 
 /* Dialog / Modal */
-dialog {display:none;}
+dialog {
+  display: none;
+}
 dialog[open] {
   display: block;
   z-index: 10;
@@ -450,12 +491,12 @@ dialog[open] {
   background: #fff;
   border: none;
   border-radius: 2px;
-  box-shadow: 0px 0px 4px 2px rgba(128, 128, 128, 0.1);    
-  padding:0;
-  margin:0;
+  box-shadow: 0px 0px 4px 2px rgba(128, 128, 128, 0.1);
+  padding: 0;
+  margin: 0;
 }
 dialog::backdrop {
-  background-color:#f4f4f4;
+  background-color: #f4f4f4;
 }
 dialog .modal {
   z-index: 99999;
@@ -469,19 +510,32 @@ dialog .modal {
   box-sizing: border-box;
   min-width: 35vw;
   gap: 10px;
-  -webkit-box-shadow: 0px 10px 13px 5px var(--plane-line-color) 5px 5px 15px 5px rgba(0,0,0,0);
-  box-shadow: 0px 10px 27px 2px var(--plane-line-color), 5px 5px 15px 5px rgba(0,0,0,0);
-  
+  -webkit-box-shadow: 0px 10px 13px 5px var(--plane-line-color) 5px 5px 15px 5px
+    rgba(0, 0, 0, 0);
+  box-shadow: 0px 10px 27px 2px var(--plane-line-color),
+    5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
 #modalGameOver {
-  background: radial-gradient(circle, var(--main-gradient-start) 0%, var(--main-gradient-end) 100%); 
+  background: radial-gradient(
+    circle,
+    var(--main-gradient-start) 0%,
+    var(--main-gradient-end) 100%
+  );
 }
 /* END - Dialog / Modal */
 
 /* Responsive */
 @media screen and (max-width: 768px) {
-  .main-game {flex-direction: column;}
-  #game #app canvas {max-height: 90vh;}
-  .turret-buttons, .Power-buttons {display:flex; flex-direction: row;gap: 10px;}
-
+  .main-game {
+    flex-direction: column;
+  }
+  #game #app canvas {
+    max-height: 90vh;
+  }
+  .turret-buttons,
+  .Power-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
 }

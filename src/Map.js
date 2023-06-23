@@ -249,7 +249,7 @@ export default class MapScene extends Phaser.Scene {
   onTileClicked(pointer) {
     const tile = this.map.worldToTileXY(pointer.worldX, pointer.worldY);
     const tileId = this.map.getTileAt(tile.x, tile.y, true).index;
-    console.log(tileId);
+    // console.log(tileId);
     if (tileId != 7 || this.resources < 50) return; // prevent tile resource issues
     if (!this.turretType) return;
 
@@ -290,6 +290,8 @@ export default class MapScene extends Phaser.Scene {
   }
 
   gameOver() {
+    this.physics.resume();
+    this.scene.resume();
     const modalGameOver = document.getElementById("modalGameOver");
     modalGameOver.setAttribute("open", "");
   }
@@ -347,6 +349,8 @@ export default class MapScene extends Phaser.Scene {
   }
 
   victory() {
+    this.physics.resume();
+    this.scene.resume();
     const modalGameOver = document.getElementById("modalGameOver");
     modalGameOver.setAttribute("open", "");
   }

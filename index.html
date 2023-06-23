@@ -3,25 +3,48 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Neon Defence: A fast-paced, strategic tower defense game. Build and upgrade turrets to defend against relentless waves of enemies in a vibrant neon world.">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta
+      name="description"
+      content="Neon Defence: A fast-paced, strategic tower defense game. Build and upgrade turrets to defend against relentless waves of enemies in a vibrant neon world."
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/assets/favicon/site.webmanifest">
-    <link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#350c56">
-    <link rel="shortcut icon" href="/assets/favicon/favicon.ico">
-    <meta name="msapplication-TileColor" content="#350c56">
-    <meta name="msapplication-config" content="/assets/favicon/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/assets/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/assets/favicon/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="/assets/favicon/safari-pinned-tab.svg"
+      color="#350c56"
+    />
+    <link rel="shortcut icon" href="/assets/favicon/favicon.ico" />
+    <meta name="msapplication-TileColor" content="#350c56" />
+    <meta
+      name="msapplication-config"
+      content="/assets/favicon/browserconfig.xml"
+    />
+    <meta name="theme-color" content="#ffffff" />
 
     <title>Neon Defence - Game</title>
     <link rel="stylesheet" href="./assets/CSS/game.css" />
   </head>
 
   <body id="game">
-
     <main>
       <div id="stars"></div>
 
@@ -35,17 +58,23 @@
               <span>$100</span>
             </button>
             <button id="laser-turret" class="ui-btn" data-type="laser">
-              <img src="./assets/images/LaserTurretHUD.png" alt="laser turret" />
-              <span>$100</span>
+              <img
+                src="./assets/images/LaserTurretHUD.png"
+                alt="laser turret"
+              />
+              <span>$400</span>
             </button>
             <button id="shotgun-turret" class="ui-btn" data-type="shotgun">
-              <img src="./assets/images/ShotGunTurretHUD.png" alt="shotgun turret"/>
-            <span>$100</span>
+              <img
+                src="./assets/images/ShotGunTurretHUD.png"
+                alt="shotgun turret"
+              />
+              <span>$300</span>
             </button>
 
             <button id="human-turret" class="ui-btn" data-type="human">
               <img src="./assets/images/turret.png" alt="plasma turret" />
-              <span>$100</span>
+              <span>$500</span>
             </button>
           </div>
 
@@ -61,38 +90,67 @@
             <button id="fire">
               <i style="color: red" class="fa-solid fa-fire"></i>
             </button>
-
-            
           </div>
         </section>
       </div>
 
       <div class="btn-box">
         <div class="controls">
-          <button id="start" class="ui-btn">Start <i class="fa-solid fa-play"></i></button>
-          <button id="pause" class="ui-btn">Pause <i class="fa-sharp fa-solid fa-pause"></i></button>
+          <button id="start" class="ui-btn">
+            Start <i class="fa-solid fa-play"></i>
+          </button>
+          <button id="pause" class="ui-btn">
+            Pause <i class="fa-sharp fa-solid fa-pause"></i>
+          </button>
           <!-- Pause Modal -->
           <dialog id="modalPause">
             <div class="modal">
-              <button class="btn close-button" data-close-modal="">&times;</button>
+              <button class="btn close-button" data-close-modal="">
+                &times;
+              </button>
               <h3>How to Play:</h3>
               <h5>DevGames Hackathon - June 2023</h5>
             </div>
           </dialog>
-          <button id="speed-up" class="ui-btn">x2 Speed <i class="fa-sharp fa-solid fa-forward-fast"></i></button>
-          <button id="settings" data-type="laser" class="ui-btn">Settings <i class="fa-solid fa-gear"></i></button>
+          <button id="speed-up" class="ui-btn">
+            x2 Speed <i class="fa-sharp fa-solid fa-forward-fast"></i>
+          </button>
+          <button id="settings" data-type="laser" class="ui-btn">
+            Settings <i class="fa-solid fa-gear"></i>
+          </button>
           <!-- Settings Modal -->
           <dialog id="modalSettings">
             <div class="modal">
-              <button class="btn close-button" data-close-modal="">&times;</button>
+              <button class="btn close-button" data-close-modal="">
+                &times;
+              </button>
               <h3>Settings:</h3>
               <button id="mute-sound" class="ui-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M499.1 6.3c8.1 6 12.9 15.6 12.9 25.7v72V368c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6V147L192 223.8V432c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6V200 128c0-14.1 9.3-26.6 22.8-30.7l320-96c9.7-2.9 20.2-1.1 28.3 5z"/></svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="1em"
+                  viewBox="0 0 512 512"
+                >
+                  <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                  <path
+                    d="M499.1 6.3c8.1 6 12.9 15.6 12.9 25.7v72V368c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6V147L192 223.8V432c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6V200 128c0-14.1 9.3-26.6 22.8-30.7l320-96c9.7-2.9 20.2-1.1 28.3 5z"
+                  />
+                </svg>
               </button>
-              
+
               <button id="music" class="ui-btn">
-                <svg class="play" xmlns="http://www.w3.org/2000/svg" width="21.25" height="17.5" viewBox="0 0 21.25 17.5">
-                  <path d="M1.25-11.25v7.5h5l5.625,5H13.75v-17.5H11.875l-5.625,5Zm16,6.75a3.745,3.745,0,0,0,1.5-3,3.745,3.745,0,0,0-1.5-3L16.125-9a1.87,1.87,0,0,1,.75,1.5,1.87,1.87,0,0,1-.75,1.5Zm2.25,3a7.491,7.491,0,0,0,3-6,7.491,7.491,0,0,0-3-6L18.375-12a5.615,5.615,0,0,1,2.25,4.5A5.615,5.615,0,0,1,18.375-3L19.5-1.5Z" transform="translate(-1.25 16.25)" fill="var(--labs-sys-color-volume)"></path>
+                <svg
+                  class="play"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="21.25"
+                  height="17.5"
+                  viewBox="0 0 21.25 17.5"
+                >
+                  <path
+                    d="M1.25-11.25v7.5h5l5.625,5H13.75v-17.5H11.875l-5.625,5Zm16,6.75a3.745,3.745,0,0,0,1.5-3,3.745,3.745,0,0,0-1.5-3L16.125-9a1.87,1.87,0,0,1,.75,1.5,1.87,1.87,0,0,1-.75,1.5Zm2.25,3a7.491,7.491,0,0,0,3-6,7.491,7.491,0,0,0-3-6L18.375-12a5.615,5.615,0,0,1,2.25,4.5A5.615,5.615,0,0,1,18.375-3L19.5-1.5Z"
+                    transform="translate(-1.25 16.25)"
+                    fill="var(--labs-sys-color-volume)"
+                  ></path>
                 </svg>
               </button>
             </div>
@@ -102,7 +160,7 @@
         <div id="heart-container"></div>
       </div>
     </main>
-      
+
     <p id="sell-turret"></p>
 
     <!--  <div id="timer" class="circle">
@@ -113,7 +171,6 @@
               <div class="innerb"></div>
             </div>
     </div> -->
-
 
     <!-- Game Over Modal -->
     <dialog id="modalGameOver">
@@ -129,8 +186,11 @@
         <p id="home-button"><a href="index.html">Insert Coin</a></p>
       </div>
     </dialog>
-    
-    <script src="https://kit.fontawesome.com/27545168c5.js" crossorigin="anonymous"></script>
+
+    <script
+      src="https://kit.fontawesome.com/27545168c5.js"
+      crossorigin="anonymous"
+    ></script>
     <script type="module" src="src/main.js"></script>
   </body>
 </html>

@@ -55,7 +55,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
 export const checkAuthState = async () => {
   onAuthStateChanged(firebaseAuth, (user) => {
     if (user) {
-      console.log(user);
+      // console.log(user);
       //   getUserData(user.uid);
     } else {
       console.log("user is not logged in");
