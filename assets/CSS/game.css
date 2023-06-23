@@ -33,6 +33,7 @@ body {
   margin: 0;
   position: relative;
 }
+#game main {overflow:hidden;}
 #game #app canvas {
   max-height: 80vh;
   max-width: 100%;
@@ -184,8 +185,8 @@ body {
     5px 5px 15px 5px rgba(255, 139, 253, 0);
   border: 3px double var(--moon-background-color);
   border-radius: 3px;
-  color: var(--background-color) !important;
-  background: #fff !important;
+  color: var(--background-color);
+  background: #fff;
   font-weight: 600;
   font-size: 18px;
   font-family: courier, monospace;
@@ -216,7 +217,7 @@ body {
 }
 
 .Power-buttons button {background-color: var(--background-color) !important;}
-.Power-buttons i {font-size:45px;}
+.Power-buttons i {font-size:30px;}
 
 .controls {
   display: flex;
