@@ -22,7 +22,7 @@ body {
   --plane-line-color: #16F7FF;
   --plane-shadow-color: #fc784f /*#ff91cf*/;
 }
-#intro, #game {
+#intro {
   background: var(--background-color);
   padding: 0;
   margin: 0;
