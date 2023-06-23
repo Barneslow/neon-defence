@@ -89,7 +89,7 @@ export default class MapScene extends Phaser.Scene {
       padding: 10,
     });
 
-    this.scoreText = this.add.text(920, 0, `Score: ${this.score}`, {
+    this.scoreText = this.add.text(900, 0, `Score: ${this.score}`, {
       fontSize: "26px",
       backgroundColor: "#180727",
       fontFamily: "Work Sans",
@@ -225,9 +225,11 @@ export default class MapScene extends Phaser.Scene {
   }
 
   gameOver() {
-    this.scene.start("GameOverScene");
+    const modalGameOver = document.getElementById("modalGameOver");
+    modalGameOver.setAttribute("open", "");
   }
 
+  
   spawnEnemiesForWave(enemyType) {
     let enemy;
     if (enemyType === "drone") {
