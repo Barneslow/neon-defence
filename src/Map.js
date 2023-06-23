@@ -191,7 +191,6 @@ export default class MapScene extends Phaser.Scene {
   }
 
   increaseGameSpeed() {
-    console.log("speed");
     this.speedMultiplyer = 2;
   }
 
@@ -231,11 +230,18 @@ export default class MapScene extends Phaser.Scene {
   }
 
   startWave() {
+    const previousTimers = this.time._active;
+    // remove previous timer
+    if (previousTimers.length > 0) {
+      previousTimers.forEach((timer) => this.time.removeEvent(timer));
+    }
+
+    console.log(previousTimers);
     if (!this.isWaveInProgress) {
       this.isWaveInProgress = true;
       this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
 
-      const time = this.waveArray.length * 2000 + 20000;
+      const time = (this.waveArray.length - 1) * 2000 + 22000;
 
       this.timeUntilNextWave = time;
 
