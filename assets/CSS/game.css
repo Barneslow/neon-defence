@@ -74,7 +74,7 @@ body {
   }
 }
 
-#intro h1 {
+#game h1 {
   position: relative;
   display: inline-block;
   font-family: 'Work Sans', sans-serif;
@@ -84,16 +84,16 @@ body {
   margin: 0;
   line-height: 1;
 }
-#intro h1 span {
+#game h1 span {
   color: transparent;
   background: linear-gradient(#000000 0%,#113e87 22%,#10cccc 50%,#000000 51%,#e21ddc 78%,#ff91cf 78%,#ffffff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-#intro h1 span:before {
+#game h1 span:before {
   content: attr(text);
 }
-#intro h1 span:after {
+#game h1 span:after {
   content: attr(text);
   position: absolute;
   top: 0;
@@ -101,7 +101,7 @@ body {
   opacity: 0.2;
   text-shadow: 3px 0px #fff, -3px 0px #fff, 0px 3px #fff, 0px -3px #fff, 3px 3px #fff, -3px -3px #fff, 3px -3px #fff, -3px 3px #fff;
 }
-#intro .shine {
+#game .shine {
   position: absolute;
   width: 5px;
   height: 2px;
@@ -110,27 +110,27 @@ body {
   box-shadow: 0 0 7px 2px #fff;
   z-index: 3;
 }
-#intro .shine.one {
+#game .shine.one {
   top: 15%;
   left: 4%;
   animation: shine1 1000ms alternate infinite;
 }
-#intro .shine.two {
+#game .shine.two {
   top: 55%;
   left: 20%;
   animation: shine1 1500ms alternate infinite;
 }
-#intro .shine.three {
+#game .shine.three {
   top: 15%;
   left: 40%;
   animation: shine1 1700ms alternate infinite;
 }
-#intro .shine.four {
+#game .shine.four {
   top: 15%;
   left: 80%;
   animation: shine1 900ms alternate infinite;
 }
-#intro .shine.five {
+#game .shine.five {
   top: 55%;
   left: 95%;
   animation: shine1 1300ms alternate infinite;
@@ -147,6 +147,26 @@ body {
   100% {
     transform: rotate(720deg) scale(0);
     opacity: 0;
+  }
+}
+#home-button a {
+  font-family: courier, monospace;
+  font-size: 1.8rem;
+  color: #fff;
+  font-weight: 300;
+  margin-top: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-animation: opacity 2s infinite;
+  animation: opacity 2s infinite;
+}
+@keyframes opacity {
+  0% {
+      opacity: 1;
+  } 50% {
+      opacity: 0;
+  } 100% {
+      opacity: 1;
   }
 }
 
@@ -216,7 +236,7 @@ body {
   text-shadow: 3px 3px 0 var(--moon-line-color), -1px -1px 0 var(--moon-background-color), 1px -1px 0 var(--moon-line-color), -1px 1px 0 var(--moon-background-color), 1px 1px 0 var(--moon-background-color);
 }
 
-.Power-buttons button {background-color: var(--background-color) !important;}
+.Power-buttons button {background-color: var(--background-color) !important;color: #fff !important;}
 .Power-buttons i {font-size:30px;}
 
 .controls {
