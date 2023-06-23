@@ -124,8 +124,7 @@ const toggleDropdown = () => {
   dropdownContent.classList.toggle("show");
 };
 
-// dropdownButton.addEventListener("click", toggleDropdown);
-
+// re
 // Close dropdown when clicking outside
 window.addEventListener("click", (event) => {
   if (!event.target.matches(".dropbtn")) {
