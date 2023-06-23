@@ -41,6 +41,7 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
   preload() {}
 
   startTimer() {
+    console.log(this.turretSprite.name);
     this.timer = this.scene.time.addEvent({
       delay: this.timerCountInMilli / this.MapScene.speedMultiplyer,
       callback: this.endTimer,

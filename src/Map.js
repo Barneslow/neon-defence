@@ -13,7 +13,7 @@ import DroneEnemy from "./classes/enemies/DroneClass";
 export default class MapScene extends Phaser.Scene {
   constructor() {
     super("mapScene");
-    this.resources = 1000;
+    this.resources = 2000;
     this.score = 0;
     this.isWaveInProgress = false;
     this.startedGame = false;
@@ -218,7 +218,6 @@ export default class MapScene extends Phaser.Scene {
 
     new PowerTurret(this, centerX, centerY, turretsClassTypes[type]);
 
-    element.textContent = `Shoot`;
     this[type] = true;
   }
 
@@ -464,7 +463,7 @@ function loadAllSprites(scene) {
   scene.load.image("fire", "assets/images/turrets/FireTowerActive.png");
   scene.load.image(
     "fire-inactive",
-    "assets/images/turrets/ElectricTowerInactive.png"
+    "assets/images/turrets/FireTowerInactive.png"
   );
 
   // Enemy Sprites
