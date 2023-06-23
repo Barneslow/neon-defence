@@ -24,7 +24,7 @@ export const enemyClassTypes = {
   spider: {
     name: "spider",
     sprite: "spider",
-    health: 50,
+    health: 1,
     sound: {
       name: "dead",
       audio: "dead",

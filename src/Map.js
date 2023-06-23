@@ -9,6 +9,14 @@ import { WAVE_DATA } from "./config/wave-config";
 import { turretsClassTypes } from "./config/turrets-config";
 import PowerTurret from "./classes/turrets/PowerTurret";
 import DroneEnemy from "./classes/enemies/DroneClass";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  updateDoc,
+} from "@firebase/firestore";
+import { firebaseAuth, firebaseDB } from "./config/firebase";
 
 export default class MapScene extends Phaser.Scene {
   constructor() {
@@ -292,12 +300,14 @@ export default class MapScene extends Phaser.Scene {
   }
 
   gameOver() {
-    this.physics.resume();
-    this.scene.resume();
+    this.physics.pause();
+    this.scene.pause();
     const modalGameOver = document.getElementById("modalGameOver");
     modalGameOver.setAttribute("open", "");
 
     const score = document.getElementById("score");
+
+    saveUserHighScore(this.score);
 
     score.textContent = `Your Score ${this.score.toString()}`;
   }
@@ -488,4 +498,30 @@ function loadAllAudio(scene) {
   scene.load.audio("bulletsound", "assets/sounds/BulletSound.mp3");
   scene.load.audio("dead", "assets/sounds/dead-enemy.mp3");
   scene.load.audio("dead-boss", "assets/sounds/dead-boss.mp3");
+}
+
+async function saveUserHighScore(score) {
+  if (!firebaseAuth.currentUser) return;
+  try {
+    const docRef = doc(firebaseDB, "users", firebaseAuth.currentUser.uid);
+    const userSnap = await getDoc(docRef);
+
+    if (userSnap.exists()) {
+      const user = userSnap.data();
+
+      console.log(user.highScore < score);
+      if (user.highScore < score) {
+        await updateDoc(docRef, {
+          highScore: score,
+        });
+      }
+    } else {
+      console.log("No such document!");
+    }
+
+    // Add event listeners for like buttons
+  } catch (error) {
+    console.error("Error retrieving stories:", error);
+    alert("Failed to retrieve stories. Please try again.");
+  }
 }
