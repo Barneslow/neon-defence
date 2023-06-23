@@ -1,9 +1,9 @@
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
+  from = "/game"
+  to = "/game.html"
   status = 200
 
 [[redirects]]
-  from = "/game.html"
-  to = "/game.html"
+  from = "/*"
+  to = "/index.html"
   status = 200
