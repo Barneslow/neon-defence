@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import Turret from "./classes/turrets/Turret";
 import BaseEnemy from "./classes/enemies/BaseEnemy";
 import Bullet from "./classes/bullet/Bullet";
-import { placeTurretOnMap } from "./helpers/helpers";
+import { formatDuration, placeTurretOnMap } from "./helpers/helpers";
 import { enemyClassTypes } from "./config/enemy-config";
 import BaseTurret from "./classes/turrets/BaseTurret";
 import { WAVE_DATA } from "./config/wave-config";
@@ -26,6 +26,7 @@ export default class MapScene extends Phaser.Scene {
     this.freeze = false;
     this.speedMultiplyer = 1;
     this.difficulty = 1;
+    this.timeUntilNextWave = 0;
   }
 
   preload() {
@@ -96,6 +97,19 @@ export default class MapScene extends Phaser.Scene {
       // @ts-ignore
       padding: 10,
     });
+
+    this.waveTimeRemainingText = this.add.text(
+      500,
+      50,
+      `Time Until Next Wave: ${this.timeUntilNextWave}`,
+      {
+        fontSize: "24px",
+        backgroundColor: "black",
+        fontFamily: "Work Sans",
+        // @ts-ignore
+        padding: 10,
+      }
+    );
 
     layer1.setInteractive();
     // layer2.setInteractive(false);
@@ -186,6 +200,13 @@ export default class MapScene extends Phaser.Scene {
     this.scoreText.setText(`Score: ${this.score}`);
   }
 
+  updateWaveTimeRemaining() {
+    console.log(this.timeUntilNextWave);
+    this.waveTimeRemainingText.setText(
+      `Time Until Next Wave: ${formatDuration(this.timeUntilNextWave)}`
+    );
+  }
+
   onTileClicked(pointer) {
     const tile = this.map.worldToTileXY(pointer.worldX, pointer.worldY);
     const tileId = this.map.getTileAt(tile.x, tile.y, true).index;
@@ -213,6 +234,19 @@ export default class MapScene extends Phaser.Scene {
     if (!this.isWaveInProgress) {
       this.isWaveInProgress = true;
       this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
+
+      const time = this.waveArray.length * 2000 + 20000;
+
+      this.timeUntilNextWave = time;
+
+      this.time.addEvent({
+        delay: 1000,
+        repeat: time / 1000,
+        callback: () => {
+          this.timeUntilNextWave = this.timeUntilNextWave - 1000;
+        },
+        callbackScope: this,
+      });
     }
   }
 
@@ -247,16 +281,20 @@ export default class MapScene extends Phaser.Scene {
   }
 
   update(time, delta) {
+    this.updateWaveTimeRemaining();
     if (!this.isWaveInProgress) return;
 
     if (time > this.nextEnemy && this.waveArray.length > 0) {
       // CHANGE DURATION OF ENEMY RESPAWN
-
       this.spawnEnemiesForWave(this.waveArray[0]);
       this.nextEnemy = time + 2000 / this.speedMultiplyer;
     }
     if (time > this.nextEnemy && this.waveArray.length === 0) {
       this.endWave();
+    }
+    if (this.timeUntilNextWave <= 0) {
+      console.log("next wave");
+      this.startWave();
     }
   }
 }

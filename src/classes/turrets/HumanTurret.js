@@ -64,26 +64,7 @@ export default class HumanTurret extends Phaser.GameObjects.Sprite {
     this.circle.setStrokeStyle(4, 0xffffff);
 
     this.depth = 2;
-
-    // zone.body.setCircle(100);
   }
-
-  // preUpdate(time, delta) {
-  //   super.preUpdate(time, delta);
-
-  //   // Clear the previous graphics
-
-  //   // Draw the circle with the specified properties
-  //   const circleRadius = this.range / 2;
-  //   this.circleGraphics.fillStyle(this.circleFillColor, this.circleOpacity);
-  //   this.circleGraphics.fillCircle(this.x, this.y, circleRadius);
-
-  //   // Add the graphics object to the scene
-  //   this.scene.add.existing(this.circleGraphics);
-
-  //   // Set the circle to follow the sprite's position
-  //   this.circleGraphics.setPosition(this.x, this.y);
-  // }
 
   setPlayerInRange(pointer) {
     const distanceToPointer = Phaser.Math.Distance.Between(

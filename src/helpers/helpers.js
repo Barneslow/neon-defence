@@ -75,3 +75,14 @@ export function getEnemyNearTurret(x, y, distance, enemies) {
 export function timerDelay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+export function formatDuration(duration) {
+  const minutes = Math.floor(duration / 60000); // Get the whole minutes
+  const seconds = Math.floor((duration % 60000) / 1000); // Get the remaining seconds
+
+  // Format the minutes and seconds into a string
+  const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes.toString();
+  const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds.toString();
+
+  return `${formattedMinutes}:${formattedSeconds}`;
+}
