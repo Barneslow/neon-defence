@@ -1,20 +1,12 @@
-@import "https://fonts.googleapis.com/css?family=Damion|Work+Sans:900";
+@import "https://fonts.googleapis.com/css?family=Work+Sans:900";
 
 *,
 *:before,
 *:after {
   box-sizing: border-box;
   padding: 0;
-  margin: 0.5rem;
 }
 
-body {
-  display: flex;
-  justify-content: center;
-  cursor: url("../images/cursor.png") 0 0, pointer;
-}
-
-/***** INTRO Styling *****/
 :root {
   --background-color: #180727;
   --main-gradient-start: #44155d;
@@ -30,6 +22,25 @@ body {
   --plane-line-color: #16f7ff;
   --plane-shadow-color: #fc784f /*#ff91cf*/;
 }
+
+::selection {
+  color: var(--moon-line-color);
+  background: var(--background-color);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  cursor: url("../images/cursor.png") 0 0, pointer;
+  font-family: 'Work Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #44155d;
+}
+
+/***** INTRO Styling *****/
 #intro {
   background: var(--background-color);
   padding: 0;
@@ -568,7 +579,6 @@ small a {
   color: #fff;
 }
 .menu-content button {
-  text-align: middle;
   padding: 12px 40px;
   background-color: transparent;
   -webkit-box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000,
@@ -577,8 +587,8 @@ small a {
     5px 5px 15px 5px rgba(255, 139, 253, 0);
   border: 3px double var(--moon-background-color);
   border-radius: 3px;
-  color: var(--background-color);
-  background: #fff;
+  color: var(--moon-background-color);
+  background: var(--background-color);
   font-weight: 600;
   font-size: 18px;
   font-family: courier, monospace;
@@ -634,6 +644,8 @@ dialog[open] {
   box-shadow: 0px 0px 4px 2px rgba(128, 128, 128, 0.1);
   padding: 0;
   margin: 0;
+  max-height: 80vh;
+  overflow: auto;
 }
 dialog::backdrop {
   background-color: #f4f4f4;
@@ -656,6 +668,12 @@ dialog .modal {
     5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
 /* END - Dialog / Modal */
+
+/* Custom Scroll */
+::-webkit-scrollbar {width: 8px;}
+::-webkit-scrollbar-track {background: var(--background-color);}
+::-webkit-scrollbar-thumb {background: var(--moon-background-color);border-radius: 100px;}
+::-webkit-scrollbar-thumb:hover {background: var(--moon-line-color);}
 
 /* Sign-in / Guest */
 .signin-modal {
@@ -717,15 +735,17 @@ dialog .modal {
 /* Leaderboard */
 #leaderboard {
   overflow: auto;
+  border: 3px solid var(--moon-background-color);
 }
 #leaderboard .leaderboard-score {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border: 3px solid var(--moon-background-color);
+  border-bottom: 3px solid var(--moon-background-color);
   padding: 0 10px;
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
 }
-#leaderboard .leaderboard-score:first-child {
+#leaderboard .leaderboard-score:last-child {
   border-bottom: 0;
 }
 /* END - Leaderboard */
