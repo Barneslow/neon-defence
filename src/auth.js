@@ -1,9 +1,7 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import {
   GoogleAuthProvider,
-  createUserWithEmailAndPassword,
   signInWithPopup,
-  signInWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
 import { firebaseAuth, firebaseDB } from "./config/firebase";
@@ -55,8 +53,17 @@ export const createUserDocumentFromAuth = async (userAuth) => {
 export const checkAuthState = async () => {
   onAuthStateChanged(firebaseAuth, (user) => {
     if (user) {
-      // console.log(user);
-      //   getUserData(user.uid);
+      const menu = document.querySelector(".menu-content");
+      const signInBtn = document.getElementById("signin-btn");
+
+      signInBtn.style.display = "none";
+      const userTitle = document.createElement("h2");
+      userTitle.textContent = `${user.displayName}`;
+      userTitle.style.color = "white";
+
+      const existingChild = menu.children[1];
+
+      menu.insertBefore(userTitle, existingChild);
     } else {
       console.log("user is not logged in");
     }

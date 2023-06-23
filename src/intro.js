@@ -20,17 +20,17 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Add event listener to the sign-in form
-  const loginForm = document.getElementById("login-form");
-  loginForm.addEventListener("submit", function (event) {
-    event.preventDefault();
+  // const loginForm = document.getElementById("login-form");
+  // loginForm.addEventListener("submit", function (event) {
+  //   event.preventDefault();
 
-    // Get the input values from the form
-    const email = document.getElementById("email-input").value;
-    const password = document.getElementById("password-input").value;
+  //   // Get the input values from the form
+  //   const email = document.getElementById("email-input").value;
+  //   const password = document.getElementById("password-input").value;
 
-    // Call the signIn function with the email and password
-    signIn(email, password);
-  });
+  //   // Call the signIn function with the email and password
+  //   signIn(email, password);
+  // });
 
   // Define the signIn function
   function signIn(email, password) {
@@ -202,12 +202,12 @@ const signInModal = document.getElementById("modalSignin");
 attachModalEvents(signInButton, signInModal);
 
 // Warning to rorate screen for Mobile Portrait mode
-window.addEventListener("orientationchange", function() {
+window.addEventListener("orientationchange", function () {
   if (window.orientation === 0 || window.orientation === 180) {
-      // Portrait mode
-      document.getElementById("warning-message").style.display = "block";
+    // Portrait mode
+    document.getElementById("warning-message").style.display = "block";
   } else {
-      // Landscape mode
-      document.getElementById("warning-message").style.display = "none";
+    // Landscape mode
+    document.getElementById("warning-message").style.display = "none";
   }
 });

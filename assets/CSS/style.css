@@ -46,7 +46,11 @@ body {
     var(--main-gradient-end) 100%
   );
 }
-
+#google-signin-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
 #modalHowToPlay {
   font-size: 1.2rem;
 }

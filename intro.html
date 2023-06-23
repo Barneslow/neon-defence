@@ -80,8 +80,8 @@
                 &times;
               </button>
               <div class="modal-content">
-                <h2>Sign In</h2>
-                <form id="login-form" onsubmit="login(event)">
+                <!-- <h2>Sign In</h2> -->
+                <!-- <form id="login-form" onsubmit="login(event)">
                   <input
                     type="text"
                     id="name-input"
@@ -101,8 +101,15 @@
                     required
                   />
                   <button type="submit">Sign In</button>
-                </form>
-                <button id="google-signin-btn">Sign In with Google</button>
+                </form> -->
+                <button id="google-signin-btn">
+                  Sign In with Google
+                  <img
+                    src="/assets/images/google.png"
+                    alt="google icon"
+                    style="height: 30px"
+                  />
+                </button>
                 <h3>OR</h3>
                 <button id="guest-btn" onclick="playAsGuest()">
                   Play as Guest
@@ -360,7 +367,7 @@
         experience.
       </p>
     </div>
-
+    <script type="auth" src="src/intro.js"></script>
     <script type="module" src="src/intro.js"></script>
   </body>
 </html>
