@@ -62,10 +62,15 @@ You start with three lives. If an enemy reaches the Sun, you lose a life. Losing
 ##Controls 
 The game can be played using the following controls:
 
-[Add control scheme here] ##Installation [Add installation instructions here]
+To place a turret, click on the type of turrets you'd like to place and then click on the tile with the little sun to place it.
+Power Turrets are automatically placed when you click on their buttons and are not moveable.
+You can sell a turret by clicking on it , but it'll give you half the resources it cost back.
+
+##Installation [Add installation instructions here]
 
 ##Credits 
-[Provide credits to any external assets, libraries, or resources used in the game]
+All resources were created for the games.
+Made by Darrach Barneveld, Devan Cadman, and Tanguy L'Alexandre.
 
 ##License 
 [Specify the license under which the game is distributed, if applicable]
