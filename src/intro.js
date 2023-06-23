@@ -117,14 +117,14 @@ music.addEventListener("keydown", (e) => {
 });
 
 // Dropdown
-const dropdownButton = document.querySelector(".dropbtn");
+// const dropdownButton = document.querySelector(".dropbtn");
 const dropdownContent = document.querySelector(".dropdown-content");
 
 const toggleDropdown = () => {
   dropdownContent.classList.toggle("show");
 };
 
-dropdownButton.addEventListener("click", toggleDropdown);
+// dropdownButton.addEventListener("click", toggleDropdown);
 
 // Close dropdown when clicking outside
 window.addEventListener("click", (event) => {
