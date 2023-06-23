@@ -229,6 +229,7 @@ body {
   max-width: 90%;
   margin-left: 0;
   max-height: 20vh;
+}
 
 .btn-box button:disabled {
   cursor: not-allowed;
