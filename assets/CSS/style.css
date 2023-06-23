@@ -1,7 +1,11 @@
-@import 'https://fonts.googleapis.com/css?family=Damion|Work+Sans:900';
+@import "https://fonts.googleapis.com/css?family=Damion|Work+Sans:900";
 
-*, *:before, *:after {
-  box-sizing:border-box;
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0.5rem;
 }
 
 body {
@@ -13,17 +17,17 @@ body {
 /***** INTRO Styling *****/
 :root {
   --background-color: #180727;
-  --main-gradient-start: #44155D;
-  --main-gradient-end: #150D40;
+  --main-gradient-start: #44155d;
+  --main-gradient-end: #150d40;
 
-  --moon-gradient-start: #9070FE;
+  --moon-gradient-start: #9070fe;
   --moon-gradient-end: #fc784f /*#44155D*/;
-  --moon-line-color: #16F7FF;
-  --moon-background-color: #F016FF;
-  
-  --plane-background-start: #150D40;
-  --plane-background-end: #44155D;
-  --plane-line-color: #16F7FF;
+  --moon-line-color: #16f7ff;
+  --moon-background-color: #f016ff;
+
+  --plane-background-start: #150d40;
+  --plane-background-end: #44155d;
+  --plane-line-color: #16f7ff;
   --plane-shadow-color: #fc784f /*#ff91cf*/;
 }
 #intro {
@@ -36,7 +40,15 @@ body {
   width: 100%;
   height: 100%;
   position: fixed;
-  background: radial-gradient(circle, var(--main-gradient-start) 0%, var(--main-gradient-end) 100%);
+  background: radial-gradient(
+    circle,
+    var(--main-gradient-start) 0%,
+    var(--main-gradient-end) 100%
+  );
+}
+
+#modalHowToPlay {
+  font-size: 1.2rem;
 }
 
 /* Header */
@@ -53,7 +65,7 @@ body {
 #intro h1 {
   position: relative;
   display: inline-block;
-  font-family: 'Work Sans', sans-serif;
+  font-family: "Work Sans", sans-serif;
   text-transform: uppercase;
   font-size: 5em;
   z-index: 1;
@@ -62,7 +74,15 @@ body {
 }
 #intro h1 span {
   color: transparent;
-  background: linear-gradient(#000000 0%,#113e87 22%,#10cccc 50%,#000000 51%,#e21ddc 78%,#ff91cf 78%,#ffffff 100%);
+  background: linear-gradient(
+    #000000 0%,
+    #113e87 22%,
+    #10cccc 50%,
+    #000000 51%,
+    #e21ddc 78%,
+    #ff91cf 78%,
+    #ffffff 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -75,7 +95,8 @@ body {
   top: 0;
   left: 0;
   opacity: 0.2;
-  text-shadow: 3px 0px #fff, -3px 0px #fff, 0px 3px #fff, 0px -3px #fff, 3px 3px #fff, -3px -3px #fff, 3px -3px #fff, -3px 3px #fff;
+  text-shadow: 3px 0px #fff, -3px 0px #fff, 0px 3px #fff, 0px -3px #fff,
+    3px 3px #fff, -3px -3px #fff, 3px -3px #fff, -3px 3px #fff;
 }
 #intro .shine {
   position: absolute;
@@ -138,11 +159,13 @@ body {
 }
 @keyframes opacity {
   0% {
-      opacity: 1;
-  } 50% {
-      opacity: 0;
-  } 100% {
-      opacity: 1;
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
@@ -169,13 +192,13 @@ body {
 @keyframes stars {
   from {
     transform: translateX(0);
- }
+  }
   60% {
     transform: translateX(3vmax) rotate(1deg);
- }
+  }
   to {
     transform: translateX(0);
- }
+  }
 }
 
 /* Mountains */
@@ -188,7 +211,7 @@ body {
   height: 50%;
 }
 #intro .mountains svg {
-  width:100%;
+  width: 100%;
   bottom: 0;
   position: absolute;
 }
@@ -212,7 +235,11 @@ body {
   top: 0;
   width: 100%;
   height: 40%;
-  background: linear-gradient(0deg, var(--moon-gradient-start) 0%, var(--moon-gradient-end) 100%);
+  background: linear-gradient(
+    0deg,
+    var(--moon-gradient-start) 0%,
+    var(--moon-gradient-end) 100%
+  );
 }
 #intro .moon .line {
   top: 0;
@@ -221,16 +248,36 @@ body {
   position: absolute;
   animation: moonLinesSlide 6s ease-in infinite both;
 }
-#intro .moon .line:nth-child(1) {animation-delay: 0.6s;}
-#intro .moon .line:nth-child(2) {animation-delay: 1.2s;}
-#intro .moon .line:nth-child(3) {animation-delay: 1.8s;}
-#intro .moon .line:nth-child(4) {animation-delay: 2.4s;}
-#intro .moon .line:nth-child(5) {animation-delay: 3s;}
-#intro .moon .line:nth-child(6) {animation-delay: 3.6s;}
-#intro .moon .line:nth-child(7) {animation-delay: 4.2s;}
-#intro .moon .line:nth-child(8) {animation-delay: 4.8s;}
-#intro .moon .line:nth-child(9) {animation-delay: 5.4s;}
-#intro .moon .line:nth-child(10) {animation-delay: 6s;}
+#intro .moon .line:nth-child(1) {
+  animation-delay: 0.6s;
+}
+#intro .moon .line:nth-child(2) {
+  animation-delay: 1.2s;
+}
+#intro .moon .line:nth-child(3) {
+  animation-delay: 1.8s;
+}
+#intro .moon .line:nth-child(4) {
+  animation-delay: 2.4s;
+}
+#intro .moon .line:nth-child(5) {
+  animation-delay: 3s;
+}
+#intro .moon .line:nth-child(6) {
+  animation-delay: 3.6s;
+}
+#intro .moon .line:nth-child(7) {
+  animation-delay: 4.2s;
+}
+#intro .moon .line:nth-child(8) {
+  animation-delay: 4.8s;
+}
+#intro .moon .line:nth-child(9) {
+  animation-delay: 5.4s;
+}
+#intro .moon .line:nth-child(10) {
+  animation-delay: 6s;
+}
 
 /* Grid Pattern Plane Area */
 #intro .plane {
@@ -243,7 +290,11 @@ body {
   overflow: hidden;
   border-top: 2px solid var(--plane-line-color);
   box-shadow: 0 0 150px -60px var(--plane-line-color);
-  background: linear-gradient(0deg, var(--plane-background-start) 60%, var(--plane-background-end) 100%);
+  background: linear-gradient(
+    0deg,
+    var(--plane-background-start) 60%,
+    var(--plane-background-end) 100%
+  );
 }
 #intro .plane .vlines {
   width: 100%;
@@ -346,16 +397,36 @@ body {
   animation: linesSlide 3s ease-in infinite both;
   box-shadow: 0 0 5px var(--plane-shadow-color);
 }
-#intro .plane .lines .line:nth-child(1) {animation-delay: 0.3s;}
-#intro .plane .lines .line:nth-child(2) {animation-delay: 0.6s;}
-#intro .plane .lines .line:nth-child(3) {animation-delay: 0.9s;}
-#intro .plane .lines .line:nth-child(4) {animation-delay: 1.2s;}
-#intro .plane .lines .line:nth-child(5) {animation-delay: 1.5s;}
-#intro .plane .lines .line:nth-child(6) {animation-delay: 1.8s;}
-#intro .plane .lines .line:nth-child(7) {animation-delay: 2.1s;}
-#intro .plane .lines .line:nth-child(8) {animation-delay: 2.4s;}
-#intro .plane .lines .line:nth-child(9) {animation-delay: 2.7s;}
-#intro .plane .lines .line:nth-child(10) {animation-delay: 3s;}
+#intro .plane .lines .line:nth-child(1) {
+  animation-delay: 0.3s;
+}
+#intro .plane .lines .line:nth-child(2) {
+  animation-delay: 0.6s;
+}
+#intro .plane .lines .line:nth-child(3) {
+  animation-delay: 0.9s;
+}
+#intro .plane .lines .line:nth-child(4) {
+  animation-delay: 1.2s;
+}
+#intro .plane .lines .line:nth-child(5) {
+  animation-delay: 1.5s;
+}
+#intro .plane .lines .line:nth-child(6) {
+  animation-delay: 1.8s;
+}
+#intro .plane .lines .line:nth-child(7) {
+  animation-delay: 2.1s;
+}
+#intro .plane .lines .line:nth-child(8) {
+  animation-delay: 2.4s;
+}
+#intro .plane .lines .line:nth-child(9) {
+  animation-delay: 2.7s;
+}
+#intro .plane .lines .line:nth-child(10) {
+  animation-delay: 3s;
+}
 @keyframes linesSlide {
   from {
     bottom: 100%;
@@ -396,8 +467,8 @@ body {
 }
 @media (hover) {
   #music:hover {
-    background: rgba(240, 22, 255, .6);
- }
+    background: rgba(240, 22, 255, 0.6);
+  }
 }
 #music.playing .play {
   display: block;
@@ -421,36 +492,37 @@ body {
   width: 50%;
   margin: 0 auto;
   z-index: 99;
-  background: rgba(240, 22, 255, .8);
+  background: rgba(240, 22, 255, 0.8);
 }
 
-small, small a {
+small,
+small a {
   font-family: courier, monospace;
   text-align: center;
-  color:  #fff;
+  color: #fff;
   font-size: 14px;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
-@media (max-width:1024px) {
+@media (max-width: 1024px) {
   #intro h1 {
-    font-size:3.5em;
+    font-size: 3.5em;
   }
   #intro .moon {
-    width:50vw;
-    height:50vw;
-    bottom:55%;
+    width: 50vw;
+    height: 50vw;
+    bottom: 55%;
   }
   #intro .mountains {
-    left:-50%;
-    width:250%;
+    left: -50%;
+    width: 250%;
   }
-  #intro .copywrite {    
+  #intro .copywrite {
     bottom: 4.5rem;
     width: 70%;
     margin-left: auto;
-    margin-right:0;
+    margin-right: 0;
   }
 }
 /***** END - Intro Styling *****/
@@ -468,7 +540,7 @@ small, small a {
   margin: 0 auto;
 }
 .menu-content {
-  background-color: rgba(0,0,0,0.9);
+  background-color: rgba(0, 0, 0, 0.9);
   padding: 2rem 1rem;
   display: flex;
   flex-wrap: wrap;
@@ -477,8 +549,10 @@ small, small a {
   text-align: center;
   flex-direction: column;
   gap: 10px;
-  -webkit-box-shadow: 0px 10px 13px 5px var(--plane-line-color) 5px 5px 15px 5px rgba(0,0,0,0);
-  box-shadow: 0px 10px 27px 2px var(--plane-line-color), 5px 5px 15px 5px rgba(0,0,0,0);
+  -webkit-box-shadow: 0px 10px 13px 5px var(--plane-line-color) 5px 5px 15px 5px
+    rgba(0, 0, 0, 0);
+  box-shadow: 0px 10px 27px 2px var(--plane-line-color),
+    5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
 #intro .menu-content h1 {
   font-size: 3em;
@@ -493,8 +567,10 @@ small, small a {
   text-align: middle;
   padding: 12px 40px;
   background-color: transparent;
-  -webkit-box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 5px 5px 15px 5px rgba(255,139,253,0);
-  box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 5px 5px 15px 5px rgba(255,139,253,0);
+  -webkit-box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000,
+    5px 5px 15px 5px rgba(255, 139, 253, 0);
+  box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000,
+    5px 5px 15px 5px rgba(255, 139, 253, 0);
   border: 3px double var(--moon-background-color);
   border-radius: 3px;
   color: var(--background-color);
@@ -505,7 +581,7 @@ small, small a {
   cursor: pointer;
 }
 
-.close-button {    
+.close-button {
   padding: 8px 14px !important;
   font-size: 20px;
 }
@@ -521,7 +597,7 @@ small, small a {
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  width:100%;
+  width: 100%;
 }
 .dropdown-content a {
   color: black;
@@ -538,7 +614,9 @@ small, small a {
 /***** END - Menu Styling *****/
 
 /* Dialog / Modal */
-dialog {display:none;}
+dialog {
+  display: none;
+}
 dialog[open] {
   display: block;
   z-index: 10;
@@ -549,12 +627,12 @@ dialog[open] {
   background: #fff;
   border: none;
   border-radius: 2px;
-  box-shadow: 0px 0px 4px 2px rgba(128, 128, 128, 0.1);    
-  padding:0;
-  margin:0;
+  box-shadow: 0px 0px 4px 2px rgba(128, 128, 128, 0.1);
+  padding: 0;
+  margin: 0;
 }
 dialog::backdrop {
-  background-color:#f4f4f4;
+  background-color: #f4f4f4;
 }
 dialog .modal {
   z-index: 99999;
@@ -568,9 +646,10 @@ dialog .modal {
   box-sizing: border-box;
   min-width: 35vw;
   gap: 10px;
-  -webkit-box-shadow: 0px 10px 13px 5px var(--plane-line-color) 5px 5px 15px 5px rgba(0,0,0,0);
-  box-shadow: 0px 10px 27px 2px var(--plane-line-color), 5px 5px 15px 5px rgba(0,0,0,0);
-  
+  -webkit-box-shadow: 0px 10px 13px 5px var(--plane-line-color) 5px 5px 15px 5px
+    rgba(0, 0, 0, 0);
+  box-shadow: 0px 10px 27px 2px var(--plane-line-color),
+    5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
 /* END - Dialog / Modal */
 
@@ -632,7 +711,9 @@ dialog .modal {
 /* END -  Sign-in / Guest */
 
 /* Leaderboard */
-#leaderboard {overflow:auto;}
+#leaderboard {
+  overflow: auto;
+}
 #leaderboard .leaderboard-score {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -640,11 +721,15 @@ dialog .modal {
   padding: 0 10px;
   width: 100%;
 }
-#leaderboard .leaderboard-score:first-child {border-bottom:0;}
+#leaderboard .leaderboard-score:first-child {
+  border-bottom: 0;
+}
 /* END - Leaderboard */
 
 /* Credits */
-#modalCredits ul {list-style: none;}
+#modalCredits ul {
+  list-style: none;
+}
 #modalCredits ul li {
   margin-bottom: 10px;
   display: grid;
@@ -673,7 +758,7 @@ dialog .modal {
 
 @media (orientation: portrait) {
   #warning-message {
-      display: block;
+    display: block;
   }
 }
 /* END - Warning Portrait Mode */
