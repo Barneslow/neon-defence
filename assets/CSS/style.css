@@ -1,10 +1,14 @@
 @import 'https://fonts.googleapis.com/css?family=Damion|Work+Sans:900';
 
+*, *:before, *:after {
+  box-sizing:border-box;
+}
+
 body {
   display: flex;
   justify-content: center;
+  cursor: url("../images/cursor.png") 0 0, pointer;
 }
-
 
 /***** INTRO Styling *****/
 :root {
