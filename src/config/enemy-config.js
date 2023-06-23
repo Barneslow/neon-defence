@@ -2,7 +2,7 @@ export const enemyClassTypes = {
   robot: {
     name: "robot",
     sprite: "robot",
-    health: 30,
+    health: 100,
     sound: {
       name: "dead",
       audio: "dead-enemy",
@@ -30,18 +30,18 @@ export const enemyClassTypes = {
       audio: "dead",
     },
     speed: 100,
-    resources: 25,
+    resources: 50,
   },
   drone: {
     name: "drone",
     sprite: "drone",
-    health: 50,
+    health: 40,
     sound: {
       name: "dead",
       audio: "dead",
     },
     speed: 75,
-    resources: 50,
+    resources: 75,
   },
   golem: {
     name: "golem",

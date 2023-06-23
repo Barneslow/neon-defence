@@ -124,6 +124,9 @@ export default class HumanTurret extends Phaser.GameObjects.Sprite {
     }
   }
   preload() {
-    this.MapScene.load.image("turret", "assets/images/Turret2D.png");
+    this.MapScene.load.image(
+      "HumanTurret",
+      "assets/images/turrets/HumanTurret.png"
+    );
   }
 }
