@@ -100,10 +100,7 @@ export default class MapScene extends Phaser.Scene {
       padding: 10,
     });
 
-    this.waveTimeRemainingText = this.add.text(
-      500,
-      50,
-      `Time Until Next Wave: ${this.timeUntilNextWave}`,
+    this.waveTimeRemainingText = this.add.text(350, 0, `Time Until Next Wave: ${this.timeUntilNextWave}`,
       {
         fontSize: "24px",
         backgroundColor: "black",
