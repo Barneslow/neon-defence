@@ -19,6 +19,7 @@ body {
   flex-direction: column;
   gap: 1rem;
   justify-content: center;
+  cursor: url("../images/cursor.png") 0 0, pointer;
 }
 
 #game {
@@ -33,7 +34,7 @@ body {
   position: relative;
 }
 #game #app canvas {
-  max-height: 70vh;
+  max-height: 80vh;
   max-width: 100%;
 }
 #game #stars {
@@ -166,6 +167,7 @@ body {
   color: #fff;
   font-weight: 300;
   margin-top: 5px;
+  margin-bottom: 15px;
   text-align: center;
 }
 .main-game img {
@@ -194,19 +196,27 @@ body {
   gap: 0.5rem;
 }
 
+#game button:hover {
+  background: rgb(22, 247, 255, 0.7) !important;
+}
+
 .btn-box {
   display: flex;
   margin-top: 10px;
   align-items: center;
   justify-content: space-between;
-  max-width: 80%;
+  max-width: 90%;
   margin-left: 0;
+  max-height: 20vh;
 }
 
 .btn-box i {
   font-size: 1.6rem;
   text-shadow: 3px 3px 0 var(--moon-line-color), -1px -1px 0 var(--moon-background-color), 1px -1px 0 var(--moon-line-color), -1px 1px 0 var(--moon-background-color), 1px 1px 0 var(--moon-background-color);
 }
+
+.Power-buttons button {background-color: var(--background-color) !important;}
+.Power-buttons i {font-size:45px;}
 
 .controls {
   display: flex;
@@ -226,26 +236,6 @@ body {
 .heart-icon {
   height: 50px;
   aspect-ratio: 1;
-}
-
-.ui-btn {
-  background-color: rgb(255, 87, 87);
-  border-radius: 5px;
-  color: white;
-  font-size: 1.6rem;
-  padding: 0.5rem 1rem;
-  width: fit-content;
-}
-
-.ui-btn:hover {
-  background-color: red;
-  cursor: pointer;
-}
-#start {
-  background-color: rgb(51, 114, 51);
-}
-#start:hover {
-  background-color: green;
 }
 
 /* Timer - Hourglass */
@@ -400,3 +390,11 @@ body {
   }
 }
 /* END - timer / hourglass */
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .main-game {flex-direction: column;}
+  #game #app canvas {max-height: 90vh;}
+  .turret-buttons, .Power-buttons {display:flex; flex-direction: row;gap: 10px;}
+
+}
