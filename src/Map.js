@@ -29,6 +29,7 @@ export default class MapScene extends Phaser.Scene {
     this.difficulty = 1;
     this.timeUntilNextWave = 0;
     this.isGamePaused = false;
+    this.isAudioMuted = false;
   }
 
   preload() {
@@ -56,6 +57,25 @@ export default class MapScene extends Phaser.Scene {
       .querySelector(".close-button");
 
     modalPauseBtnClose.addEventListener("click", this.togglePause.bind(this));
+
+    const settingsBtn = document.getElementById("settings");
+    settingsBtn.addEventListener("click", this.togglePause.bind(this));
+
+    const modalSettingsBtnClose = document
+      .getElementById("modalSettings")
+      .querySelector(".close-button");
+
+    modalSettingsBtnClose.addEventListener(
+      "click",
+      this.togglePause.bind(this)
+    );
+
+    const modalSettingsBtnAudio = document.getElementById("music");
+
+    modalSettingsBtnAudio.addEventListener(
+      "click",
+      this.toggleAudioMute.bind(this)
+    );
 
     const heartContainer = document.getElementById("heart-container");
     this.heartContainer = heartContainer;
@@ -150,6 +170,14 @@ export default class MapScene extends Phaser.Scene {
     this.physics.add.overlap(this.enemies, this.bullets, damageEnemy);
 
     this.displayHearts();
+  }
+
+  toggleAudioMute() {
+    if (this.isAudioMuted) {
+      this.game.sound.mute = true;
+    } else {
+      this.game.sound.mute = false;
+    }
   }
 
   purchaseTower(type, element) {
