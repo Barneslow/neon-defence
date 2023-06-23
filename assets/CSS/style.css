@@ -5,16 +5,15 @@
 *:after {
   box-sizing: border-box;
   padding: 0;
-  margin: 0.5rem;
 }
 
 body {
   display: flex;
   justify-content: center;
   cursor: url("../images/cursor.png") 0 0, pointer;
+  font-family: 'Work Sans';
 }
 
-/***** INTRO Styling *****/
 :root {
   --background-color: #180727;
   --main-gradient-start: #44155d;
@@ -30,6 +29,18 @@ body {
   --plane-line-color: #16f7ff;
   --plane-shadow-color: #fc784f /*#ff91cf*/;
 }
+
+::selection {
+  color: var(--moon-line-color);
+  background: var(--background-color);
+}
+
+a {
+  text-decoration: none;
+  color: #44155d;
+}
+
+/***** INTRO Styling *****/
 #intro {
   background: var(--background-color);
   padding: 0;
