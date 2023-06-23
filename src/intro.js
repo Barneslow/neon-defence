@@ -1,10 +1,9 @@
+// Import signInWithGoogle function
 import { signInWithGoogle } from "./auth";
 
 document.addEventListener("DOMContentLoaded", function () {
   const startButton = document.getElementById("start-button");
   const menu = document.getElementById("menu");
-
-  signInButton.addEventListener("click", signInWithGoogle);
 
   // Add event listener to the start button
   startButton.addEventListener("click", function (event) {
@@ -13,7 +12,60 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("introHeader").style.display = "none";
   });
 
+
+  // Add event listener to the sign-in button
+  signInButton.addEventListener("click", function () {
+    signInModal.setAttribute("open", "");
+  });
+
+  // Add event listener to the sign-in form
+const loginForm = document.getElementById("login-form");
+loginForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  
+  // Get the input values from the form
+  const email = document.getElementById("email-input").value;
+  const password = document.getElementById("password-input").value;
+
+  // Call the signIn function with the email and password
+  signIn(email, password);
 });
+
+// Define the signIn function
+function signIn(email, password) {
+  // Make an API call to your backend with the email and password
+  // Example using fetch:
+  fetch("/api/signin", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password }),
+  })
+    .then((response) => {
+      if (response.ok) {
+        // Sign-in successful
+        console.log("Sign-in successful");
+        // Add code to handle successful sign-in, such as redirecting to another page
+      } else {
+        // Sign-in failed
+        console.log("Sign-in failed");
+        // Add code to handle failed sign-in, such as displaying an error message
+      }
+    })
+    .catch((error) => {
+      // Error occurred during sign-in
+      console.log("Error during sign-in:", error);
+      // Add code to handle the error, such as displaying an error message
+    });
+}
+
+  // Attach sign-in with Google functionality to the sign-in modal
+  attachModalEvents(signInButton, signInModal);
+  const googleSignInButton = signInModal.querySelector("#google-signin-btn");
+  googleSignInButton.addEventListener("click", signInWithGoogle);
+});
+
 
 // Stars Background
 const getRandomInt = (min, max) => {
@@ -21,7 +73,6 @@ const getRandomInt = (min, max) => {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
 };
-
 const stars = document.getElementById("stars");
 
 const render = () => {
@@ -41,9 +92,9 @@ const render = () => {
     stars.appendChild(star);
   }
 };
-
 requestAnimationFrame(render);
 window.addEventListener("resize", () => requestAnimationFrame(render));
+
 
 // Music / Music Button
 const music = document.getElementById("music");
