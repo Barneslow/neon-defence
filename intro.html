@@ -51,49 +51,51 @@
           <!-- Sign-in Modal -->
           <button id="signin-btn">Sign In / Guest</button>
           <dialog id="modalSignin">
-            <button class="btn close-button" data-close-modal="">
-              &times;
-            </button>
-            <div class="modal-content">
-              <h3>Sign In</h3>
-              <form id="login-form" onsubmit="login(event)">
-                <input
-                  type="text"
-                  id="name-input"
-                  placeholder="Name"
-                  required
-                />
-                <input
-                  type="email"
-                  id="email-input"
-                  placeholder="Email"
-                  required
-                />
-                <input
-                  type="password"
-                  id="password-input"
-                  placeholder="Password"
-                  required
-                />
-                <button type="submit">Sign In</button>
-              </form>
-              <button id="google-signin-btn">Sign In with Google</button>
-              <h3>OR</h3>
-              <button id="guest-btn" onclick="playAsGuest()">
-                Play as Guest
-              </button>
+            <div class="modal">
+              <button class="btn close-button" data-close-modal="">&times;</button>
+              <div class="modal-content">
+                <h2>Sign In</h2>
+                <form id="login-form" onsubmit="login(event)">
+                  <input
+                    type="text"
+                    id="name-input"
+                    placeholder="Name"
+                    required
+                  />
+                  <input
+                    type="email"
+                    id="email-input"
+                    placeholder="Email"
+                    required
+                  />
+                  <input
+                    type="password"
+                    id="password-input"
+                    placeholder="Password"
+                    required
+                  />
+                  <button type="submit">Sign In</button>
+                </form>
+                <button id="google-signin-btn">Sign In with Google</button>
+                <h3>OR</h3>
+                <button id="guest-btn" onclick="playAsGuest()">
+                  Play as Guest
+                </button>
+              </div>
             </div>
           </dialog>
 
           <!-- Leaderboard Modal -->
           <button id="leaderboard-button">Leaderboard</button>
           <dialog id="modalLeaderboard">
-            <button class="close-button">&times;</button>
-            <h3>Leaderboard</h3>
-            <div id="leaderboard">
-              <div class="leaderboard-score">
-                <h3>Darrach</h3>
-                <h3>5010204</h3>
+            <div class="modal">
+              <button class="close-button">&times;</button>
+              <h2>Leaderboard</h2>
+              <div id="leaderboard">
+                <div class="leaderboard-score">
+                  <h3>Darrach</h3>
+                  <h3>5010204</h3>
+                </div>
               </div>
             </div>
           </dialog>
@@ -110,41 +112,45 @@
           <!-- How to Play Modal -->
           <button id="how-to-play-button">How to Play Modal</button>
           <dialog id="modalHowToPlay">
-            <button class="btn close-button" data-close-modal="">
-              &times;
-            </button>
-            <h3>How to Play:</h3>
-            <h5>DevGames Hackathon - June 2023</h5>
+            <div class="modal">
+              <button class="btn close-button" data-close-modal="">
+                &times;
+              </button>
+              <h2>How to Play:</h2>
+              <h3>DevGames Hackathon - June 2023</h3>
+            </div>
           </dialog>
 
           <!-- Credits Modal -->
           <button id="credits-button">Credits</button>
           <dialog id="modalCredits" data-modal="">
-            <button class="btn close-button" data-close-modal="">
-              &times;
-            </button>
-            <h3>Credits:</h3>
-            <h5>DevGames Hackathon - June 2023</h5>
-            <ul>
-              <li class="darrach">
-                <img src="./assets/images/turret.png" alt="plasma turret" />
-                <a href="https://github.com/DarrachBarneveld" target="_blank"
-                  >Darrach Barneveld</a
-                >
-              </li>
-              <li class="devan">
-                <img src="./assets/images/turret.png" alt="plasma turret" />
-                <a href="https://github.com/devan-cadman" target="_blank"
-                  >Devan Cadman</a
-                >
-              </li>
-              <li class="tanguy">
-                <img src="./assets/images/turret.png" alt="plasma turret" />
-                <a href="https://github.com/tlalexandre" target="_blank"
-                  >Tanguy L'Alexandre</a
-                >
-              </li>
-            </ul>
+            <div class="modal">
+              <button class="btn close-button" data-close-modal="">
+                &times;
+              </button>
+              <h2>Credits:</h2>
+              <h3>DevGames Hackathon - June 2023</h3>
+              <ul>
+                <li class="darrach">
+                  <img src="https://ca.slack-edge.com/T0L30B202-U053H23P673-6de9e16f0259-512" alt="darrach barneveld" />
+                  <a href="https://github.com/DarrachBarneveld" target="_blank"
+                    >Darrach Barneveld</a
+                  >
+                </li>
+                <li class="devan">
+                  <img src="https://ca.slack-edge.com/T0L30B202-UFU8HB2UW-e3a5147cb84f-512" alt="pdevan cadman" />
+                  <a href="https://github.com/devan-cadman" target="_blank"
+                    >Devan Cadman</a
+                  >
+                </li>
+                <li class="tanguy">
+                  <img src="https://ca.slack-edge.com/T0L30B202-U04NK9J1E7K-59cf6c5af8d9-512" alt="Tanguy L'Alexandre" />
+                  <a href="https://github.com/tlalexandre" target="_blank"
+                    >Tanguy L'Alexandre</a
+                  >
+                </li>
+              </ul>
+            </div>
           </dialog>
         </div>
       </section>
