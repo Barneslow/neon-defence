@@ -16,6 +16,7 @@ export default class MapScene extends Phaser.Scene {
     this.resources = 1000;
     this.score = 0;
     this.isWaveInProgress = false;
+    this.startedGame = false;
     this.waveIndex = 0;
     this.boss = false;
     this.turretType = "auto";
@@ -231,6 +232,7 @@ export default class MapScene extends Phaser.Scene {
   }
 
   startWave() {
+    this.startedGame = true;
     // @ts-ignore
     this.startBtn.disabled = true;
     // @ts-ignore
@@ -240,12 +242,11 @@ export default class MapScene extends Phaser.Scene {
       previousTimers.forEach((timer) => this.time.removeEvent(timer));
     }
 
-    console.log(previousTimers);
     if (!this.isWaveInProgress) {
       this.isWaveInProgress = true;
       this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
 
-      const time = (this.waveArray.length - 1) * 2000 + 22000;
+      const time = this.waveArray.length * 2000 + 22000;
 
       this.timeUntilNextWave = time;
 
@@ -291,6 +292,11 @@ export default class MapScene extends Phaser.Scene {
   }
 
   update(time, delta) {
+    if (!this.startedGame) return;
+    if (this.timeUntilNextWave <= 0) {
+      console.log("next wave");
+      this.startWave();
+    }
     this.updateWaveTimeRemaining();
     if (!this.isWaveInProgress) return;
 
@@ -299,12 +305,11 @@ export default class MapScene extends Phaser.Scene {
       this.spawnEnemiesForWave(this.waveArray[0]);
       this.nextEnemy = time + 2000 / this.speedMultiplyer;
     }
+
     if (time > this.nextEnemy && this.waveArray.length === 0) {
       this.endWave();
+      // @ts-ignore
       this.startBtn.disabled = false;
-    }
-    if (this.timeUntilNextWave <= 0) {
-      this.startWave();
     }
   }
 }
