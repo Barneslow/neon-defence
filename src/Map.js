@@ -25,6 +25,7 @@ export default class MapScene extends Phaser.Scene {
     this.fire = false;
     this.freeze = false;
     this.speedMultiplyer = 1;
+    this.difficulty = 1;
   }
 
   preload() {
@@ -40,6 +41,11 @@ export default class MapScene extends Phaser.Scene {
     this.load.image("laser", "assets/images/LaserTurret.png");
     this.load.image("laser2", "assets/images/LaserTurretlvl2.png");
     this.load.image("laser3", "assets/images/LaserTurretlvl3.png");
+
+    // Shotgun Sprites
+    this.load.image("shotgun", "assets/images/ShotGunTurret.png");
+    this.load.image("shotgun2", "assets/images/ShotGunTurretlvl2.png");
+    this.load.image("shotgun3", "assets/images/ShotGunTurretlvl3.png");
 
     // Electric Sprites
     this.load.image("electric", "assets/images/ElectricTowerActive.png");
@@ -92,9 +98,13 @@ export default class MapScene extends Phaser.Scene {
     this.heartContainer = heartContainer;
     const autoTurret = document.getElementById("auto-turret");
     const laserTurret = document.getElementById("laser-turret");
-    this.displayHearts();
+    const shotgunTurret = document.getElementById("shotgun-turret");
+    const humanTurret = document.getElementById("human-turret");
+
     autoTurret.addEventListener("click", this.chooseTurretType.bind(this));
     laserTurret.addEventListener("click", this.chooseTurretType.bind(this));
+    shotgunTurret.addEventListener("click", this.chooseTurretType.bind(this));
+    humanTurret.addEventListener("click", this.chooseTurretType.bind(this));
 
     const electricTower = document.getElementById("electric");
     electricTower.addEventListener(
@@ -161,6 +171,8 @@ export default class MapScene extends Phaser.Scene {
     this.input.on("pointerdown", this.shootBullet, this);
     // OVERLAP FUNCTION
     this.physics.add.overlap(this.enemies, this.bullets, damageEnemy);
+
+    this.displayHearts();
   }
 
   purchaseTower(type, element) {

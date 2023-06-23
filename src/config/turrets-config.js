@@ -57,6 +57,35 @@ export const turretsClassTypes = {
     },
     tickTimer: 2000,
   },
+  shotgun: {
+    name: "shotgun",
+    sprite: {
+      level1: {
+        name: "shotgun",
+        sprite1: "ShotGunTurret",
+      },
+      level2: {
+        name: "shotgun2",
+        sprite1: "ShotGunTurretlvl2",
+      },
+      level3: {
+        name: "shotgun3",
+        sprite1: "ShotGunTurretlvl3",
+      },
+    },
+    damageOutput: {
+      level1: 20,
+      level2: 50,
+      level3: 100,
+    },
+    cost: 100,
+    experience: {
+      level1: 0,
+      level2: 100,
+      level3: 300,
+    },
+    tickTimer: 4000,
+  },
 
   human: {
     name: "turret",

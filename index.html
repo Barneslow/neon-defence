@@ -19,11 +19,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Phaser 3 Game</title>
     <link rel="stylesheet" href="./assets/CSS/game.css" />
-</head>
+  </head>
 
-<body id="game">
-  <div id="stars"></div>
-  <div id="app"></div>
+  <body id="game">
+    <div id="stars"></div>
+    <div id="app"></div>
     <div class="btn-box">
       <div class="controls">
         <button id="start" class="ui-btn">Start</button>
@@ -34,33 +34,44 @@
       <div class="turret-buttons">
         <h3>Turrets</h3>
         <button id="auto-turret" class="ui-btn" data-type="auto">
-          <img src="./assets/images/Turret2DHUD.png" alt="auto turret" /> Turret <span>$100</span>
+          <img src="./assets/images/Turret2DHUD.png" alt="auto turret" /> Turret
+          <span>$100</span>
         </button>
-        <button id="laser-turret" class="ui-btn" data-type="auto">
-          <img src="./assets/images/LaserTurretHUD.png" alt="laser turret" /> Laser Turret <span>$100</span>
+        <button id="laser-turret" class="ui-btn" data-type="laser">
+          <img src="./assets/images/LaserTurretHUD.png" alt="laser turret" />
+          Laser Turret <span>$100</span>
         </button>
-        <button id="shot-turret" class="ui-btn" data-type="auto">
-          <img src="./assets/images/ShotGunTurretHUD.png" alt="shotgun turret" /> Shotgun Turret <span>$100</span>
+        <button id="shotgun-turret" class="ui-btn" data-type="shotgun">
+          <img
+            src="./assets/images/ShotGunTurretHUD.png"
+            alt="shotgun turret"
+          />
+          Shotgun Turret <span>$100</span>
         </button>
 
-        <button id="plasma-turret" class="ui-btn" data-type="auto">
-          <img src="./assets/images/turret.png" alt="plasma turret" /> Plasma Turret <span>$100</span>
+        <button id="human-turret" class="ui-btn" data-type="human">
+          <img src="./assets/images/turret.png" alt="plasma turret" /> Plasma
+          Turret <span>$100</span>
         </button>
       </div>
-        
+
       <div class="Power-buttons">
         <h3>Power Buttons</h3>
-        <button id="electric" style="background-color: yellow">Buy Electric Power</button>
+        <button id="electric" style="background-color: yellow">
+          Buy Electric Power
+        </button>
 
-        <button id="freeze" style="background-color: aquamarine">Buy Freeze Power</button>
+        <button id="freeze" style="background-color: aquamarine">
+          Buy Freeze Power
+        </button>
         <button id="fire" style="background-color: red">Buy Fire Power</button>
 
         <div id="timer" class="circle">
           <div class="up">
-              <div class="innera"></div>
+            <div class="innera"></div>
           </div>
           <div class="down">
-              <div class="innerb"></div>
+            <div class="innerb"></div>
           </div>
         </div>
       </div>

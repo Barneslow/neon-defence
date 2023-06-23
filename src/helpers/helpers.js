@@ -13,7 +13,8 @@ export function placeTurretOnMap(pointer, resources, map, turretType) {
   const turretCosts = {
     auto: turretsClassTypes.auto.cost,
     laser: turretsClassTypes.laser.cost,
-    electric: turretsClassTypes.electric.cost,
+    shotgun: turretsClassTypes.shotgun.cost,
+    human: turretsClassTypes.human.cost,
   };
 
   if (tileId === 7 && resources >= turretCosts[turretType]) {
@@ -25,31 +26,19 @@ export function placeTurretOnMap(pointer, resources, map, turretType) {
     const centerY = tile.y * tileHeight + offsetY;
 
     let turret;
-    if (turretType === "auto") {
-      // turret = new Turret(
-      //   this,
-      //   centerX,
-      //   centerY,
-      //   turretsClassTypes["auto"]
-      // );
-      // turret = new HumanTurret(
-      //   this,
-      //   centerX,
-      //   centerY,
-      //   turretsClassTypes["human"]
-      // );
-      turret = new BaseTurret(
+    if (turretType === "human") {
+      turret = new HumanTurret(
         this,
         centerX,
         centerY,
-        turretsClassTypes["auto"]
+        turretsClassTypes[turretType]
       );
-    } else if (turretType === "laser") {
+    } else {
       turret = new BaseTurret(
         this,
         centerX,
         centerY,
-        turretsClassTypes["laser"]
+        turretsClassTypes[turretType]
       );
     }
 
