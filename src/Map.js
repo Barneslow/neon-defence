@@ -34,15 +34,7 @@ export default class MapScene extends Phaser.Scene {
 
     loadAllSprites(this);
 
-    // Audio Files
-    this.load.audio("electric-audio", "assets/sounds/electricity.mp3");
-    this.load.audio("fire-audio", "assets/sounds/fire.mp3");
-    this.load.audio("freeze-audio", "assets/sounds/freeze.mp3");
-    this.load.audio("power-up", "assets/sounds/power-up.mp3");
-
-    this.load.audio("bulletsound", "assets/sounds/BulletSound.mp3");
-    this.load.audio("dead", "assets/sounds/dead-enemy.mp3");
-    this.load.audio("dead-boss", "assets/sounds/dead-boss.mp3");
+    loadAllAudio(this);
   }
 
   create() {
@@ -338,17 +330,14 @@ function loadAllSprites(scene) {
   scene.load.image("electric", "assets/images/turrets/ElectricTowerActive.png");
   scene.load.image(
     "electric-inactive",
-    "assets/images/ElectricTowerInactive.png"
+    "assets/images/turrets/ElectricTowerInactive.png"
   );
 
   // Freeze Sprites
-  scene.load.image(
-    "freeze",
-    "assets/images/turrets/turrets/FreezeTowerActive.png"
-  );
+  scene.load.image("freeze", "assets/images/turrets/FreezeTowerActive.png");
   scene.load.image(
     "freeze-inactive",
-    "assets/images/turrets/turrets/ElectricTowerInactive.png"
+    "assets/images/turrets/ElectricTowerInactive.png"
   );
 
   // Fire Sprites
@@ -368,4 +357,15 @@ function loadAllSprites(scene) {
 
   // Bullet Sprites
   scene.load.image("bullet", "assets/images/Bullet.png");
+}
+
+function loadAllAudio(scene) {
+  scene.load.audio("electric-audio", "assets/sounds/electricity.mp3");
+  scene.load.audio("fire-audio", "assets/sounds/fire.mp3");
+  scene.load.audio("freeze-audio", "assets/sounds/freeze.mp3");
+  scene.load.audio("power-up", "assets/sounds/power-up.mp3");
+
+  scene.load.audio("bulletsound", "assets/sounds/BulletSound.mp3");
+  scene.load.audio("dead", "assets/sounds/dead-enemy.mp3");
+  scene.load.audio("dead-boss", "assets/sounds/dead-boss.mp3");
 }
