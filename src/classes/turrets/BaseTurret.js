@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { getEnemyNearTurret } from "../../helpers/helpers";
+import { getEnemyNearTurret, timerDelay } from "../../helpers/helpers";
 import { Popup } from "../../Popup";
 import BaseBullet from "../bullet/BaseBullet";
 import { bulletClassTypes } from "../../config/bullet-config";
@@ -24,6 +24,7 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
     //Adding bullet physics
     this.bullets = this.scene.add.group();
     // this.bulletSound = this.scene.sound.add("bulletsound");
+    this.laserSound = this.scene.sound.add("laser");
 
     // Adding tower level
     this.experiencePoints = 0;
@@ -87,8 +88,10 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
     if (enemy) {
       // TURRET ROTATION
       let angle = Phaser.Math.Angle.Between(this.x, this.y, enemy.x, enemy.y);
+
+      let enemyPosition = { x: enemy.x, y: enemy.y };
       this.angle = (angle + Math.PI + Math.PI / 2) * Phaser.Math.RAD_TO_DEG;
-      this.shootBullet();
+      this.shootBullet(enemyPosition);
     }
   }
 
@@ -115,8 +118,33 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
     }
   }
 
-  shootBullet() {
+  async startDrawing(enemyPosition) {
+    this.line.x1 = this.x;
+    this.line.y1 = this.y;
+
+    this.line.x2 = enemyPosition.x;
+    this.line.y2 = enemyPosition.y;
+
+    this.graphics.strokeLineShape(this.line);
+
+    console.log(this.graphics);
+    this.laserSound.play();
+    await timerDelay(200);
+
+    this.graphics.clear();
+  }
+
+  shootBullet(enemyPosition) {
     this.upgradeExperience();
+    if (this.turretName === "laser") {
+      this.graphics = this.MapScene.add.graphics();
+      this.line = new Phaser.Geom.Line();
+
+      this.graphics.lineStyle(3, 0x00ff00);
+      this.startDrawing(enemyPosition);
+      console.log("laser fire");
+      return;
+    }
     const bullet = new BaseBullet(
       this.scene,
       this.x,

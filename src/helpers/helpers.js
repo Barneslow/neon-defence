@@ -71,3 +71,7 @@ export function getEnemyNearTurret(x, y, distance, enemies) {
   }
   return false;
 }
+
+export function timerDelay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

@@ -364,6 +364,7 @@ function loadAllAudio(scene) {
   scene.load.audio("fire-audio", "assets/sounds/fire.mp3");
   scene.load.audio("freeze-audio", "assets/sounds/freeze.mp3");
   scene.load.audio("power-up", "assets/sounds/power-up.mp3");
+  scene.load.audio("laser", "assets/sounds/laser.mp3");
 
   scene.load.audio("bulletsound", "assets/sounds/BulletSound.mp3");
   scene.load.audio("dead", "assets/sounds/dead-enemy.mp3");
