@@ -488,10 +488,7 @@ small, small a {
 .menu-content button {
   text-align: middle;
   margin-top: 30px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 80px;
-  padding-right: 80px;
+  padding: 12px 40px;
   background-color: transparent;
   -webkit-box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 5px 5px 15px 5px rgba(255,139,253,0);
   box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 5px 5px 15px 5px rgba(255,139,253,0);
@@ -590,3 +587,25 @@ dialog[open] {
   width: auto;
   cursor: pointer;
 }
+/* END -  Sign-in / Guest */
+
+/* Warning Portrait Mode */
+#warning-message {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ff0000;
+  color: #ffffff;
+  text-align: center;
+  padding: 10px;
+  z-index: 9999;
+}
+
+@media (orientation: portrait) {
+  #warning-message {
+      display: block;
+  }
+}
+/* END - Warning Portrait Mode */
