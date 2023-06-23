@@ -56,6 +56,7 @@ export const checkAuthState = async () => {
       const menu = document.querySelector(".menu-content");
       const signInBtn = document.getElementById("signin-btn");
 
+      if (!signInBtn) return;
       signInBtn.style.display = "none";
       const userTitle = document.createElement("h2");
       userTitle.textContent = `${user.displayName}`;
