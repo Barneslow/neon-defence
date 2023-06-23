@@ -68,11 +68,12 @@ export default class MapScene extends Phaser.Scene {
     this.load.image("flame", "assets/images/flame.png");
 
     // Enemy Sprites
-    this.load.image("bird", "assets/images/bird.png");
-    this.load.image("robot", "assets/images/Robot2D.png");
-    this.load.image("boss", "assets/images/Boss.png");
-    this.load.image("spider", "assets/images/spider.png");
-    this.load.image("drone", "assets/images/drone.png");
+    this.load.image("robot", "assets/images/enemies/robot.png");
+    this.load.image("heavybot", "assets/images/enemies/heavybot.png");
+    this.load.image("spider", "assets/images/enemies/spider.png");
+    this.load.image("drone", "assets/images/enemies/drone.png");
+    this.load.image("golem", "assets/images/enemies/golem.png");
+    this.load.image("boss", "assets/images/enemies/boss.png");
 
     this.load.image("bullet", "assets/images/Bullet.png");
 
@@ -320,7 +321,6 @@ export default class MapScene extends Phaser.Scene {
 
       this.spawnEnemiesForWave(this.waveArray[0]);
       this.nextEnemy = time + 2000 / this.speedMultiplyer;
-      console.log(this.enemies);
     }
     if (time > this.nextEnemy && this.waveArray.length === 0) {
       this.endWave();

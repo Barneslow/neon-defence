@@ -1,9 +1,7 @@
-import BaseEnemy from "../classes/enemies/BaseEnemy";
 import DroneEnemy from "../classes/enemies/DroneClass";
 import BaseTurret from "../classes/turrets/BaseTurret";
 import HumanTurret from "../classes/turrets/HumanTurret";
-import PowerTurret from "../classes/turrets/PowerTurret";
-import Turret from "../classes/turrets/Turret";
+
 import { turretsClassTypes } from "../config/turrets-config";
 
 export function placeTurretOnMap(pointer, resources, map, turretType) {

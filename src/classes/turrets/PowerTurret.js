@@ -5,7 +5,6 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, turretObject) {
     super(scene, x, y, turretObject.name);
 
-    console.log(scene);
     this.MapScene = scene;
     scene.add.existing(this);
     this.purchased = false;
