@@ -127,7 +127,6 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
 
     this.graphics.strokeLineShape(this.line);
 
-    console.log(this.graphics);
     this.laserSound.play();
     await timerDelay(200);
 
@@ -142,7 +141,6 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
 
       this.graphics.lineStyle(3, 0x00ff00);
       this.startDrawing(enemyPosition);
-      console.log("laser fire");
       return;
     }
     const bullet = new BaseBullet(

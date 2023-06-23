@@ -13,7 +13,7 @@ import DroneEnemy from "./classes/enemies/DroneClass";
 export default class MapScene extends Phaser.Scene {
   constructor() {
     super("mapScene");
-    this.resources = 1000;
+    this.resources = 2000;
     this.score = 0;
     this.isWaveInProgress = false;
     this.startedGame = false;
@@ -76,6 +76,9 @@ export default class MapScene extends Phaser.Scene {
       "click",
       this.toggleAudioMute.bind(this)
     );
+
+    const replayBtn = document.getElementById("replay-button");
+    replayBtn.addEventListener("click", () => location.reload());
 
     const heartContainer = document.getElementById("heart-container");
     this.heartContainer = heartContainer;
@@ -215,7 +218,6 @@ export default class MapScene extends Phaser.Scene {
 
     new PowerTurret(this, centerX, centerY, turretsClassTypes[type]);
 
-    element.textContent = `Shoot`;
     this[type] = true;
   }
 
@@ -249,7 +251,7 @@ export default class MapScene extends Phaser.Scene {
   onTileClicked(pointer) {
     const tile = this.map.worldToTileXY(pointer.worldX, pointer.worldY);
     const tileId = this.map.getTileAt(tile.x, tile.y, true).index;
-    console.log(tileId);
+    // console.log(tileId);
     if (tileId != 7 || this.resources < 50) return; // prevent tile resource issues
     if (!this.turretType) return;
 
@@ -290,8 +292,14 @@ export default class MapScene extends Phaser.Scene {
   }
 
   gameOver() {
+    this.physics.resume();
+    this.scene.resume();
     const modalGameOver = document.getElementById("modalGameOver");
     modalGameOver.setAttribute("open", "");
+
+    const score = document.getElementById("score");
+
+    score.textContent = `Your Score ${this.score.toString()}`;
   }
 
   spawnEnemiesForWave(enemyType) {
@@ -346,17 +354,23 @@ export default class MapScene extends Phaser.Scene {
     this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
   }
 
-  victory() {
-    const modalGameOver = document.getElementById("modalGameOver");
-    modalGameOver.setAttribute("open", "");
-  }
+  // victory() {
+  //   this.physics.resume();
+  //   this.scene.resume();
+  //   const modalGameOver = document.getElementById("modalGameOver");
+  //   modalGameOver.setAttribute("open", "");
+
+  //   const score = document.getElementById("score");
+
+  //   score.textContent = this.score.toString();
+  // }
 
   update(time, delta) {
     if (!this.startedGame) return;
     this.updateWaveTimeRemaining();
 
     if (this.enemies.getLength() === 0 && WAVE_DATA.length <= this.waveIndex) {
-      this.victory();
+      this.gameOver();
     }
 
     if (this.timeUntilNextWave <= 0) {
@@ -426,6 +440,11 @@ function loadAllSprites(scene) {
   scene.load.image("shotgun2", "assets/images/turrets/ShotGunTurretlvl2.png");
   scene.load.image("shotgun3", "assets/images/turrets/ShotGunTurretlvl3.png");
 
+  // Human Sprites
+  scene.load.image("human", "assets/images/turrets/HumanTurret.png");
+  scene.load.image("human2", "assets/images/turrets/HumanTurretlvl2.png");
+  scene.load.image("human3", "assets/images/turrets/HumanTurretlvl3.png");
+
   // Electric Sprites
   scene.load.image("electric", "assets/images/turrets/ElectricTowerActive.png");
   scene.load.image(
@@ -444,7 +463,7 @@ function loadAllSprites(scene) {
   scene.load.image("fire", "assets/images/turrets/FireTowerActive.png");
   scene.load.image(
     "fire-inactive",
-    "assets/images/turrets/ElectricTowerInactive.png"
+    "assets/images/turrets/FireTowerInactive.png"
   );
 
   // Enemy Sprites
