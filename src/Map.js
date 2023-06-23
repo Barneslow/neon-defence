@@ -84,17 +84,17 @@ export default class MapScene extends Phaser.Scene {
     const layer1 = map.createLayer(0, tileset);
 
     // createContainerText(this);
-    this.resourceText = this.add.text(10, 10, `Resources: ${this.resources}`, {
-      fontSize: "24px",
-      backgroundColor: "black",
+    this.resourceText = this.add.text(0, 0, `Resources: ${this.resources}`, {
+      fontSize: "26px",
+      backgroundColor: "#180727",
       fontFamily: "Work Sans",
       // @ts-ignore
       padding: 10,
     });
 
-    this.scoreText = this.add.text(700, 10, `Score: ${this.score}`, {
-      fontSize: "24px",
-      backgroundColor: "black",
+    this.scoreText = this.add.text(900, 0, `Score: ${this.score}`, {
+      fontSize: "26px",
+      backgroundColor: "#180727",
       fontFamily: "Work Sans",
       // @ts-ignore
       padding: 10,
@@ -270,9 +270,11 @@ export default class MapScene extends Phaser.Scene {
   }
 
   gameOver() {
-    this.scene.start("GameOverScene");
+    const modalGameOver = document.getElementById("modalGameOver");
+    modalGameOver.setAttribute("open", "");
   }
 
+  
   spawnEnemiesForWave(enemyType) {
     let enemy;
     if (enemyType === "drone") {

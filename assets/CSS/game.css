@@ -1,8 +1,45 @@
+:root {
+  --background-color: #180727;
+  --main-gradient-start: #44155D;
+  --main-gradient-end: #150D40;
+
+  --moon-gradient-start: #9070FE;
+  --moon-gradient-end: #fc784f /*#44155D*/;
+  --moon-line-color: #16F7FF;
+  --moon-background-color: #F016FF;
+  
+  --plane-background-start: #150D40;
+  --plane-background-end: #44155D;
+  --plane-line-color: #16F7FF;
+  --plane-shadow-color: #fc784f /*#ff91cf*/;
+}
+
 body {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   justify-content: center;
+  cursor: url("../images/cursor.png") 0 0, pointer;
+}
+
+#game {
+  height: 100dvh;
+  height: 100vh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  background: var(--background-color);
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+#game main {overflow:hidden;}
+#game #app canvas {
+  max-height: 80vh;
+  max-width: 100%;
+}
+#game #stars {
+  overflow: visible !important;
 }
 
 /* STARS */
@@ -37,42 +74,130 @@ body {
   }
 }
 
-#game {
-  height: 100dvh;
-  height: 100vh;
-  width: 100%;
-  display: grid;
-  place-items: center;
+#game h1 {
+  position: relative;
+  display: inline-block;
+  font-family: 'Work Sans', sans-serif;
+  text-transform: uppercase;
+  font-size: 5em;
+  z-index: 1;
+  margin: 0;
+  line-height: 1;
 }
-#game #app canvas {
-  max-height: 70vh;
-  max-width: 100%;
+#game h1 span {
+  color: transparent;
+  background: linear-gradient(#000000 0%,#113e87 22%,#10cccc 50%,#000000 51%,#e21ddc 78%,#ff91cf 78%,#ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-#game #stars {
-  overflow: visible !important;
+#game h1 span:before {
+  content: attr(text);
 }
-
-.btn-box {
-  display: flex;
-  gap: 0.5rem;
+#game h1 span:after {
+  content: attr(text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.2;
+  text-shadow: 3px 0px #fff, -3px 0px #fff, 0px 3px #fff, 0px -3px #fff, 3px 3px #fff, -3px -3px #fff, 3px -3px #fff, -3px 3px #fff;
 }
-.btn-box h3 {
+#game .shine {
+  position: absolute;
+  width: 5px;
+  height: 2px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 7px 2px #fff;
+  z-index: 3;
+}
+#game .shine.one {
+  top: 15%;
+  left: 4%;
+  animation: shine1 1000ms alternate infinite;
+}
+#game .shine.two {
+  top: 55%;
+  left: 20%;
+  animation: shine1 1500ms alternate infinite;
+}
+#game .shine.three {
+  top: 15%;
+  left: 40%;
+  animation: shine1 1700ms alternate infinite;
+}
+#game .shine.four {
+  top: 15%;
+  left: 80%;
+  animation: shine1 900ms alternate infinite;
+}
+#game .shine.five {
+  top: 55%;
+  left: 95%;
+  animation: shine1 1300ms alternate infinite;
+}
+@keyframes shine1 {
+  0% {
+    transform: rotate(0) scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: rotate(360deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(720deg) scale(0);
+    opacity: 0;
+  }
+}
+#home-button a {
   font-family: courier, monospace;
   font-size: 1.8rem;
   color: #fff;
   font-weight: 300;
   margin-top: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-animation: opacity 2s infinite;
+  animation: opacity 2s infinite;
+}
+@keyframes opacity {
+  0% {
+      opacity: 1;
+  } 50% {
+      opacity: 0;
+  } 100% {
+      opacity: 1;
+  }
+}
+
+.main-game {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+.side-bar .ui-btn, .side-bar button {
+  width: 100% !important;
+}
+
+.main-game h3 {
+  font-family: courier, monospace;
+  font-size: 1.8rem;
+  color: #fff;
+  font-weight: 300;
+  margin-top: 5px;
+  margin-bottom: 15px;
   text-align: center;
 }
-.btn-box img {
+.main-game img {
   max-height: 30px;
 }
 
-.btn-box button {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 80px;
-  padding-right: 80px;
+#game button {
+  padding: 12px 20px;
+  margin-bottom: 10px;
   background-color: transparent;
   -webkit-box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000,
     5px 5px 15px 5px rgba(255, 139, 253, 0);
@@ -80,8 +205,8 @@ body {
     5px 5px 15px 5px rgba(255, 139, 253, 0);
   border: 3px double var(--moon-background-color);
   border-radius: 3px;
-  color: var(--background-color) !important;
-  background: #fff !important;
+  color: var(--background-color);
+  background: #fff;
   font-weight: 600;
   font-size: 18px;
   font-family: courier, monospace;
@@ -92,6 +217,19 @@ body {
   gap: 0.5rem;
 }
 
+#game button:hover {
+  background: rgb(22, 247, 255, 0.7) !important;
+}
+
+.btn-box {
+  display: flex;
+  margin-top: 10px;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 90%;
+  margin-left: 0;
+  max-height: 20vh;
+
 .btn-box button:disabled {
   cursor: not-allowed;
   filter: brightness(0.5);
@@ -99,8 +237,18 @@ body {
 
 .btn-box i {
   font-size: 1.6rem;
-  text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
-    -1px 1px 0 #000, 1px 1px 0 #000;
+  text-shadow: 3px 3px 0 var(--moon-line-color), -1px -1px 0 var(--moon-background-color), 1px -1px 0 var(--moon-line-color), -1px 1px 0 var(--moon-background-color), 1px 1px 0 var(--moon-background-color);
+}
+
+.Power-buttons button {background-color: var(--background-color) !important;color: #fff !important;}
+.Power-buttons i {font-size:30px;}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 5px;
 }
 
 #heart-container {
@@ -115,30 +263,10 @@ body {
   aspect-ratio: 1;
 }
 
-.ui-btn {
-  background-color: rgb(255, 87, 87);
-  border-radius: 5px;
-  color: white;
-  font-size: 1.6rem;
-  padding: 0.5rem 1rem;
-  width: fit-content;
-}
-
-.ui-btn:hover {
-  background-color: red;
-  cursor: pointer;
-}
-#start {
-  background-color: rgb(51, 114, 51);
-}
-#start:hover {
-  background-color: green;
-}
-
 /* Timer - Hourglass */
 #timer {
   position: relative;
-  margin: 180px auto;
+  margin: auto;
   width: 80px;
   height: 80px;
   background: #ecf0f1;
@@ -303,3 +431,11 @@ body {
   }
 }
 /* END - timer / hourglass */
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .main-game {flex-direction: column;}
+  #game #app canvas {max-height: 90vh;}
+  .turret-buttons, .Power-buttons {display:flex; flex-direction: row;gap: 10px;}
+
+}
