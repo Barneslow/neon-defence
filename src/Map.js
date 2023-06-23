@@ -41,6 +41,7 @@ export default class MapScene extends Phaser.Scene {
   create() {
     const startBtn = document.getElementById("start");
     startBtn.addEventListener("click", this.startWave.bind(this));
+    this.startBtn = startBtn;
 
     const speedBtn = document.getElementById("speed-up");
     speedBtn.addEventListener("click", this.increaseGameSpeed.bind(this));
@@ -230,6 +231,9 @@ export default class MapScene extends Phaser.Scene {
   }
 
   startWave() {
+    // @ts-ignore
+    this.startBtn.disabled = true;
+    // @ts-ignore
     const previousTimers = this.time._active;
     // remove previous timer
     if (previousTimers.length > 0) {
@@ -297,9 +301,9 @@ export default class MapScene extends Phaser.Scene {
     }
     if (time > this.nextEnemy && this.waveArray.length === 0) {
       this.endWave();
+      this.startBtn.disabled = false;
     }
     if (this.timeUntilNextWave <= 0) {
-      console.log("next wave");
       this.startWave();
     }
   }

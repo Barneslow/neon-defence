@@ -92,6 +92,11 @@ body {
   gap: 0.5rem;
 }
 
+.btn-box button:disabled {
+  cursor: not-allowed;
+  filter: brightness(0.5);
+}
+
 .btn-box i {
   font-size: 1.6rem;
   text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
