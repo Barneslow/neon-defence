@@ -148,14 +148,12 @@ const attachModalEvents = (buttonElement, modalElement) => {
 // Dynaically render leaderboard
 async function renderLeaderBoardScores() {
   const leaderboardContainer = document.getElementById("leaderboard");
-  // leaderboardContainer.innerHTML = "";
+  leaderboardContainer.innerHTML = "";
 
   // Adding a loader while fetching
   const loader = document.createElement("div");
   loader.id = "loader";
   leaderboardContainer.appendChild(loader);
-
-  console.log(leaderboardContainer);
 
   try {
     const usersSnapshot = await getDocs(collection(firebaseDB, "users"));

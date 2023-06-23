@@ -68,7 +68,7 @@ export class Popup extends Phaser.GameObjects.Container {
     // Add the container to the scene
     scene.add.existing(this);
 
-    this.setDepth(1);
+    this.setDepth(3);
     this.visible = false;
   }
 
