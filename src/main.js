@@ -18,6 +18,8 @@ const config = {
 
 export default new Phaser.Game(config);
 
+// cursor change
+
 // Stars Background
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);

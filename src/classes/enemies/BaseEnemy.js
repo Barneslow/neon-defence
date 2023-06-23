@@ -7,7 +7,7 @@ export default class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
     scene.physics.add.existing(this);
     this.MapScene = scene;
     this.map = scene.map;
-    this.health = enemyObject.health;
+    this.health = enemyObject.health * scene.difficulty;
     this.currentHealth = enemyObject.health;
     this.initialMove = true;
     this.resources = enemyObject.resources;

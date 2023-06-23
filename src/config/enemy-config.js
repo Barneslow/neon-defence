@@ -1,7 +1,7 @@
 export const enemyClassTypes = {
   robot: {
     name: "robot",
-    sprite: "Robot2D",
+    sprite: "robot",
     health: 30,
     sound: {
       name: "dead",
@@ -10,16 +10,16 @@ export const enemyClassTypes = {
     speed: 50,
     resources: 10,
   },
-  boss: {
-    name: "boss",
-    sprite: "Boss",
-    health: 500,
+  heavybot: {
+    name: "heavybot",
+    sprite: "heavybot",
+    health: 50,
     sound: {
-      name: "dead-boss",
-      audio: "dead-boss",
+      name: "dead",
+      audio: "dead",
     },
-    speed: 25,
-    resources: 50,
+    speed: 40,
+    resources: 75,
   },
   spider: {
     name: "spider",
@@ -42,5 +42,27 @@ export const enemyClassTypes = {
     },
     speed: 75,
     resources: 50,
+  },
+  golem: {
+    name: "golem",
+    sprite: "golem",
+    health: 250,
+    sound: {
+      name: "dead",
+      audio: "dead",
+    },
+    speed: 30,
+    resources: 100,
+  },
+  boss: {
+    name: "boss",
+    sprite: "boss",
+    health: 500,
+    sound: {
+      name: "dead-boss",
+      audio: "dead-boss",
+    },
+    speed: 25,
+    resources: 250,
   },
 };
