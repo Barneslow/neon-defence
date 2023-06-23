@@ -192,6 +192,25 @@ body {
   cursor: pointer;
 }
 
+#electric:hover {
+  background-color: rgba(255, 255, 0, 0.8) !important;
+}
+#electric:hover > i {
+  color: black !important;
+}
+#fire:hover {
+  background-color: rgba(255, 0, 0, 0.8) !important;
+}
+#fire:hover > i {
+  color: black !important;
+}
+#freeze:hover {
+  background-color: rgba(128, 255, 212, 0.8) !important;
+}
+#freeze:hover > i {
+  color: black !important;
+}
+
 @keyframes opacity {
   0% {
     opacity: 1;
