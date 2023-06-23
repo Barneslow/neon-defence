@@ -28,6 +28,7 @@ export default class MapScene extends Phaser.Scene {
     this.speedMultiplyer = 1;
     this.difficulty = 1;
     this.timeUntilNextWave = 0;
+    this.isGamePaused = false;
   }
 
   preload() {
@@ -46,6 +47,15 @@ export default class MapScene extends Phaser.Scene {
 
     const speedBtn = document.getElementById("speed-up");
     speedBtn.addEventListener("click", this.increaseGameSpeed.bind(this));
+
+    const pauseBtn = document.getElementById("pause");
+    pauseBtn.addEventListener("click", this.togglePause.bind(this));
+
+    const modalPauseBtnClose = document
+      .getElementById("modalPause")
+      .querySelector(".close-button");
+
+    modalPauseBtnClose.addEventListener("click", this.togglePause.bind(this));
 
     const heartContainer = document.getElementById("heart-container");
     this.heartContainer = heartContainer;
@@ -100,7 +110,10 @@ export default class MapScene extends Phaser.Scene {
       padding: 10,
     });
 
-    this.waveTimeRemainingText = this.add.text(350, 0, `Time Until Next Wave: ${this.timeUntilNextWave}`,
+    this.waveTimeRemainingText = this.add.text(
+      350,
+      0,
+      `Time Until Next Wave: ${this.timeUntilNextWave}`,
       {
         fontSize: "24px",
         backgroundColor: "black",
@@ -199,7 +212,7 @@ export default class MapScene extends Phaser.Scene {
   }
 
   updateWaveTimeRemaining() {
-    console.log(this.timeUntilNextWave);
+    // console.log(this.timeUntilNextWave);
     this.waveTimeRemainingText.setText(
       `Time Until Next Wave: ${formatDuration(this.timeUntilNextWave)}`
     );
@@ -223,39 +236,21 @@ export default class MapScene extends Phaser.Scene {
     this.resources = newRes;
   }
 
+  togglePause() {
+    if (this.isGamePaused) {
+      this.physics.resume();
+      this.scene.resume();
+      this.isGamePaused = false;
+    } else {
+      this.physics.pause();
+      this.scene.pause();
+      this.isGamePaused = true;
+    }
+  }
+
   chooseTurretType(e) {
     const type = e.target.dataset.type;
     this.turretType = type;
-  }
-
-  startWave() {
-    this.startedGame = true;
-    // @ts-ignore
-    this.startBtn.disabled = true;
-    // @ts-ignore
-    const previousTimers = this.time._active;
-    // remove previous timer
-    if (previousTimers.length > 0) {
-      previousTimers.forEach((timer) => this.time.removeEvent(timer));
-    }
-
-    if (!this.isWaveInProgress) {
-      this.isWaveInProgress = true;
-      this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
-
-      const time = this.waveArray.length * 2000 + 22000;
-
-      this.timeUntilNextWave = time;
-
-      this.time.addEvent({
-        delay: 1000,
-        repeat: time / 1000,
-        callback: () => {
-          this.timeUntilNextWave = this.timeUntilNextWave - 1000;
-        },
-        callbackScope: this,
-      });
-    }
   }
 
   takeHeart() {
@@ -271,7 +266,6 @@ export default class MapScene extends Phaser.Scene {
     modalGameOver.setAttribute("open", "");
   }
 
-  
   spawnEnemiesForWave(enemyType) {
     let enemy;
     if (enemyType === "drone") {
@@ -283,6 +277,40 @@ export default class MapScene extends Phaser.Scene {
     this.waveArray.shift();
   }
 
+  startWave() {
+    this.startedGame = true;
+    // @ts-ignore
+    this.startBtn.disabled = true;
+    // @ts-ignore
+    const previousTimers = this.time._active;
+    // remove previous timer
+    if (previousTimers.length > 0) {
+      previousTimers.forEach((timer) => this.time.removeEvent(timer));
+    }
+
+    if (WAVE_DATA.length <= this.waveIndex) {
+      return;
+    }
+
+    if (!this.isWaveInProgress) {
+      this.isWaveInProgress = true;
+      this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
+
+      const time = this.waveArray.length * 2000;
+
+      this.timeUntilNextWave = time;
+
+      this.time.addEvent({
+        delay: 1000,
+        repeat: time / 1000,
+        callback: () => {
+          this.timeUntilNextWave = this.timeUntilNextWave - 1000;
+        },
+        callbackScope: this,
+      });
+    }
+  }
+
   endWave() {
     this.waveIndex++;
     this.isWaveInProgress = false;
@@ -290,13 +318,22 @@ export default class MapScene extends Phaser.Scene {
     this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
   }
 
+  victory() {
+    const modalGameOver = document.getElementById("modalGameOver");
+    modalGameOver.setAttribute("open", "");
+  }
+
   update(time, delta) {
     if (!this.startedGame) return;
+    this.updateWaveTimeRemaining();
+
+    if (this.enemies.getLength() === 0 && WAVE_DATA.length <= this.waveIndex) {
+      this.victory();
+    }
+
     if (this.timeUntilNextWave <= 0) {
-      console.log("next wave");
       this.startWave();
     }
-    this.updateWaveTimeRemaining();
     if (!this.isWaveInProgress) return;
 
     if (time > this.nextEnemy && this.waveArray.length > 0) {
@@ -343,15 +380,6 @@ function convertObjectToArray(obj) {
   }
 
   return array.filter((element) => element !== "enemies");
-}
-function createContainerText(scene, text) {
-  const containerElement = scene.add.rectangle(0, 0, 500, 100, 0x000000, 0.9);
-  const textElement = scene.add.text(10, 10, `Resources: ${scene.resources}`, {
-    fontSize: "24px",
-    fontFamily: "Work Sans",
-  });
-
-  return textElement;
 }
 
 function loadAllSprites(scene) {
