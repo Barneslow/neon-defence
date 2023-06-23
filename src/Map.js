@@ -193,6 +193,16 @@ export default class MapScene extends Phaser.Scene {
 
   purchaseTower(type, element) {
     if (this[type] === true) return;
+
+    if (this.resources < turretsClassTypes[type].cost) {
+      alert("Not Enough Res");
+      return;
+    }
+
+    this.resources = this.resources - turretsClassTypes[type].cost;
+    this.updateResources();
+
+    if (this[type] === true) return;
     let tileID;
 
     if (type === "electric") {
