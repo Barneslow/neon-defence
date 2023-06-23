@@ -258,14 +258,6 @@ export default class MapScene extends Phaser.Scene {
     if (time > this.nextEnemy && this.waveArray.length === 0) {
       this.endWave();
     }
-
-    // if (time > 1000 && this.boss === false) {
-    //   // CHANGE DURATION OF BOSS RESPAWN
-    //   const bigboy = new BaseEnemy(this, 0, 0, enemyClassTypes.boss);
-    //   this.enemies.add(bigboy);
-    //   this.boss = true;
-    //   // this.nextBoss = time + 10000;
-    // }
   }
 }
 
