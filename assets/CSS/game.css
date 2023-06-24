@@ -249,7 +249,7 @@ body {
   width: 95% !important;
   margin:0 auto;
 }
-
+.side-bar p {color:#fff;}
 .main-game h3 {
   font-family: courier,monospace;
   font-size: 1.6rem;
