@@ -144,27 +144,6 @@ const attachModalEvents = (buttonElement, modalElement) => {
   });
 };
 
-const attachModalEvents = (buttonElement, modalElement) => {
-  const closeButton = modalElement.querySelector(".close-button");
-
-  buttonElement.addEventListener("click", () => {
-    modalElement.setAttribute("open", "");
-    document.addEventListener("click", outsideClickHandler);
-  });
-
-  closeButton.addEventListener("click", () => {
-    modalElement.removeAttribute("open");
-    document.removeEventListener("click", outsideClickHandler);
-  });
-
-  const outsideClickHandler = (event) => {
-    if (!modalElement.contains(event.target)) {
-      modalElement.removeAttribute("open");
-      document.removeEventListener("click", outsideClickHandler);
-    }
-  };
-};
-
 // Dynaically render leaderboard
 async function renderLeaderBoardScores() {
   const leaderboardContainer = document.getElementById("leaderboard");
