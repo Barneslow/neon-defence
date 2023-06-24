@@ -1,6 +1,6 @@
 import gameMap from "../assets/json/2DTowerDefense.json";
 
-import map2Dsprites from "../assets/images/2Dsprites.png";
+import map2Dsprites from "../assets/images/2DSprites.png";
 
 // Enemy imports
 import boss from "../assets/images/enemies/boss.png";
