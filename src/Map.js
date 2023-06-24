@@ -37,7 +37,7 @@ export default class MapScene extends Phaser.Scene {
 
   preload() {
     this.load.tilemapTiledJSON("map", Sprites.gameMap);
-    this.load.image("tiles", Sprites.map2Dsprites);
+    this.load.image("tiles", "../assets/images/2Dsprites.png");
 
     loadAllSprites(this);
 
@@ -441,62 +441,54 @@ function convertObjectToArray(obj) {
 
 function loadAllSprites(scene) {
   // Turret Sprites
-  scene.load.image("turret", Sprites.turret);
-  scene.load.image("turret2", Sprites.turret2);
-  scene.load.image("turret3", Sprites.turret3);
-
-  // Laser Sprites
-  scene.load.image("laser", Sprites.laser);
-  scene.load.image("laser2", Sprites.laser2);
-  scene.load.image("laser3", Sprites.laser3);
-
-  // Shotgun Sprites
-  scene.load.image("shotgun", Sprites.shotgun);
-  scene.load.image("shotgun2", Sprites.shotgun2);
-  scene.load.image("shotgun3", Sprites.shotgun3);
-
-  // Human Sprites
-  scene.load.image("human", Sprites.human);
-  scene.load.image("human2", Sprites.human2);
-  scene.load.image("human3", Sprites.human3);
-
-  // Electric Sprites
-  scene.load.image("electric", Sprites.electricTowerActive);
-  scene.load.image("electric-inactive", Sprites.electricTowerInactive);
-
-  // Freeze Sprites
-  scene.load.image("freeze", Sprites.fireTowerActive);
-  scene.load.image("freeze-inactive", Sprites.fireTowerInActive);
-
-  // Fire Sprites
-  scene.load.image("fire", Sprites.freezeTowerActive);
-  scene.load.image("fire-inactive", Sprites.freezeTowerInactive);
-
-  // Enemy Sprites
-  scene.load.image("robot", Sprites.robot);
-  scene.load.image("heavybot", Sprites.heavyBot);
-  scene.load.image("spider", Sprites.spider);
-  scene.load.image("drone", Sprites.drone);
-  scene.load.image("golem", Sprites.golem);
-  scene.load.image("boss", Sprites.boss);
-
-  // Bullet Sprites
-  scene.load.image("bullet", Sprites.bullet);
-  scene.load.image("ShotGunBullet", Sprites.shotgunBullet);
-  scene.load.image("HumanBullet", Sprites.humanBullet);
+  // scene.load.image("turret", Sprites.turret);
+  // scene.load.image("turret2", Sprites.turret2);
+  // scene.load.image("turret3", Sprites.turret3);
+  // // Laser Sprites
+  // scene.load.image("laser", Sprites.laser);
+  // scene.load.image("laser2", Sprites.laser2);
+  // scene.load.image("laser3", Sprites.laser3);
+  // // Shotgun Sprites
+  // scene.load.image("shotgun", Sprites.shotgun);
+  // scene.load.image("shotgun2", Sprites.shotgun2);
+  // scene.load.image("shotgun3", Sprites.shotgun3);
+  // // Human Sprites
+  // scene.load.image("human", Sprites.human);
+  // scene.load.image("human2", Sprites.human2);
+  // scene.load.image("human3", Sprites.human3);
+  // // Electric Sprites
+  // scene.load.image("electric", Sprites.electricTowerActive);
+  // scene.load.image("electric-inactive", Sprites.electricTowerInactive);
+  // // Freeze Sprites
+  // scene.load.image("freeze", Sprites.fireTowerActive);
+  // scene.load.image("freeze-inactive", Sprites.fireTowerInActive);
+  // // Fire Sprites
+  // scene.load.image("fire", Sprites.freezeTowerActive);
+  // scene.load.image("fire-inactive", Sprites.freezeTowerInactive);
+  // // Enemy Sprites
+  // scene.load.image("robot", Sprites.robot);
+  // scene.load.image("heavybot", Sprites.heavyBot);
+  // scene.load.image("spider", Sprites.spider);
+  // scene.load.image("drone", Sprites.drone);
+  // scene.load.image("golem", Sprites.golem);
+  // scene.load.image("boss", Sprites.boss);
+  // // Bullet Sprites
+  // scene.load.image("bullet", Sprites.bullet);
+  // scene.load.image("ShotGunBullet", Sprites.shotgunBullet);
+  // scene.load.image("HumanBullet", Sprites.humanBullet);
 }
 
 function loadAllAudio(scene) {
-  // scene.load.audio("electric-audio", [
-  //   require(`assets/sounds/electricity.mp3`),
-  // ]);
-  // scene.load.audio("fire-audio", [require("assets/sounds/fire.mp3")]);
-  // scene.load.audio("freeze-audio", [require("assets/sounds/freeze.mp3")]);
-  // scene.load.audio("power-up", [require("assets/sounds/power-up.mp3")]);
-  // scene.load.audio("laser", [require("assets/sounds/laser.mp3")]);
-  // scene.load.audio("bulletsound", [require("assets/sounds/BulletSound.mp3")]);
-  // scene.load.audio("dead", [require("assets/sounds/dead-enemy.mp3")]);
-  // scene.load.audio("dead-boss", [require("assets/sounds/dead-boss.mp3")]);
+  scene.load.audio("electric-audio", [
+    require(`/assets/sounds/electricity.mp3`),
+  ]);
+  scene.load.audio("fire-audio", [require("../assets/sounds/fire.mp3")]);
+  scene.load.audio("freeze-audio", [require("/assets/sounds/freeze.mp3")]);
+  scene.load.audio("power-up", [require("/assets/sounds/power-up.mp3")]);
+  scene.load.audio("laser", [require("/assets/sounds/laser.mp3")]);
+  scene.load.audio("bulletsound", [require("/assets/sounds/BulletSound.mp3")]);
+  scene.load.audio("dead", [require("/assets/sounds/dead-enemy.mp3")]);
+  scene.load.audio("dead-boss", [require("/assets/sounds/dead-boss.mp3")]);
 }
 
 async function saveUserHighScore(score) {
