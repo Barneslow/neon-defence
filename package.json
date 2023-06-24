@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "vite",
-    "build": "vite build"
+    "start": "parcel index.html",
+    "build": "parcel build index.html "
   },
   "devDependencies": {
     "@parcel/packager-raw-url": "^2.9.2",
