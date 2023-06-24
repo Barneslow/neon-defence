@@ -39,7 +39,7 @@ export default class MapScene extends Phaser.Scene {
     this.load.tilemapTiledJSON("map", Sprites.gameMap);
     this.load.image("tiles", "../assets/images/2Dsprites.png");
 
-    loadAllSprites(this);
+    // loadAllSprites(this);
 
     loadAllAudio(this);
   }
