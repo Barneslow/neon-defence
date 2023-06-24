@@ -60,11 +60,20 @@ const attachModalEvents = (buttonElement, modalElement) => {
 
   buttonElement.addEventListener("click", () => {
     modalElement.setAttribute("open", "");
+    document.addEventListener("click", outsideClickHandler);
   });
 
   closeButton.addEventListener("click", () => {
     modalElement.removeAttribute("open");
+    document.removeEventListener("click", outsideClickHandler);
   });
+
+  const outsideClickHandler = (event) => {
+    if (!modalElement.contains(event.target)) {
+      modalElement.removeAttribute("open");
+      document.removeEventListener("click", outsideClickHandler);
+    }
+  };
 };
 
 // Pause game:

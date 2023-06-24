@@ -283,14 +283,21 @@ body {
   align-items: center;
   gap: 0.5rem;
 }
-
 #game button:hover {
   background: rgb(22, 247, 255, 0.7);
 }
 
 .close-button {
-  padding: 8px 14px !important;
+  padding: 8px 14px!important;
+  background: var(--background-color) !important;
+  color: var(--moon-line-color) !important;
+  border-radius: 100px !important;
+  border: 3px double var(--moon-line-color) !important;
   font-size: 20px;
+}
+button.btn.close-button:hover {
+  border: 3px double var(--moon-background-color) !important;
+  color: #fff !important;
 }
 
 .btn-box {
