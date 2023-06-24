@@ -1,56 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Neon Defence: A fast-paced, strategic tower defense game. Build and upgrade turrets to defend against relentless waves of enemies in a vibrant neon world."
-    />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/assets/favicon/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/assets/favicon/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/assets/favicon/favicon-16x16.png"
-    />
-    <link rel="manifest" href="/assets/favicon/site.webmanifest" />
-    <link
-      rel="mask-icon"
-      href="/assets/favicon/safari-pinned-tab.svg"
-      color="#350c56"
-    />
-    <link rel="shortcut icon" href="/assets/favicon/favicon.ico" />
-    <meta name="msapplication-TileColor" content="#350c56" />
-    <meta
-      name="msapplication-config"
-      content="/assets/favicon/browserconfig.xml"
-    />
-    <meta name="theme-color" content="#ffffff" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Neon Defence: A fast-paced, strategic tower defense game. Build and upgrade turrets to defend against relentless waves of enemies in a vibrant neon world." />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-    <title>Neon Defence - Intro</title>
-    <link rel="stylesheet" href="./assets/CSS/style.css" />
-  </head>
-  <body id="intro">
-    <main>
-      <div class="startails">
-        <div class="startail-r"></div>
-        <div class="startail-l"></div>
-        <div class="startail-m"></div>
-      </div>
-      <header id="introHeader">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png" />
+  <link rel="manifest" href="/assets/favicon/site.webmanifest" />
+  <link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#350c56" />
+  <link rel="shortcut icon" href="/assets/favicon/favicon.ico" />
+  <meta name="msapplication-TileColor" content="#350c56" />
+  <meta name="msapplication-config" content="/assets/favicon/browserconfig.xml" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <title>Neon Defence - Intro</title>
+  <link rel="stylesheet" href="./assets/CSS/style.css" />
+</head>
+
+<body id="intro">
+  <main>
+    <div class="startails">
+      <div class="startail-r"></div>
+      <div class="startail-l"></div>
+      <div class="startail-m"></div>
+    </div>
+    <header id="introHeader">
+      <h1 class="title">
+        <span text="NEON DEFENCE"></span>
+        <div class="shine one"></div>
+        <div class="shine two"></div>
+        <div class="shine three"></div>
+        <div class="shine four"></div>
+        <div class="shine five"></div>
+      </h1>
+      <p><a id="start-button">START GAME</a></p>
+    </header>
+    <section id="menu" style="display: none">
+      <div class="menu-content">
         <h1 class="title">
           <span text="NEON DEFENCE"></span>
           <div class="shine one"></div>
@@ -59,29 +50,17 @@
           <div class="shine four"></div>
           <div class="shine five"></div>
         </h1>
-        <p><a id="start-button">START GAME</a></p>
-      </header>
-      <section id="menu" style="display: none">
-        <div class="menu-content">
-          <h1 class="title">
-            <span text="NEON DEFENCE"></span>
-            <div class="shine one"></div>
-            <div class="shine two"></div>
-            <div class="shine three"></div>
-            <div class="shine four"></div>
-            <div class="shine five"></div>
-          </h1>
 
-          <!-- Sign-in Modal -->
-          <button id="signin-btn">Sign In / Guest</button>
-          <dialog id="modalSignin">
-            <div class="modal">
-              <button class="btn close-button" data-close-modal="">
-                &times;
-              </button>
-              <div class="modal-content">
-                <!-- <h2>Sign In</h2> -->
-                <!-- <form id="login-form" onsubmit="login(event)">
+        <!-- Sign-in Modal -->
+        <button id="signin-btn">Sign In / Guest</button>
+        <dialog id="modalSignin">
+          <div class="modal">
+            <button class="btn close-button" data-close-modal="">
+              &times;
+            </button>
+            <div class="modal-content">
+              <!-- <h2>Sign In</h2> -->
+              <!-- <form id="login-form" onsubmit="login(event)">
                   <input
                     type="text"
                     id="name-input"
@@ -102,42 +81,38 @@
                   />
                   <button type="submit">Sign In</button>
                 </form> -->
-                <button id="google-signin-btn">
-                  Sign In with Google
-                  <img
-                    src="/assets/images/google.png"
-                    alt="google icon"
-                    style="height: 30px"
-                  />
-                </button>
-                <h3>OR</h3>
-                <button id="guest-btn" onclick="playAsGuest()">Play as Guest</button>
+              <button id="google-signin-btn">
+                Sign In with Google
+                <img src="/assets/images/google.png" alt="google icon" style="height: 30px" />
+              </button>
+              <h3>OR</h3>
+              <button id="guest-btn" onclick="playAsGuest()">Play as Guest</button>
+            </div>
+          </div>
+        </dialog>
+
+        <!-- Start Button-->
+        <button class="start">
+          <a style="text-decoration: none" id="start" href="game.html">Start Game</a>
+        </button>
+
+        <!-- Leaderboard Modal -->
+        <button id="leaderboard-button">Leaderboard</button>
+        <dialog id="modalLeaderboard">
+          <div class="modal">
+            <button class="close-button">&times;</button>
+            <h2>Leaderboard</h2>
+            <div id="leaderboard">
+              <div class="leaderboard-score">
+                <h3>Darrach</h3>
+                <h3>5010204</h3>
               </div>
             </div>
-          </dialog>
+          </div>
+        </dialog>
 
-          <!-- Start Button-->
-          <button class="start">
-            <a style="text-decoration: none" id="start"href="game.html">Start Game</a>
-          </button>
 
-          <!-- Leaderboard Modal -->
-          <button id="leaderboard-button">Leaderboard</button>
-          <dialog id="modalLeaderboard">
-            <div class="modal">
-              <button class="close-button">&times;</button>
-              <h2>Leaderboard</h2>
-              <div id="leaderboard">
-                <div class="leaderboard-score">
-                  <h3>Darrach</h3>
-                  <h3>5010204</h3>
-                </div>
-              </div>
-            </div>
-          </dialog>
-
-          
-          <!-- <div class="dropdown">
+        <!-- <div class="dropdown">
             <button id="dropbtn" class="dropbtn">Select Mode</button>
             <div class="dropdown-content">
               <a id="easy">Easy</a>
@@ -146,164 +121,124 @@
             </div>
           </div> -->
 
-          <!-- How to Play Modal -->
-          <button id="how-to-play-button">How to Play Modal</button>
-          <dialog id="modalHowToPlay">
-            <div class="modal">
-              <button class="btn close-button" data-close-modal="">
-                &times;
-              </button>
-              <h2>How to Play:</h2>
-              <h3>Welcome to Neon Defense!</h3>
-              <p>
-                Neon City is under attack. We need you to defend it! To
-                accomplish this task, you'll find several turrets with
-                differents properties such as :
-              </p>
-              <ul>
-                <li>
-                  <h4>AutoTurret</h4>
-                  <p>This turret is the basic turret.But it does the job!</p>
-                </li>
-                <li>
-                  <h4>LaserTurret</h4>
-                  <p>This turret shoots a laser and deals damage on time.</p>
-                </li>
-                <li>
-                  <h4>ShotGunTurret</h4>
-                  <p>
-                    This turret shoots several bullets on a short range! Ideal
-                    for a burst !
-                  </p>
-                </li>
-                <li>
-                  <h4>UserControlledTurret</h4>
-                  <p>
-                    This turret allows you to aim at your enemies ! It's the
-                    weakness of drones
-                  </p>
-                </li>
-              </ul>
-              <p>
-                And you can use different Power Turrets such as the Fire, the
-                Electric, and the Freeze one
-              </p>
-              <p>
-                You'll be meeting a lot of differents enemies while defending
-                Neon City
-              </p>
-              <p>Make sure to use all the abilities you have to survive!</p>
+        <!-- How to Play Modal -->
+        <button id="how-to-play-button">How to Play Modal</button>
+        <dialog id="modalHowToPlay">
+          <div class="modal">
+            <button class="btn close-button" data-close-modal="">&times; </button>
+            <h1>How to Play:</h1>
+            <br>
+            <h2>Welcome to Neon Defense!</h2>
+            <h3>Neon City is under attack. We need you to defend it!</h3>
+            <br>
+            <ol>
+              <li> Use the in-game resources to construct and place turrets strategically.</li>
+              <li> To place a turret, click on the type of turrets you'd like to place.</li>
+              <li>Then click on the tile with the little sun to place it. <img src="./assets/images/turret-marker.png"
+                  alt="turret marker" /></li>
+              <li>Repeat until finished.</li>
+              <li>You can sell a turret by clicking on it , but it'll give you half the resources it cost back. <img
+                  src="./assets/images/sell-turret.png" alt="sell turret" /></li>
+              <li>Press the Start Button. You can also pause the Game anytime, by pressing the pause button. <img
+                  src="./assets/images/start-pause.png" alt="start and pause buttons" /></li>
+              <li>During the Game you can use the Power Turrets. First you need to purchase these. Each has their own
+                unique ability (Fire, Electrify and Freeze). Power Turrets are automatically placed when you click on
+                their buttons and are not moveable.</li>
+            </ol>
+            <br>
+            <p>You'll be meeting a lot of different enemies while defending Neon City. Make sure to use all the
+              abilities you have to survive!</p>
 
-              <p>
-                To place a turret, select the turret you want to place, and
-                click on the blue circle on the map.
-              </p>
-              <p>
-                Power turrets have predefined emplacements and a global range.
-              </p>
-              <p>Drones are only affected by usercontrolled turrets.</p>
-              <p>
-                Everytime an enemy manages to get through the Neon Sun , you
-                lose a life.
-              </p>
-              <p>
-                If you run out of hearts, Neon City is lost and taken over by
-                the Robot Army.
-              </p>
-              <h3>DevGames Hackathon - June 2023</h3>
-            </div>
-          </dialog>
+            <p>To place a turret, select the turret you want to place, and click on the blue circle on the map <img
+                src="./assets/images/turret-marker.png" alt="turret marker" />.</p>
+            <p>Power turrets have predefined emplacements and a global range.</p>
+            <p>Drones are only affected by user-controlled turrets.</p>
+            <p>Every time an enemy manages to get through the Neon Sun, you lose a life. If you run out of hearts <img
+                src="./assets/images/life-heart.png" alt="heart" />, Neon
+              City is lost and taken over by the Robot Army.</p>
+            <br>
+            <br>
+            <h2>Game Mechanics explained:</h2>
+            <p>To accomplish this task, you'll find several turrets with different properties such as:</p>
+            <ul>
+              <li>
+                <strong>Auto Turret:</strong> <img src="./assets/images/Turret2DHUD.png" alt="auto turret" />
+                <p>This turret is the basic turret. But it does the job!</p>
+              </li>
+              <li>
+                <strong>Laser Turret:</strong> <img src="./assets/images/LaserTurretHUD.png" alt="laser turret" />
+                <p>This turret shoots a laser and deals damage over time.</p>
+              </li>
+              <li>
+                <strong>Shotgun Turret:</strong> <img src="./assets/images/ShotGunTurretHUD.png" alt="shotgun turret" />
+                <p>This turret shoots several bullets at a short range! Ideal for bursts!</p>
+              </li>
+              <li>
+                <strong>Human controlled Turret:</strong> <img src="./assets/images/turrets/HumanTurret.png"
+                  alt="plasma turret" />
+                <p>This turret is controlled by you. It allows you, the player, to take control and manually aim and
+                  shoot at enemies.</p>
+              </li>
+            </ul>
+            <p>You can also use different Power Turrets such as:
+            <ul>
+              <li>
+                <strong>Fire:</strong> <img src="./assets/images/FireTowerHUD.png" alt="fire turret" />
+                <p>This turret burns the enemies.</p>
+              </li>
+              <li>
+                <strong>Electric:</strong> <img src="./assets/images/ElectricTowerHUD.png" alt="electric turret" />
+                <p>This turret electrifies the enemies.</p>
+              </li>
+              <li>
+                <strong>Freeze:</strong> <img src="./assets/images/FreezeTowerHUD.png" alt="freeze turret" />
+                <p>This turret freezes the enemies.</p>
+              </li>
+            </ul>
+            <br>
+            <small>DevGames Hackathon - June 2023</small>
+          </div>
+        </dialog>
 
-          <!-- Credits Modal -->
-          <button id="credits-button">Credits</button>
-          <dialog id="modalCredits" data-modal="">
-            <div class="modal">
-              <button class="btn close-button" data-close-modal="">
-                &times;
-              </button>
-              <h2>Credits:</h2>
-              <h3>DevGames Hackathon - June 2023</h3>
-              <ul>
-                <li class="darrach">
-                  <img
-                    src="https://ca.slack-edge.com/T0L30B202-U053H23P673-6de9e16f0259-512"
-                    alt="darrach barneveld"
-                  />
-                  <a href="https://github.com/DarrachBarneveld" target="_blank"
-                    >Darrach Barneveld</a
-                  >
-                </li>
-                <li class="devan">
-                  <img
-                    src="https://ca.slack-edge.com/T0L30B202-UFU8HB2UW-e3a5147cb84f-512"
-                    alt="pdevan cadman"
-                  />
-                  <a href="https://github.com/devan-cadman" target="_blank"
-                    >Devan Cadman</a
-                  >
-                </li>
-                <li class="tanguy">
-                  <img
-                    src="https://ca.slack-edge.com/T0L30B202-U04NK9J1E7K-59cf6c5af8d9-512"
-                    alt="Tanguy L'Alexandre"
-                  />
-                  <a href="https://github.com/tlalexandre" target="_blank"
-                    >Tanguy L'Alexandre</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </dialog>
-        </div>
-      </section>
+        <!-- Credits Modal -->
+        <button id="credits-button">Credits</button>
+        <dialog id="modalCredits" data-modal="">
+          <div class="modal">
+            <button class="btn close-button" data-close-modal="">
+              &times;
+            </button>
+            <h2>Credits:</h2>
+            <h3>DevGames Hackathon - June 2023</h3>
+            <ul>
+              <li class="darrach">
+                <img src="https://ca.slack-edge.com/T0L30B202-U053H23P673-6de9e16f0259-512" alt="darrach barneveld" />
+                <a href="https://github.com/DarrachBarneveld" target="_blank">Darrach Barneveld</a>
+              </li>
+              <li class="devan">
+                <img src="https://ca.slack-edge.com/T0L30B202-UFU8HB2UW-e3a5147cb84f-512" alt="pdevan cadman" />
+                <a href="https://github.com/devan-cadman" target="_blank">Devan Cadman</a>
+              </li>
+              <li class="tanguy">
+                <img src="https://ca.slack-edge.com/T0L30B202-U04NK9J1E7K-59cf6c5af8d9-512" alt="Tanguy L'Alexandre" />
+                <a href="https://github.com/tlalexandre" target="_blank">Tanguy L'Alexandre</a>
+              </li>
+            </ul>
+          </div>
+        </dialog>
+      </div>
+    </section>
 
-      <section class="sky">
-        <div id="stars"></div>
-        <div class="mountains">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="310"
-            preserveAspectRatio="none"
-            viewBox="0 0 299.77291 82.020832"
-            width="1133"
-          >
-            <path
-              d="M0 21.499L22.06 9.09l7.56 23.435 6.047-9.827 15.875 20.41 6.804-8.315 12.851 10.583 11.34-9.827 27.214 18.899 13.607-3.78 10.583 4.536 28.726-11.34 36.286 9.072 6.804-9.072 19.654 3.024 14.363-15.875 16.631 8.316 3.78-24.947 17.387 15.875L289.667.021l10.106 24.196v57.804H0V21.499z"
-            ></path>
-          </svg>
-        </div>
-        <div class="moon">
-          <div class="lines">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-          </div>
-        </div>
-      </section>
-      <div class="plane">
-        <div class="vlines">
-          <div class="left">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-          </div>
-          <div class="right">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-          </div>
-        </div>
+    <section class="sky">
+      <div id="stars"></div>
+      <div class="mountains">
+        <svg xmlns="http://www.w3.org/2000/svg" height="310" preserveAspectRatio="none"
+          viewBox="0 0 299.77291 82.020832" width="1133">
+          <path
+            d="M0 21.499L22.06 9.09l7.56 23.435 6.047-9.827 15.875 20.41 6.804-8.315 12.851 10.583 11.34-9.827 27.214 18.899 13.607-3.78 10.583 4.536 28.726-11.34 36.286 9.072 6.804-9.072 19.654 3.024 14.363-15.875 16.631 8.316 3.78-24.947 17.387 15.875L289.667.021l10.106 24.196v57.804H0V21.499z">
+          </path>
+        </svg>
+      </div>
+      <div class="moon">
         <div class="lines">
           <div class="line"></div>
           <div class="line"></div>
@@ -317,61 +252,70 @@
           <div class="line"></div>
         </div>
       </div>
-
-      <audio loop="loop" id="synthwave-track">
-        <source src="./assets/sounds/synthwave-80s.mp3" type="audio/mp3" />
-      </audio>
-      <button id="music">
-        <svg
-          class="play"
-          xmlns="http://www.w3.org/2000/svg"
-          width="21.25"
-          height="17.5"
-          viewBox="0 0 21.25 17.5"
-        >
-          <path
-            d="M1.25-11.25v7.5h5l5.625,5H13.75v-17.5H11.875l-5.625,5Zm16,6.75a3.745,3.745,0,0,0,1.5-3,3.745,3.745,0,0,0-1.5-3L16.125-9a1.87,1.87,0,0,1,.75,1.5,1.87,1.87,0,0,1-.75,1.5Zm2.25,3a7.491,7.491,0,0,0,3-6,7.491,7.491,0,0,0-3-6L18.375-12a5.615,5.615,0,0,1,2.25,4.5A5.615,5.615,0,0,1,18.375-3L19.5-1.5Z"
-            transform="translate(-1.25 16.25)"
-            fill="var(--labs-sys-color-volume)"
-          ></path>
-        </svg>
-        <svg
-          class="muted"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24.996"
-          height="19.992"
-          viewBox="0 0 24.996 19.992"
-        >
-          <path
-            d="M1.891-16.922,1.148-17.5,0-16.016l.742.574L23.105,1.922l.742.574L25,1.016,24.254.441,21.238-1.9A7.48,7.48,0,0,0,23.75-7.5a7.491,7.491,0,0,0-3-6L19.625-12a5.615,5.615,0,0,1,2.25,4.5,5.611,5.611,0,0,1-2.152,4.426L15-6.742V-16.25H13.125l-4.836,4.3-6.4-4.969ZM2.5-11.25v7.5h5l5.625,5H15V-1.934L3.172-11.25H2.5Zm16,6.75a3.745,3.745,0,0,0,1.5-3,3.745,3.745,0,0,0-1.5-3L17.375-9a1.87,1.87,0,0,1,.75,1.5,1.87,1.87,0,0,1-.75,1.5Z"
-            transform="translate(0 17.496)"
-            fill="var(--labs-sys-color-volume)"
-          ></path>
-        </svg>
-      </button>
-
-      <div class="copywrite">
-        <small
-          >Copyright © 2021 Neon Defence Music by
-          <a
-            href="https://pixabay.com/users/alexiaction-26977400/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=110045"
-            >AlexiAction</a
-          >
-          from<a
-            href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=110045"
-            >Pixabay</a
-          ></small
-        >
+    </section>
+    <div class="plane">
+      <div class="vlines">
+        <div class="left">
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
+        <div class="right">
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
       </div>
-    </main>
-
-    <div id="warning-message">
-      <p>
-        Please rotate your device to landscape mode for an optimal game
-        experience.
-      </p>
+      <div class="lines">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
     </div>
-    <script type="module" src="src/intro.js"></script>
-    <script type="module" src="src/intro.js"></script>
-  </body>
+
+    <audio loop="loop" id="synthwave-track">
+      <source src="./assets/sounds/synthwave-80s.mp3" type="audio/mp3" />
+    </audio>
+    <button id="music">
+      <svg class="play" xmlns="http://www.w3.org/2000/svg" width="21.25" height="17.5" viewBox="0 0 21.25 17.5">
+        <path
+          d="M1.25-11.25v7.5h5l5.625,5H13.75v-17.5H11.875l-5.625,5Zm16,6.75a3.745,3.745,0,0,0,1.5-3,3.745,3.745,0,0,0-1.5-3L16.125-9a1.87,1.87,0,0,1,.75,1.5,1.87,1.87,0,0,1-.75,1.5Zm2.25,3a7.491,7.491,0,0,0,3-6,7.491,7.491,0,0,0-3-6L18.375-12a5.615,5.615,0,0,1,2.25,4.5A5.615,5.615,0,0,1,18.375-3L19.5-1.5Z"
+          transform="translate(-1.25 16.25)" fill="var(--labs-sys-color-volume)"></path>
+      </svg>
+      <svg class="muted" xmlns="http://www.w3.org/2000/svg" width="24.996" height="19.992" viewBox="0 0 24.996 19.992">
+        <path
+          d="M1.891-16.922,1.148-17.5,0-16.016l.742.574L23.105,1.922l.742.574L25,1.016,24.254.441,21.238-1.9A7.48,7.48,0,0,0,23.75-7.5a7.491,7.491,0,0,0-3-6L19.625-12a5.615,5.615,0,0,1,2.25,4.5,5.611,5.611,0,0,1-2.152,4.426L15-6.742V-16.25H13.125l-4.836,4.3-6.4-4.969ZM2.5-11.25v7.5h5l5.625,5H15V-1.934L3.172-11.25H2.5Zm16,6.75a3.745,3.745,0,0,0,1.5-3,3.745,3.745,0,0,0-1.5-3L17.375-9a1.87,1.87,0,0,1,.75,1.5,1.87,1.87,0,0,1-.75,1.5Z"
+          transform="translate(0 17.496)" fill="var(--labs-sys-color-volume)"></path>
+      </svg>
+    </button>
+
+    <div class="copywrite">
+      <small>Copyright © 2021 Neon Defence Music by
+        <a
+          href="https://pixabay.com/users/alexiaction-26977400/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=110045">AlexiAction</a>
+        from<a
+          href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=110045">Pixabay</a></small>
+    </div>
+  </main>
+
+  <div id="warning-message">
+    <p>
+      Please rotate your device to landscape mode for an optimal game
+      experience.
+    </p>
+  </div>
+  <script type="module" src="src/intro.js"></script>
+</body>
+
 </html>
