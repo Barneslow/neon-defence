@@ -595,6 +595,8 @@ small a {
   border-radius: 3px;
   border: 3px double var(--moon-line-color);
   background-color: transparent;
+  margin-bottom: 10px;
+  padding: 12px 20px;
   font-weight: 600;
   font-size: 18px;
   font-family: courier, monospace;
