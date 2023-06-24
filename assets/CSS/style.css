@@ -62,9 +62,20 @@ a {
   align-items: center;
   gap: 0.25rem;
 }
+
+/* How to Play */
 #modalHowToPlay {
   font-size: 1.2rem;
 }
+#modalHowToPlay .modal {
+  display: block;
+  text-align: left;
+}
+#modalHowToPlay .modal .close-button {float: right;}
+#modalHowToPlay .modal h1 {font-size: 2.5rem;margin-bottom:3rem;}
+#modalHowToPlay .modal h1, #modalHowToPlay .modal h2, #modalHowToPlay .modal h3 {text-align: center;margin-bottom:1rem}
+#modalHowToPlay .modal small {color: var(--moon-background-color);font-weight: bolder;}
+/* END - How to Play */
 
 /* Header */
 #intro header {
