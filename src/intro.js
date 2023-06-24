@@ -137,6 +137,18 @@ const attachModalEvents = (buttonElement, modalElement) => {
 
   buttonElement.addEventListener("click", () => {
     modalElement.setAttribute("open", "");
+  });
+
+  closeButton.addEventListener("click", () => {
+    modalElement.removeAttribute("open");
+  });
+};
+
+const attachModalEvents = (buttonElement, modalElement) => {
+  const closeButton = modalElement.querySelector(".close-button");
+
+  buttonElement.addEventListener("click", () => {
+    modalElement.setAttribute("open", "");
     document.addEventListener("click", outsideClickHandler);
   });
 
