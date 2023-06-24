@@ -487,28 +487,20 @@ function loadAllSprites(scene) {
 }
 
 function loadAllAudio(scene) {
-  scene.load.audio("electric-audio", electricAudio);
+  scene.load.audio("electric-audio", [
+    require(`url:/assets/sounds/electricity.mp3`),
+  ]);
+  scene.load.audio("fire-audio", [require("url:/assets/sounds/fire.mp3")]);
+  scene.load.audio("freeze-audio", [require("url:/assets/sounds/freeze.mp3")]);
+  scene.load.audio("power-up", [require("url:/assets/sounds/power-up.mp3")]);
+  scene.load.audio("laser", [require("url:/assets/sounds/laser.mp3")]);
 
-  scene.load.audio("fire-audio", fireAudio);
-  scene.load.audio("freeze-audio", freezeAudio);
-
-  scene.load.audio("power-up", powerUpAudio);
-  scene.load.audio("laser", laserAudio);
-
-  scene.load.audio("bulletsound", bulletAudio);
-  scene.load.audio("dead", deadEnemyAudio);
-  scene.load.audio("dead-boss", deadBossAudio);
+  scene.load.audio("bulletsound", [
+    require("url:/assets/sounds/BulletSound.mp3"),
+  ]);
+  scene.load.audio("dead", [require("url:/assets/sounds/dead-enemy.mp3")]);
+  scene.load.audio("dead-boss", [require("url:/assets/sounds/dead-boss.mp3")]);
 }
-
-const deadBossAudio = require("url:/assets/sounds/dead-boss.mp3");
-const deadEnemyAudio = require("url:/assets/sounds/dead-enemy.mp3");
-const bulletAudio = require("url:/assets/sounds/BulletSound.mp3");
-const laserAudio = require("url:/assets/sounds/laser.mp3");
-const powerUpAudio = require("url:/assets/sounds/power-up.mp3");
-const fireAudio = require("url:/assets/sounds/fire.mp3");
-const freezeAudio = require("url:/assets/sounds/freeze.mp3");
-const electricAudio = require("url:/assets/sounds/electricity.mp3");
-console.log(electricAudio);
 
 async function saveUserHighScore(score) {
   if (!firebaseAuth.currentUser) return;
