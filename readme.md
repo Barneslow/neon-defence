@@ -7,70 +7,72 @@ Neon Defence is an exciting tower defence game where your objective is to protec
 ![GitHub contributors](https://img.shields.io/github/contributors/Barneslow/neon-defence?color=orange)
 ![GitHub language count](https://img.shields.io/github/languages/count/Barneslow/neon-defence?color=yellow)
 ![GitHub top language](https://img.shields.io/github/languages/top/Barneslow/neon-defence?color=green)
-![W3C Validation](https://img.shields.io/w3c-validation/html?color=blueviolet&targetUrl=https%3A%2F%2Fbarneslow.github.io/neon-defence/)
 
 ___
+
+<br>
 
 ## Game Map
 ![game-map](assets/docs/game-map.png)
 
+<br>
+
 ## Turrets:
 Neon Defence features four unique types of turrets that you can utilize to defend against the enemy waves, and turrets level up after killing enough enemies:
 
-### Auto Turret:
+### Auto Turret: <img src="assets/images/Turret2DHUD.png" width="32" height="32">
 This turret automatically fires at enemies within its range. It provides a consistent stream of damage to keep the enemy at bay.
-![Turret2D](assets/images/turrets/Turret2DHUD.png)
 
-
-### Laser Turret: 
+### Laser Turret: <img src="assets/images/LaserTurretHUD.png" width="32" height="32">
 The LaserTurret emits a high-intensity laser beam that can cut through enemies, dealing continuous damage to a single target. It's effective against tougher foes.
-![LaserTurret](assets/images/turrets/LaserTurretHUD.png)
 
-### Shotgun Turret:
+### Shotgun Turret: <img src="assets/images/ShotGunTurretHUD.png" width="32" height="32">
 The ShotGunTurret unleashes a powerful shotgun blast that damages multiple enemies in a cone-shaped area. It's great for dealing with groups of weaker enemies.
-![ShotGunTurret](assets/images/turrets/ShotGunTurretHUD.png)
 
-### Human-Controlled Turret: 
+### Human-Controlled Turret: <img src="assets/images/turrets/HumanTurret.png" width="32" height="32">
 The Human-Controlled Turret allows you, the player, to take control and manually aim and shoot at enemies. Use your skills to accurately eliminate threats and protect the Sun.
-![HumanTurret](assets/images/turrets/HumanTurret.png)
+
+<br>
 
 ## Power Turrets:
-### Fire Turret: 
+### Fire Turret: <img src="assets/images/FireTowerHUD.png" width="28" height="50">
 The Fire Turret, Burns all enemies.
-![FireTurret](assets/images/turrets/FireTowerHUD.png)
 
-### Electric Turret: 
+### Electric Turret: <img src="assets/images/ElectricTowerHUD.png" width="28" height="50">
 The Electric Turret, electrifies all enemies.
-![ElectricTurret](assets/images/turrets/ElectricTowerHUD.png)
 
-### Freeze Turret: 
+### Freeze Turret: <img src="assets/images/FreezeTowerHUD.png" width="28" height="50">
 The Freeze turret, freezes the enemies for a certain period.
-![FreezeTurret](assets/images/turrets/FreezeTowerHUD.png)
+
+<br>
 
 ## Enemies 
 Neon Defence throws various enemies at you throughout the game. Here are some of the enemy types you will encounter:
 
-### Basic Robot: 
+### Basic Robot: ![robot](assets/images/enemies/robot.png)
 These are the most common enemies you'll face. They have moderate health and deal low damage.
-![robot](hassets/images/enemies/robot.png)
 
-### Reinforced Robot: 
+### Reinforced Robot: ![heavybot](assets/images/enemies/heavybot.png)
 Reinforced robots are tougher than the basic ones, requiring more hits to defeat. Be prepared for a longer fight.
-![heavybot](assets/images/enemies/heavybot.png)
 
-### Mechanic Spider: 
+### Mechanic Spider: ![spider](assets/images/enemies/spider.png)
 These agile enemies can crawl over obstacles and move quickly towards the Sun. Watch out for their speed.
-![spider](assets/images/enemies/spider.png)
 
-### Drone: 
+### Drone: ![drone](assets/images/enemies/drone.png)
 Drones are aerial enemies that fly above the ground defences. You'll need to use turrets capable of hitting airborne targets to deal with them.
-![drone](assets/images/enemies/drone.png)
 
-### Boss:
-Boss enemies are formidable adversaries that possess high health and deal significant damage. They pose a real threat to the Sun and require careful planning to defeat.
-![boss](assets/images/enemies/boss.png)
+### Boss: ![boss](assets/images/enemies/boss.png)
+Boss enemies are formidable adversaries that possess high health and deal significant damage. They pose a real threat to the Sun and require careful planning to defeat.  
+
+<br>
+
+___
+
+<br>
 
 ## How to Play
+
+
 ### Build Turrets: 
 Use the in-game resources to construct and place turrets strategically. Experiment with different turret combinations to find the most effective defence against each enemy type.
 
@@ -85,32 +87,42 @@ Your primary objective is to protect the Sun from enemy incursions. Ensure that 
 
 ### Lives and Game Over: 
 You start with three lives. If an enemy reaches the Sun, you lose a life. Losing all three lives will result in a game over. Strive to maintain a strong defence and keep the Sun safe.
-![hearts](assets/images/life-heart.png)
+
+<img src="assets/images/life-heart.png" width="100" height="100"><img src="assets/images/life-heart.png" width="100" height="100"><img src="assets/images/life-heart.png" width="100" height="100">
 
 ## Controls 
 The game can be played using the following controls:
 
-To place a turret, click on the type of turrets you'd like to place and then click on the tile with the little sun to place it. ![turret-marker](assets/images/turret-marker.png)
+To place a turret, click on the type of turrets you'd like to place and then click on the tile with the little sun to place it ![turret-marker](assets/images/turret-marker.png).
+
 Power Turrets are automatically placed when you click on their buttons and are not moveable.
 You can sell a turret by clicking on it , but it'll give you half the resources it cost back.
-![sell-turret](assets/docs/screenshots/sell-turret.png)
 
- ___
+![sell-turret](assets/docs/sell-turret.png)
+
+<br>
+
+___
+
+<br>
 
 ## Design
 
 ### Colour Scheme
 
-For the colours I based them off the colours of the stone used at Göbekli Tepe, a type of Tan. I then chose a suitable dark complimentary colour - Dark Navy.
+For the colours I based them off the Synthwave/Retrowave Colours.
+
+<br>
+
 ![ScreenShot](assets/docs/neon-defence-color-scheme.png)
 
 #### Logo & Favicon
 
  |                       **Logo**                               |                           **Favicon**                                  |
   | :----------------------------------------------------------:        | :-------------------------------------------------------------------:        |
-  | ![Logo](assets/images/neon-defence-logo.png)  | ![Favicon](assets/favicon/favicon.png)     |
+  | ![Logo](assets/docs/neon-defence-logo.png)  | ![Favicon](assets/favicon/favicon.png)     |
 
- ___
+
 
 ## Screenshots
  |                       **Intro Page**                               |                           **Intro Menu**                                  |
@@ -120,19 +132,29 @@ For the colours I based them off the colours of the stone used at Göbekli Tepe,
   | :----------------------------------------------------------:        | :-------------------------------------------------------------------:        |
   | ![Game](assets/docs/screenshots/game-page.png)  | ![GameOver](assets/docs/screenshots/game-over.png)     |
 
- ___
+<br>
+
+___
+
+<br>
 
 ## Future Implementations.
 
  * Add varied Modes/Levels..
 
+<br>
 
- ___
+___
+
+<br>
 
 ## Installation [Add installation instructions here]
 
+<br>
 
- ___
+___
+
+<br>
 
 ## Tech
 In the tech section, we provide information about the technology stack, dependencies, and any technical details related to the project.
@@ -154,6 +176,8 @@ For the development of Rainbow warriors we made use of the following stack of te
  - [Parcel.js](https://parceljs.org/)
  - ![JavaScript](https://img.shields.io/badge/Firebase-FFCA28.svg?style=for-the-badge&logo=Firebase&logoColor=black) [Firebase](https://firebase.google.com/)
 
+<br>
+
 ##### Technologies Used
 * ![Adobe Illustrator](https://img.shields.io/badge/adobe%20illustrator-%23FF9A00.svg?style=for-the-badge&logo=adobe%20illustrator&logoColor=white) [Adobe Illustrator](https://www.adobe.com/uk/products/illustrator.html) - To create site icons.
 * ![Adobe Photoshop](https://img.shields.io/badge/adobe%20photoshop-%2331A8FF.svg?style=for-the-badge&logo=adobe%20photoshop&logoColor=white) [Adobe Photoshop](https://www.adobe.com/uk/products/photoshop.html) - To edit images.
@@ -173,11 +197,19 @@ For the development of Rainbow warriors we made use of the following stack of te
 * [ghostCSS](http://wernull.com/2013/04/debug-ghost-css-elements-causing-unwanted-scrolling/) - To check for layout issues.
 * [Can I Use](https://caniuse.com/#home) - to check for CSS Browser comparability issues.
 
+<br>
+
+___
+
+<br>
+
 ## Credits 
 All resources were created for the games. Made by:
 - [Darrach Barneveld](https://github.com/DarrachBarneveld)
 - [Devan Cadman](https://github.com/devan-cadman)
 - [Tanguy L'Alexandre](https://github.com/tlalexandre)
+
+<br>
 
 ## License 
 [Specify the license under which the game is distributed, if applicable]
