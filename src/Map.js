@@ -12,7 +12,7 @@ import DroneEnemy from "./classes/enemies/DroneClass";
 import { doc, getDoc, updateDoc } from "@firebase/firestore";
 import { firebaseAuth, firebaseDB } from "./config/firebase";
 import * as Sprites from "./parcelSpriteImports";
-// import * as AudioFiles from "./parcelAudioImports";
+import * as AudioFiles from "./parcelAudioImports";
 
 export default class MapScene extends Phaser.Scene {
   constructor() {
@@ -40,9 +40,9 @@ export default class MapScene extends Phaser.Scene {
     this.load.tilemapTiledJSON("map", Sprites.gameMap);
     this.load.image("tiles", Sprites.map2Dsprites);
 
-    // loadAllSprites(this);
+    loadAllSprites(this);
 
-    // loadAllAudio(this);
+    loadAllAudio(this);
   }
 
   create() {
@@ -480,14 +480,15 @@ function loadAllSprites(scene) {
 }
 
 function loadAllAudio(scene) {
-  // scene.load.audio("electric-audio", AudioFiles.electricity);
-  // scene.load.audio("fire-audio", AudioFiles.fire);
-  // scene.load.audio("freeze-audio", AudioFiles.freeze);
-  // scene.load.audio("power-up", AudioFiles.powerUp);
-  // scene.load.audio("laser", AudioFiles.laser);
-  // scene.load.audio("bulletsound", AudioFiles.bullet);
-  // scene.load.audio("dead", AudioFiles.dead);
-  // scene.load.audio("dead-boss", AudioFiles.deadboss);
+  scene.load.audio("electric-audio", AudioFiles.electricity);
+  scene.load.audio("fire-audio", AudioFiles.fire);
+  scene.load.audio("freeze-audio", AudioFiles.freeze);
+  scene.load.audio("power-up", AudioFiles.powerUp);
+  scene.load.audio("laser", AudioFiles.laser);
+  scene.load.audio("bulletsound", AudioFiles.bullet);
+  scene.load.audio("dead", AudioFiles.dead);
+  scene.load.audio("dead-boss", AudioFiles.deadboss);
+
   // scene.load.audio("electric-audio", "../assets/sounds/electricity.mp3");
   // scene.load.audio("fire-audio", "../assets/sounds/fire.mp3");
   // scene.load.audio("freeze-audio", "../assets/sounds/freeze.mp3");
