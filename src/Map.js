@@ -480,15 +480,37 @@ function loadAllSprites(scene) {
 
 function loadAllAudio(scene) {
   scene.load.audio("electric-audio", [
+    // @ts-ignore
     require("../assets/sounds/electricity.mp3"),
   ]);
-  scene.load.audio("fire-audio", [require("../assets/sounds/fire.mp3")]);
-  scene.load.audio("freeze-audio", [require("/assets/sounds/freeze.mp3")]);
-  scene.load.audio("power-up", [require("/assets/sounds/power-up.mp3")]);
-  scene.load.audio("laser", [require("/assets/sounds/laser.mp3")]);
-  scene.load.audio("bulletsound", [require("/assets/sounds/BulletSound.mp3")]);
-  scene.load.audio("dead", [require("/assets/sounds/dead-enemy.mp3")]);
-  scene.load.audio("dead-boss", [require("/assets/sounds/dead-boss.mp3")]);
+  scene.load.audio("fire-audio", [
+    // @ts-ignore
+    require("../assets/sounds/fire.mp3"),
+  ]);
+  scene.load.audio("freeze-audio", [
+    // @ts-ignore
+    require("/assets/sounds/freeze.mp3"),
+  ]);
+  scene.load.audio("power-up", [
+    // @ts-ignore
+    require("/assets/sounds/power-up.mp3"),
+  ]);
+  scene.load.audio("laser", [
+    require(// @ts-ignore
+    "/assets/sounds/laser.mp3"),
+  ]);
+  scene.load.audio("bulletsound", [
+    require(// @ts-ignore
+    "/assets/sounds/BulletSound.mp3"),
+  ]);
+  scene.load.audio("dead", [
+    require(// @ts-ignore
+    "/assets/sounds/dead-enemy.mp3"),
+  ]);
+  scene.load.audio("dead-boss", [
+    require(// @ts-ignore
+    "/assets/sounds/dead-boss.mp3"),
+  ]);
 }
 
 async function saveUserHighScore(score) {
