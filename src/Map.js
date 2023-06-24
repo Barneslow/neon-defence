@@ -14,7 +14,6 @@ import { firebaseAuth, firebaseDB } from "./config/firebase";
 import * as Sprites from "./parcelSpriteImports";
 import * as AudioFiles from "./parcelAudioImports";
 
-console.log(Sprites.gameMap);
 export default class MapScene extends Phaser.Scene {
   constructor() {
     super("mapScene");

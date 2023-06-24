@@ -1,5 +1,6 @@
 // @ts-ignore
 import electricity from "../assets/sounds/electricity.mp3";
+
 // @ts-ignore
 
 import fire from "../assets/sounds/fire.mp3";
