@@ -480,7 +480,7 @@ function loadAllSprites(scene) {
 
 function loadAllAudio(scene) {
   scene.load.audio("electric-audio", [
-    require(`/assets/sounds/electricity.mp3`),
+    require("../assets/sounds/electricity.mp3"),
   ]);
   scene.load.audio("fire-audio", [require("../assets/sounds/fire.mp3")]);
   scene.load.audio("freeze-audio", [require("/assets/sounds/freeze.mp3")]);
