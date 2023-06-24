@@ -9,14 +9,9 @@ import { WAVE_DATA } from "./config/wave-config";
 import { turretsClassTypes } from "./config/turrets-config";
 import PowerTurret from "./classes/turrets/PowerTurret";
 import DroneEnemy from "./classes/enemies/DroneClass";
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  updateDoc,
-} from "@firebase/firestore";
+import { doc, getDoc, updateDoc } from "@firebase/firestore";
 import { firebaseAuth, firebaseDB } from "./config/firebase";
+import * as Sprites from "./parcelSpriteImports";
 
 export default class MapScene extends Phaser.Scene {
   constructor() {
@@ -41,8 +36,8 @@ export default class MapScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.tilemapTiledJSON("map", "assets/json/2DTowerDefense.json");
-    this.load.image("tiles", "assets/images/2Dsprites.png");
+    this.load.tilemapTiledJSON("map", Sprites.gameMap);
+    this.load.image("tiles", Sprites.map2Dsprites);
 
     loadAllSprites(this);
 
@@ -446,70 +441,71 @@ function convertObjectToArray(obj) {
 
 function loadAllSprites(scene) {
   // Turret Sprites
-  scene.load.image("turret", "assets/images/turrets/Turret2D.png");
-  scene.load.image("turret2", "assets/images/turrets/Turret2Dlvl2.png");
-  scene.load.image("turret3", "assets/images/turrets/Turret2Dlvl3.png");
+  scene.load.image("turret", Sprites.turret);
+  scene.load.image("turret2", Sprites.turret2);
+  scene.load.image("turret3", Sprites.turret3);
 
   // Laser Sprites
-  scene.load.image("laser", "assets/images/turrets/LaserTurret.png");
-  scene.load.image("laser2", "assets/images/turrets/LaserTurretlvl2.png");
-  scene.load.image("laser3", "assets/images/turrets/LaserTurretlvl3.png");
+  scene.load.image("laser", Sprites.laser);
+  scene.load.image("laser2", Sprites.laser2);
+  scene.load.image("laser3", Sprites.laser3);
 
   // Shotgun Sprites
-  scene.load.image("shotgun", "assets/images/turrets/ShotGunTurret.png");
-  scene.load.image("shotgun2", "assets/images/turrets/ShotGunTurretlvl2.png");
-  scene.load.image("shotgun3", "assets/images/turrets/ShotGunTurretlvl3.png");
+  scene.load.image("shotgun", Sprites.shotgun);
+  scene.load.image("shotgun2", Sprites.shotgun2);
+  scene.load.image("shotgun3", Sprites.shotgun3);
 
   // Human Sprites
-  scene.load.image("human", "assets/images/turrets/HumanTurret.png");
-  scene.load.image("human2", "assets/images/turrets/HumanTurretlvl2.png");
-  scene.load.image("human3", "assets/images/turrets/HumanTurretlvl3.png");
+  scene.load.image("human", Sprites.human);
+  scene.load.image("human2", Sprites.human2);
+  scene.load.image("human3", Sprites.human3);
 
   // Electric Sprites
-  scene.load.image("electric", "assets/images/turrets/ElectricTowerActive.png");
-  scene.load.image(
-    "electric-inactive",
-    "assets/images/turrets/ElectricTowerInactive.png"
-  );
+  scene.load.image("electric", Sprites.electricTowerActive);
+  scene.load.image("electric-inactive", Sprites.electricTowerInactive);
 
   // Freeze Sprites
-  scene.load.image("freeze", "assets/images/turrets/FreezeTowerActive.png");
-  scene.load.image(
-    "freeze-inactive",
-    "assets/images/turrets/ElectricTowerInactive.png"
-  );
+  scene.load.image("freeze", Sprites.fireTowerActive);
+  scene.load.image("freeze-inactive", Sprites.fireTowerInActive);
 
   // Fire Sprites
-  scene.load.image("fire", "assets/images/turrets/FireTowerActive.png");
-  scene.load.image(
-    "fire-inactive",
-    "assets/images/turrets/FireTowerInactive.png"
-  );
+  scene.load.image("fire", Sprites.freezeTowerActive);
+  scene.load.image("fire-inactive", Sprites.freezeTowerInactive);
 
   // Enemy Sprites
-  scene.load.image("robot", "assets/images/enemies/robot.png");
-  scene.load.image("heavybot", "assets/images/enemies/heavybot.png");
-  scene.load.image("spider", "assets/images/enemies/spider.png");
-  scene.load.image("drone", "assets/images/enemies/drone.png");
-  scene.load.image("golem", "assets/images/enemies/golem.png");
-  scene.load.image("boss", "assets/images/enemies/boss.png");
+  scene.load.image("robot", Sprites.robot);
+  scene.load.image("heavybot", Sprites.heavyBot);
+  scene.load.image("spider", Sprites.spider);
+  scene.load.image("drone", Sprites.drone);
+  scene.load.image("golem", Sprites.golem);
+  scene.load.image("boss", Sprites.boss);
 
   // Bullet Sprites
-  scene.load.image("bullet", "assets/images/Bullet.png");
-  scene.load.image("ShotGunBullet", "assets/images/ShotGunBullet.png");
-  scene.load.image("HumanBullet", "assets/images/HumanBullet.png");
+  scene.load.image("bullet", Sprites.bullet);
+  scene.load.image("ShotGunBullet", Sprites.shotgunBullet);
+  scene.load.image("HumanBullet", Sprites.humanBullet);
 }
 
 function loadAllAudio(scene) {
-  scene.load.audio("electric-audio", "assets/sounds/electricity.mp3");
-  scene.load.audio("fire-audio", "assets/sounds/fire.mp3");
-  scene.load.audio("freeze-audio", "assets/sounds/freeze.mp3");
-  scene.load.audio("power-up", "assets/sounds/power-up.mp3");
-  scene.load.audio("laser", "assets/sounds/laser.mp3");
+  scene.load.audio("electric-audio", [
+    require("url:../assets/sounds/electricity.mp3"),
+  ]);
 
-  scene.load.audio("bulletsound", "assets/sounds/BulletSound.mp3");
-  scene.load.audio("dead", "assets/sounds/dead-enemy.mp3");
-  scene.load.audio("dead-boss", "assets/sounds/dead-boss.mp3");
+  scene.load.audio("fire-audio", [require("url:../assets/sounds/fire.mp3")]);
+  scene.load.audio("freeze-audio", [
+    require("url:../assets/sounds/freeze.mp3"),
+  ]);
+
+  scene.load.audio("power-up", [require("url:../assets/sounds/power-up.mp3")]);
+  scene.load.audio("laser", [require("url:../assets/sounds/laser.mp3")]);
+
+  scene.load.audio("bulletsound", [
+    require("url:../assets/sounds/BulletSound.mp3"),
+  ]);
+  scene.load.audio("dead", [require("url:../assets/sounds/dead-enemy.mp3")]);
+  scene.load.audio("dead-boss", [
+    require("url:../assets/sounds/dead-boss.mp3"),
+  ]);
 }
 
 async function saveUserHighScore(score) {
