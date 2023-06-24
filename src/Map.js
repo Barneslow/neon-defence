@@ -441,41 +441,41 @@ function convertObjectToArray(obj) {
 
 function loadAllSprites(scene) {
   // Turret Sprites
-  // scene.load.image("turret", Sprites.turret);
-  // scene.load.image("turret2", Sprites.turret2);
-  // scene.load.image("turret3", Sprites.turret3);
-  // // Laser Sprites
-  // scene.load.image("laser", Sprites.laser);
-  // scene.load.image("laser2", Sprites.laser2);
-  // scene.load.image("laser3", Sprites.laser3);
-  // // Shotgun Sprites
-  // scene.load.image("shotgun", Sprites.shotgun);
-  // scene.load.image("shotgun2", Sprites.shotgun2);
-  // scene.load.image("shotgun3", Sprites.shotgun3);
-  // // Human Sprites
-  // scene.load.image("human", Sprites.human);
-  // scene.load.image("human2", Sprites.human2);
-  // scene.load.image("human3", Sprites.human3);
-  // // Electric Sprites
-  // scene.load.image("electric", Sprites.electricTowerActive);
-  // scene.load.image("electric-inactive", Sprites.electricTowerInactive);
-  // // Freeze Sprites
-  // scene.load.image("freeze", Sprites.fireTowerActive);
-  // scene.load.image("freeze-inactive", Sprites.fireTowerInActive);
-  // // Fire Sprites
-  // scene.load.image("fire", Sprites.freezeTowerActive);
-  // scene.load.image("fire-inactive", Sprites.freezeTowerInactive);
-  // // Enemy Sprites
-  // scene.load.image("robot", Sprites.robot);
-  // scene.load.image("heavybot", Sprites.heavyBot);
-  // scene.load.image("spider", Sprites.spider);
-  // scene.load.image("drone", Sprites.drone);
-  // scene.load.image("golem", Sprites.golem);
-  // scene.load.image("boss", Sprites.boss);
-  // // Bullet Sprites
-  // scene.load.image("bullet", Sprites.bullet);
-  // scene.load.image("ShotGunBullet", Sprites.shotgunBullet);
-  // scene.load.image("HumanBullet", Sprites.humanBullet);
+  scene.load.image("turret", Sprites.turret);
+  scene.load.image("turret2", Sprites.turret2);
+  scene.load.image("turret3", Sprites.turret3);
+  // Laser Sprites
+  scene.load.image("laser", Sprites.laser);
+  scene.load.image("laser2", Sprites.laser2);
+  scene.load.image("laser3", Sprites.laser3);
+  // Shotgun Sprites
+  scene.load.image("shotgun", Sprites.shotgun);
+  scene.load.image("shotgun2", Sprites.shotgun2);
+  scene.load.image("shotgun3", Sprites.shotgun3);
+  // Human Sprites
+  scene.load.image("human", Sprites.human);
+  scene.load.image("human2", Sprites.human2);
+  scene.load.image("human3", Sprites.human3);
+  // Electric Sprites
+  scene.load.image("electric", Sprites.electricTowerActive);
+  scene.load.image("electric-inactive", Sprites.electricTowerInactive);
+  // Freeze Sprites
+  scene.load.image("freeze", Sprites.fireTowerActive);
+  scene.load.image("freeze-inactive", Sprites.fireTowerInActive);
+  // Fire Sprites
+  scene.load.image("fire", Sprites.freezeTowerActive);
+  scene.load.image("fire-inactive", Sprites.freezeTowerInactive);
+  // Enemy Sprites
+  scene.load.image("robot", Sprites.robot);
+  scene.load.image("heavybot", Sprites.heavyBot);
+  scene.load.image("spider", Sprites.spider);
+  scene.load.image("drone", Sprites.drone);
+  scene.load.image("golem", Sprites.golem);
+  scene.load.image("boss", Sprites.boss);
+  // Bullet Sprites
+  scene.load.image("bullet", Sprites.bullet);
+  scene.load.image("ShotGunBullet", Sprites.shotgunBullet);
+  scene.load.image("HumanBullet", Sprites.humanBullet);
 }
 
 function loadAllAudio(scene) {
