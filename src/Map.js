@@ -12,7 +12,9 @@ import DroneEnemy from "./classes/enemies/DroneClass";
 import { doc, getDoc, updateDoc } from "@firebase/firestore";
 import { firebaseAuth, firebaseDB } from "./config/firebase";
 import * as Sprites from "./parcelSpriteImports";
+import * as AudioFiles from "./parcelAudioImports";
 
+console.log(Sprites.gameMap);
 export default class MapScene extends Phaser.Scene {
   constructor() {
     super("mapScene");
@@ -37,9 +39,9 @@ export default class MapScene extends Phaser.Scene {
 
   preload() {
     this.load.tilemapTiledJSON("map", Sprites.gameMap);
-    this.load.image("tiles", "../assets/images/2Dsprites.png");
+    this.load.image("tiles", Sprites.map2Dsprites);
 
-    // loadAllSprites(this);
+    loadAllSprites(this);
 
     loadAllAudio(this);
   }
@@ -479,38 +481,46 @@ function loadAllSprites(scene) {
 }
 
 function loadAllAudio(scene) {
-  scene.load.audio("electric-audio", [
-    // @ts-ignore
-    require("../assets/sounds/electricity.mp3"),
-  ]);
-  scene.load.audio("fire-audio", [
-    // @ts-ignore
-    require("../assets/sounds/fire.mp3"),
-  ]);
-  scene.load.audio("freeze-audio", [
-    // @ts-ignore
-    require("/assets/sounds/freeze.mp3"),
-  ]);
-  scene.load.audio("power-up", [
-    // @ts-ignore
-    require("/assets/sounds/power-up.mp3"),
-  ]);
-  scene.load.audio("laser", [
-    require(// @ts-ignore
-    "/assets/sounds/laser.mp3"),
-  ]);
-  scene.load.audio("bulletsound", [
-    require(// @ts-ignore
-    "/assets/sounds/BulletSound.mp3"),
-  ]);
-  scene.load.audio("dead", [
-    require(// @ts-ignore
-    "/assets/sounds/dead-enemy.mp3"),
-  ]);
-  scene.load.audio("dead-boss", [
-    require(// @ts-ignore
-    "/assets/sounds/dead-boss.mp3"),
-  ]);
+  scene.load.audio("electric-audio", AudioFiles.electricity);
+  scene.load.audio("fire-audio", AudioFiles.fire);
+  scene.load.audio("freeze-audio", AudioFiles.freeze);
+  scene.load.audio("power-up", AudioFiles.powerUp);
+  scene.load.audio("laser", AudioFiles.laser);
+  scene.load.audio("bulletsound", AudioFiles.bullet);
+  scene.load.audio("dead", AudioFiles.dead);
+  scene.load.audio("dead-boss", AudioFiles.deadboss);
+  // scene.load.audio("electric-audio", [
+  //   // @ts-ignore
+  //   require("../assets/sounds/electricity.mp3"),
+  // ]);
+  // scene.load.audio("fire-audio", [
+  //   // @ts-ignore
+  //   require("../assets/sounds/fire.mp3"),
+  // ]);
+  // scene.load.audio("freeze-audio", [
+  //   // @ts-ignore
+  //   require("/assets/sounds/freeze.mp3"),
+  // ]);
+  // scene.load.audio("power-up", [
+  //   // @ts-ignore
+  //   require("/assets/sounds/power-up.mp3"),
+  // ]);
+  // scene.load.audio("laser", [
+  //   require(// @ts-ignore
+  //   "/assets/sounds/laser.mp3"),
+  // ]);
+  // scene.load.audio("bulletsound", [
+  //   require(// @ts-ignore
+  //   "/assets/sounds/BulletSound.mp3"),
+  // ]);
+  // scene.load.audio("dead", [
+  //   require(// @ts-ignore
+  //   "/assets/sounds/dead-enemy.mp3"),
+  // ]);
+  // scene.load.audio("dead-boss", [
+  //   require(// @ts-ignore
+  //   "/assets/sounds/dead-boss.mp3"),
+  // ]);
 }
 
 async function saveUserHighScore(score) {
