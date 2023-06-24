@@ -2,10 +2,9 @@
 import electricity from "/assets/sounds/electricity.mp3";
 
 // @ts-ignore
-
 import fire from "/assets/sounds/fire.mp3";
-// @ts-ignore
 
+// @ts-ignore
 import freeze from "/assets/sounds/freeze.mp3";
 // @ts-ignore
 
