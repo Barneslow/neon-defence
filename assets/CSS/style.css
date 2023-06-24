@@ -573,31 +573,42 @@ small a {
   font-size: 3em;
   margin: 0 1rem;
 }
-.menu-content button:hover {
+.menu-content button:hover, .menu-content button a:hover {
   box-shadow: none;
   background: var(--background-color);
   color: #fff;
 }
 .menu-content button {
-  padding: 12px 40px;
-  background-color: transparent;
-  -webkit-box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000,
-    5px 5px 15px 5px rgba(255, 139, 253, 0);
-  box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000,
-    5px 5px 15px 5px rgba(255, 139, 253, 0);
-  border: 3px double var(--moon-background-color);
-  border-radius: 3px;
-  color: var(--moon-background-color);
   background: var(--background-color);
+  color: var(--moon-line-color);
+  border-radius: 3px;
+  border: 3px double var(--moon-line-color);
+  background-color: transparent;
   font-weight: 600;
   font-size: 18px;
   font-family: courier, monospace;
   cursor: pointer;
+  -webkit-box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000,
+  5px 5px 15px 5px rgba(255, 139, 253, 0);
+box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000,
+  5px 5px 15px 5px rgba(255, 139, 253, 0);
+}
+
+.menu-content button a {
+  color: var(--moon-line-color);
 }
 
 .close-button {
-  padding: 8px 14px !important;
+  padding: 8px 14px!important;
+  background: var(--background-color) !important;
+  color: var(--moon-line-color) !important;
+  border-radius: 100px !important;
+  border: 3px double var(--moon-line-color) !important;
   font-size: 20px;
+}
+button.btn.close-button:hover {
+  border: 3px double var(--moon-background-color) !important;
+  color: #fff !important;
 }
 
 .dropdown {
