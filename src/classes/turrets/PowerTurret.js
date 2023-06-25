@@ -5,6 +5,7 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, turretObject) {
     super(scene, x, y, turretObject.name);
 
+    this.name = turretObject.name;
     this.MapScene = scene;
     scene.add.existing(this);
 
@@ -118,6 +119,22 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
           callbackScope: enemy,
         });
       });
+    }
+  }
+
+  upgradeExperience() {
+    this.level++;
+
+    if (this.level === 2) {
+      this.damageOutput = this.damageObject.level2;
+    }
+
+    if (this.level === 3) {
+      this.damageOutput = this.damageObject.level3;
+      const button = document.getElementById(`${this.name}-upgrade`);
+      // @ts-ignore
+      button.disabled = true;
+      button.textContent = "Fully Upgraded!";
     }
   }
 

@@ -31,7 +31,7 @@ export default class MapScene extends Phaser.Scene {
   constructor() {
     super("mapScene");
 
-    this.resources = 5000;
+    this.resources = 2000;
     this.score = 0;
     this.isWaveInProgress = false;
     this.startedGame = false;
@@ -65,8 +65,8 @@ export default class MapScene extends Phaser.Scene {
     startBtn.addEventListener("click", this.startWave.bind(this));
     this.startBtn = startBtn;
 
-    const speedBtn = document.getElementById("speed-up");
-    speedBtn.addEventListener("click", this.increaseGameSpeed.bind(this));
+    this.speedBtn = document.getElementById("speed-up");
+    this.speedBtn.addEventListener("click", this.toggleGameSpeed.bind(this));
 
     const pauseBtn = document.getElementById("pause");
     const pauseIcon = pauseBtn.querySelector("i");
@@ -123,7 +123,6 @@ export default class MapScene extends Phaser.Scene {
       "click",
       this.purchaseTower.bind(this, "electric", electricTower)
     );
-
     const fireTower = document.getElementById("fire");
     fireTower.addEventListener(
       "click",
@@ -134,6 +133,23 @@ export default class MapScene extends Phaser.Scene {
     freezeTower.addEventListener(
       "click",
       this.purchaseTower.bind(this, "freeze", freezeTower)
+    );
+
+    this.upgradeElectricBtn = document.getElementById("electric-upgrade");
+    this.upgradeFreezeBtn = document.getElementById("freeze-upgrade");
+    this.upgradeFireBtn = document.getElementById("fire-upgrade");
+
+    this.upgradeElectricBtn.addEventListener(
+      "click",
+      this.upgradeTower.bind(this, "electric")
+    );
+    this.upgradeFreezeBtn.addEventListener(
+      "click",
+      this.upgradeTower.bind(this, "freeze")
+    );
+    this.upgradeFireBtn.addEventListener(
+      "click",
+      this.upgradeTower.bind(this, "fire")
     );
 
     const map = this.make.tilemap({ key: "map" });
@@ -199,7 +215,7 @@ export default class MapScene extends Phaser.Scene {
 
     this.displayHearts();
     // @ts-ignore
-    // this.audio.play();
+    this.audio.play();
     // @ts-ignore
     this.audio.volume = 0.3;
   }
@@ -224,7 +240,7 @@ export default class MapScene extends Phaser.Scene {
     }
   }
 
-  purchaseTower(type, element) {
+  purchaseTower(type) {
     if (this[type] === true) return;
 
     if (this.resources < turretsClassTypes[type].cost) {
@@ -267,9 +283,50 @@ export default class MapScene extends Phaser.Scene {
     const centerX = tile.x * tileWidth + offsetX;
     const centerY = tile.y * tileHeight + offsetY - 15;
 
-    new PowerTurret(this, centerX, centerY, turretsClassTypes[type]);
+    const tower = new PowerTurret(
+      this,
+      centerX,
+      centerY,
+      turretsClassTypes[type]
+    );
+
+    if (type === "electric") {
+      this.electricTower = tower;
+      // @ts-ignore
+      this.upgradeElectricBtn.disabled = false;
+    }
+    if (type === "freeze") {
+      this.freezeTower = tower;
+      // @ts-ignore
+      this.upgradeFreezeBtn.disabled = false;
+    }
+    if (type === "fire") {
+      this.fireTower = tower;
+      // @ts-ignore
+      this.upgradeFireBtn.disabled = false;
+    }
 
     this[type] = true;
+  }
+
+  upgradeTower(type) {
+    if (this.resources < turretsClassTypes[type].cost) {
+      this.notEnoughRes();
+      return;
+    }
+
+    this.resources = this.resources - turretsClassTypes[type].cost;
+    this.updateResources();
+
+    if (type === "electric") {
+      this.electricTower.upgradeExperience();
+    }
+    if (type === "freeze") {
+      this.freezeTower.upgradeExperience();
+    }
+    if (type === "fire") {
+      this.fireTower.upgradeExperience();
+    }
   }
 
   displayHearts() {
@@ -283,12 +340,28 @@ export default class MapScene extends Phaser.Scene {
     });
   }
 
-  increaseGameSpeed() {
-    this.speedMultiplyer = 2;
+  toggleGameSpeed() {
+    if (this.speedMultiplyer === 2) {
+      this.speedMultiplyer = 1;
+      this.speedBtn.innerHTML =
+        'x2 Speed <i class="fa-sharp fa-solid fa-forward-fast"></i>';
+
+      // FIX LOCAL SPEED FOR ENEMIES AND TURRETS - TODO
+
+      // this.enemies.children.entries.forEach((enemy) =>
+      //   console.log(enemy.setVelocity)
+      // );
+
+      // console.log(this.enemies.children.entries);
+      // Array.from(this.enemies.children).forEach((enemy) => enemy.speed * 2);
+    } else {
+      this.speedMultiplyer = 2;
+      this.speedBtn.innerHTML =
+        'x1 Speed <i class="fa-solid fa-forward-step"></i>';
+    }
   }
 
   updateResources() {
-    console.log(this.resources);
     this.resourceText.setText(`Resources: ${this.resources}`);
     this.scoreText.setText(`Score: ${this.score}`);
   }
