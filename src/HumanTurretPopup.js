@@ -14,11 +14,10 @@ export class HumanTurretPopup extends Phaser.GameObjects.Container {
     background.setInteractive();
 
     // Create the red UpgradeButton button
-    const upgradeButton = scene.add.text(
-      0,
-      0,
-      `Upgrade ${(this.turret.level + 1) * this.turret.cost}`,
-      {
+
+    let upgradeButton;
+    if (turret.level === 3) {
+      upgradeButton = scene.add.text(0, 0, "Fully Upgraded!", {
         fontSize: "20px",
         fontFamily: "Work Sans",
         color: "#000000",
@@ -29,11 +28,30 @@ export class HumanTurretPopup extends Phaser.GameObjects.Container {
           top: 4,
           bottom: 4,
         },
-      }
-    );
-    upgradeButton.setOrigin(0.5);
-    upgradeButton.setInteractive();
-    upgradeButton.on("pointerdown", this.upgradeButtonClicked, this);
+      });
+      upgradeButton.setOrigin(0.5);
+    } else {
+      upgradeButton = scene.add.text(
+        0,
+        0,
+        `Upgrade ${(this.turret.level + 1) * this.turret.cost}`,
+        {
+          fontSize: "20px",
+          fontFamily: "Work Sans",
+          color: "#000000",
+          backgroundColor: "#0096FF",
+          padding: {
+            left: 8,
+            right: 8,
+            top: 4,
+            bottom: 4,
+          },
+        }
+      );
+      upgradeButton.setOrigin(0.5);
+      upgradeButton.setInteractive();
+      upgradeButton.on("pointerdown", this.upgradeButtonClicked, this);
+    }
 
     // Create the green Y button
     const sellButton = scene.add.text(0, -50, "Sell", {
