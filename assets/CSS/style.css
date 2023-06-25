@@ -32,7 +32,7 @@ body {
   display: flex;
   justify-content: center;
   cursor: url("../images/cursor.png") 0 0, pointer;
-  font-family: 'Work Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Work Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 a {
@@ -71,10 +71,24 @@ a {
   display: block;
   text-align: left;
 }
-#modalHowToPlay .modal .close-button {float: right;}
-#modalHowToPlay .modal h1 {font-size: 2.5rem;margin-bottom:3rem;}
-#modalHowToPlay .modal h1, #modalHowToPlay .modal h2, #modalHowToPlay .modal h3 {text-align: center;margin-bottom:1rem}
-#modalHowToPlay .modal small {color: var(--moon-background-color);font-weight: bolder;text-align:center;}
+#modalHowToPlay .modal .close-button {
+  float: right;
+}
+#modalHowToPlay .modal h1 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+}
+#modalHowToPlay .modal h1,
+#modalHowToPlay .modal h2,
+#modalHowToPlay .modal h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+#modalHowToPlay .modal small {
+  color: var(--moon-background-color);
+  font-weight: bolder;
+  text-align: center;
+}
 /* END - How to Play */
 
 /* Header */
@@ -584,12 +598,15 @@ small a {
   font-size: 3em;
   margin: 0 1rem;
 }
-.menu-content button:hover, .menu-content button a:hover {
+.menu-content button:hover,
+.menu-content button a:hover,
+select {
   box-shadow: none;
   background: var(--background-color);
   color: #fff;
 }
-.menu-content button {
+.menu-content button,
+select {
   background: var(--background-color);
   color: var(--moon-line-color);
   border-radius: 3px;
@@ -602,9 +619,9 @@ small a {
   font-family: courier, monospace;
   cursor: pointer;
   -webkit-box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000,
-  5px 5px 15px 5px rgba(255, 139, 253, 0);
-box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000,
-  5px 5px 15px 5px rgba(255, 139, 253, 0);
+    5px 5px 15px 5px rgba(255, 139, 253, 0);
+  box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000,
+    5px 5px 15px 5px rgba(255, 139, 253, 0);
 }
 
 .menu-content button a {
@@ -612,7 +629,7 @@ box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000,
 }
 
 .close-button {
-  padding: 8px 14px!important;
+  padding: 8px 14px !important;
   background: var(--background-color) !important;
   color: var(--moon-line-color) !important;
   border-radius: 100px !important;
@@ -692,14 +709,26 @@ dialog .modal {
   box-shadow: 0px 10px 27px 2px var(--plane-line-color),
     5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
-dialog .modal img {max-height:50px; max-width: 100px;}
+dialog .modal img {
+  max-height: 50px;
+  max-width: 100px;
+}
 /* END - Dialog / Modal */
 
 /* Custom Scroll */
-::-webkit-scrollbar {width: 8px;}
-::-webkit-scrollbar-track {background: var(--background-color);}
-::-webkit-scrollbar-thumb {background: var(--moon-background-color);border-radius: 100px;}
-::-webkit-scrollbar-thumb:hover {background: var(--moon-line-color);}
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background-color);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--moon-background-color);
+  border-radius: 100px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--moon-line-color);
+}
 
 /* Sign-in / Guest */
 .signin-modal {

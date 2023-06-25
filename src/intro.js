@@ -1,11 +1,13 @@
 // Import signInWithGoogle function
-import { collection, doc, getDocs } from "@firebase/firestore";
+import { collection, getDocs } from "@firebase/firestore";
 import { signInWithGoogle } from "./auth";
 import { firebaseDB } from "./config/firebase";
 
 document.addEventListener("DOMContentLoaded", function () {
   const startButton = document.getElementById("start-button");
   const menu = document.getElementById("menu");
+
+  const startGameButton = document.getElementById("start");
 
   // Add event listener to the start button
   startButton.addEventListener("click", function (event) {
@@ -19,47 +21,17 @@ document.addEventListener("DOMContentLoaded", function () {
     signInModal.setAttribute("open", "");
   });
 
-  // Add event listener to the sign-in form
-  // const loginForm = document.getElementById("login-form");
-  // loginForm.addEventListener("submit", function (event) {
-  //   event.preventDefault();
+  // Add event listener to the sign-in button
+  startGameButton.addEventListener("click", function () {
+    const dropdown = document.getElementById("dropdown");
+    // @ts-ignore
+    const selectedValue = dropdown.value;
 
-  //   // Get the input values from the form
-  //   const email = document.getElementById("email-input").value;
-  //   const password = document.getElementById("password-input").value;
+    const destinationUrl =
+      "game.html?info=" + encodeURIComponent(selectedValue);
 
-  //   // Call the signIn function with the email and password
-  //   signIn(email, password);
-  // });
-
-  // Define the signIn function
-  function signIn(email, password) {
-    // Make an API call to your backend with the email and password
-    // Example using fetch:
-    fetch("/api/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          // Sign-in successful
-          console.log("Sign-in successful");
-          // Add code to handle successful sign-in, such as redirecting to another page
-        } else {
-          // Sign-in failed
-          console.log("Sign-in failed");
-          // Add code to handle failed sign-in, such as displaying an error message
-        }
-      })
-      .catch((error) => {
-        // Error occurred during sign-in
-        console.log("Error during sign-in:", error);
-        // Add code to handle the error, such as displaying an error message
-      });
-  }
+    window.location.href = destinationUrl;
+  });
 
   // Attach sign-in with Google functionality to the sign-in modal
   attachModalEvents(signInButton, signInModal);

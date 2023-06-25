@@ -469,11 +469,11 @@ function loadAllSprites(scene) {
   scene.load.image("electric", Sprites.electricTowerActive);
   scene.load.image("electric-inactive", Sprites.electricTowerInactive);
   // Freeze Sprites
-  scene.load.image("freeze", Sprites.fireTowerActive);
-  scene.load.image("freeze-inactive", Sprites.fireTowerInActive);
+  scene.load.image("freeze", Sprites.freezeTowerActive);
+  scene.load.image("freeze-inactive", Sprites.freezeTowerActive);
   // Fire Sprites
-  scene.load.image("fire", Sprites.freezeTowerActive);
-  scene.load.image("fire-inactive", Sprites.freezeTowerInactive);
+  scene.load.image("fire", Sprites.fireTowerActive);
+  scene.load.image("fire-inactive", Sprites.fireTowerActive);
   // Enemy Sprites
   scene.load.image("robot", Sprites.robot);
   scene.load.image("heavybot", Sprites.heavyBot);

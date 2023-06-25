@@ -205,6 +205,38 @@ body {
   cursor: pointer;
 }
 
+/* #electric::after {
+  color: #000000;
+  content: "$1500";
+  display: none;
+}
+
+#electric:hover::after {
+  display: block;
+}
+
+#fire::after {
+  content: "$1250";
+
+  color: #000000;
+  display: none;
+}
+
+#fire:hover::after {
+  display: block;
+}
+
+#freeze::after {
+  content: "$1000";
+  color: #000000;
+
+  display: none;
+}
+
+#freeze:hover::after {
+  display: block;
+} */
+
 #electric:hover {
   background-color: rgba(255, 255, 0, 0.8) !important;
 }

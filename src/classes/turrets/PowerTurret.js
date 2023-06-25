@@ -7,7 +7,6 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
 
     this.MapScene = scene;
     scene.add.existing(this);
-    this.purchased = false;
 
     // Creating Turret Config Properties
     this.turretName = turretObject.name;
@@ -22,14 +21,6 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
     this.level = 1;
     this.damageOutput = turretObject.damageOutput.level1;
     this.damageObject = turretObject.damageOutput;
-
-    // Adding interactive properties
-    // this.setInteractive({ useHandCursor: true })
-    //   .on("pointerover", this.onPointerOver, this)
-    //   .on("pointerout", this.onPointerOut, this)
-    //   .on("pointerdown", this.onPointerDown, this);
-
-    console.log(turretObject);
 
     this.timer = null; // Timer object
     this.timerCountInMilli = turretObject.timer;
