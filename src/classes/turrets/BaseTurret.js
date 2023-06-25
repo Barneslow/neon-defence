@@ -26,6 +26,8 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
     // this.bulletSound = this.scene.sound.add("bulletsound");
     this.laserSound = this.scene.sound.add("laser");
 
+    this.range = turretObject.range;
+
     // Adding tower level
     this.experiencePoints = 0;
     this.level = 1;
@@ -41,6 +43,8 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
       .on("pointerover", this.onPointerOver, this)
       .on("pointerout", this.onPointerOut, this)
       .on("pointerdown", this.onPointerDown, this);
+
+    this.depth = 2;
   }
 
   preload() {}
@@ -65,25 +69,28 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
   }
 
   onPointerOver() {
-    const gameCanvas = this.scene.sys.game.canvas;
-    gameCanvas.style.cursor = "pointer";
     this.setTint(0xffff00);
+    const colorValue = Phaser.Display.Color.GetColor(255, 255, 255);
 
-    const sellElement = document.getElementById("sell-turret");
-    sellElement.textContent = `$${this.cost}`;
+    this.circle = this.scene.add.circle(
+      this.x,
+      this.y,
+      this.range / 2,
+      colorValue
+    );
+
+    this.circle.setAlpha(0.4);
+    this.circle.depth = 1;
+    this.circle.setStrokeStyle(4, 0xffffff);
   }
 
   onPointerOut() {
-    const gameCanvas = this.scene.sys.game.canvas;
-    gameCanvas.style.cursor = "auto";
-    const sellElement = document.getElementById("sell-turret");
-    sellElement.textContent = "";
-
     this.clearTint();
+    this.circle.destroy();
   }
 
   autoFire() {
-    let enemy = getEnemyNearTurret(this.x, this.y, 200, this.enemies);
+    let enemy = getEnemyNearTurret(this.x, this.y, this.range, this.enemies);
 
     if (enemy) {
       // TURRET ROTATION

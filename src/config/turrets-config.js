@@ -27,6 +27,7 @@ export const turretsClassTypes = {
       level3: 500,
     },
     tickTimer: 5000,
+    range: 400,
   },
   auto: {
     name: "turret",
@@ -56,6 +57,7 @@ export const turretsClassTypes = {
       level3: 300,
     },
     tickTimer: 2000,
+    range: 300,
   },
   shotgun: {
     name: "shotgun",
@@ -85,6 +87,7 @@ export const turretsClassTypes = {
       level3: 300,
     },
     tickTimer: 3500,
+    range: 200,
   },
 
   human: {
@@ -115,6 +118,7 @@ export const turretsClassTypes = {
       level3: 300,
     },
     tickTimer: null,
+    range: 200,
   },
 
   // POWER TOWERS
