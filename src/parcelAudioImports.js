@@ -20,6 +20,8 @@ import deadboss from "/assets/sounds/dead-boss.mp3";
 
 import lifeDamage from "/assets/sounds/life-damage.mp3";
 
+import synthWave from "/assets/sounds/synthwave-80s.mp3";
+
 export {
   electricity,
   fire,
@@ -32,4 +34,5 @@ export {
   lifeDamage,
   shotgun,
   plasma,
+  synthWave,
 };

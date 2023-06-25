@@ -47,6 +47,7 @@ export default class MapScene extends Phaser.Scene {
     this.timeUntilNextWave = 0;
     this.isGamePaused = false;
     this.isAudioMuted = false;
+    this.isMusicMuted = false;
     this.humanTurret = false;
     this.difficulty = parseInt(difficulty);
   }
@@ -75,6 +76,7 @@ export default class MapScene extends Phaser.Scene {
 
     pauseBtn.addEventListener("click", this.togglePause.bind(this));
 
+    //Audio additions
     this.lifeDamage = this.sound.add("life-damage");
 
     const settingsBtn = document.getElementById("settings");
@@ -89,11 +91,14 @@ export default class MapScene extends Phaser.Scene {
       this.togglePause.bind(this)
     );
 
-    const modalSettingsBtnAudio = document.getElementById("music");
+    const audioSettingsBtn = document.getElementById("music");
+    this.musicSettingsBtn = document.getElementById("mute-sound");
+    this.audio = document.getElementById("synthwave-track");
 
-    modalSettingsBtnAudio.addEventListener(
+    audioSettingsBtn.addEventListener("click", this.toggleAudioMute.bind(this));
+    this.musicSettingsBtn.addEventListener(
       "click",
-      this.toggleAudioMute.bind(this)
+      this.toggleMusicMute.bind(this)
     );
 
     const replayBtn = document.getElementById("replay-button");
@@ -193,20 +198,31 @@ export default class MapScene extends Phaser.Scene {
     this.physics.add.overlap(this.enemies, this.bullets, damageEnemy);
 
     this.displayHearts();
+    // @ts-ignore
+    this.audio.play();
+    // @ts-ignore
+    this.audio.volume = 0.3;
   }
 
   toggleAudioMute() {
-    if (this.isAudioMuted) {
+    if (!this.isAudioMuted) {
       this.game.sound.mute = true;
+      this.isAudioMuted = true;
     } else {
       this.game.sound.mute = false;
+      this.isAudioMuted = false;
     }
   }
 
-  // destroyReference(item) {
-  //   item = null;
-  //   // item.destroy();
-  // }
+  toggleMusicMute() {
+    if (this.isMusicMuted) {
+      this.audio.play();
+      this.isMusicMuted = false;
+    } else {
+      this.audio.pause();
+      this.isMusicMuted = true;
+    }
+  }
 
   purchaseTower(type, element) {
     if (this[type] === true) return;
@@ -336,7 +352,6 @@ export default class MapScene extends Phaser.Scene {
   }
 
   gameOver() {
-    console.log("fire");
     this.physics.pause();
     this.scene.pause();
     const modalGameOver = document.getElementById("modalGameOver");
@@ -518,6 +533,7 @@ function loadAllAudio(scene) {
   scene.load.audio("dead-boss", AudioFiles.deadboss);
 
   scene.load.audio("life-damage", AudioFiles.lifeDamage);
+  scene.load.audio("synthwave", AudioFiles.synthWave);
 }
 
 async function saveUserHighScore(score) {
