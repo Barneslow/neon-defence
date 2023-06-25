@@ -54,12 +54,25 @@ export default class MapScene extends Phaser.Scene {
     speedBtn.addEventListener("click", this.increaseGameSpeed.bind(this));
 
     const pauseBtn = document.getElementById("pause");
-    pauseBtn.addEventListener("click", this.togglePause.bind(this));
-
+    const pauseIcon = pauseBtn.querySelector("i");
+    
+    pauseBtn.addEventListener("click", function () {
+      this.togglePause();
+      // Check if the button is currently paused
+      if (pauseBtn.classList.contains("paused")) {
+        pauseBtn.textContent = "Play";
+        pauseIcon.classList.remove("fa-pause");
+        pauseIcon.classList.add("fa-play");
+      } else {
+        pauseIcon.classList.remove("fa-play");
+        pauseIcon.classList.add("fa-pause");
+      }
+    });
+    
     const modalPauseBtnClose = document
       .getElementById("modalPause")
       .querySelector(".close-button");
-
+    
     modalPauseBtnClose.addEventListener("click", this.togglePause.bind(this));
 
     const settingsBtn = document.getElementById("settings");
@@ -129,7 +142,7 @@ export default class MapScene extends Phaser.Scene {
       padding: 10,
     });
 
-    this.scoreText = this.add.text(900, 0, `Score: ${this.score}`, {
+    this.scoreText = this.add.text(800, 0, `Score: ${this.score}`, {
       fontSize: "26px",
       backgroundColor: "#180727",
       fontFamily: "Work Sans",
