@@ -31,7 +31,7 @@ export default class MapScene extends Phaser.Scene {
   constructor() {
     super("mapScene");
 
-    this.resources = 5000;
+    this.resources = 2000;
     this.score = 0;
     this.isWaveInProgress = false;
     this.startedGame = false;
@@ -345,7 +345,6 @@ export default class MapScene extends Phaser.Scene {
   }
 
   updateResources() {
-    console.log(this.resources);
     this.resourceText.setText(`Resources: ${this.resources}`);
     this.scoreText.setText(`Score: ${this.score}`);
   }
