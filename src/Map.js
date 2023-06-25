@@ -65,8 +65,8 @@ export default class MapScene extends Phaser.Scene {
     startBtn.addEventListener("click", this.startWave.bind(this));
     this.startBtn = startBtn;
 
-    const speedBtn = document.getElementById("speed-up");
-    speedBtn.addEventListener("click", this.increaseGameSpeed.bind(this));
+    this.speedBtn = document.getElementById("speed-up");
+    this.speedBtn.addEventListener("click", this.toggleGameSpeed.bind(this));
 
     const pauseBtn = document.getElementById("pause");
     const pauseIcon = pauseBtn.querySelector("i");
@@ -340,8 +340,16 @@ export default class MapScene extends Phaser.Scene {
     });
   }
 
-  increaseGameSpeed() {
-    this.speedMultiplyer = 2;
+  toggleGameSpeed() {
+    if (this.speedMultiplyer === 2) {
+      this.speedMultiplyer = 1;
+      this.speedBtn.innerHTML =
+        'x2 Speed <i class="fa-sharp fa-solid fa-forward-fast"></i>';
+    } else {
+      this.speedMultiplyer = 2;
+      this.speedBtn.innerHTML =
+        'x1 Speed <i class="fa-solid fa-forward-step"></i>';
+    }
   }
 
   updateResources() {
