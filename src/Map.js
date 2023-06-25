@@ -57,7 +57,6 @@ export default class MapScene extends Phaser.Scene {
     const pauseIcon = pauseBtn.querySelector("i");
     
     pauseBtn.addEventListener("click", function () {
-      this.togglePause();
       // Check if the button is currently paused
       if (pauseBtn.classList.contains("paused")) {
         pauseBtn.textContent = "Play";
@@ -68,12 +67,6 @@ export default class MapScene extends Phaser.Scene {
         pauseIcon.classList.add("fa-pause");
       }
     });
-    
-    const modalPauseBtnClose = document
-      .getElementById("modalPause")
-      .querySelector(".close-button");
-    
-    modalPauseBtnClose.addEventListener("click", this.togglePause.bind(this));
 
     const settingsBtn = document.getElementById("settings");
     settingsBtn.addEventListener("click", this.togglePause.bind(this));
