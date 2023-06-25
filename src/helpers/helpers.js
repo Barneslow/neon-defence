@@ -46,7 +46,10 @@ export function placeTurretOnMap(pointer) {
 
     return this.resources;
   } else {
-    this.resourceText.setText(`Resources: Not enough resources`);
+    alert("Not enough res");
+    return this.resources;
+
+    // this.resourceText.setText(`Resources: Not enough resources`);
   }
 }
 

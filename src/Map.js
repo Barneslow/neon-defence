@@ -293,7 +293,6 @@ export default class MapScene extends Phaser.Scene {
   }
 
   updateWaveTimeRemaining() {
-    // console.log(this.timeUntilNextWave);
     this.waveTimeRemainingText.setText(
       `Time Until Next Wave: ${formatDuration(this.timeUntilNextWave)}`
     );
@@ -437,6 +436,7 @@ export default class MapScene extends Phaser.Scene {
       // CHANGE DURATION OF ENEMY RESPAWN
       this.spawnEnemiesForWave(this.waveArray[0]);
       this.nextEnemy = time + 2000 / this.speedMultiplyer;
+      console.log(this.resources);
     }
 
     if (time > this.nextEnemy && this.waveArray.length === 0) {
@@ -545,7 +545,6 @@ async function saveUserHighScore(score) {
     if (userSnap.exists()) {
       const user = userSnap.data();
 
-      console.log(user.highScore < score);
       if (user.highScore < score) {
         await updateDoc(docRef, {
           highScore: score,

@@ -163,7 +163,6 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
 
     if (this.turretName === "turret") {
       this.bulletSound.play({ volume: 0.2 });
-      console.log("fire");
     }
     if (this.turretName === "shotgun") {
       this.shotgunSound.play({ volume: 0.2 });
