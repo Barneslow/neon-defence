@@ -812,3 +812,11 @@ dialog .modal img {max-height:50px; max-width: 100px;}
   }
 }
 /* END - Warning Portrait Mode */
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  body {
+    zoom: 0.8; /* Adjust the zoom level as per your requirement */
+  }
+}
+/* END - Responsive */

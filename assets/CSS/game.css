@@ -609,6 +609,9 @@ dialog .modal {
 
 /* Responsive */
 @media screen and (max-width: 768px) {
+  body {
+    zoom: 0.8; /* Adjust the zoom level as per your requirement */
+  }
   .main-game {
     flex-direction: column;
   }
@@ -622,3 +625,4 @@ dialog .modal {
     gap: 10px;
   }
 }
+/* END - Responsive */
