@@ -843,7 +843,7 @@ dialog .modal img {
 /* END - Warning Portrait Mode */
 
 /* Responsive */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 550px) {
   body {
     zoom: 0.8; /* Adjust the zoom level as per your requirement */
   }
