@@ -2,6 +2,8 @@ export class HumanTurretPopup extends Phaser.GameObjects.Container {
   constructor(scene, x, y, width, height, turret) {
     super(scene, x, y);
 
+    this.mapScene = scene;
+
     // turrent instance
     this.turret = turret;
 
@@ -12,18 +14,23 @@ export class HumanTurretPopup extends Phaser.GameObjects.Container {
     background.setInteractive();
 
     // Create the red UpgradeButton button
-    const upgradeButton = scene.add.text(0, 0, "Upgrade", {
-      fontSize: "20px",
-      fontFamily: "Work Sans",
-      color: "#000000",
-      backgroundColor: "#0096FF",
-      padding: {
-        left: 8,
-        right: 8,
-        top: 4,
-        bottom: 4,
-      },
-    });
+    const upgradeButton = scene.add.text(
+      0,
+      0,
+      `Upgrade ${(this.turret.level + 1) * this.turret.cost}`,
+      {
+        fontSize: "20px",
+        fontFamily: "Work Sans",
+        color: "#000000",
+        backgroundColor: "#0096FF",
+        padding: {
+          left: 8,
+          right: 8,
+          top: 4,
+          bottom: 4,
+        },
+      }
+    );
     upgradeButton.setOrigin(0.5);
     upgradeButton.setInteractive();
     upgradeButton.on("pointerdown", this.upgradeButtonClicked, this);
@@ -87,6 +94,10 @@ export class HumanTurretPopup extends Phaser.GameObjects.Container {
   }
   upgradeButtonClicked() {
     this.hide();
+    if ((this.turret.level + 1) * this.turret.cost > this.mapScene.resources) {
+      alert("No enough resources");
+      return;
+    }
     this.turret.upgradeLevel();
   }
 

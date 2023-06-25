@@ -65,7 +65,7 @@ export default class HumanTurret extends Phaser.GameObjects.Sprite {
       this.MapScene,
       pointer.worldX,
       pointer.worldY,
-      150,
+      175,
       150,
       this
     );
@@ -120,7 +120,7 @@ export default class HumanTurret extends Phaser.GameObjects.Sprite {
 
       this.bullets.add(bullet);
 
-      this.bulletSound.play({ volume: 0.8 });
+      this.bulletSound.play({ volume: 1 });
     }
   }
 
@@ -150,7 +150,6 @@ export default class HumanTurret extends Phaser.GameObjects.Sprite {
 
     this.MapScene.resources -= this.level * this.cost;
 
-    console.log(this.MapScene.resources);
     this.MapScene.updateResources();
   }
 
