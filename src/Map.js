@@ -192,6 +192,11 @@ export default class MapScene extends Phaser.Scene {
     }
   }
 
+  // destroyReference(item) {
+  //   item = null;
+  //   // item.destroy();
+  // }
+
   purchaseTower(type, element) {
     if (this[type] === true) return;
 
