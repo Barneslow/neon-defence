@@ -100,7 +100,7 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
 
       let enemyPosition = { x: enemy.x, y: enemy.y };
       this.angle = (angle + Math.PI + Math.PI / 2) * Phaser.Math.RAD_TO_DEG;
-      this.shootBullet(enemyPosition);
+      this.shootBullet(enemyPosition, enemy);
     }
   }
 
@@ -127,7 +127,7 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
     }
   }
 
-  async startDrawing(enemyPosition) {
+  async startDrawing(enemyPosition, enemy) {
     this.line.x1 = this.x;
     this.line.y1 = this.y;
 
@@ -139,17 +139,18 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
     this.laserSound.play({ volume: 0.2 });
     await timerDelay(200);
 
+    enemy.damageTaken(this.damageOutput);
     this.graphics.clear();
   }
 
-  shootBullet(enemyPosition) {
+  shootBullet(enemyPosition, enemy) {
     this.upgradeExperience();
     if (this.turretName === "laser") {
       this.graphics = this.MapScene.add.graphics();
       this.line = new Phaser.Geom.Line();
 
       this.graphics.lineStyle(3, 0x00ff00);
-      this.startDrawing(enemyPosition);
+      this.startDrawing(enemyPosition, enemy);
       return;
     }
     const bullet = new BaseBullet(
