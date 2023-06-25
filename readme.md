@@ -151,7 +151,7 @@ For the colours I based them off the Synthwave/Retrowave Colours.
 ## Screenshots
  |                       **Intro Page**                               |                           **Intro Menu**                                  |
   | :----------------------------------------------------------:        | :-------------------------------------------------------------------:        |
-  | ![Intro](assets/docs/screenshots/intro-page.png)  | ![Menu](assets/docs/screenshots/menu.png)     |
+  | ![Intro](assets/docs/screenshots/intro-page.png)  | ![Menu](assets/docs/screenshots/intro-menu.png)     |
    |                       **Game Page**                               |                           **Game Over Screen**                                  |
   | :----------------------------------------------------------:        | :-------------------------------------------------------------------:        |
   | ![Game](assets/docs/screenshots/game-page.png)  | ![GameOver](assets/docs/screenshots/game-over.png)     |
