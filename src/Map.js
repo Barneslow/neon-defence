@@ -13,10 +13,12 @@ import { doc, getDoc, updateDoc } from "@firebase/firestore";
 import { firebaseAuth, firebaseDB } from "./config/firebase";
 import * as Sprites from "./parcelSpriteImports";
 import * as AudioFiles from "./parcelAudioImports";
+import lifeHeartImage from "../assets/images/life-heart.png";
 
 export default class MapScene extends Phaser.Scene {
   constructor() {
     super("mapScene");
+
     this.resources = 2000;
     this.score = 0;
     this.isWaveInProgress = false;
@@ -35,7 +37,6 @@ export default class MapScene extends Phaser.Scene {
     this.isGamePaused = false;
     this.isAudioMuted = false;
   }
-
   preload() {
     this.load.tilemapTiledJSON("map", Sprites.gameMap);
     this.load.image("tiles", Sprites.map2Dsprites);
@@ -55,7 +56,7 @@ export default class MapScene extends Phaser.Scene {
 
     const pauseBtn = document.getElementById("pause");
     const pauseIcon = pauseBtn.querySelector("i");
-    
+
     pauseBtn.addEventListener("click", function () {
       this.togglePause();
       // Check if the button is currently paused
@@ -68,12 +69,12 @@ export default class MapScene extends Phaser.Scene {
         pauseIcon.classList.add("fa-pause");
       }
     });
-    
-    const modalPauseBtnClose = document
-      .getElementById("modalPause")
-      .querySelector(".close-button");
-    
-    modalPauseBtnClose.addEventListener("click", this.togglePause.bind(this));
+
+    // const modalPauseBtnClose = document
+    //   .getElementById("modalPause")
+    //   .querySelector(".close-button");
+
+    // modalPauseBtnClose.addEventListener("click", this.togglePause.bind(this));
 
     const settingsBtn = document.getElementById("settings");
     settingsBtn.addEventListener("click", this.togglePause.bind(this));
@@ -94,8 +95,8 @@ export default class MapScene extends Phaser.Scene {
       this.toggleAudioMute.bind(this)
     );
 
-    const replayBtn = document.getElementById("replay-button");
-    replayBtn.addEventListener("click", () => location.reload());
+    // const replayBtn = document.getElementById("replay-button");
+    // replayBtn.addEventListener("click", () => location.reload());
 
     const heartContainer = document.getElementById("heart-container");
     this.heartContainer = heartContainer;
@@ -254,7 +255,7 @@ export default class MapScene extends Phaser.Scene {
     hearts.forEach((heart) => {
       const imageElement = document.createElement("img");
       imageElement.classList.add("heart-icon");
-      imageElement.src = `./assets/images/life-heart.png`;
+      imageElement.src = lifeHeartImage;
       this.heartContainer.appendChild(imageElement);
     });
   }
@@ -306,7 +307,8 @@ export default class MapScene extends Phaser.Scene {
   }
 
   chooseTurretType(e) {
-    const type = e.target.dataset.type;
+    const button = e.target.closest("button");
+    const type = button.id.split("-")[0];
     this.turretType = type;
   }
 
@@ -382,17 +384,6 @@ export default class MapScene extends Phaser.Scene {
     if (this.waveIndex >= WAVE_DATA.length) return;
     this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
   }
-
-  // victory() {
-  //   this.physics.resume();
-  //   this.scene.resume();
-  //   const modalGameOver = document.getElementById("modalGameOver");
-  //   modalGameOver.setAttribute("open", "");
-
-  //   const score = document.getElementById("score");
-
-  //   score.textContent = this.score.toString();
-  // }
 
   update(time, delta) {
     if (!this.startedGame) return;
@@ -501,47 +492,6 @@ function loadAllAudio(scene) {
   scene.load.audio("bulletsound", AudioFiles.bullet);
   scene.load.audio("dead", AudioFiles.dead);
   scene.load.audio("dead-boss", AudioFiles.deadboss);
-
-  // scene.load.audio("electric-audio", "../assets/sounds/electricity.mp3");
-  // scene.load.audio("fire-audio", "../assets/sounds/fire.mp3");
-  // scene.load.audio("freeze-audio", "../assets/sounds/freeze.mp3");
-  // scene.load.audio("power-up", "../assets/sounds/power-up.mp3");
-  // scene.load.audio("laser", "../assets/sounds/laser.mp3");
-  // scene.load.audio("bulletsound", "../assets/sounds/bulletsound.mp3");
-  // scene.load.audio("dead", "../assets/sounds/dead-enemy.mp3");
-  // scene.load.audio("dead-boss", "../assets/sounds/dead-boss.mp3");
-  // scene.load.audio("electric-audio", [
-  //   // @ts-ignore
-  //   require("../assets/sounds/electricity.mp3"),
-  // ]);
-  // scene.load.audio("fire-audio", [
-  //   // @ts-ignore
-  //   require("../assets/sounds/fire.mp3"),
-  // ]);
-  // scene.load.audio("freeze-audio", [
-  //   // @ts-ignore
-  //   require("/assets/sounds/freeze.mp3"),
-  // ]);
-  // scene.load.audio("power-up", [
-  //   // @ts-ignore
-  //   require("/assets/sounds/power-up.mp3"),
-  // ]);
-  // scene.load.audio("laser", [
-  //   require(// @ts-ignore
-  //   "/assets/sounds/laser.mp3"),
-  // ]);
-  // scene.load.audio("bulletsound", [
-  //   require(// @ts-ignore
-  //   "/assets/sounds/BulletSound.mp3"),
-  // ]);
-  // scene.load.audio("dead", [
-  //   require(// @ts-ignore
-  //   "/assets/sounds/dead-enemy.mp3"),
-  // ]);
-  // scene.load.audio("dead-boss", [
-  //   require(// @ts-ignore
-  //   "/assets/sounds/dead-boss.mp3"),
-  // ]);
 }
 
 async function saveUserHighScore(score) {
@@ -562,8 +512,6 @@ async function saveUserHighScore(score) {
     } else {
       console.log("No such document!");
     }
-
-    // Add event listeners for like buttons
   } catch (error) {
     console.error("Error retrieving stories:", error);
     alert("Failed to retrieve stories. Please try again.");
