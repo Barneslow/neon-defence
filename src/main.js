@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import MapScene from "../src/Map";
+import MapScene from "./Map";
 import { checkAuthState } from "./auth";
 
 const config = {
