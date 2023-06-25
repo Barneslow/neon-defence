@@ -344,6 +344,8 @@ body {
   background: rgba(128, 128, 128, 0.4);
 }
 
+#game .power-buttons button:disabled {display:none;}
+
 #game button a {
   color: var(--background-color);
   font-weight: 600;
@@ -389,11 +391,11 @@ button.btn.close-button:hover {
     1px 1px 0 var(--moon-background-color);
 }
 
-.Power-buttons button {
+.power-buttons button {
   background-color: var(--background-color) !important;
   color: #fff !important;
 }
-.Power-buttons i {
+.power-buttons i {
   font-size: 30px;
 }
 
