@@ -16,7 +16,17 @@ import * as AudioFiles from "./parcelAudioImports";
 import lifeHeartImage from "../assets/images/life-heart.png";
 
 const difficulty = localStorage.getItem("difficulty") || "1";
+let hearts;
 
+if (difficulty === "1") {
+  hearts = 5;
+}
+if (difficulty === "2") {
+  hearts = 4;
+}
+if (difficulty === "4") {
+  hearts = 3;
+}
 export default class MapScene extends Phaser.Scene {
   constructor() {
     super("mapScene");
@@ -29,7 +39,7 @@ export default class MapScene extends Phaser.Scene {
     this.boss = false;
     this.turretType = "auto";
     this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
-    this.hearts = 3;
+    this.hearts = hearts;
     this.electric = false;
     this.fire = false;
     this.freeze = false;
