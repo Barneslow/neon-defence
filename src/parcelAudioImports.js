@@ -10,6 +10,10 @@ import laser from "/assets/sounds/laser.mp3";
 
 import bullet from "/assets/sounds/BulletSound.mp3";
 
+import shotgun from "/assets/sounds/shotgunshot.mp3";
+
+import plasma from "/assets/sounds/plasmashot.mp3";
+
 import dead from "/assets/sounds/dead-enemy.mp3";
 
 import deadboss from "/assets/sounds/dead-boss.mp3";
@@ -26,4 +30,6 @@ export {
   dead,
   deadboss,
   lifeDamage,
+  shotgun,
+  plasma,
 };

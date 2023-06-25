@@ -23,8 +23,10 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
 
     //Adding bullet physics
     this.bullets = this.scene.add.group();
-    // this.bulletSound = this.scene.sound.add("bulletsound");
+    this.bulletSound = this.scene.sound.add("bulletsound");
     this.laserSound = this.scene.sound.add("laser");
+    this.shotgunSound = this.scene.sound.add("shotgunsound");
+    this.plasmaSound = this.scene.sound.add("plasmasound");
 
     this.range = turretObject.range;
 
@@ -163,9 +165,18 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
       bulletClassTypes[this.turretName].speed
     );
 
-    this.bullets.add(bullet);
+    if (this.turretName === "turret") {
+      this.bulletSound.play({ volume: 0.2 });
+      console.log("fire");
+    }
+    if (this.turretName === "shotgun") {
+      this.shotgunSound.play({ volume: 0.2 });
+    }
+    if (this.turretName === "human") {
+      this.plasmaSound.play({ volume: 0.2 });
+    }
 
-    // this.bulletSound.play({ volume: 0.2 });
+    this.bullets.add(bullet);
   }
 
   update(time, delta) {

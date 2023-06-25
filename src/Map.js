@@ -367,7 +367,7 @@ export default class MapScene extends Phaser.Scene {
       this.isWaveInProgress = true;
       this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
 
-      const time = this.waveArray.length * 2000;
+      const time = this.waveArray.length * 2000 + 20000;
 
       this.timeUntilNextWave = time;
 
@@ -492,8 +492,12 @@ function loadAllAudio(scene) {
   scene.load.audio("fire-audio", AudioFiles.fire);
   scene.load.audio("freeze-audio", AudioFiles.freeze);
   scene.load.audio("power-up", AudioFiles.powerUp);
+
   scene.load.audio("laser", AudioFiles.laser);
   scene.load.audio("bulletsound", AudioFiles.bullet);
+  scene.load.audio("shotgunsound", AudioFiles.shotgun);
+  scene.load.audio("plasmasound", AudioFiles.plasma);
+
   scene.load.audio("dead", AudioFiles.dead);
   scene.load.audio("dead-boss", AudioFiles.deadboss);
 
