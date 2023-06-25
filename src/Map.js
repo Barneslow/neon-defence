@@ -345,6 +345,15 @@ export default class MapScene extends Phaser.Scene {
       this.speedMultiplyer = 1;
       this.speedBtn.innerHTML =
         'x2 Speed <i class="fa-sharp fa-solid fa-forward-fast"></i>';
+
+      // FIX LOCAL SPEED FOR ENEMIES AND TURRETS - TODO
+
+      // this.enemies.children.entries.forEach((enemy) =>
+      //   console.log(enemy.setVelocity)
+      // );
+
+      // console.log(this.enemies.children.entries);
+      // Array.from(this.enemies.children).forEach((enemy) => enemy.speed * 2);
     } else {
       this.speedMultiplyer = 2;
       this.speedBtn.innerHTML =
