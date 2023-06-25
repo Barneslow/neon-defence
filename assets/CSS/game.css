@@ -344,7 +344,7 @@ body {
   background: rgba(128, 128, 128, 0.4);
 }
 
-#game .power-buttons button:disabled {display:none;}
+#electric-upgrade, #freeze-upgrade, #fire-upgrade {display:none;}
 
 #game button a {
   color: var(--background-color);
