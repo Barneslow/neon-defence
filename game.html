@@ -1,71 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Neon Defence: A fast-paced, strategic tower defense game. Build and upgrade turrets to defend against relentless waves of enemies in a vibrant neon world."
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description"
-    content="Neon Defence: A fast-paced, strategic tower defense game. Build and upgrade turrets to defend against relentless waves of enemies in a vibrant neon world." />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/assets/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/assets/favicon/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="/assets/favicon/safari-pinned-tab.svg"
+      color="#350c56"
+    />
+    <link rel="shortcut icon" href="/assets/favicon/favicon.ico" />
+    <meta name="msapplication-TileColor" content="#350c56" />
+    <meta
+      name="msapplication-config"
+      content="/assets/favicon/browserconfig.xml"
+    />
+    <meta name="theme-color" content="#ffffff" />
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png" />
-  <link rel="manifest" href="/assets/favicon/site.webmanifest" />
-  <link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#350c56" />
-  <link rel="shortcut icon" href="/assets/favicon/favicon.ico" />
-  <meta name="msapplication-TileColor" content="#350c56" />
-  <meta name="msapplication-config" content="/assets/favicon/browserconfig.xml" />
-  <meta name="theme-color" content="#ffffff" />
+    <title>Neon Defence - Game</title>
+    <link rel="stylesheet" href="./assets/CSS/game.css" />
+  </head>
 
-  <title>Neon Defence - Game</title>
-  <link rel="stylesheet" href="./assets/CSS/game.css" />
-</head>
+  <body id="game">
+    <main>
+      <div id="stars"></div>
 
-<body id="game">
-  <main>
-    <div id="stars"></div>
+      <div class="main-game">
+        <div id="app"></div>
+        <section class="side-bar">
+          <div class="turret-buttons">
+            <h3>Turrets</h3>
+            <button id="auto-turret" class="ui-btn" data-type="auto">
+              <img src="./assets/images/Turret2DHUD.png" alt="auto turret" />
+              <span>$100</span>
+            </button>
+            <button id="laser-turret" class="ui-btn" data-type="laser">
+              <img
+                src="./assets/images/LaserTurretHUD.png"
+                alt="laser turret"
+              />
+              <span>$400</span>
+            </button>
+            <button id="shotgun-turret" class="ui-btn" data-type="shotgun">
+              <img
+                src="./assets/images/ShotGunTurretHUD.png"
+                alt="shotgun turret"
+              />
+              <span>$300</span>
+            </button>
 
-    <div class="main-game">
-      <div id="app"></div>
-      <section class="side-bar">
-        <div class="turret-buttons">
-          <h3>Turrets</h3>
-          <button id="auto-turret" class="ui-btn" data-type="auto">
-            <img src="./assets/images/Turret2DHUD.png" alt="auto turret" />
-            <span>$100</span>
-          </button>
-          <button id="laser-turret" class="ui-btn" data-type="laser">
-            <img src="./assets/images/LaserTurretHUD.png" alt="laser turret" />
-            <span>$400</span>
-          </button>
-          <button id="shotgun-turret" class="ui-btn" data-type="shotgun">
-            <img src="./assets/images/ShotGunTurretHUD.png" alt="shotgun turret" />
-            <span>$300</span>
-          </button>
+            <button id="human-turret" class="ui-btn" data-type="human">
+              <img
+                src="./assets/images/turrets/HumanTurret.png"
+                alt="plasma turret"
+              />
+              <span>$500</span>
+            </button>
+          </div>
 
-          <button id="human-turret" class="ui-btn" data-type="human">
-            <img src="./assets/images/turrets/HumanTurret.png" alt="plasma turret" />
-            <span>$500</span>
-          </button>
-        </div>
+          <div class="Power-buttons">
+            <h3>Power Buttons</h3>
+            <button id="electric">
+              <i style="color: yellow" class="fa-solid fa-bolt-lightning"></i>
+            </button>
 
-        <div class="Power-buttons">
-          <h3>Power Buttons</h3>
-          <button id="electric">
-            <i style="color: yellow" class="fa-solid fa-bolt-lightning"></i>
-          </button>
-
-          <button id="freeze">
-            <i style="color: aquamarine" class="fa-solid fa-icicles"></i>
-          </button>
-          <button id="fire">
-            <i style="color: red" class="fa-solid fa-fire"></i>
-          </button>
-          <p>Cost: $1500</p>
-        </div>
-      </section>
-    </div>
+            <button id="freeze">
+              <i style="color: aquamarine" class="fa-solid fa-icicles"></i>
+            </button>
+            <button id="fire">
+              <i style="color: red" class="fa-solid fa-fire"></i>
+            </button>
+            <p>Cost: $1500</p>
+          </div>
+        </section>
+      </div>
 
     <div class="btn-box">
       <div class="controls">
@@ -105,15 +136,13 @@
             </button>
           </div>
         </dialog>
+        <div id="heart-container"></div>
       </div>
+    </main>
 
-      <div id="heart-container"></div>
-    </div>
-  </main>
+    <p id="sell-turret"></p>
 
-  <p id="sell-turret"></p>
-
-  <!--  <div id="timer" class="circle">
+    <!--  <div id="timer" class="circle">
             <div class="up">
               <div class="innera"></div>
             </div>
@@ -122,25 +151,27 @@
             </div>
     </div> -->
 
-  <!-- Game Over Modal -->
-  <dialog id="modalGameOver">
-    <div class="modal">
-      <h1 class="title">
-        <span text="GAME OVER"></span>
-        <div class="shine one"></div>
-        <div class="shine two"></div>
-        <div class="shine three"></div>
-        <div class="shine four"></div>
-        <div class="shine five"></div>
-      </h1>
-      <p id="score">19000</p>
-      <p id="home-button"><a href="index.html">Home</a></p>
-      <p id="replay-button">Insert Coin to replay</p>
-    </div>
-  </dialog>
+    <!-- Game Over Modal -->
+    <dialog id="modalGameOver">
+      <div class="modal">
+        <h1 class="title">
+          <span text="GAME OVER"></span>
+          <div class="shine one"></div>
+          <div class="shine two"></div>
+          <div class="shine three"></div>
+          <div class="shine four"></div>
+          <div class="shine five"></div>
+        </h1>
+        <p id="score">19000</p>
+        <p id="home-button"><a href="index.html">Home</a></p>
+        <p id="replay-button">Insert Coin to replay</p>
+      </div>
+    </dialog>
 
-  <script src="https://kit.fontawesome.com/27545168c5.js" crossorigin="anonymous"></script>
-  <script type="module" src="src/main.js"></script>
-</body>
-
+    <script
+      src="https://kit.fontawesome.com/27545168c5.js"
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="src/main.js"></script>
+  </body>
 </html>
