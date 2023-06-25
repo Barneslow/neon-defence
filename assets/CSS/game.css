@@ -567,14 +567,10 @@ dialog .modal {
 /* GAME OVER MODAL */
 #modalGameOver {
   z-index:999;
-  display: grid;
+  display: none;
   place-content: center;
   place-items: center;
-  background: radial-gradient(
-    circle,
-    var(--main-gradient-start) 0%,
-    var(--main-gradient-end) 100%
-  );
+  background: radial-gradient(circle, var(--main-gradient-start) 0%, var(--main-gradient-end) 100%);
   border: none;
   border-radius: 2px;
   max-height: 100vh;
@@ -588,6 +584,7 @@ dialog .modal {
   overflow: auto;
   transform: translate(-50%,-50%);
 }
+#modalGameOver[over] {display: grid;}
 #modalGameOver .modal {
   z-index: 99999;
   text-align: center;
