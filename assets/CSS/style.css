@@ -616,6 +616,8 @@ select {
   padding: 12px 20px;
   font-weight: 600;
   font-size: 18px;
+  width: 75%;
+  text-align: center;
   font-family: courier, monospace;
   cursor: pointer;
   -webkit-box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000,
