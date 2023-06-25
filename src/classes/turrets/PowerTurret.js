@@ -51,6 +51,15 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
     // @ts-ignore
     this.fireBtn.disabled = true;
     this.setTexture(`${this.turretSprite.name}-inactive`);
+
+    this.fireBtn.innerHTML = `<div id="timer" class="circle">
+    <div class="up">
+      <div class="innera"></div>
+    </div>
+    <div class="down">
+      <div class="innerb"></div>
+    </div>
+</div>`;
   }
 
   endTimer() {
@@ -58,6 +67,19 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
     this.fireBtn.disabled = false;
     this.setTexture(this.turretSprite.name);
     this.powerUpSound.play();
+
+    if (this.turretName === "fire") {
+      this.fireBtn.innerHTML =
+        '<i style="color: red" class="fa-solid fa-fire"></i>';
+    }
+    if (this.turretName === "freeze") {
+      this.fireBtn.innerHTML =
+        '<i style="color: aquamarine" class="fa-solid fa-icicles"></i>';
+    }
+    if (this.turretName === "electric") {
+      this.fireBtn.innerHTML =
+        '<i style="color: yellow" class="fa-solid fa-bolt-lightning"></i>';
+    }
   }
 
   fireTower() {
@@ -120,42 +142,6 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
 
     popup.show();
   }
-
-  //   sellTurret() {
-  //     this.MapScene.resources += this.cost / 2;
-  //     this.MapScene.updateResources();
-  //     this.destroy();
-  //   }
-
-  //   onPointerOver() {
-  //     const gameCanvas = this.scene.sys.game.canvas;
-  //     gameCanvas.style.cursor = "pointer";
-  //     this.setTint(0xffff00);
-
-  //     const sellElement = document.getElementById("sell-turret");
-  //     sellElement.textContent = `$${this.cost}`;
-  //   }
-
-  //   onPointerOut() {
-  //     const gameCanvas = this.scene.sys.game.canvas;
-  //     gameCanvas.style.cursor = "auto";
-  //     const sellElement = document.getElementById("sell-turret");
-  //     sellElement.textContent = "";
-
-  //     this.clearTint();
-  //   }
-
-  //   upgradeExperience() {
-  //     if (this.level === 2) {
-  //       this.setTexture(this.turretSprite.level2.name);
-  //       this.damageOutput = this.damageObject.level2;
-  //     }
-
-  //     if (this.level === 3) {
-  //       this.setTexture(this.turretSprite.level3.name);
-  //       this.damageOutput = this.damageObject.level3;
-  //     }
-  //   }
 
   updateTower() {
     this.level++;
