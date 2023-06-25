@@ -29,13 +29,17 @@ document.addEventListener("DOMContentLoaded", function () {
   googleSignInButton.addEventListener("click", signInWithGoogle);
 });
 
+let value;
+
 const difficultySelection = document.getElementById("dropdown");
+
+// @ts-ignore
+value = "1";
+localStorage.setItem("difficulty", value);
 
 difficultySelection.addEventListener("change", () => {
   // @ts-ignore
   const selectedValue = difficultySelection.value;
-
-  let value;
 
   if (selectedValue === "easy") {
     value = "1";

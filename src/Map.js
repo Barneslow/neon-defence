@@ -18,6 +18,7 @@ import lifeHeartImage from "../assets/images/life-heart.png";
 const difficulty = localStorage.getItem("difficulty") || "1";
 let hearts;
 
+console.log(difficulty);
 if (difficulty === "1") {
   hearts = 5;
 }
