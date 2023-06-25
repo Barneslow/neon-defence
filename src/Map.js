@@ -15,6 +15,8 @@ import * as Sprites from "./parcelSpriteImports";
 import * as AudioFiles from "./parcelAudioImports";
 import lifeHeartImage from "../assets/images/life-heart.png";
 
+const difficulty = localStorage.getItem("difficulty") || "1";
+
 export default class MapScene extends Phaser.Scene {
   constructor() {
     super("mapScene");
@@ -32,11 +34,11 @@ export default class MapScene extends Phaser.Scene {
     this.fire = false;
     this.freeze = false;
     this.speedMultiplyer = 1;
-    this.difficulty = 1;
     this.timeUntilNextWave = 0;
     this.isGamePaused = false;
     this.isAudioMuted = false;
     this.humanTurret = false;
+    this.difficulty = parseInt(difficulty);
   }
   preload() {
     this.load.tilemapTiledJSON("map", Sprites.gameMap);

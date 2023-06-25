@@ -3,11 +3,13 @@ import { collection, getDocs } from "@firebase/firestore";
 import { signInWithGoogle } from "./auth";
 import { firebaseDB } from "./config/firebase";
 
+if (!localStorage.getItem("difficulty")) {
+  localStorage.setItem("difficulty", "easy");
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   const startButton = document.getElementById("start-button");
   const menu = document.getElementById("menu");
-
-  const startGameButton = document.getElementById("start");
 
   // Add event listener to the start button
   startButton.addEventListener("click", function (event) {
@@ -21,22 +23,31 @@ document.addEventListener("DOMContentLoaded", function () {
     signInModal.setAttribute("open", "");
   });
 
-  // Add event listener to the sign-in button
-  startGameButton.addEventListener("click", function () {
-    const dropdown = document.getElementById("dropdown");
-    // @ts-ignore
-    const selectedValue = dropdown.value;
-
-    const destinationUrl =
-      "game.html?info=" + encodeURIComponent(selectedValue);
-
-    window.location.href = destinationUrl;
-  });
-
   // Attach sign-in with Google functionality to the sign-in modal
   attachModalEvents(signInButton, signInModal);
   const googleSignInButton = signInModal.querySelector("#google-signin-btn");
   googleSignInButton.addEventListener("click", signInWithGoogle);
+});
+
+const difficultySelection = document.getElementById("dropdown");
+
+difficultySelection.addEventListener("change", () => {
+  // @ts-ignore
+  const selectedValue = difficultySelection.value;
+
+  let value;
+
+  if (selectedValue === "easy") {
+    value = "1";
+  }
+  if (selectedValue === "medium") {
+    value = "2";
+  }
+  if (selectedValue === "hard") {
+    value = "4";
+  }
+
+  localStorage.setItem("difficulty", value);
 });
 
 // Stars Background
