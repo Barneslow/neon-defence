@@ -325,6 +325,7 @@ export default class MapScene extends Phaser.Scene {
   }
 
   gameOver() {
+    console.log("fire");
     this.physics.pause();
     this.scene.pause();
     const modalGameOver = document.getElementById("modalGameOver");

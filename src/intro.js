@@ -124,14 +124,6 @@ const toggleDropdown = () => {
   dropdownContent.classList.toggle("show");
 };
 
-// re
-// Close dropdown when clicking outside
-// window.addEventListener("click", (event) => {
-//   if (!event.target.matches(".dropbtn")) {
-//     dropdownContent.classList.remove("show");
-//   }
-// });
-
 const attachModalEvents = (buttonElement, modalElement) => {
   const closeButton = modalElement.querySelector(".close-button");
 

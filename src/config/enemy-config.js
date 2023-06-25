@@ -29,7 +29,7 @@ export const enemyClassTypes = {
       name: "dead",
       audio: "dead",
     },
-    speed: 100,
+    speed: 1000,
     resources: 50,
   },
   drone: {

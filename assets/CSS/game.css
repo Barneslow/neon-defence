@@ -602,7 +602,7 @@ dialog .modal {
   overflow: auto;
   transform: translate(-50%, -50%);
 }
-#modalGameOver[over] {
+#modalGameOver[open] {
   display: grid;
 }
 #modalGameOver .modal {
