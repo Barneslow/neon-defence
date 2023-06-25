@@ -13,11 +13,25 @@ import { doc, getDoc, updateDoc } from "@firebase/firestore";
 import { firebaseAuth, firebaseDB } from "./config/firebase";
 import * as Sprites from "./parcelSpriteImports";
 import * as AudioFiles from "./parcelAudioImports";
+import lifeHeartImage from "../assets/images/life-heart.png";
 
+const difficulty = localStorage.getItem("difficulty") || "1";
+let hearts;
+
+if (difficulty === "1") {
+  hearts = 5;
+}
+if (difficulty === "2") {
+  hearts = 4;
+}
+if (difficulty === "4") {
+  hearts = 3;
+}
 export default class MapScene extends Phaser.Scene {
   constructor() {
     super("mapScene");
-    this.resources = 2000;
+
+    this.resources = 5000;
     this.score = 0;
     this.isWaveInProgress = false;
     this.startedGame = false;
@@ -25,17 +39,18 @@ export default class MapScene extends Phaser.Scene {
     this.boss = false;
     this.turretType = "auto";
     this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
-    this.hearts = 3;
+    this.hearts = hearts;
     this.electric = false;
     this.fire = false;
     this.freeze = false;
     this.speedMultiplyer = 1;
-    this.difficulty = 1;
     this.timeUntilNextWave = 0;
     this.isGamePaused = false;
     this.isAudioMuted = false;
+    this.isMusicMuted = false;
+    this.humanTurret = false;
+    this.difficulty = parseInt(difficulty);
   }
-
   preload() {
     this.load.tilemapTiledJSON("map", Sprites.gameMap);
     this.load.image("tiles", Sprites.map2Dsprites);
@@ -55,18 +70,14 @@ export default class MapScene extends Phaser.Scene {
 
     const pauseBtn = document.getElementById("pause");
     const pauseIcon = pauseBtn.querySelector("i");
-    
-    pauseBtn.addEventListener("click", function () {
-      // Check if the button is currently paused
-      if (pauseBtn.classList.contains("paused")) {
-        pauseBtn.textContent = "Play";
-        pauseIcon.classList.remove("fa-pause");
-        pauseIcon.classList.add("fa-play");
-      } else {
-        pauseIcon.classList.remove("fa-play");
-        pauseIcon.classList.add("fa-pause");
-      }
-    });
+
+    this.pauseIcon = pauseIcon;
+    this.pauseBtn = pauseBtn;
+
+    pauseBtn.addEventListener("click", this.togglePause.bind(this));
+
+    //Audio additions
+    this.lifeDamage = this.sound.add("life-damage");
 
     const settingsBtn = document.getElementById("settings");
     settingsBtn.addEventListener("click", this.togglePause.bind(this));
@@ -80,11 +91,14 @@ export default class MapScene extends Phaser.Scene {
       this.togglePause.bind(this)
     );
 
-    const modalSettingsBtnAudio = document.getElementById("music");
+    const audioSettingsBtn = document.getElementById("music");
+    this.musicSettingsBtn = document.getElementById("mute-sound");
+    this.audio = document.getElementById("synthwave-track");
 
-    modalSettingsBtnAudio.addEventListener(
+    audioSettingsBtn.addEventListener("click", this.toggleAudioMute.bind(this));
+    this.musicSettingsBtn.addEventListener(
       "click",
-      this.toggleAudioMute.bind(this)
+      this.toggleMusicMute.bind(this)
     );
 
     const replayBtn = document.getElementById("replay-button");
@@ -96,6 +110,8 @@ export default class MapScene extends Phaser.Scene {
     const laserTurret = document.getElementById("laser-turret");
     const shotgunTurret = document.getElementById("shotgun-turret");
     const humanTurret = document.getElementById("human-turret");
+
+    this.humanTurretBtn = humanTurret;
 
     autoTurret.addEventListener("click", this.chooseTurretType.bind(this));
     laserTurret.addEventListener("click", this.chooseTurretType.bind(this));
@@ -157,7 +173,6 @@ export default class MapScene extends Phaser.Scene {
     );
 
     layer1.setInteractive();
-    // layer2.setInteractive(false);
     layer1.on("pointerdown", this.onTileClicked, this);
 
     this.nextEnemy = 0;
@@ -183,13 +198,29 @@ export default class MapScene extends Phaser.Scene {
     this.physics.add.overlap(this.enemies, this.bullets, damageEnemy);
 
     this.displayHearts();
+    // @ts-ignore
+    // this.audio.play();
+    // @ts-ignore
+    this.audio.volume = 0.3;
   }
 
   toggleAudioMute() {
-    if (this.isAudioMuted) {
+    if (!this.isAudioMuted) {
       this.game.sound.mute = true;
+      this.isAudioMuted = true;
     } else {
       this.game.sound.mute = false;
+      this.isAudioMuted = false;
+    }
+  }
+
+  toggleMusicMute() {
+    if (this.isMusicMuted) {
+      this.audio.play();
+      this.isMusicMuted = false;
+    } else {
+      this.audio.pause();
+      this.isMusicMuted = true;
     }
   }
 
@@ -197,7 +228,7 @@ export default class MapScene extends Phaser.Scene {
     if (this[type] === true) return;
 
     if (this.resources < turretsClassTypes[type].cost) {
-      alert("Not Enough Res");
+      this.notEnoughRes();
       return;
     }
 
@@ -247,7 +278,7 @@ export default class MapScene extends Phaser.Scene {
     hearts.forEach((heart) => {
       const imageElement = document.createElement("img");
       imageElement.classList.add("heart-icon");
-      imageElement.src = `./assets/images/life-heart.png`;
+      imageElement.src = lifeHeartImage;
       this.heartContainer.appendChild(imageElement);
     });
   }
@@ -257,15 +288,25 @@ export default class MapScene extends Phaser.Scene {
   }
 
   updateResources() {
+    console.log(this.resources);
     this.resourceText.setText(`Resources: ${this.resources}`);
     this.scoreText.setText(`Score: ${this.score}`);
   }
 
   updateWaveTimeRemaining() {
-    // console.log(this.timeUntilNextWave);
     this.waveTimeRemainingText.setText(
       `Time Until Next Wave: ${formatDuration(this.timeUntilNextWave)}`
     );
+  }
+
+  notEnoughRes() {
+    this.resourceText.setText(`Resources: Not enough resources`);
+
+    this.time.addEvent({
+      delay: 1000,
+      callback: this.updateResources,
+      callbackScope: this,
+    });
   }
 
   onTileClicked(pointer) {
@@ -277,21 +318,28 @@ export default class MapScene extends Phaser.Scene {
 
     // PLACE TURRET ON THE MAP
     const boundPlaceTurretOnMapFunc = placeTurretOnMap.bind(this); // Bind the function to transfer this keyword
-    const newRes = boundPlaceTurretOnMapFunc(
-      pointer,
-      this.resources,
-      this.map,
-      this.turretType
-    );
+    const newRes = boundPlaceTurretOnMapFunc(pointer);
     this.resources = newRes;
+
+    if (this.turretType === "human" && this.resources >= 500) {
+      this.humanTurret = true;
+      // @ts-ignore
+      this.humanTurretBtn.disabled = true;
+      this.turretType = null;
+    }
   }
 
   togglePause() {
     if (this.isGamePaused) {
       this.physics.resume();
       this.scene.resume();
+      this.pauseBtn.innerHTML =
+        'Pause <i class="fa-sharp fa-solid fa-pause"></i>';
+
       this.isGamePaused = false;
     } else {
+      this.pauseBtn.innerHTML =
+        'Play <i class="fa-sharp fa-solid fa-play"></i>';
       this.physics.pause();
       this.scene.pause();
       this.isGamePaused = true;
@@ -299,7 +347,8 @@ export default class MapScene extends Phaser.Scene {
   }
 
   chooseTurretType(e) {
-    const type = e.target.dataset.type;
+    const button = e.target.closest("button");
+    const type = button.id.split("-")[0];
     this.turretType = type;
   }
 
@@ -309,6 +358,7 @@ export default class MapScene extends Phaser.Scene {
       this.gameOver();
     }
     this.displayHearts();
+    this.lifeDamage.play({ volume: 0.6 });
   }
 
   gameOver() {
@@ -352,9 +402,11 @@ export default class MapScene extends Phaser.Scene {
 
     if (!this.isWaveInProgress) {
       this.isWaveInProgress = true;
-      this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
+      this.waveArray = shuffleArray(
+        convertObjectToArray(WAVE_DATA[this.waveIndex])
+      );
 
-      const time = this.waveArray.length * 2000;
+      const time = this.waveArray.length * 2000 + 20000;
 
       this.timeUntilNextWave = time;
 
@@ -373,19 +425,10 @@ export default class MapScene extends Phaser.Scene {
     this.waveIndex++;
     this.isWaveInProgress = false;
     if (this.waveIndex >= WAVE_DATA.length) return;
-    this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
+    this.waveArray = shuffleArray(
+      convertObjectToArray(WAVE_DATA[this.waveIndex])
+    );
   }
-
-  // victory() {
-  //   this.physics.resume();
-  //   this.scene.resume();
-  //   const modalGameOver = document.getElementById("modalGameOver");
-  //   modalGameOver.setAttribute("open", "");
-
-  //   const score = document.getElementById("score");
-
-  //   score.textContent = this.score.toString();
-  // }
 
   update(time, delta) {
     if (!this.startedGame) return;
@@ -467,11 +510,11 @@ function loadAllSprites(scene) {
   scene.load.image("electric", Sprites.electricTowerActive);
   scene.load.image("electric-inactive", Sprites.electricTowerInactive);
   // Freeze Sprites
-  scene.load.image("freeze", Sprites.fireTowerActive);
-  scene.load.image("freeze-inactive", Sprites.fireTowerInActive);
+  scene.load.image("freeze", Sprites.freezeTowerActive);
+  scene.load.image("freeze-inactive", Sprites.freezeTowerInactive);
   // Fire Sprites
-  scene.load.image("fire", Sprites.freezeTowerActive);
-  scene.load.image("fire-inactive", Sprites.freezeTowerInactive);
+  scene.load.image("fire", Sprites.fireTowerActive);
+  scene.load.image("fire-inactive", Sprites.fireTowerInActive);
   // Enemy Sprites
   scene.load.image("robot", Sprites.robot);
   scene.load.image("heavybot", Sprites.heavyBot);
@@ -490,51 +533,17 @@ function loadAllAudio(scene) {
   scene.load.audio("fire-audio", AudioFiles.fire);
   scene.load.audio("freeze-audio", AudioFiles.freeze);
   scene.load.audio("power-up", AudioFiles.powerUp);
+
   scene.load.audio("laser", AudioFiles.laser);
   scene.load.audio("bulletsound", AudioFiles.bullet);
+  scene.load.audio("shotgunsound", AudioFiles.shotgun);
+  scene.load.audio("plasmasound", AudioFiles.plasma);
+
   scene.load.audio("dead", AudioFiles.dead);
   scene.load.audio("dead-boss", AudioFiles.deadboss);
 
-  // scene.load.audio("electric-audio", "../assets/sounds/electricity.mp3");
-  // scene.load.audio("fire-audio", "../assets/sounds/fire.mp3");
-  // scene.load.audio("freeze-audio", "../assets/sounds/freeze.mp3");
-  // scene.load.audio("power-up", "../assets/sounds/power-up.mp3");
-  // scene.load.audio("laser", "../assets/sounds/laser.mp3");
-  // scene.load.audio("bulletsound", "../assets/sounds/bulletsound.mp3");
-  // scene.load.audio("dead", "../assets/sounds/dead-enemy.mp3");
-  // scene.load.audio("dead-boss", "../assets/sounds/dead-boss.mp3");
-  // scene.load.audio("electric-audio", [
-  //   // @ts-ignore
-  //   require("../assets/sounds/electricity.mp3"),
-  // ]);
-  // scene.load.audio("fire-audio", [
-  //   // @ts-ignore
-  //   require("../assets/sounds/fire.mp3"),
-  // ]);
-  // scene.load.audio("freeze-audio", [
-  //   // @ts-ignore
-  //   require("/assets/sounds/freeze.mp3"),
-  // ]);
-  // scene.load.audio("power-up", [
-  //   // @ts-ignore
-  //   require("/assets/sounds/power-up.mp3"),
-  // ]);
-  // scene.load.audio("laser", [
-  //   require(// @ts-ignore
-  //   "/assets/sounds/laser.mp3"),
-  // ]);
-  // scene.load.audio("bulletsound", [
-  //   require(// @ts-ignore
-  //   "/assets/sounds/BulletSound.mp3"),
-  // ]);
-  // scene.load.audio("dead", [
-  //   require(// @ts-ignore
-  //   "/assets/sounds/dead-enemy.mp3"),
-  // ]);
-  // scene.load.audio("dead-boss", [
-  //   require(// @ts-ignore
-  //   "/assets/sounds/dead-boss.mp3"),
-  // ]);
+  scene.load.audio("life-damage", AudioFiles.lifeDamage);
+  scene.load.audio("synthwave", AudioFiles.synthWave);
 }
 
 async function saveUserHighScore(score) {
@@ -546,7 +555,6 @@ async function saveUserHighScore(score) {
     if (userSnap.exists()) {
       const user = userSnap.data();
 
-      console.log(user.highScore < score);
       if (user.highScore < score) {
         await updateDoc(docRef, {
           highScore: score,
@@ -555,10 +563,15 @@ async function saveUserHighScore(score) {
     } else {
       console.log("No such document!");
     }
-
-    // Add event listeners for like buttons
   } catch (error) {
     console.error("Error retrieving stories:", error);
     alert("Failed to retrieve stories. Please try again.");
   }
+}
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 }

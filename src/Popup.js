@@ -32,7 +32,7 @@ export class Popup extends Phaser.GameObjects.Container {
       },
     });
     xButton.setOrigin(0.5);
-    xButton.setInteractive({ useHandCursor: true });
+    xButton.setInteractive();
     xButton.on("pointerup", this.onXButtonClicked, this);
 
     // Create the green Y button

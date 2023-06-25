@@ -47,24 +47,26 @@
   <body id="game">
     <main>
       <div id="stars"></div>
-
+      <audio loop="loop" id="synthwave-track">
+        <source src="./assets/sounds/synthwave-80s.mp3" type="audio/mp3" />
+      </audio>
       <div class="main-game">
         <div id="app"></div>
         <section class="side-bar">
           <div class="turret-buttons">
             <h3>Turrets</h3>
-            <button id="auto-turret" class="ui-btn" data-type="auto">
+            <button id="auto-turret" class="ui-btn" >
               <img src="./assets/images/Turret2DHUD.png" alt="auto turret" />
               <span>$100</span>
             </button>
-            <button id="laser-turret" class="ui-btn" data-type="laser">
+            <button id="laser-turret" class="ui-btn" >
               <img
                 src="./assets/images/LaserTurretHUD.png"
                 alt="laser turret"
               />
               <span>$400</span>
             </button>
-            <button id="shotgun-turret" class="ui-btn" data-type="shotgun">
+            <button id="shotgun-turret" class="ui-btn" >
               <img
                 src="./assets/images/ShotGunTurretHUD.png"
                 alt="shotgun turret"
@@ -72,12 +74,12 @@
               <span>$300</span>
             </button>
 
-            <button id="human-turret" class="ui-btn" data-type="human">
+            <button id="human-turret" class="ui-btn" >
               <img
                 src="./assets/images/turrets/HumanTurret.png"
                 alt="plasma turret"
               />
-              <span>$500</span>
+              <span>$750</span>
             </button>
           </div>
 
@@ -86,14 +88,16 @@
             <button id="electric">
               <i style="color: yellow" class="fa-solid fa-bolt-lightning"></i>
             </button>
-
+           <p>$1500</p>
             <button id="freeze">
               <i style="color: aquamarine" class="fa-solid fa-icicles"></i>
             </button>
+            <p>$1000</p>
             <button id="fire">
               <i style="color: red" class="fa-solid fa-fire"></i>
             </button>
-            <p>Cost: $1500</p>
+            <p>$1250</p>
+
           </div>
         </section>
       </div>
@@ -142,17 +146,9 @@
 
     <p id="sell-turret"></p>
 
-    <!--  <div id="timer" class="circle">
-            <div class="up">
-              <div class="innera"></div>
-            </div>
-            <div class="down">
-              <div class="innerb"></div>
-            </div>
-    </div> -->
 
     <!-- Game Over Modal -->
-    <dialog id="modalGameOver">
+    <dialog id="modalGameOver" >
       <div class="modal">
         <h1 class="title">
           <span text="GAME OVER"></span>

@@ -1,7 +1,7 @@
 import Phaser from "phaser";
-import Bullet from "../bullet/Bullet";
 import { bulletClassTypes } from "../../config/bullet-config";
 import BaseBullet from "../bullet/BaseBullet";
+import { HumanTurretPopup } from "../../HumanTurretPopup";
 
 export default class HumanTurret extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, turretObject) {
@@ -9,9 +9,11 @@ export default class HumanTurret extends Phaser.GameObjects.Sprite {
     this.MapScene = scene;
     scene.add.existing(this);
     this.range = 200;
+    this.cost = turretObject.cost;
 
     // config options
     this.turretName = turretObject.name;
+    this.turretSprite = turretObject.sprite;
 
     // Adding CollisionGroups
     this.bulletCollisionGroup = scene.physics.scene.bullets;
@@ -33,37 +35,42 @@ export default class HumanTurret extends Phaser.GameObjects.Sprite {
       this.scene.input.mousePointer.worldY
     );
 
-    this.bullets = this.scene.add.group(); // Group to hold the bullets
-    this.bulletSpeed = 500; // Speed of the bullets
+    this.bullets = this.scene.add.group();
+    this.bulletSpeed = 500;
 
-    this.shootInterval = 50; // Time interval between shots in milliseconds
-    this.lastShootTime = 0; // Time when the last shot was fired
-    this.bulletSound = this.scene.sound.add("bulletsound");
+    this.shootInterval = 50;
+    this.lastShootTime = 0;
+    this.bulletSound = this.scene.sound.add("plasmasound");
 
     this.playerInRange = false;
 
     this.scene.input.on("pointermove", this.setPlayerInRange, this);
     this.scene.input.on("pointerdown", this.shootBullet, this);
 
-    // // Adding radius circle
-    // this.circleGraphics = scene.add.graphics();
-    // this.circleOpacity = 0.5;
-    // this.circleFillColor = 0xffffff; // White col
+    this.setInteractive().on("pointerdown", this.onPointerDown, this);
 
     const colorValue = Phaser.Display.Color.GetColor(255, 255, 255);
 
-    this.circle = this.scene.add.circle(
-      this.x,
-      this.y,
-      this.range / 2,
-      colorValue
-    );
+    this.circle = this.scene.add.circle(this.x, this.y, this.range, colorValue);
 
     this.circle.setAlpha(0.4);
     this.circle.depth = 1;
     this.circle.setStrokeStyle(4, 0xffffff);
 
     this.depth = 2;
+  }
+
+  onPointerDown(pointer) {
+    const popup = new HumanTurretPopup(
+      this.MapScene,
+      pointer.worldX,
+      pointer.worldY,
+      175,
+      150,
+      this
+    );
+
+    popup.show();
   }
 
   setPlayerInRange(pointer) {
@@ -89,7 +96,6 @@ export default class HumanTurret extends Phaser.GameObjects.Sprite {
 
     const targetRotation = angle + (270 * Math.PI) / 180;
 
-    // Smoothly rotate the turret towards the pointer
     this.rotation = Phaser.Math.Angle.RotateTo(
       this.rotation,
       targetRotation,
@@ -114,8 +120,37 @@ export default class HumanTurret extends Phaser.GameObjects.Sprite {
 
       this.bullets.add(bullet);
 
-      this.bulletSound.play({ volume: 0.2 });
+      this.bulletSound.play({ volume: 1 });
     }
+  }
+
+  sellTurret() {
+    this.MapScene.input.off("pointermove", this.setPlayerInRange, this);
+    this.MapScene.input.off("pointerdown", this.shootBullet, this);
+    this.MapScene.resources += this.cost / 2;
+    this.MapScene.humanTurret = false;
+    this.MapScene.humanTurretBtn.disabled = false;
+
+    this.MapScene.updateResources();
+    this.circle.destroy();
+    this.destroy();
+  }
+
+  upgradeLevel() {
+    this.level++;
+    if (this.level === 2) {
+      this.setTexture(this.turretSprite.level2.name);
+      this.damageOutput = this.damageObject.level2;
+    }
+
+    if (this.level === 3) {
+      this.setTexture(this.turretSprite.level3.name);
+      this.damageOutput = this.damageObject.level3;
+    }
+
+    this.MapScene.resources -= this.level * this.cost;
+
+    this.MapScene.updateResources();
   }
 
   update(time, delta) {

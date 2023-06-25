@@ -8,7 +8,7 @@ export default class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
     this.MapScene = scene;
     this.map = scene.map;
     this.health = enemyObject.health * scene.difficulty;
-    this.currentHealth = enemyObject.health;
+    this.currentHealth = enemyObject.health * scene.difficulty;
     this.initialMove = true;
     this.resources = enemyObject.resources;
     this.speed = enemyObject.speed * scene.speedMultiplyer;
@@ -74,13 +74,15 @@ export default class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
     if (healthPercentage < 0.75 && healthPercentage > 0.5) {
       this.setTint(0xff9999);
     } else if (healthPercentage < 0.5) {
+      console.log(this.currentHealth);
+
       this.setTint(0xff0000);
     }
     if (this.currentHealth <= 0) {
       this.destroy();
       this.deadSound.play({ volume: 0.2 });
       this.MapScene.resources += this.resources;
-      this.MapScene.score += this.resources;
+      this.MapScene.score += this.resources * this.MapScene.difficulty;
       this.MapScene.updateResources();
     }
   }

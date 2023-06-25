@@ -1,7 +1,11 @@
 // Import signInWithGoogle function
-import { collection, doc, getDocs } from "@firebase/firestore";
+import { collection, getDocs } from "@firebase/firestore";
 import { signInWithGoogle } from "./auth";
 import { firebaseDB } from "./config/firebase";
+
+if (!localStorage.getItem("difficulty")) {
+  localStorage.setItem("difficulty", "easy");
+}
 
 document.addEventListener("DOMContentLoaded", function () {
   const startButton = document.getElementById("start-button");
@@ -19,52 +23,31 @@ document.addEventListener("DOMContentLoaded", function () {
     signInModal.setAttribute("open", "");
   });
 
-  // Add event listener to the sign-in form
-  // const loginForm = document.getElementById("login-form");
-  // loginForm.addEventListener("submit", function (event) {
-  //   event.preventDefault();
-
-  //   // Get the input values from the form
-  //   const email = document.getElementById("email-input").value;
-  //   const password = document.getElementById("password-input").value;
-
-  //   // Call the signIn function with the email and password
-  //   signIn(email, password);
-  // });
-
-  // Define the signIn function
-  function signIn(email, password) {
-    // Make an API call to your backend with the email and password
-    // Example using fetch:
-    fetch("/api/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          // Sign-in successful
-          console.log("Sign-in successful");
-          // Add code to handle successful sign-in, such as redirecting to another page
-        } else {
-          // Sign-in failed
-          console.log("Sign-in failed");
-          // Add code to handle failed sign-in, such as displaying an error message
-        }
-      })
-      .catch((error) => {
-        // Error occurred during sign-in
-        console.log("Error during sign-in:", error);
-        // Add code to handle the error, such as displaying an error message
-      });
-  }
-
   // Attach sign-in with Google functionality to the sign-in modal
   attachModalEvents(signInButton, signInModal);
   const googleSignInButton = signInModal.querySelector("#google-signin-btn");
   googleSignInButton.addEventListener("click", signInWithGoogle);
+});
+
+const difficultySelection = document.getElementById("dropdown");
+
+difficultySelection.addEventListener("change", () => {
+  // @ts-ignore
+  const selectedValue = difficultySelection.value;
+
+  let value;
+
+  if (selectedValue === "easy") {
+    value = "1";
+  }
+  if (selectedValue === "medium") {
+    value = "2";
+  }
+  if (selectedValue === "hard") {
+    value = "4";
+  }
+
+  localStorage.setItem("difficulty", value);
 });
 
 // Stars Background
@@ -123,14 +106,6 @@ const dropdownContent = document.querySelector(".dropdown-content");
 const toggleDropdown = () => {
   dropdownContent.classList.toggle("show");
 };
-
-// re
-// Close dropdown when clicking outside
-// window.addEventListener("click", (event) => {
-//   if (!event.target.matches(".dropbtn")) {
-//     dropdownContent.classList.remove("show");
-//   }
-// });
 
 const attachModalEvents = (buttonElement, modalElement) => {
   const closeButton = modalElement.querySelector(".close-button");

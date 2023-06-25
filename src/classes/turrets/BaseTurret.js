@@ -23,8 +23,12 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
 
     //Adding bullet physics
     this.bullets = this.scene.add.group();
-    // this.bulletSound = this.scene.sound.add("bulletsound");
+    this.bulletSound = this.scene.sound.add("bulletsound");
     this.laserSound = this.scene.sound.add("laser");
+    this.shotgunSound = this.scene.sound.add("shotgunsound");
+    this.plasmaSound = this.scene.sound.add("plasmasound");
+
+    this.range = turretObject.range;
 
     // Adding tower level
     this.experiencePoints = 0;
@@ -37,10 +41,12 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
     this.tickTimer = turretObject.tickTimer;
 
     // Adding interactive properties
-    this.setInteractive({ useHandCursor: true })
+    this.setInteractive()
       .on("pointerover", this.onPointerOver, this)
       .on("pointerout", this.onPointerOut, this)
       .on("pointerdown", this.onPointerDown, this);
+
+    this.depth = 2;
   }
 
   preload() {}
@@ -65,25 +71,23 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
   }
 
   onPointerOver() {
-    const gameCanvas = this.scene.sys.game.canvas;
-    gameCanvas.style.cursor = "pointer";
     this.setTint(0xffff00);
+    const colorValue = Phaser.Display.Color.GetColor(255, 255, 255);
 
-    const sellElement = document.getElementById("sell-turret");
-    sellElement.textContent = `$${this.cost}`;
+    this.circle = this.scene.add.circle(this.x, this.y, this.range, colorValue);
+
+    this.circle.setAlpha(0.4);
+    this.circle.depth = 1;
+    this.circle.setStrokeStyle(4, 0xffffff);
   }
 
   onPointerOut() {
-    const gameCanvas = this.scene.sys.game.canvas;
-    gameCanvas.style.cursor = "auto";
-    const sellElement = document.getElementById("sell-turret");
-    sellElement.textContent = "";
-
     this.clearTint();
+    this.circle.destroy();
   }
 
   autoFire() {
-    let enemy = getEnemyNearTurret(this.x, this.y, 200, this.enemies);
+    let enemy = getEnemyNearTurret(this.x, this.y, this.range, this.enemies);
 
     if (enemy) {
       // TURRET ROTATION
@@ -91,7 +95,7 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
 
       let enemyPosition = { x: enemy.x, y: enemy.y };
       this.angle = (angle + Math.PI + Math.PI / 2) * Phaser.Math.RAD_TO_DEG;
-      this.shootBullet(enemyPosition);
+      this.shootBullet(enemyPosition, enemy);
     }
   }
 
@@ -118,7 +122,7 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
     }
   }
 
-  async startDrawing(enemyPosition) {
+  async startDrawing(enemyPosition, enemy) {
     this.line.x1 = this.x;
     this.line.y1 = this.y;
 
@@ -127,20 +131,21 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
 
     this.graphics.strokeLineShape(this.line);
 
-    this.laserSound.play();
+    this.laserSound.play({ volume: 0.2 });
     await timerDelay(200);
 
+    enemy.damageTaken(this.damageOutput);
     this.graphics.clear();
   }
 
-  shootBullet(enemyPosition) {
+  shootBullet(enemyPosition, enemy) {
     this.upgradeExperience();
     if (this.turretName === "laser") {
       this.graphics = this.MapScene.add.graphics();
       this.line = new Phaser.Geom.Line();
 
       this.graphics.lineStyle(3, 0x00ff00);
-      this.startDrawing(enemyPosition);
+      this.startDrawing(enemyPosition, enemy);
       return;
     }
     const bullet = new BaseBullet(
@@ -156,9 +161,17 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
       bulletClassTypes[this.turretName].speed
     );
 
-    this.bullets.add(bullet);
+    if (this.turretName === "turret") {
+      this.bulletSound.play({ volume: 0.2 });
+    }
+    if (this.turretName === "shotgun") {
+      this.shotgunSound.play({ volume: 0.2 });
+    }
+    if (this.turretName === "human") {
+      this.plasmaSound.play({ volume: 0.2 });
+    }
 
-    // this.bulletSound.play({ volume: 0.2 });
+    this.bullets.add(bullet);
   }
 
   update(time, delta) {

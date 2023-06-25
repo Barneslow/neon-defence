@@ -205,6 +205,38 @@ body {
   cursor: pointer;
 }
 
+/* #electric::after {
+  color: #000000;
+  content: "$1500";
+  display: none;
+}
+
+#electric:hover::after {
+  display: block;
+}
+
+#fire::after {
+  content: "$1250";
+
+  color: #000000;
+  display: none;
+}
+
+#fire:hover::after {
+  display: block;
+}
+
+#freeze::after {
+  content: "$1000";
+  color: #000000;
+
+  display: none;
+}
+
+#freeze:hover::after {
+  display: block;
+} */
+
 #electric:hover {
   background-color: rgba(255, 255, 0, 0.8) !important;
 }
@@ -247,11 +279,14 @@ body {
 .side-bar .ui-btn,
 .side-bar button {
   width: 95% !important;
-  margin:0 auto;
+  margin: 0 auto;
 }
-.side-bar p {color:#fff;}
+
+.side-bar p {
+  color: #fff;
+}
 .main-game h3 {
-  font-family: courier,monospace;
+  font-family: courier, monospace;
   font-size: 1.6rem;
   color: #fff;
   font-weight: 300;
@@ -284,12 +319,23 @@ body {
   align-items: center;
   gap: 0.5rem;
 }
+
+#game button:disabled {
+  cursor: not-allowed;
+  background: rgba(128, 128, 128, 0.9) !important;
+}
+
 #game button:hover {
   background: rgb(22, 247, 255, 0.7);
 }
 
+#game button:disabled:hover {
+  cursor: not-allowed;
+  background: rgba(128, 128, 128, 0.4);
+}
+
 .close-button {
-  padding: 8px 14px!important;
+  padding: 8px 14px !important;
   background: var(--background-color) !important;
   color: var(--moon-line-color) !important;
   border-radius: 100px !important;
@@ -566,11 +612,15 @@ dialog .modal {
 
 /* GAME OVER MODAL */
 #modalGameOver {
-  z-index:999;
+  z-index: 999;
   display: none;
   place-content: center;
   place-items: center;
-  background: radial-gradient(circle, var(--main-gradient-start) 0%, var(--main-gradient-end) 100%);
+  background: radial-gradient(
+    circle,
+    var(--main-gradient-start) 0%,
+    var(--main-gradient-end) 100%
+  );
   border: none;
   border-radius: 2px;
   max-height: 100vh;
@@ -582,9 +632,11 @@ dialog .modal {
   top: 50%;
   left: 50%;
   overflow: auto;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
-#modalGameOver[over] {display: grid;}
+#modalGameOver[open] {
+  display: grid;
+}
 #modalGameOver .modal {
   z-index: 99999;
   text-align: center;
@@ -594,18 +646,28 @@ dialog .modal {
   align-items: center;
   min-width: 35vw;
   padding: 2rem;
-  font-size: .9rem;
+  font-size: 0.9rem;
   display: flex;
   position: relative;
-  box-shadow: 5px 5px 50px #fff, inset 0px 0px 0px #fff, 5px 5px 0px 50px #ff8bfd00;
+  box-shadow: 5px 5px 50px #fff, inset 0px 0px 0px #fff,
+    5px 5px 0px 50px #ff8bfd00;
 }
 /* END - Game Over Modal */
 
 /* Custom Scroll */
-::-webkit-scrollbar {width: 8px;}
-::-webkit-scrollbar-track {background: var(--background-color);}
-::-webkit-scrollbar-thumb {background: var(--moon-background-color);border-radius: 100px;}
-::-webkit-scrollbar-thumb:hover {background: var(--moon-line-color);}
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background-color);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--moon-background-color);
+  border-radius: 100px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--moon-line-color);
+}
 
 /* Responsive */
 @media screen and (max-width: 768px) {

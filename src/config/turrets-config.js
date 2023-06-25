@@ -27,6 +27,7 @@ export const turretsClassTypes = {
       level3: 500,
     },
     tickTimer: 5000,
+    range: 250,
   },
   auto: {
     name: "turret",
@@ -56,6 +57,7 @@ export const turretsClassTypes = {
       level3: 300,
     },
     tickTimer: 2000,
+    range: 150,
   },
   shotgun: {
     name: "shotgun",
@@ -74,9 +76,9 @@ export const turretsClassTypes = {
       },
     },
     damageOutput: {
-      level1: 20,
-      level2: 50,
-      level3: 100,
+      level1: 50,
+      level2: 100,
+      level3: 200,
     },
     cost: 300,
     experience: {
@@ -84,7 +86,8 @@ export const turretsClassTypes = {
       level2: 100,
       level3: 300,
     },
-    tickTimer: 3500,
+    tickTimer: 2500,
+    range: 100,
   },
 
   human: {
@@ -104,17 +107,18 @@ export const turretsClassTypes = {
       },
     },
     damageOutput: {
-      level1: 5,
-      level2: 10,
-      level3: 20,
+      level1: 10,
+      level2: 20,
+      level3: 50,
     },
-    cost: 500,
+    cost: 750,
     experience: {
       level1: 0,
       level2: 100,
       level3: 300,
     },
     tickTimer: null,
+    range: 200,
   },
 
   // POWER TOWERS
