@@ -205,6 +205,16 @@ body {
   cursor: pointer;
 }
 
+#electric-upgrade {
+  background: rgb(59, 207, 59) !important;
+}
+#freeze-upgrade {
+  background: rgb(59, 207, 59) !important;
+}
+#fire-upgrade {
+  background: rgb(59, 207, 59) !important;
+}
+
 /* #electric::after {
   color: #000000;
   content: "$1500";

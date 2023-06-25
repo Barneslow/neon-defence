@@ -123,7 +123,6 @@ export default class MapScene extends Phaser.Scene {
       "click",
       this.purchaseTower.bind(this, "electric", electricTower)
     );
-
     const fireTower = document.getElementById("fire");
     fireTower.addEventListener(
       "click",
@@ -134,6 +133,23 @@ export default class MapScene extends Phaser.Scene {
     freezeTower.addEventListener(
       "click",
       this.purchaseTower.bind(this, "freeze", freezeTower)
+    );
+
+    this.upgradeElectricBtn = document.getElementById("electric-upgrade");
+    this.upgradeFreezeBtn = document.getElementById("freeze-upgrade");
+    this.upgradeFireBtn = document.getElementById("fire-upgrade");
+
+    this.upgradeElectricBtn.addEventListener(
+      "click",
+      this.upgradeTower.bind(this, "electric")
+    );
+    this.upgradeFreezeBtn.addEventListener(
+      "click",
+      this.upgradeTower.bind(this, "freeze")
+    );
+    this.upgradeFireBtn.addEventListener(
+      "click",
+      this.upgradeTower.bind(this, "fire")
     );
 
     const map = this.make.tilemap({ key: "map" });
@@ -224,7 +240,7 @@ export default class MapScene extends Phaser.Scene {
     }
   }
 
-  purchaseTower(type, element) {
+  purchaseTower(type) {
     if (this[type] === true) return;
 
     if (this.resources < turretsClassTypes[type].cost) {
@@ -267,9 +283,50 @@ export default class MapScene extends Phaser.Scene {
     const centerX = tile.x * tileWidth + offsetX;
     const centerY = tile.y * tileHeight + offsetY - 15;
 
-    new PowerTurret(this, centerX, centerY, turretsClassTypes[type]);
+    const tower = new PowerTurret(
+      this,
+      centerX,
+      centerY,
+      turretsClassTypes[type]
+    );
+
+    if (type === "electric") {
+      this.electricTower = tower;
+      // @ts-ignore
+      this.upgradeElectricBtn.disabled = false;
+    }
+    if (type === "freeze") {
+      this.freezeTower = tower;
+      // @ts-ignore
+      this.upgradeFreezeBtn.disabled = false;
+    }
+    if (type === "fire") {
+      this.fireTower = tower;
+      // @ts-ignore
+      this.upgradeFireBtn.disabled = false;
+    }
 
     this[type] = true;
+  }
+
+  upgradeTower(type) {
+    if (this.resources < turretsClassTypes[type].cost) {
+      this.notEnoughRes();
+      return;
+    }
+
+    this.resources = this.resources - turretsClassTypes[type].cost;
+    this.updateResources();
+
+    if (type === "electric") {
+      this.electricTower.upgradeExperience();
+    }
+    if (type === "freeze") {
+      this.freezeTower.upgradeExperience();
+    }
+    if (type === "fire") {
+      this.fireTower.upgradeExperience();
+    }
   }
 
   displayHearts() {
