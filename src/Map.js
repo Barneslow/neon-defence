@@ -146,7 +146,7 @@ export default class MapScene extends Phaser.Scene {
       padding: 10,
     });
 
-    this.scoreText = this.add.text(900, 0, `Score: ${this.score}`, {
+    this.scoreText = this.add.text(800, 0, `Score: ${this.score}`, {
       fontSize: "26px",
       backgroundColor: "#180727",
       fontFamily: "Work Sans",
