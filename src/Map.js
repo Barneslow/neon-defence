@@ -367,7 +367,9 @@ export default class MapScene extends Phaser.Scene {
 
     if (!this.isWaveInProgress) {
       this.isWaveInProgress = true;
-      this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
+      this.waveArray = shuffleArray(
+        convertObjectToArray(WAVE_DATA[this.waveIndex])
+      );
 
       const time = this.waveArray.length * 2000 + 20000;
 
@@ -388,7 +390,9 @@ export default class MapScene extends Phaser.Scene {
     this.waveIndex++;
     this.isWaveInProgress = false;
     if (this.waveIndex >= WAVE_DATA.length) return;
-    this.waveArray = convertObjectToArray(WAVE_DATA[this.waveIndex]);
+    this.waveArray = shuffleArray(
+      convertObjectToArray(WAVE_DATA[this.waveIndex])
+    );
   }
 
   update(time, delta) {
@@ -472,10 +476,10 @@ function loadAllSprites(scene) {
   scene.load.image("electric-inactive", Sprites.electricTowerInactive);
   // Freeze Sprites
   scene.load.image("freeze", Sprites.freezeTowerActive);
-  scene.load.image("freeze-inactive", Sprites.freezeTowerActive);
+  scene.load.image("freeze-inactive", Sprites.freezeTowerInactive);
   // Fire Sprites
   scene.load.image("fire", Sprites.fireTowerActive);
-  scene.load.image("fire-inactive", Sprites.fireTowerActive);
+  scene.load.image("fire-inactive", Sprites.fireTowerInActive);
   // Enemy Sprites
   scene.load.image("robot", Sprites.robot);
   scene.load.image("heavybot", Sprites.heavyBot);
@@ -528,4 +532,11 @@ async function saveUserHighScore(score) {
     console.error("Error retrieving stories:", error);
     alert("Failed to retrieve stories. Please try again.");
   }
+}
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 }

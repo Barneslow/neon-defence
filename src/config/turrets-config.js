@@ -27,7 +27,7 @@ export const turretsClassTypes = {
       level3: 500,
     },
     tickTimer: 5000,
-    range: 400,
+    range: 250,
   },
   auto: {
     name: "turret",
@@ -57,7 +57,7 @@ export const turretsClassTypes = {
       level3: 300,
     },
     tickTimer: 2000,
-    range: 300,
+    range: 150,
   },
   shotgun: {
     name: "shotgun",
@@ -87,7 +87,7 @@ export const turretsClassTypes = {
       level3: 300,
     },
     tickTimer: 3500,
-    range: 200,
+    range: 100,
   },
 
   human: {

@@ -74,12 +74,7 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
     this.setTint(0xffff00);
     const colorValue = Phaser.Display.Color.GetColor(255, 255, 255);
 
-    this.circle = this.scene.add.circle(
-      this.x,
-      this.y,
-      this.range / 2,
-      colorValue
-    );
+    this.circle = this.scene.add.circle(this.x, this.y, this.range, colorValue);
 
     this.circle.setAlpha(0.4);
     this.circle.depth = 1;

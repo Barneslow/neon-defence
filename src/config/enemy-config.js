@@ -8,12 +8,12 @@ export const enemyClassTypes = {
       audio: "dead-enemy",
     },
     speed: 50,
-    resources: 10,
+    resources: 25,
   },
   heavybot: {
     name: "heavybot",
     sprite: "heavybot",
-    health: 50,
+    health: 200,
     sound: {
       name: "dead",
       audio: "dead",
@@ -24,40 +24,40 @@ export const enemyClassTypes = {
   spider: {
     name: "spider",
     sprite: "spider",
-    health: 1,
+    health: 150,
     sound: {
       name: "dead",
       audio: "dead",
     },
-    speed: 1000,
-    resources: 50,
+    speed: 100,
+    resources: 75,
   },
   drone: {
     name: "drone",
     sprite: "drone",
-    health: 40,
+    health: 100,
     sound: {
       name: "dead",
       audio: "dead",
     },
     speed: 75,
-    resources: 75,
+    resources: 100,
   },
   golem: {
     name: "golem",
     sprite: "golem",
-    health: 250,
+    health: 300,
     sound: {
       name: "dead",
       audio: "dead",
     },
     speed: 30,
-    resources: 100,
+    resources: 150,
   },
   boss: {
     name: "boss",
     sprite: "boss",
-    health: 500,
+    health: 600,
     sound: {
       name: "dead-boss",
       audio: "dead-boss",

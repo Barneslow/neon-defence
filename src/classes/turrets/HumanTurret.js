@@ -40,7 +40,7 @@ export default class HumanTurret extends Phaser.GameObjects.Sprite {
 
     this.shootInterval = 50;
     this.lastShootTime = 0;
-    this.bulletSound = this.scene.sound.add("bulletsound");
+    this.bulletSound = this.scene.sound.add("plasmasound");
 
     this.playerInRange = false;
 
@@ -51,12 +51,7 @@ export default class HumanTurret extends Phaser.GameObjects.Sprite {
 
     const colorValue = Phaser.Display.Color.GetColor(255, 255, 255);
 
-    this.circle = this.scene.add.circle(
-      this.x,
-      this.y,
-      this.range / 2,
-      colorValue
-    );
+    this.circle = this.scene.add.circle(this.x, this.y, this.range, colorValue);
 
     this.circle.setAlpha(0.4);
     this.circle.depth = 1;
@@ -101,7 +96,6 @@ export default class HumanTurret extends Phaser.GameObjects.Sprite {
 
     const targetRotation = angle + (270 * Math.PI) / 180;
 
-    // Smoothly rotate the turret towards the pointer
     this.rotation = Phaser.Math.Angle.RotateTo(
       this.rotation,
       targetRotation,
@@ -126,7 +120,7 @@ export default class HumanTurret extends Phaser.GameObjects.Sprite {
 
       this.bullets.add(bullet);
 
-      this.bulletSound.play({ volume: 0.2 });
+      this.bulletSound.play({ volume: 0.8 });
     }
   }
 
@@ -158,8 +152,6 @@ export default class HumanTurret extends Phaser.GameObjects.Sprite {
 
     console.log(this.MapScene.resources);
     this.MapScene.updateResources();
-
-    console.log(this.damageOutput);
   }
 
   update(time, delta) {
