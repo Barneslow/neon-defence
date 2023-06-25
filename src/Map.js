@@ -228,7 +228,7 @@ export default class MapScene extends Phaser.Scene {
     if (this[type] === true) return;
 
     if (this.resources < turretsClassTypes[type].cost) {
-      alert("Not Enough Res");
+      this.notEnoughRes();
       return;
     }
 
@@ -299,6 +299,16 @@ export default class MapScene extends Phaser.Scene {
     );
   }
 
+  notEnoughRes() {
+    this.resourceText.setText(`Resources: Not enough resources`);
+
+    this.time.addEvent({
+      delay: 1000,
+      callback: this.updateResources,
+      callbackScope: this,
+    });
+  }
+
   onTileClicked(pointer) {
     const tile = this.map.worldToTileXY(pointer.worldX, pointer.worldY);
     const tileId = this.map.getTileAt(tile.x, tile.y, true).index;
@@ -310,12 +320,6 @@ export default class MapScene extends Phaser.Scene {
     const boundPlaceTurretOnMapFunc = placeTurretOnMap.bind(this); // Bind the function to transfer this keyword
     const newRes = boundPlaceTurretOnMapFunc(pointer);
     this.resources = newRes;
-
-    this.time.addEvent({
-      delay: 1000,
-      callback: this.updateResources,
-      callbackScope: this,
-    });
 
     if (this.turretType === "human" && this.resources >= 500) {
       this.humanTurret = true;
