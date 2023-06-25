@@ -4,9 +4,9 @@ import HumanTurret from "../classes/turrets/HumanTurret";
 
 import { turretsClassTypes } from "../config/turrets-config";
 
-export function placeTurretOnMap(pointer, resources, map, turretType) {
-  const tile = map.worldToTileXY(pointer.worldX, pointer.worldY);
-  const tileId = map.getTileAt(tile.x, tile.y, true).index;
+export function placeTurretOnMap(pointer) {
+  const tile = this.map.worldToTileXY(pointer.worldX, pointer.worldY);
+  const tileId = this.map.getTileAt(tile.x, tile.y, true).index;
 
   const turretCosts = {
     auto: turretsClassTypes.auto.cost,
@@ -15,35 +15,36 @@ export function placeTurretOnMap(pointer, resources, map, turretType) {
     human: turretsClassTypes.human.cost,
   };
 
-  if (tileId === 7 && resources >= turretCosts[turretType]) {
-    const tileWidth = map.tileWidth;
-    const tileHeight = map.tileHeight;
+  if (tileId === 7 && this.resources >= turretCosts[this.turretType]) {
+    const tileWidth = this.map.tileWidth;
+    const tileHeight = this.map.tileHeight;
     const offsetX = tileWidth / 2;
     const offsetY = tileHeight / 2;
     const centerX = tile.x * tileWidth + offsetX;
     const centerY = tile.y * tileHeight + offsetY;
 
     let turret;
-    if (turretType === "human") {
+    if (this.turretType === "human") {
       turret = new HumanTurret(
         this,
         centerX,
         centerY,
-        turretsClassTypes[turretType]
+        turretsClassTypes[this.turretType]
       );
     } else {
       turret = new BaseTurret(
         this,
         centerX,
         centerY,
-        turretsClassTypes[turretType]
+        turretsClassTypes[this.turretType]
       );
     }
 
-    resources -= turretCosts[turretType];
-    this.resourceText.setText(`Resources: ${resources}`);
+    this.resources -= turretCosts[this.turretType];
+    this.resourceText.setText(`Resources: ${this.resources}`);
     this.turrets.add(turret);
-    return resources;
+
+    return this.resources;
   } else {
     this.resourceText.setText(`Resources: Not enough resources`);
   }

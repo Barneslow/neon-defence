@@ -127,7 +127,7 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
 
     this.graphics.strokeLineShape(this.line);
 
-    this.laserSound.play();
+    this.laserSound.play({ volume: 0.2 });
     await timerDelay(200);
 
     this.graphics.clear();

@@ -36,6 +36,7 @@ export default class MapScene extends Phaser.Scene {
     this.timeUntilNextWave = 0;
     this.isGamePaused = false;
     this.isAudioMuted = false;
+    this.humanTurret = false;
   }
   preload() {
     this.load.tilemapTiledJSON("map", Sprites.gameMap);
@@ -57,24 +58,12 @@ export default class MapScene extends Phaser.Scene {
     const pauseBtn = document.getElementById("pause");
     const pauseIcon = pauseBtn.querySelector("i");
 
-    pauseBtn.addEventListener("click", function () {
-      this.togglePause();
-      // Check if the button is currently paused
-      if (pauseBtn.classList.contains("paused")) {
-        pauseBtn.textContent = "Play";
-        pauseIcon.classList.remove("fa-pause");
-        pauseIcon.classList.add("fa-play");
-      } else {
-        pauseIcon.classList.remove("fa-play");
-        pauseIcon.classList.add("fa-pause");
-      }
-    });
+    this.pauseIcon = pauseIcon;
+    this.pauseBtn = pauseBtn;
 
-    // const modalPauseBtnClose = document
-    //   .getElementById("modalPause")
-    //   .querySelector(".close-button");
+    pauseBtn.addEventListener("click", this.togglePause.bind(this));
 
-    // modalPauseBtnClose.addEventListener("click", this.togglePause.bind(this));
+    this.lifeDamage = this.sound.add("life-damage");
 
     const settingsBtn = document.getElementById("settings");
     settingsBtn.addEventListener("click", this.togglePause.bind(this));
@@ -95,8 +84,8 @@ export default class MapScene extends Phaser.Scene {
       this.toggleAudioMute.bind(this)
     );
 
-    // const replayBtn = document.getElementById("replay-button");
-    // replayBtn.addEventListener("click", () => location.reload());
+    const replayBtn = document.getElementById("replay-button");
+    replayBtn.addEventListener("click", () => location.reload());
 
     const heartContainer = document.getElementById("heart-container");
     this.heartContainer = heartContainer;
@@ -104,6 +93,8 @@ export default class MapScene extends Phaser.Scene {
     const laserTurret = document.getElementById("laser-turret");
     const shotgunTurret = document.getElementById("shotgun-turret");
     const humanTurret = document.getElementById("human-turret");
+
+    this.humanTurretBtn = humanTurret;
 
     autoTurret.addEventListener("click", this.chooseTurretType.bind(this));
     laserTurret.addEventListener("click", this.chooseTurretType.bind(this));
@@ -285,21 +276,28 @@ export default class MapScene extends Phaser.Scene {
 
     // PLACE TURRET ON THE MAP
     const boundPlaceTurretOnMapFunc = placeTurretOnMap.bind(this); // Bind the function to transfer this keyword
-    const newRes = boundPlaceTurretOnMapFunc(
-      pointer,
-      this.resources,
-      this.map,
-      this.turretType
-    );
+    const newRes = boundPlaceTurretOnMapFunc(pointer);
     this.resources = newRes;
+
+    if (this.turretType === "human" && this.resources >= 500) {
+      this.humanTurret = true;
+      // @ts-ignore
+      this.humanTurretBtn.disabled = true;
+      this.turretType = null;
+    }
   }
 
   togglePause() {
     if (this.isGamePaused) {
       this.physics.resume();
       this.scene.resume();
+      this.pauseBtn.innerHTML =
+        'Pause <i class="fa-sharp fa-solid fa-pause"></i>';
+
       this.isGamePaused = false;
     } else {
+      this.pauseBtn.innerHTML =
+        'Play <i class="fa-sharp fa-solid fa-play"></i>';
       this.physics.pause();
       this.scene.pause();
       this.isGamePaused = true;
@@ -318,6 +316,7 @@ export default class MapScene extends Phaser.Scene {
       this.gameOver();
     }
     this.displayHearts();
+    this.lifeDamage.play({ volume: 0.6 });
   }
 
   gameOver() {
@@ -492,6 +491,8 @@ function loadAllAudio(scene) {
   scene.load.audio("bulletsound", AudioFiles.bullet);
   scene.load.audio("dead", AudioFiles.dead);
   scene.load.audio("dead-boss", AudioFiles.deadboss);
+
+  scene.load.audio("life-damage", AudioFiles.lifeDamage);
 }
 
 async function saveUserHighScore(score) {

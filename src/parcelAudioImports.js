@@ -14,4 +14,16 @@ import dead from "/assets/sounds/dead-enemy.mp3";
 
 import deadboss from "/assets/sounds/dead-boss.mp3";
 
-export { electricity, fire, freeze, powerUp, laser, bullet, dead, deadboss };
+import lifeDamage from "/assets/sounds/life-damage.mp3";
+
+export {
+  electricity,
+  fire,
+  freeze,
+  powerUp,
+  laser,
+  bullet,
+  dead,
+  deadboss,
+  lifeDamage,
+};
