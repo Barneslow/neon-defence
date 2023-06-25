@@ -215,7 +215,7 @@ export default class MapScene extends Phaser.Scene {
 
     this.displayHearts();
     // @ts-ignore
-    // this.audio.play();
+    this.audio.play();
     // @ts-ignore
     this.audio.volume = 0.3;
   }
