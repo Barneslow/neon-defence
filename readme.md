@@ -245,6 +245,7 @@ For the development of Rainbow warriors we made use of the following stack of te
 - [BrowserStack](https://www.browserstack.com/guide/browser-compatibility-for-variable-fonts) - To check site responsiveness on live devices.
 - [Polypane Browser](https://polypane.app/) - Responsive & Accessibility Testing and more!
 - [ghostCSS](http://wernull.com/2013/04/debug-ghost-css-elements-causing-unwanted-scrolling/) - To check for layout issues.
+- [Netlify](https://app.netlify.com/) - Deployment.
 - [Can I Use](https://caniuse.com/#home) - to check for CSS Browser comparability issues.
 
 <br>
