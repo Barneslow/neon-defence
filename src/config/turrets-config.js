@@ -16,8 +16,8 @@ export const turretsClassTypes = {
       },
     },
     damageOutput: {
-      level1: 20,
-      level2: 50,
+      level1: 30,
+      level2: 60,
       level3: 150,
     },
     cost: 400,
@@ -26,7 +26,7 @@ export const turretsClassTypes = {
       level2: 200,
       level3: 500,
     },
-    tickTimer: 5000,
+    tickTimer: 3500,
     range: 250,
   },
   auto: {
@@ -46,9 +46,9 @@ export const turretsClassTypes = {
       },
     },
     damageOutput: {
-      level1: 10,
-      level2: 15,
-      level3: 30,
+      level1: 20,
+      level2: 40,
+      level3: 75,
     },
     cost: 100,
     experience: {
@@ -56,7 +56,7 @@ export const turretsClassTypes = {
       level2: 100,
       level3: 300,
     },
-    tickTimer: 2000,
+    tickTimer: 1500,
     range: 150,
   },
   shotgun: {
@@ -78,7 +78,7 @@ export const turretsClassTypes = {
     damageOutput: {
       level1: 50,
       level2: 100,
-      level3: 200,
+      level3: 250,
     },
     cost: 300,
     experience: {
@@ -86,7 +86,7 @@ export const turretsClassTypes = {
       level2: 100,
       level3: 300,
     },
-    tickTimer: 2500,
+    tickTimer: 2000,
     range: 100,
   },
 
