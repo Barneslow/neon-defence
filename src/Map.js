@@ -199,7 +199,7 @@ export default class MapScene extends Phaser.Scene {
 
     this.displayHearts();
     // @ts-ignore
-    this.audio.play();
+    // this.audio.play();
     // @ts-ignore
     this.audio.volume = 0.3;
   }
@@ -288,6 +288,7 @@ export default class MapScene extends Phaser.Scene {
   }
 
   updateResources() {
+    console.log(this.resources);
     this.resourceText.setText(`Resources: ${this.resources}`);
     this.scoreText.setText(`Score: ${this.score}`);
   }
@@ -309,6 +310,12 @@ export default class MapScene extends Phaser.Scene {
     const boundPlaceTurretOnMapFunc = placeTurretOnMap.bind(this); // Bind the function to transfer this keyword
     const newRes = boundPlaceTurretOnMapFunc(pointer);
     this.resources = newRes;
+
+    this.time.addEvent({
+      delay: 1000,
+      callback: this.updateResources,
+      callbackScope: this,
+    });
 
     if (this.turretType === "human" && this.resources >= 500) {
       this.humanTurret = true;
@@ -436,7 +443,6 @@ export default class MapScene extends Phaser.Scene {
       // CHANGE DURATION OF ENEMY RESPAWN
       this.spawnEnemiesForWave(this.waveArray[0]);
       this.nextEnemy = time + 2000 / this.speedMultiplyer;
-      console.log(this.resources);
     }
 
     if (time > this.nextEnemy && this.waveArray.length === 0) {
