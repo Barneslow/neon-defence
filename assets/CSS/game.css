@@ -657,7 +657,7 @@ dialog .modal-content {display:flex;}
     max-height: 90vh;
   }
   .turret-buttons,
-  .Power-buttons {
+  .power-buttons {
     display: flex;
     flex-direction: row;
     gap: 10px;
