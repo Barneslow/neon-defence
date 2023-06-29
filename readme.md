@@ -2,6 +2,8 @@
 
 Neon Defence is an exciting tower defence game where your objective is to protect the Sun of Neon City from various types of enemies. Build and strategically place different types of turrets to fend off waves of incoming enemies and prevent them from reaching the Sun. If enemies manage to reach the Sun, you will lose a life. Be careful, as losing three lives will result in a game over.
 
+**Live Site:** https://neon-defence.vercel.app
+
 ![Am I responsive screenshot](assets/docs/Am-I-Responsive-neon-defence.png)
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/Barneslow/neon-defence?color=red)
@@ -25,12 +27,9 @@ Neon Defence is an exciting tower defence game where your objective is to protec
 8. [Design](#design)
 9. [Screenshots](#screenshots)
 10. [Future Implementations](#future-implementations)
-11. [Installation](#installation)
 12. [Tech](#tech)
 13. [Bugs](#bugs)
 14. [Credits](#credits)
-15. [License](#license)
-16. [Feedback and Support](#feedback-and-support)
 
 <br>
 
@@ -186,15 +185,8 @@ For the colours I based them off the Synthwave/Retrowave Colours.
 
 ## Future Implementations.
 
-- Add varied Modes/Levels..
-
-<br>
-
----
-
-<br>
-
-## Installation [Add installation instructions here]
+- Add Different Map variation's.
+- Add different wave and enemies.
 
 <br>
 
@@ -223,7 +215,8 @@ For the development of Rainbow warriors we made use of the following stack of te
 - ![NodeJS](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white) [Node.JS](https://nodejs.org/en)
 - ![JavaScript](https://img.shields.io/badge/Vite-646CFF.svg?style=for-the-badge&logo=Vite&logoColor=white) [Vite.js](https://vitejs.dev/)
 - [Parcel.js](https://parceljs.org/)
-- ![JavaScript](https://img.shields.io/badge/Firebase-FFCA28.svg?style=for-the-badge&logo=Firebase&logoColor=black) [Firebase](https://firebase.google.com/)
+- ![Firebase](https://img.shields.io/badge/Firebase-FFCA28.svg?style=for-the-badge&logo=Firebase&logoColor=black) [Firebase](https://firebase.google.com/)
+- ![Netlify](https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7) [Netlify](https://www.netlify.com)
 
 <br>
 
@@ -236,7 +229,7 @@ For the development of Rainbow warriors we made use of the following stack of te
 - ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) [GIT](https://git-scm.com/), [GitHub](https://github.com/) - tracking, storing, hosting project
 - ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) [GitHub Desktop](https://desktop.github.com/) - for local development
 
-- ![Goggle Fonts](https://img.shields.io/badge/Google%20Fonts-4285F4.svg?style=for-the-badge&logo=Google-Fonts&logoColor=white) [Google Fonts:](https://fonts.google.com/) - Google fonts were used to import the 'Inknut Antiqua' font into the style.css file which is used on all pages throughout the project.
+- ![Goggle Fonts](https://img.shields.io/badge/Google%20Fonts-4285F4.svg?style=for-the-badge&logo=Google-Fonts&logoColor=white) [Google Fonts:](https://fonts.google.com/)
 - [Coolors](https://coolors.co/) - Coolors was used for choosing the website's colours palette.
 - ![Shields.io](https://img.shields.io/badge/Shields.io-000000.svg?style=for-the-badge&logo=shieldsdotio&logoColor=white) [Shields.io](https://shields.io/) - To add badges to the README
 
@@ -262,18 +255,10 @@ Not enough time to fix - next future patch update.
 
 ## Credits
 
+**Team:  Code Craftsmen**
+
 All resources were created for the games. Made by:
 
 - [Darrach Barneveld](https://github.com/DarrachBarneveld)
 - [Devan Cadman](https://github.com/devan-cadman)
 - [Tanguy L'Alexandre](https://github.com/tlalexandre)
-
-<br>
-
-## License
-
-[Specify the license under which the game is distributed, if applicable]
-
-## Feedback and Support
-
-[Provide instructions on how users can provide feedback or seek support]
