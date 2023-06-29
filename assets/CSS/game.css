@@ -344,7 +344,7 @@ body {
   background: rgba(128, 128, 128, 0.4);
 }
 
-#electric-upgrade, #freeze-upgrade, #fire-upgrade {display:none !important;}
+#electric-upgrade, #freeze-upgrade, #fire-upgrade {display:none;}
 
 #game button a {
   color: var(--background-color);
@@ -576,6 +576,10 @@ dialog::backdrop {
 dialog .modal {
   z-index: 99999;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   text-align: center;
   padding: 2rem;
   box-sizing: border-box;
@@ -586,7 +590,6 @@ dialog .modal {
   box-shadow: 0px 10px 27px 2px var(--plane-line-color),
     5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
-dialog .modal-content {display:flex;}
 /* END - Dialog / Modal */
 
 /* GAME OVER MODAL */
@@ -657,7 +660,7 @@ dialog .modal-content {display:flex;}
     max-height: 90vh;
   }
   .turret-buttons,
-  .power-buttons {
+  .Power-buttons {
     display: flex;
     flex-direction: row;
     gap: 10px;
