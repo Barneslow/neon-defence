@@ -614,7 +614,8 @@ select {
   border-radius: 3px;
   border: 3px double var(--moon-line-color);
   background-color: var(--background-color);
-  margin-bottom: 10px;
+  margin-bottom: 15px !important;
+  margin: auto;
   padding: 12px 20px;
   font-weight: 600;
   font-size: 18px;
@@ -846,8 +847,10 @@ dialog .modal img {
 
 /* Responsive */
 @media screen and (max-width: 768px) {
-  dialog[open] {width:90%;}
+  dialog[open] {width:90% !important;}
   dialog .modal {max-width:none !important;}
+  .menu-content {display:block !important;height:80vh !important;overflow-y:auto;}
+  #intro .copywrite {bottom:2rem !important;}
 }
 @media screen and (max-width: 550px) {
   body {
