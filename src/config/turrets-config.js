@@ -27,7 +27,7 @@ export const turretsClassTypes = {
       level3: 300,
     },
     tickTimer: 350,
-    range: 150,
+    range: 200,
   },
 
   laser: {
