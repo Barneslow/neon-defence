@@ -11,6 +11,7 @@ import humanTurretCursor from "../assets/images/turrets/HumanTurret.png";
 import shotgunTurretCursor from "../assets/images/turrets/ShotGunTurret.png";
 import autoTurretCursor from "../assets/images/turrets/Turret2D.png";
 import laserTurretCursor from "../assets/images/turrets/LaserTurret.png";
+import antiAirTurretCursor from "../assets/images/turrets/AntiAerialTurretlvl1.png";
 
 // Enemy imports
 import boss from "../assets/images/enemies/boss.png";
@@ -91,4 +92,5 @@ export {
   autoTurretCursor,
   laserTurretCursor,
   shotgunTurretCursor,
+  antiAirTurretCursor,
 };

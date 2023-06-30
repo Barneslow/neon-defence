@@ -18,6 +18,8 @@ export class InteractiveTile extends Phaser.GameObjects.Sprite {
       document.body.style.cursor = `url("${Sprites.laserTurretCursor}")16 16, auto`;
     } else if (this.Mapscene.turretType === "auto") {
       document.body.style.cursor = `url("${Sprites.autoTurretCursor}")16 16, auto`;
+    } else if (this.Mapscene.turretType === "antiAir") {
+      document.body.style.cursor = `url("${Sprites.antiAirTurretCursor}")16 16, auto`;
     } else if (this.Mapscene.turretType === "human") {
       document.body.style.cursor = `url("${Sprites.humanTurretCursor}")16 16, auto`;
     } else if (this.Mapscene.turretType === "shotgun") {
