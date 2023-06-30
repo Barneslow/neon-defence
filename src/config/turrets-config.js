@@ -17,16 +17,16 @@ export const turretsClassTypes = {
     },
     damageOutput: {
       level1: 30,
-      level2: 60,
-      level3: 150,
+      level2: 40,
+      level3: 60,
     },
     cost: 400,
     experience: {
       level1: 0,
-      level2: 200,
-      level3: 500,
+      level2: 100,
+      level3: 300,
     },
-    tickTimer: 3500,
+    tickTimer: 3000,
     range: 250,
   },
   auto: {
@@ -46,9 +46,9 @@ export const turretsClassTypes = {
       },
     },
     damageOutput: {
-      level1: 20,
-      level2: 40,
-      level3: 75,
+      level1: 10,
+      level2: 15,
+      level3: 30,
     },
     cost: 100,
     experience: {
@@ -56,8 +56,8 @@ export const turretsClassTypes = {
       level2: 100,
       level3: 300,
     },
-    tickTimer: 1500,
-    range: 150,
+    tickTimer: 1000,
+    range: 175,
   },
   shotgun: {
     name: "shotgun",
@@ -77,8 +77,8 @@ export const turretsClassTypes = {
     },
     damageOutput: {
       level1: 50,
-      level2: 100,
-      level3: 250,
+      level2: 70,
+      level3: 100,
     },
     cost: 300,
     experience: {
@@ -86,8 +86,8 @@ export const turretsClassTypes = {
       level2: 100,
       level3: 300,
     },
-    tickTimer: 2000,
-    range: 100,
+    tickTimer: 1500,
+    range: 125,
   },
 
   human: {
@@ -108,14 +108,14 @@ export const turretsClassTypes = {
     },
     damageOutput: {
       level1: 10,
-      level2: 20,
-      level3: 50,
+      level2: 15,
+      level3: 25,
     },
     cost: 750,
     experience: {
       level1: 0,
-      level2: 100,
-      level3: 300,
+      level2: 35,
+      level3: 100,
     },
     tickTimer: null,
     range: 200,
@@ -131,8 +131,8 @@ export const turretsClassTypes = {
     },
     damageOutput: {
       level1: 25,
-      level2: 50,
-      level3: 100,
+      level2: 35,
+      level3: 50,
     },
     cost: 1500,
     timer: 10000,
@@ -161,8 +161,8 @@ export const turretsClassTypes = {
     },
     damageOutput: {
       level1: 2,
-      level2: 5,
-      level3: 10,
+      level2: 4,
+      level3: 6,
     },
     cost: 1250,
     timer: 10000,

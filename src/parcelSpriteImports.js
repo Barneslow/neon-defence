@@ -2,6 +2,16 @@ import gameMap from "../assets/json/2DTowerDefense.json";
 
 import map2Dsprites from "../assets/images/2DSprites.png";
 
+// Interactive Tile
+import interactiveTile from "../assets/images/turret-marker.png";
+
+// Cursors
+import cursor from "../assets/images/cursor.png";
+import humanTurretCursor from "../assets/images/turrets/HumanTurret.png";
+import shotgunTurretCursor from "../assets/images/turrets/ShotGunTurret.png";
+import autoTurretCursor from "../assets/images/turrets/Turret2D.png";
+import laserTurretCursor from "../assets/images/turrets/LaserTurret.png";
+
 // Enemy imports
 import boss from "../assets/images/enemies/boss.png";
 import drone from "../assets/images/enemies/drone.png";
@@ -40,6 +50,7 @@ import humanBullet from "../assets/images/HumanBullet.png";
 export {
   gameMap,
   map2Dsprites,
+  interactiveTile,
   boss,
   drone,
   golem,
@@ -67,4 +78,9 @@ export {
   bullet,
   shotgunBullet,
   humanBullet,
+  cursor,
+  humanTurretCursor,
+  autoTurretCursor,
+  laserTurretCursor,
+  shotgunTurretCursor,
 };

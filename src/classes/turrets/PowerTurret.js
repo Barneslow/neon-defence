@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import { Popup } from "../../Popup";
+import { fire } from "../../parcelAudioImports";
 
 export default class PowerTurret extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, turretObject) {
@@ -92,15 +93,18 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
         let currentVelocity = { x: currentVelocityX, y: currentVelocityY };
 
         enemy.setVelocity(0, 0);
+        enemy.setTint(0x99ccff);
 
         this.MapScene.time.delayedCall(this.damageOutput, () => {
           if (!enemy.body) return;
           enemy.setVelocity(currentVelocity.x, currentVelocity.y);
+          enemy.clearTint();
         });
       });
     }
     if (this.turretName === "fire") {
       totalEnemies.forEach((enemy) => {
+        changeTintPeriodically(enemy, this.MapScene.speedMultiplyer);
         let counter = 0;
         const burnTimer = enemy.scene.time.addEvent({
           delay: 1000 / this.MapScene.speedMultiplyer,
@@ -109,6 +113,7 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
             if (!enemy) {
               return;
             }
+            this.sound.play();
             enemy.damageTaken(this.damageOutput);
             counter++;
 
@@ -160,4 +165,32 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
       const remainingTime = Math.ceil(this.timer.getRemaining() / 1000);
     }
   }
+}
+function changeTintPeriodically(sprite, speedMultiplyer) {
+  let currentTint = 0; // 0: Red, 1: Yellow, 2: Orange
+  let timerId;
+  let intervalId;
+
+  function clearTint() {
+    sprite.clearTint(); // Clear the tint from the sprite
+    clearInterval(intervalId); // Stop the interval
+  }
+
+  function setTint() {
+    if (currentTint === 0) {
+      sprite.setTint(0xff0000); // Set red tint
+      currentTint = 1;
+    } else if (currentTint === 1) {
+      sprite.setTint(0xffff00); // Set yellow tint
+      currentTint = 2;
+    } else {
+      sprite.setTint(0xffa500); // Set orange tint
+      currentTint = 0;
+    }
+
+    timerId = setTimeout(clearTint, 10000 / speedMultiplyer); // Clear the tint and stop after 10 seconds (10000 milliseconds)
+  }
+
+  setTint(); // Initial tint
+  intervalId = setInterval(setTint, 300 / speedMultiplyer); // Change tint every 300 milliseconds (0.3 seconds)
 }
