@@ -1,8 +1,8 @@
 export const WAVE_DATA = [
-  { robot: 4, spider: 1, heavybot: 2, drone: 0, golem: 0, boss: 0 },
-  { robot: 6, spider: 3, heavybot: 2, drone: 0, golem: 0, boss: 0 },
-  { robot: 10, spider: 5, heavybot: 3, drone: 1, golem: 1, boss: 0 },
-  { robot: 10, spider: 5, heavybot: 5, drone: 2, golem: 2, boss: 0 },
+  { robot: 4, spider: 0, heavybot: 0, drone: 0, golem: 0, boss: 0 },
+  { robot: 4, spider: 0, heavybot: 2, drone: 0, golem: 0, boss: 0 },
+  { robot: 6, spider: 2, heavybot: 3, drone: 0, golem: 0, boss: 0 },
+  { robot: 6, spider: 2, heavybot: 1, drone: 2, golem: 0, boss: 0 },
   { robot: 12, spider: 7, heavybot: 4, drone: 2, golem: 2, boss: 0 },
   { robot: 10, spider: 7, heavybot: 7, drone: 4, golem: 3, boss: 0 },
   { robot: 15, spider: 10, heavybot: 5, drone: 8, golem: 5, boss: 0 },

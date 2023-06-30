@@ -13,7 +13,7 @@ export const enemyClassTypes = {
   heavybot: {
     name: "heavybot",
     sprite: "heavybot",
-    health: 200,
+    health: 150,
     sound: {
       name: "dead",
       audio: "dead",
@@ -24,7 +24,7 @@ export const enemyClassTypes = {
   spider: {
     name: "spider",
     sprite: "spider",
-    health: 150,
+    health: 125,
     sound: {
       name: "dead",
       audio: "dead",

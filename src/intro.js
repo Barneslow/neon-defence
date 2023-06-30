@@ -1,6 +1,6 @@
 // Import signInWithGoogle function
 import { collection, getDocs } from "@firebase/firestore";
-import { signInWithGoogle } from "./auth";
+import { signInWithGoogle, userSignOut } from "./auth";
 import { firebaseDB } from "./config/firebase";
 
 if (!localStorage.getItem("difficulty")) {
@@ -27,6 +27,9 @@ document.addEventListener("DOMContentLoaded", function () {
   attachModalEvents(signInButton, signInModal);
   const googleSignInButton = signInModal.querySelector("#google-signin-btn");
   googleSignInButton.addEventListener("click", signInWithGoogle);
+
+  const logoutBtn = document.getElementById("logout-btn");
+  logoutBtn.addEventListener("click", userSignOut);
 });
 
 let value;
