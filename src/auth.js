@@ -3,6 +3,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   onAuthStateChanged,
+  signOut,
 } from "firebase/auth";
 import { firebaseAuth, firebaseDB } from "./config/firebase";
 
@@ -51,24 +52,27 @@ export const createUserDocumentFromAuth = async (userAuth) => {
   return userSnapShot;
 };
 export const checkAuthState = async () => {
+  const signInBtn = document.getElementById("signin-btn");
+  const logoutBtn = document.getElementById("logout-btn");
+  const userName = document.getElementById("username");
+  const menu = document.querySelector(".menu-content");
+
   onAuthStateChanged(firebaseAuth, (user) => {
     if (user) {
-      const menu = document.querySelector(".menu-content");
-      const signInBtn = document.getElementById("signin-btn");
-
-      if (!signInBtn) return;
       signInBtn.style.display = "none";
-      const userTitle = document.createElement("h2");
-      userTitle.textContent = `${user.displayName}`;
-      userTitle.style.color = "white";
-
-      const existingChild = menu.children[1];
-
-      menu.insertBefore(userTitle, existingChild);
+      userName.style.display = "block";
+      userName.textContent = `${user.displayName}`;
+      logoutBtn.style.display = "block";
     } else {
-      console.log("user is not logged in");
+      logoutBtn.style.display = "none";
+      userName.style.display = "none";
+      signInBtn.style.display = "block";
     }
   });
+};
+
+export const userSignOut = async () => {
+  await signOut(firebaseAuth);
 };
 
 checkAuthState();

@@ -2,11 +2,7 @@ import Phaser from "phaser";
 import Turret from "./classes/turrets/Turret";
 import BaseEnemy from "./classes/enemies/BaseEnemy";
 import Bullet from "./classes/bullet/Bullet";
-import {
-  formatDuration,
-  placeTurretOnMap,
-  toggleCurrentEnemiesSpeed,
-} from "./helpers/helpers";
+import { formatDuration, toggleCurrentEnemiesSpeed } from "./helpers/helpers";
 import { enemyClassTypes } from "./config/enemy-config";
 import BaseTurret from "./classes/turrets/BaseTurret";
 import { WAVE_DATA } from "./config/wave-config";
