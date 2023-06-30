@@ -64,6 +64,7 @@ export const checkAuthState = async () => {
       userName.textContent = `${user.displayName}`;
       logoutBtn.style.display = "block";
     } else {
+      if (!logoutBtn) return;
       logoutBtn.style.display = "none";
       userName.style.display = "none";
       signInBtn.style.display = "block";
