@@ -331,6 +331,7 @@ body {
   border-radius: 100px !important;
   border: 3px double var(--moon-line-color) !important;
   font-size: 20px;
+  float:right;
 }
 button.btn.close-button:hover {
   border: 3px double var(--moon-background-color) !important;
@@ -593,7 +594,11 @@ dialog .modal {
   box-shadow: 0px 10px 27px 2px var(--plane-line-color),
     5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
-dialog .modal-content {display:flex;}
+dialog .modal-content {
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+}
 /* END - Dialog / Modal */
 
 /* GAME OVER MODAL */
