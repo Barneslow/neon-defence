@@ -15,13 +15,13 @@ export class InteractiveTile extends Phaser.GameObjects.Sprite {
   onHoverIn() {
     console.log(this.Mapscene.turretType);
     if (this.Mapscene.turretType === "laser") {
-      document.body.style.cursor = `url("${Sprites.laserTurretCursor}")10 10, auto`;
+      document.body.style.cursor = `url("${Sprites.laserTurretCursor}")16 16, auto`;
     } else if (this.Mapscene.turretType === "auto") {
-      document.body.style.cursor = `url("${Sprites.autoTurretCursor}")10 10, auto`;
+      document.body.style.cursor = `url("${Sprites.autoTurretCursor}")16 16, auto`;
     } else if (this.Mapscene.turretType === "human") {
-      document.body.style.cursor = `url("${Sprites.humanTurretCursor}")10 10, auto`;
+      document.body.style.cursor = `url("${Sprites.humanTurretCursor}")16 16, auto`;
     } else if (this.Mapscene.turretType === "shotgun") {
-      document.body.style.cursor = `url("${Sprites.shotgunTurretCursor}")10 10, auto`;
+      document.body.style.cursor = `url("${Sprites.shotgunTurretCursor}")16 16, auto`;
     } else document.body.style.cursor = "pointer";
 
     this.setTint(0xffff00); // Set a yellow tint

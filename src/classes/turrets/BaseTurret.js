@@ -101,7 +101,7 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
 
   upgradeExperience() {
     // LEVEL UP TOWER - REFACTOR LATER
-    this.experiencePoints += 10;
+    this.experiencePoints += 2;
 
     // Alternate exp
     if (this.experiencePoints === this.experience.level2) {

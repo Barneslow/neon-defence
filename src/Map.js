@@ -20,7 +20,8 @@ import * as AudioFiles from "./parcelAudioImports";
 import lifeHeartImage from "../assets/images/life-heart.png";
 import { createGameMap } from "./helpers/mapCreationHelpers";
 
-const difficulty = localStorage.getItem("difficulty") || "1";
+const NEXT_WAVE_TIME = 30000;
+const difficulty = localStorage.getItem("difficulty") || "4";
 let hearts;
 
 if (difficulty === "1") {
@@ -71,7 +72,6 @@ export default class MapScene extends Phaser.Scene {
     this.waveTimeRemainingText = waveTimeRemainingText;
     this.scoreText = scoreText;
     this.resourceText = resourceText;
-    // layer1.on("pointerdown", this.onTileClicked, this);
 
     this.startBtn = document.getElementById("start");
     this.startBtn.addEventListener("click", this.startWave.bind(this));
@@ -346,26 +346,6 @@ export default class MapScene extends Phaser.Scene {
     });
   }
 
-  // onTileClicked(pointer) {
-  //   const tile = this.map.worldToTileXY(pointer.worldX, pointer.worldY);
-  //   const tileId = this.map.getTileAt(tile.x, tile.y, true).index;
-  //   // console.log(tileId);
-  //   if (tileId != 7 || this.resources < 50) return; // prevent tile resource issues
-  //   if (!this.turretType) return;
-
-  //   // PLACE TURRET ON THE MAP
-  //   const boundPlaceTurretOnMapFunc = placeTurretOnMap.bind(this); // Bind the function to transfer this keyword
-  //   const newRes = boundPlaceTurretOnMapFunc(pointer);
-  //   this.resources = newRes;
-
-  //   if (this.turretType === "human" && this.resources >= 500) {
-  //     this.humanTurret = true;
-  //     // @ts-ignore
-  //     this.humanTurretBtn.disabled = true;
-  //     this.turretType = null;
-  //   }
-  // }
-
   togglePause() {
     if (this.isGamePaused) {
       this.physics.resume();
@@ -450,7 +430,7 @@ export default class MapScene extends Phaser.Scene {
         convertObjectToArray(WAVE_DATA[this.waveIndex])
       );
 
-      const time = this.waveArray.length * 2000 + 20000;
+      const time = this.waveArray.length * 1000 + NEXT_WAVE_TIME;
 
       this.timeUntilNextWave = time;
 
@@ -490,7 +470,7 @@ export default class MapScene extends Phaser.Scene {
     if (time > this.nextEnemy && this.waveArray.length > 0) {
       // CHANGE DURATION OF ENEMY RESPAWN
       this.spawnEnemiesForWave(this.waveArray[0]);
-      this.nextEnemy = time + 2000 / this.speedMultiplyer;
+      this.nextEnemy = time + 1000 / this.speedMultiplyer;
     }
 
     if (time > this.nextEnemy && this.waveArray.length === 0) {

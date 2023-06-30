@@ -15,8 +15,6 @@ export function createGameMap(scene) {
       sprite.setOrigin(0, 0);
       sprite.x = tile.pixelX;
       sprite.y = tile.pixelY;
-
-      layer1.removeTileAt(tile.x, tile.y);
     }
   });
 
