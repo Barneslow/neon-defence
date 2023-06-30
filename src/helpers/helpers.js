@@ -3,7 +3,44 @@ import BaseTurret from "../classes/turrets/BaseTurret";
 import HumanTurret from "../classes/turrets/HumanTurret";
 
 import { turretsClassTypes } from "../config/turrets-config";
-import { turret } from "../parcelSpriteImports";
+
+export function placeTurret(sprite) {
+  const turretCosts = {
+    auto: turretsClassTypes.auto.cost,
+    laser: turretsClassTypes.laser.cost,
+    shotgun: turretsClassTypes.shotgun.cost,
+    human: turretsClassTypes.human.cost,
+  };
+
+  if (this.resources >= turretCosts[this.turretType]) {
+    let turret;
+    if (this.turretType === "human") {
+      turret = new HumanTurret(
+        this,
+        sprite.x + 16,
+        sprite.y + 16,
+        turretsClassTypes[this.turretType]
+      );
+    } else {
+      turret = new BaseTurret(
+        this,
+        sprite.x + 16,
+        sprite.y + 16,
+        turretsClassTypes[this.turretType]
+      );
+    }
+
+    this.resources -= turretCosts[this.turretType];
+    this.resourceText.setText(`Resources: ${this.resources}`);
+    this.turrets.add(turret);
+
+    return this.resources;
+  } else {
+    this.notEnoughRes();
+
+    return this.resources;
+  }
+}
 
 export function placeTurretOnMap(pointer) {
   const tile = this.map.worldToTileXY(pointer.worldX, pointer.worldY);

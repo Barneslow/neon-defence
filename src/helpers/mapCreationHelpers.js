@@ -1,3 +1,5 @@
+import { InteractiveTile } from "../classes/InteractiveTile";
+
 export function createGameMap(scene) {
   const map = scene.make.tilemap({ key: "map" });
 
@@ -6,6 +8,17 @@ export function createGameMap(scene) {
   const layer1 = map.createLayer(0, tileset);
 
   layer1.setInteractive();
+
+  layer1.forEachTile(function (tile) {
+    if (tile.index === 7) {
+      const sprite = new InteractiveTile(scene);
+      sprite.setOrigin(0, 0);
+      sprite.x = tile.pixelX;
+      sprite.y = tile.pixelY;
+
+      layer1.removeTileAt(tile.x, tile.y);
+    }
+  });
 
   const resourceText = createContainerText(
     scene,

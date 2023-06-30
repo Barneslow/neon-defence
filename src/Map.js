@@ -71,7 +71,7 @@ export default class MapScene extends Phaser.Scene {
     this.waveTimeRemainingText = waveTimeRemainingText;
     this.scoreText = scoreText;
     this.resourceText = resourceText;
-    layer1.on("pointerdown", this.onTileClicked, this);
+    // layer1.on("pointerdown", this.onTileClicked, this);
 
     this.startBtn = document.getElementById("start");
     this.startBtn.addEventListener("click", this.startWave.bind(this));
@@ -346,25 +346,25 @@ export default class MapScene extends Phaser.Scene {
     });
   }
 
-  onTileClicked(pointer) {
-    const tile = this.map.worldToTileXY(pointer.worldX, pointer.worldY);
-    const tileId = this.map.getTileAt(tile.x, tile.y, true).index;
-    // console.log(tileId);
-    if (tileId != 7 || this.resources < 50) return; // prevent tile resource issues
-    if (!this.turretType) return;
+  // onTileClicked(pointer) {
+  //   const tile = this.map.worldToTileXY(pointer.worldX, pointer.worldY);
+  //   const tileId = this.map.getTileAt(tile.x, tile.y, true).index;
+  //   // console.log(tileId);
+  //   if (tileId != 7 || this.resources < 50) return; // prevent tile resource issues
+  //   if (!this.turretType) return;
 
-    // PLACE TURRET ON THE MAP
-    const boundPlaceTurretOnMapFunc = placeTurretOnMap.bind(this); // Bind the function to transfer this keyword
-    const newRes = boundPlaceTurretOnMapFunc(pointer);
-    this.resources = newRes;
+  //   // PLACE TURRET ON THE MAP
+  //   const boundPlaceTurretOnMapFunc = placeTurretOnMap.bind(this); // Bind the function to transfer this keyword
+  //   const newRes = boundPlaceTurretOnMapFunc(pointer);
+  //   this.resources = newRes;
 
-    if (this.turretType === "human" && this.resources >= 500) {
-      this.humanTurret = true;
-      // @ts-ignore
-      this.humanTurretBtn.disabled = true;
-      this.turretType = null;
-    }
-  }
+  //   if (this.turretType === "human" && this.resources >= 500) {
+  //     this.humanTurret = true;
+  //     // @ts-ignore
+  //     this.humanTurretBtn.disabled = true;
+  //     this.turretType = null;
+  //   }
+  // }
 
   togglePause() {
     if (this.isGamePaused) {
@@ -384,7 +384,14 @@ export default class MapScene extends Phaser.Scene {
   }
 
   chooseTurretType(e) {
+    const buttons = Array.from(
+      document.querySelector(".turret-buttons").querySelectorAll("button")
+    );
+
+    buttons.forEach((button) => button.classList.remove("selected"));
+
     const button = e.target.closest("button");
+    button.classList.add("selected");
     const type = button.id.split("-")[0];
     this.turretType = type;
   }
@@ -527,6 +534,7 @@ function convertObjectToArray(obj) {
 }
 
 function loadAllSprites(scene) {
+  scene.load.image("interactive-tile", Sprites.interactiveTile);
   // Turret Sprites
   scene.load.image("turret", Sprites.turret);
   scene.load.image("turret2", Sprites.turret2);

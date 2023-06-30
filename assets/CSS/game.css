@@ -215,6 +215,10 @@ body {
   background: rgb(59, 207, 59) !important;
 }
 
+.selected {
+  background: yellow !important;
+}
+
 /* #electric::after {
   color: #000000;
   content: "$1500";
@@ -344,7 +348,11 @@ body {
   background: rgba(128, 128, 128, 0.4);
 }
 
-#electric-upgrade, #freeze-upgrade, #fire-upgrade {display:none;}
+#electric-upgrade,
+#freeze-upgrade,
+#fire-upgrade {
+  display: none;
+}
 
 #game button a {
   color: var(--background-color);
@@ -421,117 +429,154 @@ button.btn.close-button:hover {
 
 /* Timer - Hourglass */
 #timer {
-  position:relative;
-  margin:auto;
-  width:40px;
-  height:40px;
-  background:#44155d;
-  border:1px solid #44155d;
-  border-radius:100%;
-  overflow:hidden;
+  position: relative;
+  margin: auto;
+  width: 40px;
+  height: 40px;
+  background: #44155d;
+  border: 1px solid #44155d;
+  border-radius: 100%;
+  overflow: hidden;
   animation: rotates 2s infinite linear;
   -webkit-animation: rotates 2s infinite linear;
 }
-#timer .up{
+#timer .up {
   width: 15px;
   height: 20px;
-  left:12.5px;
-  overflow:hidden;
-  background:#cef;
-  position:absolute;
+  left: 12.5px;
+  overflow: hidden;
+  background: #cef;
+  position: absolute;
 }
-#timer .up:before,.up:after{
-  content:"";
-  width:15px;height:15px;
-  background:#44155d;
-  position:absolute;
-  z-index:1;
+#timer .up:before,
+.up:after {
+  content: "";
+  width: 15px;
+  height: 15px;
+  background: #44155d;
+  position: absolute;
+  z-index: 1;
 }
-#timer .up:before{
-  top:15px;
-  left:-8.5px;
-  transform:rotate(45deg);
-  -webkit-transform:rotate(45deg);
+#timer .up:before {
+  top: 15px;
+  left: -8.5px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
 }
-.up:after{
-  top:15px; left:8.5px;
-  transform:rotate(45deg);
-  -webkit-transform:rotate(45deg);
+.up:after {
+  top: 15px;
+  left: 8.5px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
 }
-#timer .innera{
-  position:relative;
-  top:7.5px;
-  width:15px;height:15px;
+#timer .innera {
+  position: relative;
+  top: 7.5px;
+  width: 15px;
+  height: 15px;
   background: #f016ff;
   animation: mymove 2s infinite linear;
   -webkit-animation: mymove 2s infinite linear;
 }
-#timer .down{
+#timer .down {
   width: 15px;
   height: 20px;
-  left:12.5px;
-  top:20px;
-  overflow:hidden;
-  background:#cef;
-  position:absolute;
-  z-index:1;
+  left: 12.5px;
+  top: 20px;
+  overflow: hidden;
+  background: #cef;
+  position: absolute;
+  z-index: 1;
 }
-#timer .down:before,.down:after{
-  content:"";
-  width:15px;
-  height:20px;
-  background:#44155d;
-  position:absolute;
-  z-index:1;
+#timer .down:before,
+.down:after {
+  content: "";
+  width: 15px;
+  height: 20px;
+  background: #44155d;
+  position: absolute;
+  z-index: 1;
 }
-#timer .down:before{
-  top:-12.5px;
-  left:-8.5px;
-  transform:rotate(45deg);
-  -webkit-transform:rotate(45deg);
+#timer .down:before {
+  top: -12.5px;
+  left: -8.5px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
 }
-#timer .down:after{
-  top:-12.5px;
-  left:12px;
-  transform:rotate(45deg);
-  -webkit-transform:rotate(45deg);
+#timer .down:after {
+  top: -12.5px;
+  left: 12px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
 }
-#timer .innerb{
-  position:relative;
-  top:20px;
-  width:15px;
-  height:15px;
+#timer .innerb {
+  position: relative;
+  top: 20px;
+  width: 15px;
+  height: 15px;
   background: #f016ff;
   animation: mymoveb 2s infinite linear;
   -webkit-animation: mymoveb 2s infinite linear;
 }
-@keyframes mymove{
-  0%{top:12.5px;}
-  100%{top:22.5px;}
+@keyframes mymove {
+  0% {
+    top: 12.5px;
+  }
+  100% {
+    top: 22.5px;
+  }
 }
-@keyframes mymoveb{
-  0%{top:20px;}
-  90%{top:10px;}
-  100%{top:-2.5px;}
+@keyframes mymoveb {
+  0% {
+    top: 20px;
+  }
+  90% {
+    top: 10px;
+  }
+  100% {
+    top: -2.5px;
+  }
 }
-@keyframes rotates{
-  0%{transform:rotate(0deg);}
-  80%{transform:rotate(0deg);}
-  100%{transform:rotate(180deg);}
+@keyframes rotates {
+  0% {
+    transform: rotate(0deg);
+  }
+  80% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
 }
-@-webkit-keyframes mymove{
-  0%{top:7.5px;}
-  100%{top:22.5px;}
+@-webkit-keyframes mymove {
+  0% {
+    top: 7.5px;
+  }
+  100% {
+    top: 22.5px;
+  }
 }
-@-webkit-keyframes mymoveb{
-  0%{top:20px;}
-  90%{top:10px;}
-  100%{top:-2.5px;}
+@-webkit-keyframes mymoveb {
+  0% {
+    top: 20px;
+  }
+  90% {
+    top: 10px;
+  }
+  100% {
+    top: -2.5px;
+  }
 }
-@-webkit-keyframes rotates{
-  0%{-webkit-transform:rotate(0deg);}
-  80%{-webkit-transform:rotate(0deg);}
-  100%{-webkit-transform:rotate(180deg);}
+@-webkit-keyframes rotates {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  80% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(180deg);
+  }
 }
 /* END - timer / hourglass */
 
