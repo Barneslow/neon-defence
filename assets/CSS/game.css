@@ -668,7 +668,7 @@ dialog .modal-content {
   #game #app canvas {
     max-height: 90vh;
   }
-  .purret-buttons,
+  .turret-buttons,
   .power-buttons {
     display: flex;
     flex-direction: row;
