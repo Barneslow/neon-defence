@@ -87,6 +87,7 @@ a {
 #modalHowToPlay .modal h1 {
   font-size: 2.5rem;
   margin-bottom: 3rem;
+  width: 75%;
 }
 #modalHowToPlay .modal h1,
 #modalHowToPlay .modal h2,
@@ -622,7 +623,8 @@ select {
   border-radius: 3px;
   border: 3px double var(--moon-line-color);
   background-color: var(--background-color);
-  margin-bottom: 10px;
+  margin-bottom: 15px !important;
+  margin: auto;
   padding: 12px 20px;
   font-weight: 600;
   font-size: 18px;
@@ -648,6 +650,7 @@ select {
   border: 3px double var(--moon-line-color) !important;
   font-size: 20px;
   max-width: 43px;
+  float:right;
 }
 button.btn.close-button:hover {
   border: 3px double var(--moon-background-color) !important;
@@ -699,7 +702,7 @@ dialog[open] {
   padding: 0;
   margin: 0;
   max-height: 80vh;
-  width: 80%;
+  width: 35%;
   overflow: auto;
 }
 dialog::backdrop {
@@ -708,10 +711,6 @@ dialog::backdrop {
 dialog .modal {
   z-index: 99999;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
   text-align: center;
   padding: 4rem 3rem;
   box-sizing: border-box;
@@ -856,6 +855,12 @@ dialog .modal img {
 /* END - Warning Portrait Mode */
 
 /* Responsive */
+@media screen and (max-width: 768px) {
+  dialog[open] {width:90% !important;}
+  dialog .modal {max-width:none !important;}
+  .menu-content {display:block !important;height:80vh !important;overflow-y:auto;}
+  #intro .copywrite {bottom:2rem !important;}
+}
 @media screen and (max-width: 550px) {
   body {
     zoom: 0.8; /* Adjust the zoom level as per your requirement */

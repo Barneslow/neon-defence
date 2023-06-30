@@ -214,43 +214,9 @@ body {
 #fire-upgrade {
   background: rgb(59, 207, 59) !important;
 }
-
 .selected {
   background: yellow !important;
 }
-
-/* #electric::after {
-  color: #000000;
-  content: "$1500";
-  display: none;
-}
-
-#electric:hover::after {
-  display: block;
-}
-
-#fire::after {
-  content: "$1250";
-
-  color: #000000;
-  display: none;
-}
-
-#fire:hover::after {
-  display: block;
-}
-
-#freeze::after {
-  content: "$1000";
-  color: #000000;
-
-  display: none;
-}
-
-#freeze:hover::after {
-  display: block;
-} */
-
 #electric:hover {
   background-color: rgba(255, 255, 0, 0.8) !important;
 }
@@ -348,11 +314,7 @@ body {
   background: rgba(128, 128, 128, 0.4);
 }
 
-#electric-upgrade,
-#freeze-upgrade,
-#fire-upgrade {
-  display: none;
-}
+#electric-upgrade, #freeze-upgrade, #fire-upgrade {display:none !important;}
 
 #game button a {
   color: var(--background-color);
@@ -621,10 +583,6 @@ dialog::backdrop {
 dialog .modal {
   z-index: 99999;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
   text-align: center;
   padding: 2rem;
   box-sizing: border-box;
@@ -635,6 +593,7 @@ dialog .modal {
   box-shadow: 0px 10px 27px 2px var(--plane-line-color),
     5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
+dialog .modal-content {display:flex;}
 /* END - Dialog / Modal */
 
 /* GAME OVER MODAL */
@@ -704,8 +663,8 @@ dialog .modal {
   #game #app canvas {
     max-height: 90vh;
   }
-  .turret-buttons,
-  .Power-buttons {
+  .purret-buttons,
+  .power-buttons {
     display: flex;
     flex-direction: row;
     gap: 10px;
