@@ -1,5 +1,5 @@
 export const WAVE_DATA = [
-  { robot: 4, spider: 0, heavybot: 0, drone: 0, golem: 0, boss: 0 },
+  { robot: 0, spider: 0, heavybot: 0, drone: 10, golem: 0, boss: 0 },
   { robot: 4, spider: 0, heavybot: 2, drone: 0, golem: 0, boss: 0 },
   { robot: 6, spider: 2, heavybot: 3, drone: 0, golem: 0, boss: 0 },
   { robot: 6, spider: 2, heavybot: 1, drone: 2, golem: 0, boss: 0 },

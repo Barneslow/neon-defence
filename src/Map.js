@@ -120,38 +120,21 @@ export default class MapScene extends Phaser.Scene {
     shotgunTurret.addEventListener("click", this.chooseTurretType.bind(this));
     humanTurret.addEventListener("click", this.chooseTurretType.bind(this));
 
-    const electricTower = document.getElementById("electric");
-    electricTower.addEventListener(
+    this.electricTower = document.getElementById("electric");
+    this.electricTower.addEventListener(
       "click",
-      this.purchaseTower.bind(this, "electric", electricTower)
+      this.purchaseTower.bind(this, "electric", this.electricTower)
     );
-    const fireTower = document.getElementById("fire");
-    fireTower.addEventListener(
+    this.fireTower = document.getElementById("fire");
+    this.fireTower.addEventListener(
       "click",
-      this.purchaseTower.bind(this, "fire", fireTower)
-    );
-
-    const freezeTower = document.getElementById("freeze");
-    freezeTower.addEventListener(
-      "click",
-      this.purchaseTower.bind(this, "freeze", freezeTower)
+      this.purchaseTower.bind(this, "fire", this.fireTower)
     );
 
-    this.upgradeElectricBtn = document.getElementById("electric-upgrade");
-    this.upgradeFreezeBtn = document.getElementById("freeze-upgrade");
-    this.upgradeFireBtn = document.getElementById("fire-upgrade");
-
-    this.upgradeElectricBtn.addEventListener(
+    this.freezeTower = document.getElementById("freeze");
+    this.freezeTower.addEventListener(
       "click",
-      this.upgradeTower.bind(this, "electric")
-    );
-    this.upgradeFreezeBtn.addEventListener(
-      "click",
-      this.upgradeTower.bind(this, "freeze")
-    );
-    this.upgradeFireBtn.addEventListener(
-      "click",
-      this.upgradeTower.bind(this, "fire")
+      this.purchaseTower.bind(this, "freeze", this.freezeTower)
     );
 
     this.nextEnemy = 0;
@@ -219,12 +202,18 @@ export default class MapScene extends Phaser.Scene {
 
     if (type === "electric") {
       tileID = 39;
+      this.electricTower.innerHTML =
+        '<i style="color: yellow" class="fa-solid fa-bolt-lightning"></i>';
     }
     if (type === "fire") {
       tileID = 59;
+      this.fire.innerHTML =
+        '<i style="color: red" class="fa-solid fa-fire"></i>';
     }
     if (type === "freeze") {
       tileID = 49;
+      this.freezeTower.innerHTML =
+        '<i style="color: aquamarine" class="fa-solid fa-icicles"></i>';
     }
     const tileInstances = [];
 
@@ -270,26 +259,6 @@ export default class MapScene extends Phaser.Scene {
     }
 
     this[type] = true;
-  }
-
-  upgradeTower(type) {
-    if (this.resources < turretsClassTypes[type].cost) {
-      this.notEnoughRes();
-      return;
-    }
-
-    this.resources = this.resources - turretsClassTypes[type].cost;
-    this.updateResources();
-
-    if (type === "electric") {
-      this.electricTower.upgradeExperience();
-    }
-    if (type === "freeze") {
-      this.freezeTower.upgradeExperience();
-    }
-    if (type === "fire") {
-      this.fireTower.upgradeExperience();
-    }
   }
 
   displayHearts() {
