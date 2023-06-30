@@ -855,7 +855,7 @@ dialog .modal img {
 /* END - Warning Portrait Mode */
 
 /* Responsive */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) and (orientation:landscape){
   dialog[open] {width:90% !important;}
   dialog .modal {max-width:none !important;}
   .menu-content {display:block !important;height:80vh !important;overflow-y:auto;}
