@@ -45,7 +45,7 @@ export const bulletClassTypes = {
       level2: 0.75,
       level3: 1,
     },
-    size: 60,
+    size: 100,
   },
   human: {
     damage: 10,
