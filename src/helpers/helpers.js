@@ -1,3 +1,4 @@
+import BaseEnemy from "../classes/enemies/BaseEnemy";
 import DroneEnemy from "../classes/enemies/DroneClass";
 import BaseTurret from "../classes/turrets/BaseTurret";
 import HumanTurret from "../classes/turrets/HumanTurret";
@@ -10,6 +11,7 @@ export function placeTurret(sprite) {
     laser: turretsClassTypes.laser.cost,
     shotgun: turretsClassTypes.shotgun.cost,
     human: turretsClassTypes.human.cost,
+    antiAir: turretsClassTypes.antiAir.cost,
   };
 
   if (this.resources >= turretCosts[this.turretType]) {
@@ -109,6 +111,22 @@ export function getEnemyNearTurret(x, y, distance, enemies) {
       ) < distance
     )
       return noDroneFilter[i];
+  }
+  return false;
+}
+
+export function getFlyingEnemyNearTurret(x, y, distance, enemies) {
+  const enemyUnits = enemies.getChildren();
+
+  const noBaseFilter = enemyUnits.filter((obj) => obj instanceof DroneEnemy);
+
+  for (let i = 0; i < noBaseFilter.length; i++) {
+    if (
+      noBaseFilter[i].active &&
+      Phaser.Math.Distance.Between(x, y, noBaseFilter[i].x, noBaseFilter[i].y) <
+        distance
+    )
+      return noBaseFilter[i];
   }
   return false;
 }

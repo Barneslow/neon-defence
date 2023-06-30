@@ -1,4 +1,35 @@
 export const turretsClassTypes = {
+  antiAir: {
+    name: "antiAir",
+    sprite: {
+      level1: {
+        name: "antiAir",
+        sprite1: "AntiAerialTurretlvl1",
+      },
+      level2: {
+        name: "antiAir2",
+        sprite2: "AntiAerialTurretlvl2",
+      },
+      level3: {
+        name: "antiAir3",
+        sprite3: "AntiAerialTurretlv3",
+      },
+    },
+    damageOutput: {
+      level1: 10,
+      level2: 15,
+      level3: 25,
+    },
+    cost: 300,
+    experience: {
+      level1: 0,
+      level2: 100,
+      level3: 300,
+    },
+    tickTimer: 350,
+    range: 150,
+  },
+
   laser: {
     name: "laser",
     sprite: {

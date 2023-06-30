@@ -1,5 +1,9 @@
 import Phaser from "phaser";
-import { getEnemyNearTurret, timerDelay } from "../../helpers/helpers";
+import {
+  getEnemyNearTurret,
+  getFlyingEnemyNearTurret,
+  timerDelay,
+} from "../../helpers/helpers";
 import { Popup } from "../../Popup";
 import BaseBullet from "../bullet/BaseBullet";
 import { bulletClassTypes } from "../../config/bullet-config";
@@ -17,6 +21,8 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
     this.cost = turretObject.cost;
     this.experience = turretObject.experience;
 
+    console.log(this.turretName);
+
     // Adding CollisionGroups
     this.bulletCollisionGroup = scene.physics.scene.bullets;
     this.enemies = scene.physics.scene.enemies;
@@ -27,6 +33,7 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
     this.laserSound = this.scene.sound.add("laser");
     this.shotgunSound = this.scene.sound.add("shotgunsound");
     this.plasmaSound = this.scene.sound.add("plasmasound");
+    this.antiAirSound = this.scene.sound.add("antiAirsound");
 
     this.range = turretObject.range;
 
@@ -87,7 +94,16 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
   }
 
   autoFire() {
-    let enemy = getEnemyNearTurret(this.x, this.y, this.range, this.enemies);
+    let enemy;
+
+    this.turretName === "antiAir"
+      ? (enemy = getFlyingEnemyNearTurret(
+          this.x,
+          this.y,
+          this.range,
+          this.enemies
+        ))
+      : (enemy = getEnemyNearTurret(this.x, this.y, this.range, this.enemies));
 
     if (enemy) {
       // TURRET ROTATION
@@ -168,6 +184,9 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
     }
     if (this.turretName === "shotgun") {
       this.shotgunSound.play({ volume: 0.2 });
+    }
+    if (this.turretName === "antiAir") {
+      this.antiAirSound.play({ volume: 0.3 });
     }
     if (this.turretName === "human") {
       this.plasmaSound.play({ volume: 0.2 });

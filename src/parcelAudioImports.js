@@ -22,6 +22,8 @@ import lifeDamage from "/assets/sounds/life-damage.mp3";
 
 import synthWave from "/assets/sounds/synthwave-80s.mp3";
 
+import antiAir from "/assets/sounds/antiAir.mp3";
+
 export {
   electricity,
   fire,
@@ -34,5 +36,6 @@ export {
   lifeDamage,
   shotgun,
   plasma,
+  antiAir,
   synthWave,
 };

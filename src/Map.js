@@ -111,10 +111,13 @@ export default class MapScene extends Phaser.Scene {
     const autoTurret = document.getElementById("auto-turret");
     const laserTurret = document.getElementById("laser-turret");
     const shotgunTurret = document.getElementById("shotgun-turret");
+    const antiAirTurret = document.getElementById("antiAir-turret");
+
     const humanTurret = document.getElementById("human-turret");
 
     this.humanTurretBtn = humanTurret;
 
+    antiAirTurret.addEventListener("click", this.chooseTurretType.bind(this));
     autoTurret.addEventListener("click", this.chooseTurretType.bind(this));
     laserTurret.addEventListener("click", this.chooseTurretType.bind(this));
     shotgunTurret.addEventListener("click", this.chooseTurretType.bind(this));
@@ -338,6 +341,7 @@ export default class MapScene extends Phaser.Scene {
     const button = e.target.closest("button");
     button.classList.add("selected");
     const type = button.id.split("-")[0];
+
     this.turretType = type;
   }
 
@@ -485,6 +489,12 @@ function convertObjectToArray(obj) {
 
 function loadAllSprites(scene) {
   scene.load.image("interactive-tile", Sprites.interactiveTile);
+
+  // AntiAir Sprites
+  scene.load.image("antiAir", Sprites.antiAir);
+  scene.load.image("antiAir2", Sprites.antiAir2);
+  scene.load.image("antiAir3", Sprites.antiAir3);
+
   // Turret Sprites
   scene.load.image("turret", Sprites.turret);
   scene.load.image("turret2", Sprites.turret2);
@@ -521,6 +531,7 @@ function loadAllSprites(scene) {
   scene.load.image("bullet", Sprites.bullet);
   scene.load.image("ShotGunBullet", Sprites.shotgunBullet);
   scene.load.image("HumanBullet", Sprites.humanBullet);
+  scene.load.image("AntiAerialBullet", Sprites.aerialBullet);
 }
 
 function loadAllAudio(scene) {
@@ -533,6 +544,7 @@ function loadAllAudio(scene) {
   scene.load.audio("bulletsound", AudioFiles.bullet);
   scene.load.audio("shotgunsound", AudioFiles.shotgun);
   scene.load.audio("plasmasound", AudioFiles.plasma);
+  scene.load.audio("antiAirsound", AudioFiles.antiAir);
 
   scene.load.audio("dead", AudioFiles.dead);
   scene.load.audio("dead-boss", AudioFiles.deadboss);

@@ -29,6 +29,9 @@ import freezeTowerActive from "../assets/images/turrets/FreezeTowerActive.png";
 import freezeTowerInactive from "../assets/images/turrets/FreezeTowerInactive.png";
 
 // Tower imports
+import antiAir from "../assets/images/turrets/AntiAerialTurretlvl1.png";
+import antiAir2 from "../assets/images/turrets/AntiAerialTurretlvl2.png";
+import antiAir3 from "../assets/images/turrets/AntiAerialTurretlvl3.png";
 import turret from "../assets/images/turrets/Turret2D.png";
 import turret2 from "../assets/images/turrets/Turret2Dlvl2.png";
 import turret3 from "../assets/images/turrets/Turret2Dlvl3.png";
@@ -44,10 +47,14 @@ import human3 from "../assets/images/turrets/HumanTurretlvl3.png";
 
 // Bullet Imports
 import bullet from "../assets/images/Bullet.png";
+import aerialBullet from "../assets/images/AntiAerialBullet.png";
 import shotgunBullet from "../assets/images/ShotGunBullet.png";
 import humanBullet from "../assets/images/HumanBullet.png";
 
 export {
+  antiAir,
+  antiAir2,
+  antiAir3,
   gameMap,
   map2Dsprites,
   interactiveTile,
@@ -78,6 +85,7 @@ export {
   bullet,
   shotgunBullet,
   humanBullet,
+  aerialBullet,
   cursor,
   humanTurretCursor,
   autoTurretCursor,
