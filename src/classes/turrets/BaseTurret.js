@@ -21,8 +21,6 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
     this.cost = turretObject.cost;
     this.experience = turretObject.experience;
 
-    console.log(this.turretName);
-
     // Adding CollisionGroups
     this.bulletCollisionGroup = scene.physics.scene.bullets;
     this.enemies = scene.physics.scene.enemies;
@@ -118,8 +116,6 @@ export default class BaseTurret extends Phaser.GameObjects.Sprite {
   upgradeExperience() {
     // LEVEL UP TOWER - REFACTOR LATER
     this.experiencePoints++;
-
-    console.log(this.experiencePoints);
 
     // Alternate exp
     if (this.experiencePoints >= this.experience.level2) {

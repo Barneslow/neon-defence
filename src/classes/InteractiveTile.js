@@ -13,7 +13,6 @@ export class InteractiveTile extends Phaser.GameObjects.Sprite {
   }
 
   onHoverIn() {
-    console.log(this.Mapscene.turretType);
     if (this.Mapscene.turretType === "laser") {
       document.body.style.cursor = `url("${Sprites.laserTurretCursor}")16 16, auto`;
     } else if (this.Mapscene.turretType === "auto") {

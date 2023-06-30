@@ -379,7 +379,6 @@ export default class MapScene extends Phaser.Scene {
   }
 
   startWave() {
-    console.log(this.timeUntilNextWave);
     const bonus = (this.timeUntilNextWave * 10) / 1000;
     this.resources = this.resources + bonus;
     this.score = this.score + bonus;
