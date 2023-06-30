@@ -1,6 +1,5 @@
 import Phaser from "phaser";
-import { Popup } from "../../Popup";
-import { fire } from "../../parcelAudioImports";
+import { HumanTurretPopup } from "../../HumanTurretPopup";
 
 export default class PowerTurret extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, turretObject) {
@@ -23,6 +22,7 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
     this.level = 1;
     this.damageOutput = turretObject.damageOutput.level1;
     this.damageObject = turretObject.damageOutput;
+    this.cost = turretObject.cost;
 
     this.timer = null; // Timer object
     this.timerCountInMilli = turretObject.timer;
@@ -31,9 +31,24 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
 
     this.sound = this.scene.sound.add(turretObject.sound);
     this.powerUpSound = this.scene.sound.add("power-up");
+
+    this.setInteractive().on("pointerdown", this.onPointerDown, this);
   }
 
   preload() {}
+
+  onPointerDown(pointer) {
+    const popup = new HumanTurretPopup(
+      this.MapScene,
+      pointer.worldX,
+      pointer.worldY,
+      175,
+      150,
+      this
+    );
+
+    popup.show();
+  }
 
   startTimer() {
     this.timer = this.scene.time.addEvent({
@@ -127,7 +142,7 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
     }
   }
 
-  upgradeExperience() {
+  upgradeLevel() {
     this.level++;
 
     if (this.level === 2) {
@@ -141,19 +156,10 @@ export default class PowerTurret extends Phaser.GameObjects.Sprite {
       button.disabled = true;
       button.textContent = "Fully Upgraded!";
     }
-  }
 
-  onPointerDown(pointer) {
-    const popup = new Popup(
-      this.MapScene,
-      pointer.worldX,
-      pointer.worldY,
-      100,
-      100,
-      this
-    );
+    this.MapScene.resources -= this.level * this.cost;
 
-    popup.show();
+    this.MapScene.updateResources();
   }
 
   updateTower() {

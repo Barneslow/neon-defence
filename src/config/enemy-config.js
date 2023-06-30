@@ -24,7 +24,7 @@ export const enemyClassTypes = {
   spider: {
     name: "spider",
     sprite: "spider",
-    health: 125,
+    health: 100,
     sound: {
       name: "dead",
       audio: "dead",
@@ -35,13 +35,13 @@ export const enemyClassTypes = {
   drone: {
     name: "drone",
     sprite: "drone",
-    health: 100,
+    health: 125,
     sound: {
       name: "dead",
       audio: "dead",
     },
     speed: 75,
-    resources: 100,
+    resources: 125,
   },
   golem: {
     name: "golem",
@@ -57,12 +57,12 @@ export const enemyClassTypes = {
   boss: {
     name: "boss",
     sprite: "boss",
-    health: 600,
+    health: 1000,
     sound: {
       name: "dead-boss",
       audio: "dead-boss",
     },
     speed: 25,
-    resources: 250,
+    resources: 300,
   },
 };
