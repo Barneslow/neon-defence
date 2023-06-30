@@ -229,7 +229,7 @@ For the development of Rainbow warriors we made use of the following stack of te
 - ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) [GIT](https://git-scm.com/), [GitHub](https://github.com/) - tracking, storing, hosting project
 - ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) [GitHub Desktop](https://desktop.github.com/) - for local development
 
-- ![Goggle Fonts](https://img.shields.io/badge/Google%20Fonts-4285F4.svg?style=for-the-badge&logo=Google-Fonts&logoColor=white) [Google Fonts:](https://fonts.google.com/) - Google fonts were used to import the 'Inknut Antiqua' font into the style.css file which is used on all pages throughout the project.
+- ![Goggle Fonts](https://img.shields.io/badge/Google%20Fonts-4285F4.svg?style=for-the-badge&logo=Google-Fonts&logoColor=white) [Google Fonts:](https://fonts.google.com/) - Google fonts were used to import the 'Work Sans' font into the style.css file which is used on all pages throughout the project.
 - [Coolors](https://coolors.co/) - Coolors was used for choosing the website's colours palette.
 - ![Shields.io](https://img.shields.io/badge/Shields.io-000000.svg?style=for-the-badge&logo=shieldsdotio&logoColor=white) [Shields.io](https://shields.io/) - To add badges to the README
 
