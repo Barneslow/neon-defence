@@ -3,6 +3,7 @@ import BaseTurret from "../classes/turrets/BaseTurret";
 import HumanTurret from "../classes/turrets/HumanTurret";
 
 import { turretsClassTypes } from "../config/turrets-config";
+import { turret } from "../parcelSpriteImports";
 
 export function placeTurretOnMap(pointer) {
   const tile = this.map.worldToTileXY(pointer.worldX, pointer.worldY);
@@ -88,4 +89,22 @@ export function formatDuration(duration) {
   const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds.toString();
 
   return `${formattedMinutes}:${formattedSeconds}`;
+}
+
+export function toggleCurrentEnemiesSpeed(
+  speed,
+  currentEnemies,
+  currentTurrets
+) {
+  currentEnemies.forEach((enemy) => {
+    const newXVelocity = enemy.body.velocity.x * speed;
+    const newYVelocity = enemy.body.velocity.y * speed;
+
+    enemy.body.setVelocity(newXVelocity, newYVelocity);
+    enemy.speed = enemy.speed * speed;
+  });
+
+  currentTurrets.forEach((turret) => {
+    turret.tickTimer = turret.tickTimer / speed;
+  });
 }

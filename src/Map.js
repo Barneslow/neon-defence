@@ -2,7 +2,11 @@ import Phaser from "phaser";
 import Turret from "./classes/turrets/Turret";
 import BaseEnemy from "./classes/enemies/BaseEnemy";
 import Bullet from "./classes/bullet/Bullet";
-import { formatDuration, placeTurretOnMap } from "./helpers/helpers";
+import {
+  formatDuration,
+  placeTurretOnMap,
+  toggleCurrentEnemiesSpeed,
+} from "./helpers/helpers";
 import { enemyClassTypes } from "./config/enemy-config";
 import BaseTurret from "./classes/turrets/BaseTurret";
 import { WAVE_DATA } from "./config/wave-config";
@@ -14,11 +18,11 @@ import { firebaseAuth, firebaseDB } from "./config/firebase";
 import * as Sprites from "./parcelSpriteImports";
 import * as AudioFiles from "./parcelAudioImports";
 import lifeHeartImage from "../assets/images/life-heart.png";
+import { createGameMap } from "./helpers/mapCreationHelpers";
 
 const difficulty = localStorage.getItem("difficulty") || "1";
 let hearts;
 
-console.log(difficulty);
 if (difficulty === "1") {
   hearts = 5;
 }
@@ -55,27 +59,29 @@ export default class MapScene extends Phaser.Scene {
   preload() {
     this.load.tilemapTiledJSON("map", Sprites.gameMap);
     this.load.image("tiles", Sprites.map2Dsprites);
-
     loadAllSprites(this);
-
     loadAllAudio(this);
   }
 
   create() {
-    const startBtn = document.getElementById("start");
-    startBtn.addEventListener("click", this.startWave.bind(this));
-    this.startBtn = startBtn;
+    // CREATE GAME MAP
+    const { map, layer1, waveTimeRemainingText, scoreText, resourceText } =
+      createGameMap(this);
+    this.map = map;
+    this.waveTimeRemainingText = waveTimeRemainingText;
+    this.scoreText = scoreText;
+    this.resourceText = resourceText;
+    layer1.on("pointerdown", this.onTileClicked, this);
+
+    this.startBtn = document.getElementById("start");
+    this.startBtn.addEventListener("click", this.startWave.bind(this));
 
     this.speedBtn = document.getElementById("speed-up");
     this.speedBtn.addEventListener("click", this.toggleGameSpeed.bind(this));
 
-    const pauseBtn = document.getElementById("pause");
-    const pauseIcon = pauseBtn.querySelector("i");
-
-    this.pauseIcon = pauseIcon;
-    this.pauseBtn = pauseBtn;
-
-    pauseBtn.addEventListener("click", this.togglePause.bind(this));
+    this.pauseBtn = document.getElementById("pause");
+    this.pauseIcon = this.pauseBtn.querySelector("i");
+    this.pauseBtn.addEventListener("click", this.togglePause.bind(this));
 
     //Audio additions
     this.lifeDamage = this.sound.add("life-damage");
@@ -105,8 +111,7 @@ export default class MapScene extends Phaser.Scene {
     const replayBtn = document.getElementById("replay-button");
     replayBtn.addEventListener("click", () => location.reload());
 
-    const heartContainer = document.getElementById("heart-container");
-    this.heartContainer = heartContainer;
+    this.heartContainer = document.getElementById("heart-container");
     const autoTurret = document.getElementById("auto-turret");
     const laserTurret = document.getElementById("laser-turret");
     const shotgunTurret = document.getElementById("shotgun-turret");
@@ -152,45 +157,6 @@ export default class MapScene extends Phaser.Scene {
       "click",
       this.upgradeTower.bind(this, "fire")
     );
-
-    const map = this.make.tilemap({ key: "map" });
-    this.map = map;
-    const tileset = map.addTilesetImage("2Dsprites", "tiles", 32, 32);
-
-    const layer1 = map.createLayer(0, tileset);
-
-    // createContainerText(this);
-    this.resourceText = this.add.text(0, 0, `Resources: ${this.resources}`, {
-      fontSize: "26px",
-      backgroundColor: "#180727",
-      fontFamily: "Work Sans",
-      // @ts-ignore
-      padding: 10,
-    });
-
-    this.scoreText = this.add.text(800, 0, `Score: ${this.score}`, {
-      fontSize: "26px",
-      backgroundColor: "#180727",
-      fontFamily: "Work Sans",
-      // @ts-ignore
-      padding: 10,
-    });
-
-    this.waveTimeRemainingText = this.add.text(
-      350,
-      0,
-      `Time Until Next Wave: ${this.timeUntilNextWave}`,
-      {
-        fontSize: "24px",
-        backgroundColor: "black",
-        fontFamily: "Work Sans",
-        // @ts-ignore
-        padding: 10,
-      }
-    );
-
-    layer1.setInteractive();
-    layer1.on("pointerdown", this.onTileClicked, this);
 
     this.nextEnemy = 0;
     this.nextBoss = 0;
@@ -342,23 +308,20 @@ export default class MapScene extends Phaser.Scene {
   }
 
   toggleGameSpeed() {
+    const currentEnemies = Array.from(this.enemies.children.entries);
+    const currentTurrets = Array.from(this.turrets.children.entries);
+
     if (this.speedMultiplyer === 2) {
       this.speedMultiplyer = 1;
       this.speedBtn.innerHTML =
         'x2 Speed <i class="fa-sharp fa-solid fa-forward-fast"></i>';
 
-      // FIX LOCAL SPEED FOR ENEMIES AND TURRETS - TODO
-
-      // this.enemies.children.entries.forEach((enemy) =>
-      //   console.log(enemy.setVelocity)
-      // );
-
-      // console.log(this.enemies.children.entries);
-      // Array.from(this.enemies.children).forEach((enemy) => enemy.speed * 2);
+      toggleCurrentEnemiesSpeed(0.5, currentEnemies, currentTurrets);
     } else {
       this.speedMultiplyer = 2;
       this.speedBtn.innerHTML =
         'x1 Speed <i class="fa-solid fa-forward-step"></i>';
+      toggleCurrentEnemiesSpeed(2, currentEnemies, currentTurrets);
     }
   }
 
