@@ -23,8 +23,8 @@ export const turretsClassTypes = {
     cost: 400,
     experience: {
       level1: 0,
-      level2: 200,
-      level3: 500,
+      level2: 100,
+      level3: 300,
     },
     tickTimer: 3000,
     range: 250,
@@ -53,11 +53,11 @@ export const turretsClassTypes = {
     cost: 100,
     experience: {
       level1: 0,
-      level2: 35,
-      level3: 100,
+      level2: 100,
+      level3: 300,
     },
     tickTimer: 1000,
-    range: 150,
+    range: 175,
   },
   shotgun: {
     name: "shotgun",
@@ -83,11 +83,11 @@ export const turretsClassTypes = {
     cost: 300,
     experience: {
       level1: 0,
-      level2: 35,
-      level3: 100,
+      level2: 100,
+      level3: 300,
     },
     tickTimer: 1500,
-    range: 100,
+    range: 125,
   },
 
   human: {
