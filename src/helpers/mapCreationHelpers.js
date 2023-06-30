@@ -23,7 +23,7 @@ export function createGameMap(scene) {
     `Resources: ${scene.resources}`,
     { x: 0, y: 0 }
   );
-  const scoreText = createContainerText(scene, `Resources: ${scene.score}`, {
+  const scoreText = createContainerText(scene, `Score: ${scene.score}`, {
     x: 800,
     y: 0,
   });

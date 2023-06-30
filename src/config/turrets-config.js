@@ -17,8 +17,8 @@ export const turretsClassTypes = {
     },
     damageOutput: {
       level1: 30,
-      level2: 60,
-      level3: 100,
+      level2: 40,
+      level3: 60,
     },
     cost: 400,
     experience: {
@@ -47,8 +47,8 @@ export const turretsClassTypes = {
     },
     damageOutput: {
       level1: 10,
-      level2: 20,
-      level3: 40,
+      level2: 15,
+      level3: 30,
     },
     cost: 100,
     experience: {
@@ -77,8 +77,8 @@ export const turretsClassTypes = {
     },
     damageOutput: {
       level1: 50,
-      level2: 75,
-      level3: 200,
+      level2: 70,
+      level3: 100,
     },
     cost: 300,
     experience: {
@@ -107,9 +107,9 @@ export const turretsClassTypes = {
       },
     },
     damageOutput: {
-      level1: 5,
-      level2: 10,
-      level3: 30,
+      level1: 10,
+      level2: 15,
+      level3: 25,
     },
     cost: 750,
     experience: {
